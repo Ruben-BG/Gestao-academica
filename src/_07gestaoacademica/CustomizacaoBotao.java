@@ -8,7 +8,7 @@ import javax.swing.JButton;
 public class CustomizacaoBotao extends JButton {
 
     private boolean saiu;
-    private Color cor, corSaiu, corClicou, corBorda;
+    private Color cor, corSaiu, corClicou, corEntrou, corBorda;
     private int raio = 0;
 
     public CustomizacaoBotao() {
@@ -17,13 +17,14 @@ public class CustomizacaoBotao extends JButton {
         cor = cor.WHITE;
         corSaiu = new Color(36, 53, 61, 255);
         corClicou = new Color(76, 95, 99, 255);
+        corEntrou = new Color(76, 95, 99, 255);
         corBorda = new Color(36, 53, 61, 255);
         setContentAreaFilled(false);
 
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                setCor(corSaiu);
+                setCor(corClicou);
             }
 
             @Override
@@ -37,14 +38,14 @@ public class CustomizacaoBotao extends JButton {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                setCor(corClicou);
-                saiu = true;
+                setCor(corEntrou);
+                saiu = false;
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
                 setBackground(corSaiu);
-                saiu = false;
+                saiu = true;
             }
         });
 
@@ -65,6 +66,10 @@ public class CustomizacaoBotao extends JButton {
 
     public Color getCorClicou() {
         return corClicou;
+    }
+    
+    public Color getEntrou() {
+        return corEntrou;
     }
 
     public Color getCorBorda() {
@@ -91,6 +96,10 @@ public class CustomizacaoBotao extends JButton {
 
     public void setCorClicou(Color corClicou) {
         this.corClicou = corClicou;
+    }
+    
+    public void setCorEntrou(Color corEntrou) {
+        this.corEntrou = corEntrou;
     }
 
     public void setCorBorda(Color corBorda) {
