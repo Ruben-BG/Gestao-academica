@@ -1,23 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package _07gestaoacademica;
+import java.awt.Color;
+import javax.swing.JFrame;
 
 /**
  *
- * @author ravtec
+ * @author ruben-braga
  */
 public class FormularioContaUsuario extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FormularioContaUsuario
-     */
+    //Variáveis
+    private int mouseX, mouseY;
+    
+    //Programa Geral
     public FormularioContaUsuario() {
         initComponents();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,122 +25,348 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel3 = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        bemVindoLabel = new javax.swing.JLabel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        formularioGeralPanel = new javax.swing.JPanel();
+        cabecalhoPanel = new javax.swing.JPanel();
+        tituloCabecalhoLabel = new javax.swing.JLabel();
+        sairPaginaButton = new javax.swing.JButton();
+        professorRadioButton = new javax.swing.JRadioButton();
+        alunoRadioButton = new javax.swing.JRadioButton();
+        coordenadorRadioButton = new javax.swing.JRadioButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        nomeLabel = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jPanel6 = new javax.swing.JPanel();
+        cpfLabel = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        telefoneLabel = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        emailLabel = new javax.swing.JLabel();
+        jTextField4 = new javax.swing.JTextField();
+        enderecoLabel = new javax.swing.JLabel();
+        jTextField5 = new javax.swing.JTextField();
+        senhaLabel = new javax.swing.JLabel();
+        jTextField6 = new javax.swing.JTextField();
+        criarContaBotton = new _07gestaoacademica.CustomizacaoBotao();
+        identifiqueLabel1 = new javax.swing.JLabel();
+        entrarContaBotton = new _07gestaoacademica.CustomizacaoBotao();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Criar Conta");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setUndecorated(true);
         setResizable(false);
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        formularioGeralPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel1.setBackground(new java.awt.Color(36, 53, 61));
+        cabecalhoPanel.setBackground(new java.awt.Color(255, 255, 255));
+        cabecalhoPanel.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                cabecalhoPanelMouseDragged(evt);
+            }
+        });
+        cabecalhoPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                cabecalhoPanelMousePressed(evt);
+            }
+        });
 
-        bemVindoLabel.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
-        bemVindoLabel.setForeground(new java.awt.Color(255, 255, 255));
-        bemVindoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        bemVindoLabel.setText("Texto default");
+        tituloCabecalhoLabel.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        tituloCabecalhoLabel.setForeground(new java.awt.Color(0, 0, 0));
+        tituloCabecalhoLabel.setText("CRIAR CONTA");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bemVindoLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
+        sairPaginaButton.setBackground(new java.awt.Color(255, 255, 255));
+        sairPaginaButton.setFont(new java.awt.Font("Verdana", 1, 32)); // NOI18N
+        sairPaginaButton.setForeground(new java.awt.Color(0, 0, 0));
+        sairPaginaButton.setText("X");
+        sairPaginaButton.setBorder(null);
+        sairPaginaButton.setContentAreaFilled(false);
+        sairPaginaButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sairPaginaButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                sairPaginaButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                sairPaginaButtonMouseExited(evt);
+            }
+        });
+        sairPaginaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sairPaginaButtonActionPerformed(evt);
+            }
+        });
+
+        professorRadioButton.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(professorRadioButton);
+        professorRadioButton.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        professorRadioButton.setForeground(new java.awt.Color(36, 53, 61));
+        professorRadioButton.setSelected(true);
+        professorRadioButton.setText("Sou Professor(a)");
+
+        alunoRadioButton.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(alunoRadioButton);
+        alunoRadioButton.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        alunoRadioButton.setForeground(new java.awt.Color(36, 53, 61));
+        alunoRadioButton.setText("Sou Aluno(a)");
+        alunoRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                alunoRadioButtonActionPerformed(evt);
+            }
+        });
+
+        coordenadorRadioButton.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(coordenadorRadioButton);
+        coordenadorRadioButton.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        coordenadorRadioButton.setForeground(new java.awt.Color(36, 53, 61));
+        coordenadorRadioButton.setText("Sou Coordenador(a)");
+        coordenadorRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                coordenadorRadioButtonActionPerformed(evt);
+            }
+        });
+
+        jSeparator1.setForeground(new java.awt.Color(76, 95, 99));
+
+        javax.swing.GroupLayout cabecalhoPanelLayout = new javax.swing.GroupLayout(cabecalhoPanel);
+        cabecalhoPanel.setLayout(cabecalhoPanelLayout);
+        cabecalhoPanelLayout.setHorizontalGroup(
+            cabecalhoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cabecalhoPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(cabecalhoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(cabecalhoPanelLayout.createSequentialGroup()
+                        .addComponent(professorRadioButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(alunoRadioButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(coordenadorRadioButton)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jSeparator1))
+                .addContainerGap())
+            .addGroup(cabecalhoPanelLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(tituloCabecalhoLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(sairPaginaButton)
+                .addGap(17, 17, 17))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(bemVindoLabel)
-                .addContainerGap(41, Short.MAX_VALUE))
+        cabecalhoPanelLayout.setVerticalGroup(
+            cabecalhoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cabecalhoPanelLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(cabecalhoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tituloCabecalhoLabel)
+                    .addComponent(sairPaginaButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addGroup(cabecalhoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(professorRadioButton)
+                    .addComponent(alunoRadioButton)
+                    .addComponent(coordenadorRadioButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Nome:");
+        nomeLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        nomeLabel.setForeground(new java.awt.Color(0, 0, 0));
+        nomeLabel.setText("Digite seu nome:");
 
         jTextField1.setBackground(new java.awt.Color(255, 255, 255));
         jTextField1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jTextField1.setForeground(new java.awt.Color(36, 53, 61));
         jTextField1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 615, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
+        cpfLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        cpfLabel.setForeground(new java.awt.Color(0, 0, 0));
+        cpfLabel.setText("Digite seu CPF:");
+
+        jTextField2.setBackground(new java.awt.Color(255, 255, 255));
+        jTextField2.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jTextField2.setForeground(new java.awt.Color(36, 53, 61));
+        jTextField2.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+
+        telefoneLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        telefoneLabel.setForeground(new java.awt.Color(0, 0, 0));
+        telefoneLabel.setText("Digite seu telefone:");
+
+        jTextField3.setBackground(new java.awt.Color(255, 255, 255));
+        jTextField3.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jTextField3.setForeground(new java.awt.Color(36, 53, 61));
+        jTextField3.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+
+        emailLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        emailLabel.setForeground(new java.awt.Color(0, 0, 0));
+        emailLabel.setText("Digite seu email:");
+
+        jTextField4.setBackground(new java.awt.Color(255, 255, 255));
+        jTextField4.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jTextField4.setForeground(new java.awt.Color(36, 53, 61));
+        jTextField4.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+
+        enderecoLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        enderecoLabel.setForeground(new java.awt.Color(0, 0, 0));
+        enderecoLabel.setText("Digite seu endereço:");
+
+        jTextField5.setBackground(new java.awt.Color(255, 255, 255));
+        jTextField5.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jTextField5.setForeground(new java.awt.Color(36, 53, 61));
+        jTextField5.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+
+        senhaLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        senhaLabel.setForeground(new java.awt.Color(0, 0, 0));
+        senhaLabel.setText("Digite sua senha:");
+
+        jTextField6.setBackground(new java.awt.Color(255, 255, 255));
+        jTextField6.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jTextField6.setForeground(new java.awt.Color(36, 53, 61));
+        jTextField6.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+
+        criarContaBotton.setForeground(new java.awt.Color(255, 255, 255));
+        criarContaBotton.setText("CRIAR CONTA");
+        criarContaBotton.setToolTipText("");
+        criarContaBotton.setCor(new java.awt.Color(36, 53, 61));
+        criarContaBotton.setCorBorda(new java.awt.Color(255, 255, 255));
+        criarContaBotton.setCorEntrou(new java.awt.Color(19, 176, 110));
+        criarContaBotton.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+
+        identifiqueLabel1.setFont(new java.awt.Font("SansSerif", 2, 12)); // NOI18N
+        identifiqueLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        identifiqueLabel1.setText("ou");
+
+        entrarContaBotton.setForeground(new java.awt.Color(255, 255, 255));
+        entrarContaBotton.setText("ENTRE NA SUA CONTA");
+        entrarContaBotton.setToolTipText("");
+        entrarContaBotton.setCor(new java.awt.Color(36, 53, 61));
+        entrarContaBotton.setCorBorda(new java.awt.Color(255, 255, 255));
+        entrarContaBotton.setCorEntrou(new java.awt.Color(19, 176, 110));
+        entrarContaBotton.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+
+        javax.swing.GroupLayout formularioGeralPanelLayout = new javax.swing.GroupLayout(formularioGeralPanel);
+        formularioGeralPanel.setLayout(formularioGeralPanelLayout);
+        formularioGeralPanelLayout.setHorizontalGroup(
+            formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(cabecalhoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(formularioGeralPanelLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(formularioGeralPanelLayout.createSequentialGroup()
+                        .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cpfLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(formularioGeralPanelLayout.createSequentialGroup()
+                        .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(telefoneLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(enderecoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(formularioGeralPanelLayout.createSequentialGroup()
+                        .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(senhaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(26, Short.MAX_VALUE))
+            .addGroup(formularioGeralPanelLayout.createSequentialGroup()
+                .addGap(155, 155, 155)
+                .addComponent(criarContaBotton, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(identifiqueLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(entrarContaBotton, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jLabel1)
+        formularioGeralPanelLayout.setVerticalGroup(
+            formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, formularioGeralPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cabecalhoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(320, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("tab1", jPanel4);
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 670, Short.MAX_VALUE)
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 399, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("tab2", jPanel6);
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(45, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(72, 72, 72)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(formularioGeralPanelLayout.createSequentialGroup()
+                        .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(formularioGeralPanelLayout.createSequentialGroup()
+                                .addComponent(nomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, formularioGeralPanelLayout.createSequentialGroup()
+                                .addComponent(cpfLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(35, 35, 35)
+                        .addComponent(telefoneLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(formularioGeralPanelLayout.createSequentialGroup()
+                        .addComponent(enderecoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(36, 36, 36)
+                .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(formularioGeralPanelLayout.createSequentialGroup()
+                        .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(formularioGeralPanelLayout.createSequentialGroup()
+                        .addComponent(senhaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(45, 45, 45)
+                .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(entrarContaBotton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(criarContaBotton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(identifiqueLabel1))
+                .addGap(28, 28, 28))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(formularioGeralPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(formularioGeralPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void coordenadorRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coordenadorRadioButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_coordenadorRadioButtonActionPerformed
+
+    private void alunoRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alunoRadioButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_alunoRadioButtonActionPerformed
+
+    private void cabecalhoPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cabecalhoPanelMousePressed
+        mouseX = evt.getX();
+        mouseY = evt.getY();
+    }//GEN-LAST:event_cabecalhoPanelMousePressed
+
+    private void cabecalhoPanelMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cabecalhoPanelMouseDragged
+        this.setLocation(this.getX() + evt.getX() - mouseX, this.getY() + evt.getY() - mouseY);
+    }//GEN-LAST:event_cabecalhoPanelMouseDragged
+
+    private void sairPaginaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairPaginaButtonActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_sairPaginaButtonActionPerformed
+
+    private void sairPaginaButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairPaginaButtonMouseEntered
+        Color corSelecionado = new Color(89, 89, 89);
+        sairPaginaButton.setForeground(corSelecionado);
+    }//GEN-LAST:event_sairPaginaButtonMouseEntered
+
+    private void sairPaginaButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairPaginaButtonMouseExited
+        sairPaginaButton.setForeground(Color.BLACK);
+    }//GEN-LAST:event_sairPaginaButtonMouseExited
 
     /**
      * @param args the command line arguments
@@ -180,13 +404,29 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel bemVindoLabel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JRadioButton alunoRadioButton;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JPanel cabecalhoPanel;
+    private javax.swing.JRadioButton coordenadorRadioButton;
+    private javax.swing.JLabel cpfLabel;
+    private _07gestaoacademica.CustomizacaoBotao criarContaBotton;
+    private javax.swing.JLabel emailLabel;
+    private javax.swing.JLabel enderecoLabel;
+    private _07gestaoacademica.CustomizacaoBotao entrarContaBotton;
+    private javax.swing.JPanel formularioGeralPanel;
+    private javax.swing.JLabel identifiqueLabel1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
+    private javax.swing.JLabel nomeLabel;
+    private javax.swing.JRadioButton professorRadioButton;
+    private javax.swing.JButton sairPaginaButton;
+    private javax.swing.JLabel senhaLabel;
+    private javax.swing.JLabel telefoneLabel;
+    private javax.swing.JLabel tituloCabecalhoLabel;
     // End of variables declaration//GEN-END:variables
 }
