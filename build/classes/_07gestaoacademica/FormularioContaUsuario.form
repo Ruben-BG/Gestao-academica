@@ -54,53 +54,56 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="cabecalhoPanel" alignment="0" max="32767" attributes="0"/>
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+              <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="nomeLabel" min="-2" pref="230" max="-2" attributes="0"/>
-                              <Component id="jTextField1" min="-2" pref="326" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="cpfLabel" alignment="0" min="-2" pref="230" max="-2" attributes="0"/>
-                              <Component id="jTextField2" alignment="0" min="-2" pref="326" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="telefoneLabel" alignment="0" min="-2" pref="230" max="-2" attributes="0"/>
-                              <Component id="jTextField3" alignment="0" min="-2" pref="326" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="enderecoLabel" alignment="0" min="-2" pref="230" max="-2" attributes="0"/>
-                              <Component id="jTextField5" alignment="0" min="-2" pref="326" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="nomeLabel" min="-2" pref="230" max="-2" attributes="0"/>
+                                      <Component id="nomeTextField" min="-2" pref="326" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="cpfLabel" alignment="0" min="-2" pref="230" max="-2" attributes="0"/>
+                                      <Component id="cpfTextField" alignment="0" min="-2" pref="326" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="telefoneLabel" alignment="0" min="-2" pref="230" max="-2" attributes="0"/>
+                                      <Component id="telefoneTextField" alignment="0" min="-2" pref="326" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="enderecoLabel" alignment="0" min="-2" pref="230" max="-2" attributes="0"/>
+                                      <Component id="enderecoTextField" alignment="0" min="-2" pref="326" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="emailTextField" alignment="0" min="-2" pref="326" max="-2" attributes="0"/>
+                                      <Component id="emailLabel" alignment="0" min="-2" pref="230" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="senhaLabel" min="-2" pref="230" max="-2" attributes="0"/>
+                                      <Component id="senhaPasswordField" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="emailLabel" alignment="0" min="-2" pref="230" max="-2" attributes="0"/>
-                              <Component id="jTextField4" alignment="0" min="-2" pref="326" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="separate" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="senhaLabel" alignment="0" min="-2" pref="230" max="-2" attributes="0"/>
-                              <Component id="jTextField6" alignment="0" min="-2" pref="326" max="-2" attributes="0"/>
-                          </Group>
+                          <EmptySpace min="-2" pref="155" max="-2" attributes="0"/>
+                          <Component id="criarContaBotton" min="-2" pref="180" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="identifiqueLabel1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="entrarContaBotton" min="-2" pref="180" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="26" max="32767" attributes="0"/>
-              </Group>
-              <Group type="102" attributes="0">
-                  <EmptySpace min="-2" pref="155" max="-2" attributes="0"/>
-                  <Component id="criarContaBotton" min="-2" pref="180" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="identifiqueLabel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="entrarContaBotton" min="-2" pref="180" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -116,39 +119,36 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="nomeLabel" min="-2" pref="28" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jTextField1" min="-2" pref="32" max="-2" attributes="0"/>
+                                  <Component id="nomeTextField" min="-2" pref="32" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="cpfLabel" min="-2" pref="28" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jTextField2" min="-2" pref="32" max="-2" attributes="0"/>
+                                  <Component id="cpfTextField" min="-2" pref="32" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                           <Component id="telefoneLabel" min="-2" pref="28" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTextField3" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="telefoneTextField" min="-2" pref="32" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="enderecoLabel" min="-2" pref="28" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTextField5" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="enderecoTextField" min="-2" pref="32" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="emailLabel" min="-2" pref="28" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTextField4" min="-2" pref="32" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="senhaLabel" min="-2" pref="28" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTextField6" min="-2" pref="32" max="-2" attributes="0"/>
-                      </Group>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="emailLabel" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="senhaLabel" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="emailTextField" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                      <Component id="senhaPasswordField" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="entrarContaBotton" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                       <Component id="criarContaBotton" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
@@ -206,7 +206,7 @@
                           <Component id="tituloCabecalhoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="sairPaginaButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="23" max="32767" attributes="0"/>
+                      <EmptySpace pref="22" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="professorRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="alunoRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -334,7 +334,7 @@
             <Property name="text" type="java.lang.String" value="Digite seu nome:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField1">
+        <Component class="javax.swing.JTextField" name="nomeTextField">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -363,7 +363,7 @@
             <Property name="text" type="java.lang.String" value="Digite seu CPF:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField2">
+        <Component class="javax.swing.JTextField" name="cpfTextField">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -392,7 +392,7 @@
             <Property name="text" type="java.lang.String" value="Digite seu telefone:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField3">
+        <Component class="javax.swing.JTextField" name="telefoneTextField">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -421,7 +421,7 @@
             <Property name="text" type="java.lang.String" value="Digite seu email:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField4">
+        <Component class="javax.swing.JTextField" name="emailTextField">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -450,7 +450,7 @@
             <Property name="text" type="java.lang.String" value="Digite seu endere&#xe7;o:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField5">
+        <Component class="javax.swing.JTextField" name="enderecoTextField">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -479,16 +479,10 @@
             <Property name="text" type="java.lang.String" value="Digite sua senha:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField6">
+        <Component class="javax.swing.JPasswordField" name="senhaPasswordField">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Verdana" size="12" style="0"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="3d" green="35" red="24" type="rgb"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
@@ -517,6 +511,9 @@
               <Font name="Verdana" size="12" style="0"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="criarContaBottonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="identifiqueLabel1">
           <Properties>
@@ -549,6 +546,9 @@
               <Font name="Verdana" size="12" style="0"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="entrarContaBottonActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

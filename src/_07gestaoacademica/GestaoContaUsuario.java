@@ -35,15 +35,16 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
         jSeparator1 = new javax.swing.JSeparator();
-        entrarContaBotton = new _07gestaoacademica.CustomizacaoBotao();
-        identifiqueLabel1 = new javax.swing.JLabel();
-        novoCadastroBotton = new _07gestaoacademica.CustomizacaoBotao();
         matriculaLabel = new javax.swing.JLabel();
         matriculaTextField = new javax.swing.JTextField();
         senhaLabel = new javax.swing.JLabel();
-        senhaTextField = new javax.swing.JTextField();
+        senhaPasswordField = new javax.swing.JPasswordField();
+        entrarContaBotton = new _07gestaoacademica.CustomizacaoBotao();
+        identifiqueLabel1 = new javax.swing.JLabel();
+        novoCadastroBotton = new _07gestaoacademica.CustomizacaoBotao();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tela inicial");
         setResizable(false);
         setSize(new java.awt.Dimension(700, 409));
 
@@ -114,6 +115,21 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        matriculaLabel.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        matriculaLabel.setForeground(new java.awt.Color(0, 0, 0));
+        matriculaLabel.setText("Digite sua Matrícula:");
+
+        matriculaTextField.setBackground(new java.awt.Color(255, 255, 255));
+        matriculaTextField.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        matriculaTextField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+
+        senhaLabel.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        senhaLabel.setForeground(new java.awt.Color(0, 0, 0));
+        senhaLabel.setText("Digite sua Senha:");
+
+        senhaPasswordField.setBackground(new java.awt.Color(255, 255, 255));
+        senhaPasswordField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+
         entrarContaBotton.setForeground(new java.awt.Color(255, 255, 255));
         entrarContaBotton.setText("ENTRAR");
         entrarContaBotton.setToolTipText("");
@@ -144,22 +160,6 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
             }
         });
 
-        matriculaLabel.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        matriculaLabel.setForeground(new java.awt.Color(0, 0, 0));
-        matriculaLabel.setText("Digite sua Matrícula:");
-
-        matriculaTextField.setBackground(new java.awt.Color(255, 255, 255));
-        matriculaTextField.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        matriculaTextField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
-
-        senhaLabel.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        senhaLabel.setForeground(new java.awt.Color(0, 0, 0));
-        senhaLabel.setText("Digite sua Senha:");
-
-        senhaTextField.setBackground(new java.awt.Color(255, 255, 255));
-        senhaTextField.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        senhaTextField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
-
         javax.swing.GroupLayout gestaoPanelLayout = new javax.swing.GroupLayout(gestaoPanel);
         gestaoPanel.setLayout(gestaoPanelLayout);
         gestaoPanelLayout.setHorizontalGroup(
@@ -170,30 +170,32 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(selecaoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(gestaoPanelLayout.createSequentialGroup()
-                        .addGap(95, 95, 95)
                         .addGroup(gestaoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(novoCadastroBotton, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(entrarContaBotton, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(gestaoPanelLayout.createSequentialGroup()
-                                .addGap(86, 86, 86)
-                                .addComponent(identifiqueLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(95, 95, 95)
+                                .addGroup(gestaoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(novoCadastroBotton, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(entrarContaBotton, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(gestaoPanelLayout.createSequentialGroup()
+                                        .addGap(86, 86, 86)
+                                        .addComponent(identifiqueLabel1))))
+                            .addGroup(gestaoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(gestaoPanelLayout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addComponent(senhaPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, gestaoPanelLayout.createSequentialGroup()
+                                    .addGap(28, 28, 28)
+                                    .addGroup(gestaoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(gestaoPanelLayout.createSequentialGroup()
+                                            .addComponent(senhaLabel)
+                                            .addGap(205, 205, 205))
+                                        .addGroup(gestaoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(gestaoPanelLayout.createSequentialGroup()
+                                                .addGap(6, 6, 6)
+                                                .addComponent(matriculaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(matriculaLabel))))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(gestaoPanelLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(gestaoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(gestaoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(gestaoPanelLayout.createSequentialGroup()
-                            .addGap(6, 6, 6)
-                            .addComponent(senhaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(senhaLabel))
-                    .addGroup(gestaoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(gestaoPanelLayout.createSequentialGroup()
-                            .addGap(6, 6, 6)
-                            .addComponent(matriculaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(matriculaLabel)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         gestaoPanelLayout.setVerticalGroup(
             gestaoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,7 +209,7 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addComponent(senhaLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(senhaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(senhaPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(entrarContaBotton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
@@ -295,6 +297,6 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
     private _07gestaoacademica.CustomizacaoBotao novoCadastroBotton;
     private javax.swing.JPanel selecaoPanel;
     private javax.swing.JLabel senhaLabel;
-    private javax.swing.JTextField senhaTextField;
+    private javax.swing.JPasswordField senhaPasswordField;
     // End of variables declaration//GEN-END:variables
 }

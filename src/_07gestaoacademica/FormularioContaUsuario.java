@@ -1,6 +1,7 @@
 package _07gestaoacademica;
 import java.awt.Color;
-import javax.swing.JFrame;
+import java.awt.List;
+import java.util.ArrayList;
 
 /**
  *
@@ -8,10 +9,51 @@ import javax.swing.JFrame;
  */
 public class FormularioContaUsuario extends javax.swing.JFrame {
 
-    //Variáveis
+    //Atributos
     private int mouseX, mouseY;
+    private Usuario usuario;
+    private PopUp popUp;
+    protected ArrayList<Usuario> usuarios = new ArrayList<>();
+
+    protected void opcoesUsuario(Boolean aluno, Boolean professor, Boolean coordenador) {
+
+        usuario.setAluno(aluno);
+        usuario.setProfessor(professor);
+        usuario.setCoordenador(coordenador);
+
+    }
+
+    protected void gerarPopUp() {
+
+        if(nomeTextField.equals("")) {
+            popUp = new PopUp();
+            popUp.semNome();
+        } else if(cpfTextField.equals("")) {
+            popUp = new PopUp();
+            popUp.campoNaoPreenchido("CPF");
+        } else if(emailTextField.equals("")) {
+            popUp = new PopUp();
+            popUp.campoNaoPreenchido("Email");
+        } else if(senhaPasswordField.equals("")) {
+            popUp = new PopUp();
+            popUp.campoNaoPreenchido("Senha");
+        }
+
+    }
     
-    //Programa Geral
+    public void pegaDados() {
+        
+        String senha = new String(senhaPasswordField.getPassword());
+        
+        usuario.setNome(nomeTextField.getText());
+        usuario.setTelefone(telefoneTextField.getText());
+        usuario.setEmail(emailTextField.getText());
+        usuario.setCpf(cpfTextField.getText());
+        usuario.setEndereco(enderecoTextField.getText());
+        usuario.setSenha(senha);
+        
+    }
+
     public FormularioContaUsuario() {
         initComponents();
     }
@@ -35,17 +77,17 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
         coordenadorRadioButton = new javax.swing.JRadioButton();
         jSeparator1 = new javax.swing.JSeparator();
         nomeLabel = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        nomeTextField = new javax.swing.JTextField();
         cpfLabel = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        cpfTextField = new javax.swing.JTextField();
         telefoneLabel = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        telefoneTextField = new javax.swing.JTextField();
         emailLabel = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        emailTextField = new javax.swing.JTextField();
         enderecoLabel = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        enderecoTextField = new javax.swing.JTextField();
         senhaLabel = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        senhaPasswordField = new javax.swing.JPasswordField();
         criarContaBotton = new _07gestaoacademica.CustomizacaoBotao();
         identifiqueLabel1 = new javax.swing.JLabel();
         entrarContaBotton = new _07gestaoacademica.CustomizacaoBotao();
@@ -156,7 +198,7 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
                 .addGroup(cabecalhoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tituloCabecalhoLabel)
                     .addComponent(sairPaginaButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(cabecalhoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(professorRadioButton)
                     .addComponent(alunoRadioButton)
@@ -169,55 +211,53 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
         nomeLabel.setForeground(new java.awt.Color(0, 0, 0));
         nomeLabel.setText("Digite seu nome:");
 
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(36, 53, 61));
-        jTextField1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        nomeTextField.setBackground(new java.awt.Color(255, 255, 255));
+        nomeTextField.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        nomeTextField.setForeground(new java.awt.Color(36, 53, 61));
+        nomeTextField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
 
         cpfLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         cpfLabel.setForeground(new java.awt.Color(0, 0, 0));
         cpfLabel.setText("Digite seu CPF:");
 
-        jTextField2.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField2.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(36, 53, 61));
-        jTextField2.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        cpfTextField.setBackground(new java.awt.Color(255, 255, 255));
+        cpfTextField.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        cpfTextField.setForeground(new java.awt.Color(36, 53, 61));
+        cpfTextField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
 
         telefoneLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         telefoneLabel.setForeground(new java.awt.Color(0, 0, 0));
         telefoneLabel.setText("Digite seu telefone:");
 
-        jTextField3.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField3.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jTextField3.setForeground(new java.awt.Color(36, 53, 61));
-        jTextField3.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        telefoneTextField.setBackground(new java.awt.Color(255, 255, 255));
+        telefoneTextField.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        telefoneTextField.setForeground(new java.awt.Color(36, 53, 61));
+        telefoneTextField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
 
         emailLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         emailLabel.setForeground(new java.awt.Color(0, 0, 0));
         emailLabel.setText("Digite seu email:");
 
-        jTextField4.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField4.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jTextField4.setForeground(new java.awt.Color(36, 53, 61));
-        jTextField4.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        emailTextField.setBackground(new java.awt.Color(255, 255, 255));
+        emailTextField.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        emailTextField.setForeground(new java.awt.Color(36, 53, 61));
+        emailTextField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
 
         enderecoLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         enderecoLabel.setForeground(new java.awt.Color(0, 0, 0));
         enderecoLabel.setText("Digite seu endereço:");
 
-        jTextField5.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField5.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jTextField5.setForeground(new java.awt.Color(36, 53, 61));
-        jTextField5.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        enderecoTextField.setBackground(new java.awt.Color(255, 255, 255));
+        enderecoTextField.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        enderecoTextField.setForeground(new java.awt.Color(36, 53, 61));
+        enderecoTextField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
 
         senhaLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         senhaLabel.setForeground(new java.awt.Color(0, 0, 0));
         senhaLabel.setText("Digite sua senha:");
 
-        jTextField6.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField6.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jTextField6.setForeground(new java.awt.Color(36, 53, 61));
-        jTextField6.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        senhaPasswordField.setBackground(new java.awt.Color(255, 255, 255));
+        senhaPasswordField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
 
         criarContaBotton.setForeground(new java.awt.Color(255, 255, 255));
         criarContaBotton.setText("CRIAR CONTA");
@@ -226,6 +266,11 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
         criarContaBotton.setCorBorda(new java.awt.Color(255, 255, 255));
         criarContaBotton.setCorEntrou(new java.awt.Color(19, 176, 110));
         criarContaBotton.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        criarContaBotton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                criarContaBottonActionPerformed(evt);
+            }
+        });
 
         identifiqueLabel1.setFont(new java.awt.Font("SansSerif", 2, 12)); // NOI18N
         identifiqueLabel1.setForeground(new java.awt.Color(0, 0, 0));
@@ -238,6 +283,11 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
         entrarContaBotton.setCorBorda(new java.awt.Color(255, 255, 255));
         entrarContaBotton.setCorEntrou(new java.awt.Color(19, 176, 110));
         entrarContaBotton.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        entrarContaBotton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                entrarContaBottonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout formularioGeralPanelLayout = new javax.swing.GroupLayout(formularioGeralPanel);
         formularioGeralPanel.setLayout(formularioGeralPanelLayout);
@@ -245,41 +295,42 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
             formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(cabecalhoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(formularioGeralPanelLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
                 .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(formularioGeralPanelLayout.createSequentialGroup()
-                        .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cpfLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(24, 24, 24)
+                        .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(formularioGeralPanelLayout.createSequentialGroup()
+                                .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(nomeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cpfLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cpfTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(formularioGeralPanelLayout.createSequentialGroup()
+                                .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(telefoneLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(telefoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(enderecoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(enderecoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(formularioGeralPanelLayout.createSequentialGroup()
+                                .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(senhaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(senhaPasswordField)))))
                     .addGroup(formularioGeralPanelLayout.createSequentialGroup()
-                        .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(telefoneLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(155, 155, 155)
+                        .addComponent(criarContaBotton, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(enderecoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(formularioGeralPanelLayout.createSequentialGroup()
-                        .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, Short.MAX_VALUE)
-                        .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(senhaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(identifiqueLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(entrarContaBotton, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(26, Short.MAX_VALUE))
-            .addGroup(formularioGeralPanelLayout.createSequentialGroup()
-                .addGap(155, 155, 155)
-                .addComponent(criarContaBotton, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(identifiqueLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(entrarContaBotton, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         formularioGeralPanelLayout.setVerticalGroup(
             formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -293,30 +344,28 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
                             .addGroup(formularioGeralPanelLayout.createSequentialGroup()
                                 .addComponent(nomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(nomeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, formularioGeralPanelLayout.createSequentialGroup()
                                 .addComponent(cpfLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(cpfTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(35, 35, 35)
                         .addComponent(telefoneLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(telefoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(formularioGeralPanelLayout.createSequentialGroup()
                         .addComponent(enderecoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(enderecoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(36, 36, 36)
-                .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(formularioGeralPanelLayout.createSequentialGroup()
-                        .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(formularioGeralPanelLayout.createSequentialGroup()
-                        .addComponent(senhaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(45, 45, 45)
+                .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(senhaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(senhaPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(44, 44, 44)
                 .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(entrarContaBotton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(criarContaBotton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -346,6 +395,7 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_alunoRadioButtonActionPerformed
 
+    //evento de mover a janela
     private void cabecalhoPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cabecalhoPanelMousePressed
         mouseX = evt.getX();
         mouseY = evt.getY();
@@ -368,10 +418,55 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
         sairPaginaButton.setForeground(Color.BLACK);
     }//GEN-LAST:event_sairPaginaButtonMouseExited
 
+    private void criarContaBottonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_criarContaBottonActionPerformed
+        
+        popUp = null;
+        usuario = new Usuario();
+        int numeroMatricula = 0000001;
+        
+        if(professorRadioButton.isSelected()) {            
+            opcoesUsuario(false, true, false);
+        } else if(alunoRadioButton.isSelected()) {
+            opcoesUsuario(true, false, false);
+        } else {
+            opcoesUsuario(false, false, true);
+        }
+        
+        gerarPopUp();
+        
+        /*if(popUp == null) {
+            
+            pegaDados();
+            usuarios.add(usuario);
+            
+            if(usuarios.size() >= 1) {
+                
+                for(int linha = 0; linha < usuarios.size(); linha++) {
+                    
+                    if(numeroMatricula)
+                    
+                }
+                
+            }
+            
+            usuario.setMatricula(0000001);
+            popUp = new PopUp();
+            
+                    
+        }*/
+        
+    }//GEN-LAST:event_criarContaBottonActionPerformed
+
+    private void entrarContaBottonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarContaBottonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_entrarContaBottonActionPerformed
+
+    
+    
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public FormularioContaUsuario(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -409,24 +504,24 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
     private javax.swing.JPanel cabecalhoPanel;
     private javax.swing.JRadioButton coordenadorRadioButton;
     private javax.swing.JLabel cpfLabel;
+    private javax.swing.JTextField cpfTextField;
     private _07gestaoacademica.CustomizacaoBotao criarContaBotton;
     private javax.swing.JLabel emailLabel;
+    private javax.swing.JTextField emailTextField;
     private javax.swing.JLabel enderecoLabel;
+    private javax.swing.JTextField enderecoTextField;
     private _07gestaoacademica.CustomizacaoBotao entrarContaBotton;
     private javax.swing.JPanel formularioGeralPanel;
     private javax.swing.JLabel identifiqueLabel1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JLabel nomeLabel;
+    private javax.swing.JTextField nomeTextField;
     private javax.swing.JRadioButton professorRadioButton;
     private javax.swing.JButton sairPaginaButton;
     private javax.swing.JLabel senhaLabel;
+    private javax.swing.JPasswordField senhaPasswordField;
     private javax.swing.JLabel telefoneLabel;
+    private javax.swing.JTextField telefoneTextField;
     private javax.swing.JLabel tituloCabecalhoLabel;
     // End of variables declaration//GEN-END:variables
 }
