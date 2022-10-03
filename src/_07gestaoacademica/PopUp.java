@@ -9,12 +9,14 @@ import java.awt.Color;
 public class PopUp extends javax.swing.JFrame {
     
     private int mouseX, mouseY;
+    GestaoContaUsuario novaGestaoContaUsuario;
 
     /**
      * Creates new form PopUp
      */
     public PopUp() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -124,12 +126,12 @@ public class PopUp extends javax.swing.JFrame {
             .addComponent(cabecalhoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelPrincipalPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(mensagemCentralLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(mensagemCentralLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelPrincipalPanelLayout.createSequentialGroup()
-                .addContainerGap(156, Short.MAX_VALUE)
-                .addComponent(botaoFinalButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(154, 154, 154))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botaoFinalButton, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(117, 117, 117))
         );
         painelPrincipalPanelLayout.setVerticalGroup(
             painelPrincipalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,8 +139,8 @@ public class PopUp extends javax.swing.JFrame {
                 .addComponent(cabecalhoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(71, 71, 71)
                 .addComponent(mensagemCentralLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
-                .addComponent(botaoFinalButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addComponent(botaoFinalButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -185,7 +187,7 @@ public class PopUp extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public PopUp(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -218,27 +220,37 @@ public class PopUp extends javax.swing.JFrame {
     }
     
     //Opções de frases
+    private void finalizacaoFrame() {
+        setVisible(true);
+        pack();
+    }
+    
     public void semNome() {
         mensagemCentralLabel.setText("Nome não definido, ou inválido, por favor tente novamente.");
-        setVisible(true);
+        finalizacaoFrame();
     }
     
     public void campoNaoPreenchido(String campo) {
         mensagemCentralLabel.setText("Campo de " + campo + " não preenchido.");
-        setVisible(true);
+        finalizacaoFrame();
     }
     
     public void naoNumerico(String campo) {
         mensagemCentralLabel.setText("O valor do " + campo + " tem que conter apenas números.");
-        setVisible(true);
+        finalizacaoFrame();
     }
     
     public void limiteNumero(String campo, int quantidade) {
         mensagemCentralLabel.setText("O valor do " + campo + " tem que conter no máximo " + quantidade + " números.");
-        setVisible(true);
+        finalizacaoFrame();
     }
     
-    
+    public void MensagemFinal(String textoCadastro) {
+        tituloLabel.setText("SUCESSO");
+        mensagemCentralLabel.setText(textoCadastro);
+        botaoFinalButton.setText("ENTRAR NO SISTEMA");
+        finalizacaoFrame();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private _07gestaoacademica.CustomizacaoBotao botaoFinalButton;

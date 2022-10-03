@@ -1,9 +1,8 @@
 package _07gestaoacademica;
 
-public class Usuario {
+public class UsuarioProfessor {
 
     private String nome, telefone, email, cpf, endereco, senha;
-    private Boolean aluno, professor, coordenador;
 
     private int matricula;
 
@@ -30,18 +29,6 @@ public class Usuario {
 
     public String getSenha() {
         return senha;
-    }
-
-    public Boolean getAluno() {
-        return aluno;
-    }
-
-    public Boolean getProfessor() {
-        return professor;
-    }
-
-    public Boolean getCoordenador() {
-        return coordenador;
     }
 
     public int getMatricula() {
@@ -71,18 +58,6 @@ public class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    public void setAluno(Boolean aluno) {
-        this.aluno = aluno;
-    }
-
-    public void setProfessor(Boolean professor) {
-        this.professor = professor;
-    }
-
-    public void setCoordenador(Boolean coordenador) {
-        this.coordenador = coordenador;
     }
 
     public void setMatricula(int matricula) {

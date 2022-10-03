@@ -13,9 +13,9 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
 
     FormularioContaUsuario gerarFormulario;
     
-    
     public GestaoContaUsuario() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -32,8 +32,8 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
         selecaoPanel = new javax.swing.JPanel();
         bemVindoLabel = new javax.swing.JLabel();
         identifiqueLabel = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        professorAlunoRadioButton = new javax.swing.JRadioButton();
+        coordenadorRadioButton = new javax.swing.JRadioButton();
         jSeparator1 = new javax.swing.JSeparator();
         matriculaLabel = new javax.swing.JLabel();
         matriculaTextField = new javax.swing.JTextField();
@@ -60,23 +60,28 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
         identifiqueLabel.setForeground(new java.awt.Color(0, 0, 0));
         identifiqueLabel.setText("Identifique-se:");
 
-        jRadioButton1.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        jRadioButton1.setForeground(new java.awt.Color(36, 53, 61));
-        jRadioButton1.setSelected(true);
-        jRadioButton1.setText("Sou Professor(a)/Aluno(a)");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        professorAlunoRadioButton.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(professorAlunoRadioButton);
+        professorAlunoRadioButton.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        professorAlunoRadioButton.setForeground(new java.awt.Color(36, 53, 61));
+        professorAlunoRadioButton.setSelected(true);
+        professorAlunoRadioButton.setText("Sou Professor(a)/Aluno(a)");
+        professorAlunoRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                professorAlunoRadioButtonActionPerformed(evt);
             }
         });
 
-        jRadioButton3.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        jRadioButton3.setForeground(new java.awt.Color(36, 53, 61));
-        jRadioButton3.setText("Sou Coordenador(a)");
+        coordenadorRadioButton.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(coordenadorRadioButton);
+        coordenadorRadioButton.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        coordenadorRadioButton.setForeground(new java.awt.Color(36, 53, 61));
+        coordenadorRadioButton.setText("Sou Coordenador(a)");
+        coordenadorRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                coordenadorRadioButtonActionPerformed(evt);
+            }
+        });
 
         jSeparator1.setForeground(new java.awt.Color(204, 204, 204));
 
@@ -92,9 +97,9 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
                         .addGap(10, 10, 10)
                         .addGroup(selecaoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(selecaoPanelLayout.createSequentialGroup()
-                                .addComponent(jRadioButton1)
+                                .addComponent(professorAlunoRadioButton)
                                 .addGap(18, 18, 18)
-                                .addComponent(jRadioButton3))
+                                .addComponent(coordenadorRadioButton))
                             .addComponent(identifiqueLabel))))
                 .addContainerGap(35, Short.MAX_VALUE))
             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -108,8 +113,8 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
                 .addComponent(identifiqueLabel)
                 .addGap(18, 18, 18)
                 .addGroup(selecaoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton3))
+                    .addComponent(professorAlunoRadioButton)
+                    .addComponent(coordenadorRadioButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -239,13 +244,18 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
 
     private void novoCadastroBottonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoCadastroBottonActionPerformed
         gerarFormulario = new FormularioContaUsuario();
+        gerarFormulario.setLocationRelativeTo(null);
         gerarFormulario.setVisible(true);
-        
+        this.dispose();
     }//GEN-LAST:event_novoCadastroBottonActionPerformed
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    private void professorAlunoRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_professorAlunoRadioButtonActionPerformed
+        this.matriculaLabel.setText("Digite sua Matrícula:");
+    }//GEN-LAST:event_professorAlunoRadioButtonActionPerformed
+
+    private void coordenadorRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coordenadorRadioButtonActionPerformed
+        this.matriculaLabel.setText("Digite seu nome de usuário:");
+    }//GEN-LAST:event_coordenadorRadioButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -285,16 +295,16 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bemVindoLabel;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JRadioButton coordenadorRadioButton;
     private _07gestaoacademica.CustomizacaoBotao entrarContaBotton;
     private javax.swing.JPanel gestaoPanel;
     private javax.swing.JLabel identifiqueLabel;
     private javax.swing.JLabel identifiqueLabel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel matriculaLabel;
     private javax.swing.JTextField matriculaTextField;
     private _07gestaoacademica.CustomizacaoBotao novoCadastroBotton;
+    private javax.swing.JRadioButton professorAlunoRadioButton;
     private javax.swing.JPanel selecaoPanel;
     private javax.swing.JLabel senhaLabel;
     private javax.swing.JPasswordField senhaPasswordField;

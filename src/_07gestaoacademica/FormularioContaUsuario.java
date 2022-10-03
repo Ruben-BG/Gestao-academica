@@ -1,6 +1,5 @@
 package _07gestaoacademica;
 import java.awt.Color;
-import java.awt.List;
 import java.util.ArrayList;
 
 /**
@@ -10,31 +9,23 @@ import java.util.ArrayList;
 public class FormularioContaUsuario extends javax.swing.JFrame {
 
     //Atributos
-    private int mouseX, mouseY;
-    private Usuario usuario;
+    private int mouseX, mouseY, numeroMatricula;
+    private UsuarioProfessor usuario;
     private PopUp popUp;
-    protected ArrayList<Usuario> usuarios = new ArrayList<>();
-
-    protected void opcoesUsuario(Boolean aluno, Boolean professor, Boolean coordenador) {
-
-        usuario.setAluno(aluno);
-        usuario.setProfessor(professor);
-        usuario.setCoordenador(coordenador);
-
-    }
+    GestaoContaUsuario novaGestaoContaUsuario;
 
     protected void gerarPopUp() {
 
-        if(nomeTextField.equals("")) {
+        if("".equals(nomeTextField.getText())) {
             popUp = new PopUp();
             popUp.semNome();
-        } else if(cpfTextField.equals("")) {
+        } else if("".equals(cpfTextField.getText())) {
             popUp = new PopUp();
             popUp.campoNaoPreenchido("CPF");
-        } else if(emailTextField.equals("")) {
+        } else if("".equals(emailTextField.getText())) {
             popUp = new PopUp();
             popUp.campoNaoPreenchido("Email");
-        } else if(senhaPasswordField.equals("")) {
+        } else if("".equals(String.valueOf(senhaPasswordField.getPassword()))) {
             popUp = new PopUp();
             popUp.campoNaoPreenchido("Senha");
         }
@@ -215,6 +206,11 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
         nomeTextField.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         nomeTextField.setForeground(new java.awt.Color(36, 53, 61));
         nomeTextField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        nomeTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nomeTextFieldActionPerformed(evt);
+            }
+        });
 
         cpfLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         cpfLabel.setForeground(new java.awt.Color(0, 0, 0));
@@ -406,7 +402,12 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_cabecalhoPanelMouseDragged
 
     private void sairPaginaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairPaginaButtonActionPerformed
+        mouseX = getX();
+        mouseY = getY();
         this.dispose();
+        novaGestaoContaUsuario = new GestaoContaUsuario();
+        novaGestaoContaUsuario.setLocation(mouseX, mouseY);
+        novaGestaoContaUsuario.setVisible(true);
     }//GEN-LAST:event_sairPaginaButtonActionPerformed
 
     private void sairPaginaButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairPaginaButtonMouseEntered
@@ -421,45 +422,33 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
     private void criarContaBottonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_criarContaBottonActionPerformed
         
         popUp = null;
-        usuario = new Usuario();
-        int numeroMatricula = 0000001;
-        
-        if(professorRadioButton.isSelected()) {            
-            opcoesUsuario(false, true, false);
-        } else if(alunoRadioButton.isSelected()) {
-            opcoesUsuario(true, false, false);
-        } else {
-            opcoesUsuario(false, false, true);
-        }
         
         gerarPopUp();
         
-        /*if(popUp == null) {
+        if (popUp == null) {
             
-            pegaDados();
-            usuarios.add(usuario);
-            
-            if(usuarios.size() >= 1) {
-                
-                for(int linha = 0; linha < usuarios.size(); linha++) {
-                    
-                    if(numeroMatricula)
-                    
-                }
-                
+            if(alunoRadioButton.isSelected() || professorRadioButton.isSelected()) {
+                numeroMatricula++;
+                popUp = new PopUp();
+                popUp.MensagemFinal("Sua conta foi criada com sucesso! Sua matrícula é " + numeroMatricula + ".");
+            } else {
+                popUp = new PopUp();
+                popUp.MensagemFinal("Sua conta foi criada com sucesso! Acesse o sistema.");
             }
             
-            usuario.setMatricula(0000001);
-            popUp = new PopUp();
-            
-                    
-        }*/
+        }
         
     }//GEN-LAST:event_criarContaBottonActionPerformed
 
     private void entrarContaBottonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarContaBottonActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        novaGestaoContaUsuario = new GestaoContaUsuario();
+        novaGestaoContaUsuario.setVisible(true);
     }//GEN-LAST:event_entrarContaBottonActionPerformed
+
+    private void nomeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nomeTextFieldActionPerformed
 
     
     

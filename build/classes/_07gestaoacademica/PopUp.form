@@ -48,13 +48,13 @@
               <Component id="cabecalhoPanel" alignment="0" max="32767" attributes="0"/>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="mensagemCentralLabel" max="32767" attributes="0"/>
+                  <Component id="mensagemCentralLabel" pref="408" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="156" max="32767" attributes="0"/>
-                  <Component id="botaoFinalButton" min="-2" pref="110" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="154" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="botaoFinalButton" min="-2" pref="180" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="117" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -64,8 +64,8 @@
                   <Component id="cabecalhoPanel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
                   <Component id="mensagemCentralLabel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="56" max="32767" attributes="0"/>
-                  <Component id="botaoFinalButton" min="-2" pref="45" max="-2" attributes="0"/>
+                  <EmptySpace pref="53" max="32767" attributes="0"/>
+                  <Component id="botaoFinalButton" min="-2" pref="48" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
