@@ -1,6 +1,7 @@
 package _07gestaoacademica;
 
 import java.awt.Color;
+import java.awt.event.ComponentAdapter;
 
 /**
  *
@@ -108,7 +109,6 @@ public class PopUp extends javax.swing.JFrame {
 
         botaoFinalButton.setForeground(new java.awt.Color(255, 255, 255));
         botaoFinalButton.setText("OK");
-        botaoFinalButton.setToolTipText("");
         botaoFinalButton.setCor(new java.awt.Color(36, 53, 61));
         botaoFinalButton.setCorBorda(new java.awt.Color(255, 255, 255));
         botaoFinalButton.setCorEntrou(new java.awt.Color(19, 176, 110));
@@ -137,9 +137,9 @@ public class PopUp extends javax.swing.JFrame {
             painelPrincipalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelPrincipalPanelLayout.createSequentialGroup()
                 .addComponent(cabecalhoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71)
+                .addGap(61, 61, 61)
                 .addComponent(mensagemCentralLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addComponent(botaoFinalButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -230,6 +230,11 @@ public class PopUp extends javax.swing.JFrame {
         finalizacaoFrame();
     }
     
+    public void emailErrado() {
+        mensagemCentralLabel.setText("O campo de email deve conter um @, por favor tente novamente.");
+        finalizacaoFrame();
+    }
+    
     public void campoNaoPreenchido(String campo) {
         mensagemCentralLabel.setText("Campo de " + campo + " não preenchido.");
         finalizacaoFrame();
@@ -241,15 +246,23 @@ public class PopUp extends javax.swing.JFrame {
     }
     
     public void limiteNumero(String campo, int quantidade) {
-        mensagemCentralLabel.setText("O valor do " + campo + " tem que conter no máximo " + quantidade + " números.");
+        mensagemCentralLabel.setText("O valor do " + campo + " tem que conter no mínimo " + quantidade + " digitos.");
         finalizacaoFrame();
     }
     
-    public void MensagemFinal(String textoCadastro) {
+    public void MensagemFinal(String textoCadastro, FormularioContaUsuario referenciaFormulario) {
         tituloLabel.setText("SUCESSO");
         mensagemCentralLabel.setText(textoCadastro);
         botaoFinalButton.setText("ENTRAR NO SISTEMA");
         finalizacaoFrame();
+        botaoFinalButton.addActionListener((e) -> {
+           
+            this.dispose();
+            referenciaFormulario.dispose();
+            novaGestaoContaUsuario = new GestaoContaUsuario();
+            novaGestaoContaUsuario.setVisible(true);
+            
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

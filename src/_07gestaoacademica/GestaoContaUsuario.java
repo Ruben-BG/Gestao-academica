@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package _07gestaoacademica;
 
 /**
  *
- * @author ravtec
+ * @author ruben-braga
  */
 public class GestaoContaUsuario extends javax.swing.JFrame {
 
@@ -137,7 +132,6 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
 
         entrarContaBotton.setForeground(new java.awt.Color(255, 255, 255));
         entrarContaBotton.setText("ENTRAR");
-        entrarContaBotton.setToolTipText("");
         entrarContaBotton.setCor(new java.awt.Color(36, 53, 61));
         entrarContaBotton.setCorBorda(new java.awt.Color(255, 255, 255));
         entrarContaBotton.setCorEntrou(new java.awt.Color(19, 176, 110));
@@ -152,12 +146,13 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
         identifiqueLabel1.setForeground(new java.awt.Color(0, 0, 0));
         identifiqueLabel1.setText("ou");
 
+        novoCadastroBotton.setBackground(new java.awt.Color(76, 95, 99));
         novoCadastroBotton.setForeground(new java.awt.Color(255, 255, 255));
         novoCadastroBotton.setText("CADASTRE-SE");
-        novoCadastroBotton.setToolTipText("");
-        novoCadastroBotton.setCor(new java.awt.Color(36, 53, 61));
+        novoCadastroBotton.setCor(new java.awt.Color(76, 95, 99));
         novoCadastroBotton.setCorBorda(new java.awt.Color(255, 255, 255));
         novoCadastroBotton.setCorEntrou(new java.awt.Color(19, 176, 110));
+        novoCadastroBotton.setCorSaiu(new java.awt.Color(76, 95, 99));
         novoCadastroBotton.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         novoCadastroBotton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

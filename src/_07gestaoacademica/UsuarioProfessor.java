@@ -6,6 +6,12 @@ public class UsuarioProfessor {
 
     private int matricula;
 
+    public UsuarioProfessor() {
+        
+        this.matricula = Usuario.getProximaMatricula();
+        
+    }
+
     //GETTERS
     public String getNome() {
         return nome;

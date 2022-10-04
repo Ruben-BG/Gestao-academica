@@ -1,6 +1,7 @@
 package _07gestaoacademica;
 import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.Action;
 
 /**
  *
@@ -15,6 +16,10 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
     GestaoContaUsuario novaGestaoContaUsuario;
 
     protected void gerarPopUp() {
+        
+        boolean telefoneNum = telefoneTextField.getText().chars().allMatch(Character::isDigit); //<- vê se o espaço "telefone" é numérico
+        boolean cpfNum = cpfTextField.getText().chars().allMatch(Character::isDigit); //<- vê se o espaço "cpf" é numérico
+        boolean emailCorreto = emailTextField.getText().contains("@"); //método de verificação se tem ou não @ no campo
 
         if("".equals(nomeTextField.getText())) {
             popUp = new PopUp();
@@ -28,6 +33,18 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
         } else if("".equals(String.valueOf(senhaPasswordField.getPassword()))) {
             popUp = new PopUp();
             popUp.campoNaoPreenchido("Senha");
+        } else if(!"".equals(telefoneTextField.getText()) && !telefoneNum) {
+            popUp = new PopUp();
+            popUp.naoNumerico("telefone");
+        } else if(!cpfNum) {
+            popUp = new PopUp();
+            popUp.naoNumerico("CPF");
+        } else if(!emailCorreto) {
+            popUp = new PopUp();
+            popUp.emailErrado();
+        } else if(nomeTextField.getText().chars().count() < 3) {
+            popUp = new PopUp();
+            popUp.limiteNumero("nome", 2);
         }
 
     }
@@ -63,9 +80,9 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
         cabecalhoPanel = new javax.swing.JPanel();
         tituloCabecalhoLabel = new javax.swing.JLabel();
         sairPaginaButton = new javax.swing.JButton();
+        coordenadorRadioButton = new javax.swing.JRadioButton();
         professorRadioButton = new javax.swing.JRadioButton();
         alunoRadioButton = new javax.swing.JRadioButton();
-        coordenadorRadioButton = new javax.swing.JRadioButton();
         jSeparator1 = new javax.swing.JSeparator();
         nomeLabel = new javax.swing.JLabel();
         nomeTextField = new javax.swing.JTextField();
@@ -79,6 +96,7 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
         enderecoTextField = new javax.swing.JTextField();
         senhaLabel = new javax.swing.JLabel();
         senhaPasswordField = new javax.swing.JPasswordField();
+        nomeUsuarioTextField = new javax.swing.JTextField();
         criarContaBotton = new _07gestaoacademica.CustomizacaoBotao();
         identifiqueLabel1 = new javax.swing.JLabel();
         entrarContaBotton = new _07gestaoacademica.CustomizacaoBotao();
@@ -128,12 +146,28 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
             }
         });
 
+        coordenadorRadioButton.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(coordenadorRadioButton);
+        coordenadorRadioButton.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        coordenadorRadioButton.setForeground(new java.awt.Color(36, 53, 61));
+        coordenadorRadioButton.setSelected(true);
+        coordenadorRadioButton.setText("Sou Coordenador(a)");
+        coordenadorRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                coordenadorRadioButtonActionPerformed(evt);
+            }
+        });
+
         professorRadioButton.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup1.add(professorRadioButton);
         professorRadioButton.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         professorRadioButton.setForeground(new java.awt.Color(36, 53, 61));
-        professorRadioButton.setSelected(true);
         professorRadioButton.setText("Sou Professor(a)");
+        professorRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                professorRadioButtonActionPerformed(evt);
+            }
+        });
 
         alunoRadioButton.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup1.add(alunoRadioButton);
@@ -146,17 +180,6 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
             }
         });
 
-        coordenadorRadioButton.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup1.add(coordenadorRadioButton);
-        coordenadorRadioButton.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        coordenadorRadioButton.setForeground(new java.awt.Color(36, 53, 61));
-        coordenadorRadioButton.setText("Sou Coordenador(a)");
-        coordenadorRadioButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                coordenadorRadioButtonActionPerformed(evt);
-            }
-        });
-
         jSeparator1.setForeground(new java.awt.Color(76, 95, 99));
 
         javax.swing.GroupLayout cabecalhoPanelLayout = new javax.swing.GroupLayout(cabecalhoPanel);
@@ -165,22 +188,23 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
             cabecalhoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cabecalhoPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(cabecalhoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(cabecalhoPanelLayout.createSequentialGroup()
-                        .addComponent(professorRadioButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(alunoRadioButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(coordenadorRadioButton)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jSeparator1))
+                .addComponent(jSeparator1)
                 .addContainerGap())
             .addGroup(cabecalhoPanelLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(tituloCabecalhoLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(sairPaginaButton)
-                .addGap(17, 17, 17))
+                .addGroup(cabecalhoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(cabecalhoPanelLayout.createSequentialGroup()
+                        .addComponent(coordenadorRadioButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(professorRadioButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(alunoRadioButton)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(cabecalhoPanelLayout.createSequentialGroup()
+                        .addComponent(tituloCabecalhoLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 503, Short.MAX_VALUE)
+                        .addComponent(sairPaginaButton)
+                        .addGap(17, 17, 17))))
         );
         cabecalhoPanelLayout.setVerticalGroup(
             cabecalhoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,11 +230,6 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
         nomeTextField.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         nomeTextField.setForeground(new java.awt.Color(36, 53, 61));
         nomeTextField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
-        nomeTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomeTextFieldActionPerformed(evt);
-            }
-        });
 
         cpfLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         cpfLabel.setForeground(new java.awt.Color(0, 0, 0));
@@ -255,9 +274,22 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
         senhaPasswordField.setBackground(new java.awt.Color(255, 255, 255));
         senhaPasswordField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
 
+        nomeUsuarioTextField.setBackground(new java.awt.Color(255, 255, 255));
+        nomeUsuarioTextField.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        nomeUsuarioTextField.setForeground(new java.awt.Color(36, 53, 61));
+        nomeUsuarioTextField.setText("Digite seu nome de usuário");
+        nomeUsuarioTextField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        nomeUsuarioTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                nomeUsuarioTextFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                nomeUsuarioTextFieldFocusLost(evt);
+            }
+        });
+
         criarContaBotton.setForeground(new java.awt.Color(255, 255, 255));
         criarContaBotton.setText("CRIAR CONTA");
-        criarContaBotton.setToolTipText("");
         criarContaBotton.setCor(new java.awt.Color(36, 53, 61));
         criarContaBotton.setCorBorda(new java.awt.Color(255, 255, 255));
         criarContaBotton.setCorEntrou(new java.awt.Color(19, 176, 110));
@@ -272,12 +304,13 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
         identifiqueLabel1.setForeground(new java.awt.Color(0, 0, 0));
         identifiqueLabel1.setText("ou");
 
+        entrarContaBotton.setBackground(new java.awt.Color(76, 95, 99));
         entrarContaBotton.setForeground(new java.awt.Color(255, 255, 255));
         entrarContaBotton.setText("ENTRE NA SUA CONTA");
-        entrarContaBotton.setToolTipText("");
-        entrarContaBotton.setCor(new java.awt.Color(36, 53, 61));
+        entrarContaBotton.setCor(new java.awt.Color(76, 95, 99));
         entrarContaBotton.setCorBorda(new java.awt.Color(255, 255, 255));
         entrarContaBotton.setCorEntrou(new java.awt.Color(19, 176, 110));
+        entrarContaBotton.setCorSaiu(new java.awt.Color(76, 95, 99));
         entrarContaBotton.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         entrarContaBotton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -294,7 +327,7 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
                 .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(formularioGeralPanelLayout.createSequentialGroup()
                         .addGap(24, 24, 24)
-                        .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(formularioGeralPanelLayout.createSequentialGroup()
                                 .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(nomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -327,6 +360,10 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(entrarContaBotton, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(26, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, formularioGeralPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(nomeUsuarioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(195, 195, 195))
         );
         formularioGeralPanelLayout.setVerticalGroup(
             formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -334,18 +371,18 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(cabecalhoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(formularioGeralPanelLayout.createSequentialGroup()
+                        .addComponent(nomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nomeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, formularioGeralPanelLayout.createSequentialGroup()
+                        .addComponent(cpfLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cpfTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(formularioGeralPanelLayout.createSequentialGroup()
-                        .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(formularioGeralPanelLayout.createSequentialGroup()
-                                .addComponent(nomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nomeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, formularioGeralPanelLayout.createSequentialGroup()
-                                .addComponent(cpfLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cpfTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(35, 35, 35)
                         .addComponent(telefoneLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(telefoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -353,7 +390,7 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
                         .addComponent(enderecoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(enderecoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(36, 36, 36)
+                .addGap(18, 18, 18)
                 .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(senhaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -361,7 +398,9 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
                 .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(senhaPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
+                .addGap(29, 29, 29)
+                .addComponent(nomeUsuarioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(entrarContaBotton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(criarContaBotton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -382,14 +421,6 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void coordenadorRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coordenadorRadioButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_coordenadorRadioButtonActionPerformed
-
-    private void alunoRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alunoRadioButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_alunoRadioButtonActionPerformed
 
     //evento de mover a janela
     private void cabecalhoPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cabecalhoPanelMousePressed
@@ -430,10 +461,10 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
             if(alunoRadioButton.isSelected() || professorRadioButton.isSelected()) {
                 numeroMatricula++;
                 popUp = new PopUp();
-                popUp.MensagemFinal("Sua conta foi criada com sucesso! Sua matrícula é " + numeroMatricula + ".");
+                popUp.MensagemFinal("Sua conta foi criada com sucesso! Sua matrícula é " + numeroMatricula + ".", this);
             } else {
                 popUp = new PopUp();
-                popUp.MensagemFinal("Sua conta foi criada com sucesso! Acesse o sistema.");
+                popUp.MensagemFinal("Sua conta foi criada com sucesso! Acesse o sistema.", this);
             }
             
         }
@@ -446,11 +477,28 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
         novaGestaoContaUsuario.setVisible(true);
     }//GEN-LAST:event_entrarContaBottonActionPerformed
 
-    private void nomeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nomeTextFieldActionPerformed
+    private void professorRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_professorRadioButtonActionPerformed
+        nomeUsuarioTextField.setVisible(false);
+    }//GEN-LAST:event_professorRadioButtonActionPerformed
 
-    
+    private void alunoRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alunoRadioButtonActionPerformed
+        nomeUsuarioTextField.setVisible(false);
+    }//GEN-LAST:event_alunoRadioButtonActionPerformed
+
+    private void coordenadorRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coordenadorRadioButtonActionPerformed
+        nomeUsuarioTextField.setVisible(true);
+    }//GEN-LAST:event_coordenadorRadioButtonActionPerformed
+
+    private void nomeUsuarioTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nomeUsuarioTextFieldFocusGained
+        if("Digite seu nome de usuário".equals(nomeUsuarioTextField.getText()))
+            nomeUsuarioTextField.setText("");
+    }//GEN-LAST:event_nomeUsuarioTextFieldFocusGained
+
+    private void nomeUsuarioTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nomeUsuarioTextFieldFocusLost
+        if("".equals(nomeUsuarioTextField.getText()))
+            nomeUsuarioTextField.setText("Digite seu nome de usuário");
+    }//GEN-LAST:event_nomeUsuarioTextFieldFocusLost
+
     
     /**
      * @param args the command line arguments
@@ -505,6 +553,7 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel nomeLabel;
     private javax.swing.JTextField nomeTextField;
+    private javax.swing.JTextField nomeUsuarioTextField;
     private javax.swing.JRadioButton professorRadioButton;
     private javax.swing.JButton sairPaginaButton;
     private javax.swing.JLabel senhaLabel;
