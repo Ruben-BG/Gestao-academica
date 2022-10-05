@@ -146,13 +146,13 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
         identifiqueLabel1.setForeground(new java.awt.Color(0, 0, 0));
         identifiqueLabel1.setText("ou");
 
-        novoCadastroBotton.setBackground(new java.awt.Color(76, 95, 99));
+        novoCadastroBotton.setBackground(new java.awt.Color(102, 102, 102));
         novoCadastroBotton.setForeground(new java.awt.Color(255, 255, 255));
         novoCadastroBotton.setText("CADASTRE-SE");
-        novoCadastroBotton.setCor(new java.awt.Color(76, 95, 99));
+        novoCadastroBotton.setCor(new java.awt.Color(102, 102, 102));
         novoCadastroBotton.setCorBorda(new java.awt.Color(255, 255, 255));
         novoCadastroBotton.setCorEntrou(new java.awt.Color(19, 176, 110));
-        novoCadastroBotton.setCorSaiu(new java.awt.Color(76, 95, 99));
+        novoCadastroBotton.setCorSaiu(new java.awt.Color(102, 102, 102));
         novoCadastroBotton.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         novoCadastroBotton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
