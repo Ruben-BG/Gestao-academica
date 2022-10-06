@@ -137,9 +137,9 @@ public class PopUp extends javax.swing.JFrame {
             painelPrincipalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelPrincipalPanelLayout.createSequentialGroup()
                 .addComponent(cabecalhoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61)
-                .addComponent(mensagemCentralLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(mensagemCentralLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botaoFinalButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -231,7 +231,7 @@ public class PopUp extends javax.swing.JFrame {
     }
     
     public void emailErrado() {
-        mensagemCentralLabel.setText("O campo de email deve conter um @, por favor tente novamente.");
+        mensagemCentralLabel.setText("O campo de email deve conter um provedor de email válido. \nEx.:@gmail.com");
         finalizacaoFrame();
     }
     
@@ -246,7 +246,7 @@ public class PopUp extends javax.swing.JFrame {
     }
     
     public void limiteNumero(String campo, int quantidade) {
-        mensagemCentralLabel.setText("O valor do " + campo + " tem que conter no mínimo " + quantidade + " digitos.");
+        mensagemCentralLabel.setText("O valor de " + campo + " tem que conter no mínimo " + quantidade + " digitos.");
         finalizacaoFrame();
     }
     
