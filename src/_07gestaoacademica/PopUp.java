@@ -2,6 +2,8 @@ package _07gestaoacademica;
 
 import java.awt.Color;
 import java.awt.event.ComponentAdapter;
+import javax.swing.JTextField;
+import javax.swing.border.*;
 
 /**
  *
@@ -125,21 +127,21 @@ public class PopUp extends javax.swing.JFrame {
             painelPrincipalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(cabecalhoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelPrincipalPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(mensagemCentralLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelPrincipalPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(123, Short.MAX_VALUE)
                 .addComponent(botaoFinalButton, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(117, 117, 117))
+            .addGroup(painelPrincipalPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(mensagemCentralLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         painelPrincipalPanelLayout.setVerticalGroup(
             painelPrincipalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelPrincipalPanelLayout.createSequentialGroup()
                 .addComponent(cabecalhoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(mensagemCentralLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(mensagemCentralLabel)
+                .addGap(27, 27, 27)
                 .addComponent(botaoFinalButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -225,32 +227,73 @@ public class PopUp extends javax.swing.JFrame {
         pack();
     }
     
-    public void semNome() {
+    public void semNome(JTextField textField) {
         mensagemCentralLabel.setText("Nome não definido, ou inválido, por favor tente novamente.");
         finalizacaoFrame();
+        botaoFinalButton.addActionListener((e) -> {
+           
+            this.dispose();
+            textField.requestFocus();
+            
+        });
     }
     
-    public void emailErrado() {
-        mensagemCentralLabel.setText("O campo de email deve conter um provedor de email válido. \nEx.:@gmail.com");
+    public void emailErrado(JTextField textField) {
+        mensagemCentralLabel.setText("Campo de email inválido, por favor tente novamente.");
         finalizacaoFrame();
+        botaoFinalButton.addActionListener((e) -> {
+           
+            this.dispose();
+            textField.requestFocus();
+            
+        });
     }
     
-    public void campoNaoPreenchido(String campo) {
-        mensagemCentralLabel.setText("Campo de " + campo + " não preenchido.");
+    public void campoNaoPreenchido(String campo, JTextField textField) {
+        mensagemCentralLabel.setText("Campo de " + campo + " não foi preenchido.");
         finalizacaoFrame();
+        botaoFinalButton.addActionListener((e) -> {
+           
+            this.dispose();
+            textField.requestFocus();
+            
+        });
     }
     
-    public void naoNumerico(String campo) {
+    public void naoNumerico(String campo, JTextField textField) {
         mensagemCentralLabel.setText("O valor do " + campo + " tem que conter apenas números.");
         finalizacaoFrame();
+        botaoFinalButton.addActionListener((e) -> {
+           
+            this.dispose();
+            textField.requestFocus();
+            
+        });
     }
     
-    public void limiteNumero(String campo, int quantidade) {
+    public void limiteNumero(String campo, int quantidade, JTextField textField) {
         mensagemCentralLabel.setText("O valor de " + campo + " tem que conter no mínimo " + quantidade + " digitos.");
         finalizacaoFrame();
+        botaoFinalButton.addActionListener((e) -> {
+           
+            this.dispose();
+            textField.requestFocus();
+            
+        });
     }
     
-    public void MensagemFinal(String textoCadastro, FormularioContaUsuario referenciaFormulario) {
+    public void nomeUsuario(JTextField textField) {
+        mensagemCentralLabel.setText("Nome de usuário inválido, ou não preenchido.");
+        finalizacaoFrame();
+        botaoFinalButton.addActionListener((e) -> {
+           
+            this.dispose();
+            textField.requestFocus();
+            
+        });
+    }
+    
+    public void mensagemFinal(String textoCadastro, FormularioContaUsuario referenciaFormulario) {
         tituloLabel.setText("SUCESSO");
         mensagemCentralLabel.setText(textoCadastro);
         botaoFinalButton.setText("ENTRAR NO SISTEMA");
@@ -263,6 +306,12 @@ public class PopUp extends javax.swing.JFrame {
             novaGestaoContaUsuario.setVisible(true);
             
         });
+    }
+    
+    public void entradaConta(String erro, String textoValidacao) {
+        tituloLabel.setText(erro);
+        mensagemCentralLabel.setText(textoValidacao);
+        finalizacaoFrame();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

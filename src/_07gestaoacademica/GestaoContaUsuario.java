@@ -1,5 +1,8 @@
 package _07gestaoacademica;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author ruben-braga
@@ -7,6 +10,12 @@ package _07gestaoacademica;
 public class GestaoContaUsuario extends javax.swing.JFrame {
 
     FormularioContaUsuario gerarFormulario;
+    DashboardCoordenador dashboardCoordenador;
+    Icon mostrarIcon = new ImageIcon(getClass().getResource("/_07gestaoacademica/images/mostrar.png"));
+    Icon ocultarIcon = new ImageIcon(getClass().getResource("/_07gestaoacademica/images/ocultar.png"));
+    Icon iconeAtual = ocultarIcon;
+    PopUp popUp;
+    
     
     public GestaoContaUsuario() {
         initComponents();
@@ -37,6 +46,7 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
         entrarContaBotton = new _07gestaoacademica.CustomizacaoBotao();
         identifiqueLabel1 = new javax.swing.JLabel();
         novoCadastroBotton = new _07gestaoacademica.CustomizacaoBotao();
+        mostrarSenhaButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela inicial");
@@ -160,6 +170,18 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
             }
         });
 
+        mostrarSenhaButton.setBackground(new java.awt.Color(255, 255, 255));
+        mostrarSenhaButton.setForeground(new java.awt.Color(255, 255, 255));
+        mostrarSenhaButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/_07gestaoacademica/images/ocultar.png"))); // NOI18N
+        mostrarSenhaButton.setBorder(null);
+        mostrarSenhaButton.setBorderPainted(false);
+        mostrarSenhaButton.setContentAreaFilled(false);
+        mostrarSenhaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mostrarSenhaButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout gestaoPanelLayout = new javax.swing.GroupLayout(gestaoPanel);
         gestaoPanel.setLayout(gestaoPanelLayout);
         gestaoPanelLayout.setHorizontalGroup(
@@ -170,30 +192,34 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(selecaoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(gestaoPanelLayout.createSequentialGroup()
+                        .addGap(95, 95, 95)
                         .addGroup(gestaoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(gestaoPanelLayout.createSequentialGroup()
-                                .addGap(95, 95, 95)
+                                .addComponent(novoCadastroBotton, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(72, 89, Short.MAX_VALUE))
+                            .addGroup(gestaoPanelLayout.createSequentialGroup()
                                 .addGroup(gestaoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(novoCadastroBotton, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(entrarContaBotton, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(gestaoPanelLayout.createSequentialGroup()
                                         .addGap(86, 86, 86)
-                                        .addComponent(identifiqueLabel1))))
-                            .addGroup(gestaoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(identifiqueLabel1)))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(gestaoPanelLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(gestaoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(gestaoPanelLayout.createSequentialGroup()
+                                .addComponent(senhaLabel)
+                                .addGap(205, 205, 205))
+                            .addGroup(gestaoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(gestaoPanelLayout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(senhaPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, gestaoPanelLayout.createSequentialGroup()
-                                    .addGap(28, 28, 28)
-                                    .addGroup(gestaoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(gestaoPanelLayout.createSequentialGroup()
-                                            .addComponent(senhaLabel)
-                                            .addGap(205, 205, 205))
-                                        .addGroup(gestaoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(gestaoPanelLayout.createSequentialGroup()
-                                                .addGap(6, 6, 6)
-                                                .addComponent(matriculaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(matriculaLabel))))))
+                                    .addGap(6, 6, 6)
+                                    .addComponent(matriculaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(matriculaLabel))
+                            .addGroup(gestaoPanelLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(senhaPasswordField)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(mostrarSenhaButton)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -209,7 +235,9 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addComponent(senhaLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(senhaPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(gestaoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(senhaPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mostrarSenhaButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(entrarContaBotton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
@@ -235,6 +263,64 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
 
     private void entrarContaBottonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarContaBottonActionPerformed
         
+        if(professorAlunoRadioButton.isSelected()) {
+            
+            boolean matriculaNum = matriculaTextField.getText().chars().allMatch(Character::isDigit);
+            
+            if(!matriculaNum || "".equals(matriculaTextField.getText())) {
+                
+                popUp = new PopUp();
+                popUp.entradaConta("ERRO", "Campo de matrícula não preenchido, ou inválido.");
+                
+            } else if("".equals(String.valueOf(senhaPasswordField.getPassword()))) {
+                
+                popUp = new PopUp();
+                popUp.campoNaoPreenchido("senha", senhaPasswordField);
+                
+            } else {
+                
+                BancoDeDados.loguinProfessorAluno(Integer.parseInt(matriculaTextField.getText()), String.valueOf(senhaPasswordField.getPassword()));
+                
+                if (BancoDeDados.loguinProfessorAluno(Integer.parseInt(matriculaTextField.getText()), String.valueOf(senhaPasswordField.getPassword())) == true) {
+                    popUp = new PopUp();
+                    popUp.entradaConta("SUCESSO", "Bem vindo!!!");
+                } else {
+                    popUp = new PopUp();
+                    popUp.entradaConta("ERRO", "Operação mal sucedida.");
+                }
+                
+            }
+            
+        } else {
+            
+            if("".equals(matriculaTextField.getText())) {
+                
+                popUp = new PopUp();
+                popUp.entradaConta("ERRO", "Campo do nome de usuário não preenchido, ou inválido.");
+                
+            } else if("".equals(String.valueOf(senhaPasswordField.getPassword()))) {
+                
+                popUp = new PopUp();
+                popUp.campoNaoPreenchido("senha", senhaPasswordField);
+                
+            } else {
+                
+                BancoDeDados.loginCoordenador(matriculaTextField.getText(), String.valueOf(senhaPasswordField.getPassword()));
+            
+                if(BancoDeDados.loginCoordenador(matriculaTextField.getText(), String.valueOf(senhaPasswordField.getPassword())) == true) {
+                popUp = new PopUp();
+                dashboardCoordenador = new DashboardCoordenador();
+                dashboardCoordenador.setVisible(true);
+                this.dispose();
+                } else {
+                    popUp = new PopUp();
+                    popUp.entradaConta("ERRO", "Operação mal sucedida.");
+                }
+                
+            }
+            
+        }
+        
     }//GEN-LAST:event_entrarContaBottonActionPerformed
 
     private void novoCadastroBottonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoCadastroBottonActionPerformed
@@ -251,6 +337,20 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
     private void coordenadorRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coordenadorRadioButtonActionPerformed
         this.matriculaLabel.setText("Digite seu nome de usuário:");
     }//GEN-LAST:event_coordenadorRadioButtonActionPerformed
+
+    private void mostrarSenhaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarSenhaButtonActionPerformed
+        
+        if(iconeAtual == ocultarIcon) {
+            mostrarSenhaButton.setIcon(mostrarIcon);
+            senhaPasswordField.setEchoChar((char) 0);
+            iconeAtual = mostrarIcon;
+        } else{
+            mostrarSenhaButton.setIcon(ocultarIcon);
+            senhaPasswordField.setEchoChar((char) '*');
+            iconeAtual = ocultarIcon;
+        }
+        
+    }//GEN-LAST:event_mostrarSenhaButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -298,6 +398,7 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel matriculaLabel;
     private javax.swing.JTextField matriculaTextField;
+    private javax.swing.JButton mostrarSenhaButton;
     private _07gestaoacademica.CustomizacaoBotao novoCadastroBotton;
     private javax.swing.JRadioButton professorAlunoRadioButton;
     private javax.swing.JPanel selecaoPanel;

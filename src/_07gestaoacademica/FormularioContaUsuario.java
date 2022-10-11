@@ -1,8 +1,7 @@
 package _07gestaoacademica;
+
 import java.awt.Color;
-import java.util.ArrayList;
-import javax.swing.Action;
-import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 
 /**
  *
@@ -11,26 +10,15 @@ import javax.swing.JPanel;
 public class FormularioContaUsuario extends javax.swing.JFrame {
 
     //Atributos
-    private int mouseX, mouseY, numeroMatricula;
-    private UsuarioProfessor usuario;
+    private int mouseX, mouseY;
     private PopUp popUp;
     public FormularioContaUsuario esseFormulario = this;
     GestaoContaUsuario novaGestaoContaUsuario;
     CampoFormularioCoordenador formularioCoordenador;
     CampoFormularioProfessor formularioProfessor;
-    
-    public void gerarPopUp(CampoFormularioProfessor panelProfessor, CampoFormularioCoordenador panelCoordenador) {
-        
-        if(coordenadorRadioButton.isSelected()) {
-            panelCoordenador.gerarPopUp();
-        } else if(professorRadioButton.isSelected() || alunoRadioButton.isSelected()) {
-            panelProfessor.gerarPopUp();
-        }
-        
-    }
-    
+
     public void pegaDados() {
-        
+
         /*String senha = new String(senhaPasswordField.getPassword());
         
         usuario.setNome(nomeTextField.getText());
@@ -39,7 +27,6 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
         usuario.setCpf(cpfTextField.getText());
         usuario.setEndereco(enderecoTextField.getText());
         usuario.setSenha(senha);*/
-        
     }
 
     public FormularioContaUsuario() {
@@ -47,7 +34,7 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
         formularioCoordenador = new CampoFormularioCoordenador(this);
         jScrollPane1.setViewportView(formularioCoordenador); //adiciona Panel visual mesmo depois de construido 
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -227,8 +214,15 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public JRadioButton getAlunoRadioButton() {
+        return alunoRadioButton;
+    }
     
-    //Métodos para ações
+    public JRadioButton getProfessorRadioButton() {
+        return professorRadioButton;
+    }
+    
+//Métodos para ações
     private void cabecalhoPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cabecalhoPanelMousePressed
         mouseX = evt.getX(); //evento de mover a janela
         mouseY = evt.getY();
@@ -271,7 +265,6 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
         jScrollPane1.setViewportView(formularioCoordenador);
     }//GEN-LAST:event_coordenadorRadioButtonActionPerformed
 
-    
     /**
      * @param args the command line arguments
      */

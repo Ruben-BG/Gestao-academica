@@ -17,6 +17,7 @@ public class CampoFormularioCoordenador extends javax.swing.JPanel {
     Icon iconeAtual = ocultarIcon;
     private PopUp popUp;
     private GestaoContaUsuario telaPrincipal;
+    private UsuarioCoordenador coordenador;
     
     public CampoFormularioCoordenador(FormularioContaUsuario formulario) {
         initComponents();
@@ -36,8 +37,14 @@ public class CampoFormularioCoordenador extends javax.swing.JPanel {
             gerarPopUp();
         
             if (popUp == null) {
+                
+                coordenador = new UsuarioCoordenador();
+                pegaDados();
+                BancoDeDados.cadastrarUsuario(coordenador);
+                
                 popUp = new PopUp();
-                popUp.MensagemFinal("Sua conta foi criada com sucesso! Acesse o sistema.", formulario.esseFormulario);
+                popUp.mensagemFinal("Sua conta foi criada com sucesso! Acesse o sistema.", formulario.esseFormulario);
+                
             }
             
         });
@@ -144,6 +151,7 @@ public class CampoFormularioCoordenador extends javax.swing.JPanel {
         mostrarSenhaButton.setBackground(new java.awt.Color(255, 255, 255));
         mostrarSenhaButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/_07gestaoacademica/images/ocultar.png"))); // NOI18N
         mostrarSenhaButton.setBorder(null);
+        mostrarSenhaButton.setContentAreaFilled(false);
         mostrarSenhaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mostrarSenhaButtonActionPerformed(evt);
@@ -224,42 +232,43 @@ public class CampoFormularioCoordenador extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     
-    //Métodos para ações
+    //Métodos de simplificação
     public void gerarPopUp() {
-        
         
         boolean telefoneNum = telefoneTextField.getText().chars().allMatch(Character::isDigit); //<- vê se o espaço "telefone" é numérico
         boolean cpfNum = cpfTextField.getText().chars().allMatch(Character::isDigit); //<- vê se o espaço "cpf" é numérico
-        boolean emailCorreto = emailTextField.getText().contains("@"); //método de verificação se tem ou não @ no campo
-        int tamanhoSenha = String.valueOf(senhaPasswordField.getPassword()).length();
+        String[] provedoresEmail = {"@hotmail.com", "@outlook.com", "@gmail.com", "@yahoo.com"};
         
-        if("".equals(nomeTextField.getText())) {
+        if("Digite seu nome".equals(nomeTextField.getText())) {
             popUp = new PopUp();
-            popUp.semNome();
+            popUp.semNome(nomeTextField);
         } else if(nomeTextField.getText().chars().count() < 3) {
             popUp = new PopUp();
-            popUp.limiteNumero("nome", 2);
-        } else if("".equals(cpfTextField.getText())) {
+            popUp.limiteNumero("nome", 2, nomeTextField);
+        } else if("Digite seu CPF".equals(cpfTextField.getText())) {
             popUp = new PopUp();
-            popUp.campoNaoPreenchido("CPF");
-        } else if("".equals(emailTextField.getText())) {
+            popUp.campoNaoPreenchido("CPF", cpfTextField);
+        } else if("Digite seu email".equals(emailTextField.getText())) {
             popUp = new PopUp();
-            popUp.campoNaoPreenchido("Email");
-        } else if("".equals(String.valueOf(senhaPasswordField.getPassword()))) {
+            popUp.campoNaoPreenchido("Email", emailTextField);
+        } else if("senha".equals(String.valueOf(senhaPasswordField.getPassword()))) {
             popUp = new PopUp();
-            popUp.campoNaoPreenchido("Senha");
-        } else if(!"".equals(telefoneTextField.getText()) && !telefoneNum) {
+            popUp.campoNaoPreenchido("Senha", senhaPasswordField);
+        } else if(!"Digite seu telefone".equals(telefoneTextField.getText()) && !telefoneNum) {
             popUp = new PopUp();
-            popUp.naoNumerico("telefone");
+            popUp.naoNumerico("telefone", telefoneTextField);
         } else if(!cpfNum) {
             popUp = new PopUp();
-            popUp.naoNumerico("CPF");
-        } else if(!emailCorreto) {
+            popUp.naoNumerico("CPF", cpfTextField);
+        } else if(!emailTextField.getText().contains(provedoresEmail[0]) && !emailTextField.getText().contains(provedoresEmail[1]) && !emailTextField.getText().contains(provedoresEmail[2]) && !emailTextField.getText().contains(provedoresEmail[3])) {
             popUp = new PopUp();
-            popUp.emailErrado();
-        } else if(tamanhoSenha < 8) {
+            popUp.emailErrado(emailTextField);
+        } else if(String.valueOf(senhaPasswordField.getPassword()).length() < 8) {
             popUp = new PopUp();
-            popUp.limiteNumero("senha", 8);
+            popUp.limiteNumero("senha", 8, senhaPasswordField);
+        } else if("Digite seu nome de usuário".equals(nomeUsuarioTextField.getText())) {
+            popUp = new PopUp();
+            popUp.nomeUsuario(nomeUsuarioTextField);
         }
 
     }
@@ -280,6 +289,20 @@ public class CampoFormularioCoordenador extends javax.swing.JPanel {
             textField.setForeground(Color.BLACK);
     }
     
+    protected void pegaDados() {
+        
+        coordenador.setNome(nomeTextField.getText());
+        coordenador.setCpf(cpfTextField.getText());
+        coordenador.setTelefone(telefoneTextField.getText());
+        coordenador.setEndereco(enderecoTextField.getText());
+        coordenador.setEmail(emailTextField.getText());
+        coordenador.setSenha(String.valueOf(senhaPasswordField.getPassword()));
+        coordenador.setNomeUsuario(nomeUsuarioTextField.getText());
+        
+    }
+    
+    
+    //Métodos de ação
     private void senhaPasswordFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_senhaPasswordFieldFocusGained
         campoComFoco("senha", senhaPasswordField);
     }//GEN-LAST:event_senhaPasswordFieldFocusGained

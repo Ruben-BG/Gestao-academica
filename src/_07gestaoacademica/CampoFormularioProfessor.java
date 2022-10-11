@@ -16,14 +16,13 @@ import javax.swing.JTextField;
 public class CampoFormularioProfessor extends javax.swing.JPanel {
 
     //Atributos
-    public int numeroMatricula;
-    private String[] provedoresEmail = {"@hotmail.com", "@outlook.com", "@gmail.com", "@yahoo.com"};
     Icon mostrarIcon = new ImageIcon(getClass().getResource("/_07gestaoacademica/images/mostrar.png"));
     Icon ocultarIcon = new ImageIcon(getClass().getResource("/_07gestaoacademica/images/ocultar.png"));
     Icon iconeAtual = ocultarIcon;
-    public CampoFormularioProfessor essePanel = this;
     private PopUp popUp;
     private GestaoContaUsuario telaPrincipal;
+    private UsuarioAluno aluno;
+    private UsuarioProfessor professor;
     
     public CampoFormularioProfessor(FormularioContaUsuario formulario) {
         initComponents();
@@ -44,9 +43,18 @@ public class CampoFormularioProfessor extends javax.swing.JPanel {
         
             if (popUp == null) {
 
-                numeroMatricula++;
-                popUp = new PopUp();
-                popUp.MensagemFinal("Sua conta foi criada com sucesso! Sua matrícula é " + numeroMatricula + ".", formulario.esseFormulario);
+                if (formulario.getAlunoRadioButton().isSelected()) {
+                    aluno = new UsuarioAluno();
+                    pegaDadosAluno();
+                    BancoDeDados.cadastrarUsuario(aluno);
+                    popUp = new PopUp();
+                    popUp.mensagemFinal("Sua conta foi criada com sucesso! Sua matrícula é " + professor.getMatricula() + ".", formulario.esseFormulario);
+                } else {
+                    professor = new UsuarioProfessor();
+                    pegaDadosProfessor();
+                    BancoDeDados.cadastrarUsuario(professor);
+                }
+                
 
             }
             
@@ -143,6 +151,8 @@ public class CampoFormularioProfessor extends javax.swing.JPanel {
         mostrarSenhaButton.setBackground(new java.awt.Color(255, 255, 255));
         mostrarSenhaButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/_07gestaoacademica/images/ocultar.png"))); // NOI18N
         mostrarSenhaButton.setBorder(null);
+        mostrarSenhaButton.setBorderPainted(false);
+        mostrarSenhaButton.setContentAreaFilled(false);
         mostrarSenhaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mostrarSenhaButtonActionPerformed(evt);
@@ -227,34 +237,35 @@ public class CampoFormularioProfessor extends javax.swing.JPanel {
         
         boolean telefoneNum = telefoneTextField.getText().chars().allMatch(Character::isDigit); //<- vê se o espaço "telefone" é numérico
         boolean cpfNum = cpfTextField.getText().chars().allMatch(Character::isDigit); //<- vê se o espaço "cpf" é numérico
+        String[] provedoresEmail = {"@hotmail.com", "@outlook.com", "@gmail.com", "@yahoo.com"};
         
-        if("".equals(nomeTextField.getText())) {
+        if("Digite seu nome".equals(nomeTextField.getText())) {
             popUp = new PopUp();
-            popUp.semNome();
+            popUp.semNome(nomeTextField);
         } else if(nomeTextField.getText().chars().count() < 3) {
             popUp = new PopUp();
-            popUp.limiteNumero("nome", 2);
-        } else if("".equals(cpfTextField.getText())) {
+            popUp.limiteNumero("nome", 2, nomeTextField);
+        } else if("Digite seu CPF".equals(cpfTextField.getText())) {
             popUp = new PopUp();
-            popUp.campoNaoPreenchido("CPF");
-        } else if("".equals(emailTextField.getText())) {
+            popUp.campoNaoPreenchido("CPF", cpfTextField);
+        } else if("Digite seu email".equals(emailTextField.getText())) {
             popUp = new PopUp();
-            popUp.campoNaoPreenchido("Email");
-        } else if("".equals(String.valueOf(senhaPasswordField.getPassword()))) {
+            popUp.campoNaoPreenchido("Email", emailTextField);
+        } else if("senha".equals(String.valueOf(senhaPasswordField.getPassword()))) {
             popUp = new PopUp();
-            popUp.campoNaoPreenchido("Senha");
-        } else if(!"".equals(telefoneTextField.getText()) && !telefoneNum) {
+            popUp.campoNaoPreenchido("Senha", senhaPasswordField);
+        } else if(!"Digite seu telefone".equals(telefoneTextField.getText()) && !telefoneNum) {
             popUp = new PopUp();
-            popUp.naoNumerico("telefone");
+            popUp.naoNumerico("telefone", telefoneTextField);
         } else if(!cpfNum) {
             popUp = new PopUp();
-            popUp.naoNumerico("CPF");
-        } else if(!emailTextField.getText().contains(provedoresEmail[0]) && !emailTextField.getText().contains(provedoresEmail[1]) || !emailTextField.getText().contains(provedoresEmail[2]) || !emailTextField.getText().contains(provedoresEmail[3])) {
+            popUp.naoNumerico("CPF", cpfTextField);
+        } else if(!emailTextField.getText().contains(provedoresEmail[0]) && !emailTextField.getText().contains(provedoresEmail[1]) && !emailTextField.getText().contains(provedoresEmail[2]) && !emailTextField.getText().contains(provedoresEmail[3])) {
             popUp = new PopUp();
-            popUp.emailErrado();
+            popUp.emailErrado(emailTextField);
         } else if(String.valueOf(senhaPasswordField.getPassword()).length() < 8) {
             popUp = new PopUp();
-            popUp.limiteNumero("senha", 8);
+            popUp.limiteNumero("senha", 8, emailTextField);
         }
 
     }
@@ -275,58 +286,30 @@ public class CampoFormularioProfessor extends javax.swing.JPanel {
             textField.setForeground(Color.BLACK);
     }
     
-    public void fechaFormulario(FormularioContaUsuario formulario) {
-        formulario.esseFormulario.dispose();
+    protected void pegaDadosProfessor() {
+        
+        professor.setNome(nomeTextField.getText());
+        professor.setCpf(cpfTextField.getText());
+        professor.setTelefone(telefoneTextField.getText());
+        professor.setEndereco(enderecoTextField.getText());
+        professor.setEmail(emailTextField.getText());
+        professor.setSenha(String.valueOf(senhaPasswordField.getPassword()));
+        professor.setMatricula(Usuario.getProximaMatricula());
+        
     }
     
-    private void nomeTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nomeTextFieldFocusGained
-        campoComFoco("Digite seu nome", nomeTextField);
-    }//GEN-LAST:event_nomeTextFieldFocusGained
-
-    private void nomeTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nomeTextFieldFocusLost
-        campoSemFoco("Digite seu nome", nomeTextField);
-    }//GEN-LAST:event_nomeTextFieldFocusLost
-
-    private void cpfTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cpfTextFieldFocusGained
-        campoComFoco("Digite seu CPF", cpfTextField);
-    }//GEN-LAST:event_cpfTextFieldFocusGained
-
-    private void cpfTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cpfTextFieldFocusLost
-        campoSemFoco("Digite seu CPF", cpfTextField);
-    }//GEN-LAST:event_cpfTextFieldFocusLost
-
-    private void enderecoTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_enderecoTextFieldFocusGained
-        campoComFoco("Digite seu endereço", enderecoTextField);
-    }//GEN-LAST:event_enderecoTextFieldFocusGained
-
-    private void enderecoTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_enderecoTextFieldFocusLost
-        campoSemFoco("Digite seu endereço", enderecoTextField);
-    }//GEN-LAST:event_enderecoTextFieldFocusLost
-
-    private void telefoneTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_telefoneTextFieldFocusGained
-        campoComFoco("Digite seu telefone", telefoneTextField);
-    }//GEN-LAST:event_telefoneTextFieldFocusGained
-
-    private void telefoneTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_telefoneTextFieldFocusLost
-        campoSemFoco("Digite seu telefone", telefoneTextField);
-    }//GEN-LAST:event_telefoneTextFieldFocusLost
-
-    private void emailTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailTextFieldFocusGained
-        campoComFoco("Digite seu email", emailTextField);
-    }//GEN-LAST:event_emailTextFieldFocusGained
-
-    private void emailTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailTextFieldFocusLost
-        campoSemFoco("Digite seu email", emailTextField);
-    }//GEN-LAST:event_emailTextFieldFocusLost
-
-    private void senhaPasswordFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_senhaPasswordFieldFocusGained
-        campoComFoco("senha", senhaPasswordField);
-    }//GEN-LAST:event_senhaPasswordFieldFocusGained
-
-    private void senhaPasswordFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_senhaPasswordFieldFocusLost
-        campoSemFoco("senha", senhaPasswordField);
-    }//GEN-LAST:event_senhaPasswordFieldFocusLost
-
+    protected void pegaDadosAluno() {
+        
+        aluno.setNome(nomeTextField.getText());
+        aluno.setCpf(cpfTextField.getText());
+        aluno.setTelefone(telefoneTextField.getText());
+        aluno.setEndereco(enderecoTextField.getText());
+        aluno.setEmail(emailTextField.getText());
+        aluno.setSenha(String.valueOf(senhaPasswordField.getPassword()));
+        aluno.setMatricula(Usuario.getProximaMatricula());
+        
+    }
+    
     private void mostrarSenhaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarSenhaButtonActionPerformed
         if(iconeAtual == ocultarIcon) {
             mostrarSenhaButton.setIcon(mostrarIcon);
@@ -338,6 +321,54 @@ public class CampoFormularioProfessor extends javax.swing.JPanel {
             iconeAtual = ocultarIcon;
         }
     }//GEN-LAST:event_mostrarSenhaButtonActionPerformed
+
+    private void senhaPasswordFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_senhaPasswordFieldFocusLost
+        campoSemFoco("senha", senhaPasswordField);
+    }//GEN-LAST:event_senhaPasswordFieldFocusLost
+
+    private void senhaPasswordFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_senhaPasswordFieldFocusGained
+        campoComFoco("senha", senhaPasswordField);
+    }//GEN-LAST:event_senhaPasswordFieldFocusGained
+
+    private void emailTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailTextFieldFocusLost
+        campoSemFoco("Digite seu email", emailTextField);
+    }//GEN-LAST:event_emailTextFieldFocusLost
+
+    private void emailTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailTextFieldFocusGained
+        campoComFoco("Digite seu email", emailTextField);
+    }//GEN-LAST:event_emailTextFieldFocusGained
+
+    private void enderecoTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_enderecoTextFieldFocusLost
+        campoSemFoco("Digite seu endereço", enderecoTextField);
+    }//GEN-LAST:event_enderecoTextFieldFocusLost
+
+    private void enderecoTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_enderecoTextFieldFocusGained
+        campoComFoco("Digite seu endereço", enderecoTextField);
+    }//GEN-LAST:event_enderecoTextFieldFocusGained
+
+    private void telefoneTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_telefoneTextFieldFocusLost
+        campoSemFoco("Digite seu telefone", telefoneTextField);
+    }//GEN-LAST:event_telefoneTextFieldFocusLost
+
+    private void telefoneTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_telefoneTextFieldFocusGained
+        campoComFoco("Digite seu telefone", telefoneTextField);
+    }//GEN-LAST:event_telefoneTextFieldFocusGained
+
+    private void cpfTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cpfTextFieldFocusLost
+        campoSemFoco("Digite seu CPF", cpfTextField);
+    }//GEN-LAST:event_cpfTextFieldFocusLost
+
+    private void cpfTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cpfTextFieldFocusGained
+        campoComFoco("Digite seu CPF", cpfTextField);
+    }//GEN-LAST:event_cpfTextFieldFocusGained
+
+    private void nomeTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nomeTextFieldFocusLost
+        campoSemFoco("Digite seu nome", nomeTextField);
+    }//GEN-LAST:event_nomeTextFieldFocusLost
+
+    private void nomeTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nomeTextFieldFocusGained
+        campoComFoco("Digite seu nome", nomeTextField);
+    }//GEN-LAST:event_nomeTextFieldFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
