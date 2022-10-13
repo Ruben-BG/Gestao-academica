@@ -1,7 +1,6 @@
 package _07gestaoacademica;
 
 import java.awt.Color;
-import javax.swing.JRadioButton;
 
 /**
  *
@@ -214,12 +213,12 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public JRadioButton getAlunoRadioButton() {
-        return alunoRadioButton;
+    public Boolean alunoRadioButtonSelected() {
+        return alunoRadioButton.isSelected();
     }
     
-    public JRadioButton getProfessorRadioButton() {
-        return professorRadioButton;
+    public Boolean professorRadioButtonSelected() {
+        return professorRadioButton.isSelected();
     }
     
 //Métodos para ações

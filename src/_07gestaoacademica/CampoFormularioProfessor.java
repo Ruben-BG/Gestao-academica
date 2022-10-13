@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package _07gestaoacademica;
 
 import java.awt.Color;
@@ -43,16 +39,18 @@ public class CampoFormularioProfessor extends javax.swing.JPanel {
         
             if (popUp == null) {
 
-                if (formulario.getAlunoRadioButton().isSelected()) {
+                if (formulario.alunoRadioButtonSelected()) {
                     aluno = new UsuarioAluno();
                     pegaDadosAluno();
                     BancoDeDados.cadastrarUsuario(aluno);
                     popUp = new PopUp();
-                    popUp.mensagemFinal("Sua conta foi criada com sucesso! Sua matrícula é " + professor.getMatricula() + ".", formulario.esseFormulario);
-                } else {
+                    popUp.mensagemFinal("Sua conta foi criada com sucesso! Sua matrícula é " + aluno.getMatricula() + ".", formulario.esseFormulario);
+                } else if(formulario.professorRadioButtonSelected()) {
                     professor = new UsuarioProfessor();
                     pegaDadosProfessor();
                     BancoDeDados.cadastrarUsuario(professor);
+                    popUp = new PopUp();
+                    popUp.mensagemFinal("Sua conta foi criada com sucesso! Sua matrícula é " + professor.getMatricula() + ".", formulario.esseFormulario);
                 }
                 
 
@@ -265,7 +263,7 @@ public class CampoFormularioProfessor extends javax.swing.JPanel {
             popUp.emailErrado(emailTextField);
         } else if(String.valueOf(senhaPasswordField.getPassword()).length() < 8) {
             popUp = new PopUp();
-            popUp.limiteNumero("senha", 8, emailTextField);
+            popUp.limiteNumero("senha", 8, senhaPasswordField);
         }
 
     }
@@ -295,6 +293,7 @@ public class CampoFormularioProfessor extends javax.swing.JPanel {
         professor.setEmail(emailTextField.getText());
         professor.setSenha(String.valueOf(senhaPasswordField.getPassword()));
         professor.setMatricula(Usuario.getProximaMatricula());
+        professor.isProfessor(); //identifica que é um professor
         
     }
     
@@ -307,6 +306,7 @@ public class CampoFormularioProfessor extends javax.swing.JPanel {
         aluno.setEmail(emailTextField.getText());
         aluno.setSenha(String.valueOf(senhaPasswordField.getPassword()));
         aluno.setMatricula(Usuario.getProximaMatricula());
+        aluno.isAluno(); //identifica que é um aluno
         
     }
     

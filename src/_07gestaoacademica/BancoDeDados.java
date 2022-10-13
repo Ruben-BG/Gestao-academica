@@ -20,9 +20,18 @@ public class BancoDeDados {
         for(Usuario usuario: usuarios) {
             
             Boolean usuarioAluno = usuario instanceof UsuarioAluno;
+            Boolean usuarioProfessor = usuario instanceof UsuarioProfessor;
             
             if (usuarioAluno) {
-                //int matriculaProfessorAluno = 
+                int matriculaAluno = ((UsuarioAluno)usuario).getMatricula();
+                if (matriculaAluno == matricula && usuario.getSenha().equals(senha)) 
+                    return true;
+                
+            }else if(usuarioProfessor) {
+                int matriculaProfessor = ((UsuarioProfessor)usuario).getMatricula();
+                if(matriculaProfessor == matricula && usuario.getSenha().equals(senha))
+                    return true;
+                
             }
             
         }
@@ -42,6 +51,7 @@ public class BancoDeDados {
             }
             
         }
+        
         return false;
         
     }
