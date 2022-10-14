@@ -15,11 +15,13 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
     Icon ocultarIcon = new ImageIcon(getClass().getResource("/_07gestaoacademica/images/ocultar.png"));
     Icon iconeAtual = ocultarIcon;
     PopUp popUp;
+    private final UsuarioZero alan = new UsuarioZero();
     
     
     public GestaoContaUsuario() {
         initComponents();
         this.setLocationRelativeTo(null);
+        BancoDeDados.cadastrarUsuario(alan);
     }
 
     /**
@@ -279,9 +281,9 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
                 
             } else {
                 
-                BancoDeDados.loguinProfessorAluno(Integer.parseInt(matriculaTextField.getText()), String.valueOf(senhaPasswordField.getPassword()));
+                BancoDeDados.loginProfessorAluno(Integer.parseInt(matriculaTextField.getText()), String.valueOf(senhaPasswordField.getPassword()));
                 
-                if (BancoDeDados.loguinProfessorAluno(Integer.parseInt(matriculaTextField.getText()), String.valueOf(senhaPasswordField.getPassword())) == true) {
+                if (BancoDeDados.loginProfessorAluno(Integer.parseInt(matriculaTextField.getText()), String.valueOf(senhaPasswordField.getPassword())) == true) {
                     popUp = new PopUp();
                     popUp.entradaConta("SUCESSO", "Bem vindo!!!");
                 } else {

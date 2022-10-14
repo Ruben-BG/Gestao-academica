@@ -1,6 +1,9 @@
 package _07gestaoacademica;
 
 import java.awt.Color;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import javax.swing.Timer;
 
 /**
  *
@@ -15,6 +18,24 @@ public class DashboardCoordenador extends javax.swing.JFrame {
     public DashboardCoordenador() {
         initComponents();
         setLocationRelativeTo(null);
+        
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        LocalDateTime ldt = LocalDateTime.now();
+        Timer tempo = new Timer(1000, (e) -> {dataLabel.setText(dtf.format(ldt));});//1000 = 1 segundo
+        
+        nomeLabel.setText(BancoDeDados.pegaUsuarioCoordenador().getNome() + " | Coordenador");
+        //dataLabel.setText();
+        
+        professorButton.mudarIcone("/_07gestaoacademica/images/professorP.png");
+        professorButton.mudarTexto("Professores");
+        turmaButton.mudarIcone("/_07gestaoacademica/images/turmaP.png");
+        turmaButton.mudarTexto("Turmas");
+        alunoButton.mudarTexto("Alunos");
+        solicitacaoButton.mudarIcone("/_07gestaoacademica/images/emailP.png");
+        solicitacaoButton.mudarTexto("Solicitações");
+        
+        
+        
     }
 
     /**
@@ -26,34 +47,40 @@ public class DashboardCoordenador extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        sairPaginaButton2 = new javax.swing.JButton();
+        painelGeral = new javax.swing.JPanel();
+        cabecalhoPanel = new javax.swing.JPanel();
         tituloCabecalhoLabel = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        sairPaginaButton2 = new javax.swing.JButton();
+        nomeLabel = new javax.swing.JLabel();
+        dataLabel = new javax.swing.JLabel();
+        sairButton = new javax.swing.JButton();
+        professorButton = new _07gestaoacademica.FormularioButton();
+        turmaButton = new _07gestaoacademica.FormularioButton();
+        alunoButton = new _07gestaoacademica.FormularioButton();
+        solicitacaoButton = new _07gestaoacademica.FormularioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setUndecorated(true);
         setResizable(false);
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        painelGeral.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel1.setBackground(new java.awt.Color(242, 242, 242));
-        jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        cabecalhoPanel.setBackground(new java.awt.Color(242, 242, 242));
+        cabecalhoPanel.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
-                jPanel1MouseDragged(evt);
+                cabecalhoPanelMouseDragged(evt);
             }
         });
-        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        cabecalhoPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel1MousePressed(evt);
+                cabecalhoPanelMousePressed(evt);
             }
         });
+
+        tituloCabecalhoLabel.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        tituloCabecalhoLabel.setForeground(new java.awt.Color(102, 102, 102));
+        tituloCabecalhoLabel.setText("DASHBOARD COORDENADOR");
 
         sairPaginaButton2.setBackground(new java.awt.Color(255, 255, 255));
         sairPaginaButton2.setFont(new java.awt.Font("Verdana", 1, 32)); // NOI18N
@@ -76,125 +103,168 @@ public class DashboardCoordenador extends javax.swing.JFrame {
             }
         });
 
-        tituloCabecalhoLabel.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        tituloCabecalhoLabel.setForeground(new java.awt.Color(102, 102, 102));
-        tituloCabecalhoLabel.setText("DASHBOARD COORDENADOR");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout cabecalhoPanelLayout = new javax.swing.GroupLayout(cabecalhoPanel);
+        cabecalhoPanel.setLayout(cabecalhoPanelLayout);
+        cabecalhoPanelLayout.setHorizontalGroup(
+            cabecalhoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cabecalhoPanelLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(tituloCabecalhoLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 262, Short.MAX_VALUE)
                 .addComponent(sairPaginaButton2)
                 .addGap(14, 14, 14))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        cabecalhoPanelLayout.setVerticalGroup(
+            cabecalhoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(sairPaginaButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(cabecalhoPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(tituloCabecalhoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(76, 95, 99));
-        jButton1.setText("Sair");
-        jButton1.setBorder(null);
-        jButton1.setContentAreaFilled(false);
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        nomeLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        nomeLabel.setForeground(new java.awt.Color(76, 95, 99));
+        nomeLabel.setText("NOME");
+
+        dataLabel.setForeground(new java.awt.Color(117, 117, 117));
+        dataLabel.setText("data");
+        dataLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton1MouseEntered(evt);
+                dataLabelMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton1MouseExited(evt);
+                dataLabelMouseExited(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+
+        sairButton.setBackground(new java.awt.Color(255, 255, 255));
+        sairButton.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        sairButton.setForeground(new java.awt.Color(76, 95, 99));
+        sairButton.setText("Sair");
+        sairButton.setBorder(null);
+        sairButton.setContentAreaFilled(false);
+        sairButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                sairButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                sairButtonMouseExited(evt);
+            }
+        });
+        sairButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                sairButtonActionPerformed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(76, 95, 99));
-        jLabel1.setText("NOME");
+        professorButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                professorButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                professorButtonMouseExited(evt);
+            }
+        });
 
-        jLabel2.setForeground(new java.awt.Color(117, 117, 117));
-        jLabel2.setText("data");
+        turmaButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                turmaButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                turmaButtonMouseExited(evt);
+            }
+        });
 
-        jButton2.setBackground(new java.awt.Color(134, 152, 156));
-        jButton2.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/_07gestaoacademica/images/professorP.png"))); // NOI18N
-        jButton2.setText("<html>\n0\n<br>\nProfessores\n</html>");
-        jButton2.setBorder(null);
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        alunoButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                alunoButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                alunoButtonMouseExited(evt);
+            }
+        });
 
-        jButton3.setBackground(new java.awt.Color(148, 164, 167));
-        jButton3.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(0, 0, 0));
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/_07gestaoacademica/images/turmaP.png"))); // NOI18N
-        jButton3.setText("<html> 0 <br> Turmas </html>");
-        jButton3.setBorder(null);
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        solicitacaoButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                solicitacaoButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                solicitacaoButtonMouseExited(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout painelGeralLayout = new javax.swing.GroupLayout(painelGeral);
+        painelGeral.setLayout(painelGeralLayout);
+        painelGeralLayout.setHorizontalGroup(
+            painelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(cabecalhoPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelGeralLayout.createSequentialGroup()
+                .addGroup(painelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelGeralLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(nomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(painelGeralLayout.createSequentialGroup()
+                        .addGap(87, 87, 87)
+                        .addGroup(painelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(professorButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(alunoButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(painelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(turmaButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(painelGeralLayout.createSequentialGroup()
+                        .addComponent(dataLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(sairButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(solicitacaoButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(87, 87, 87)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(80, 80, 80)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        painelGeralLayout.setVerticalGroup(
+            painelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelGeralLayout.createSequentialGroup()
+                .addComponent(cabecalhoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                .addGroup(painelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(sairButton)
+                    .addComponent(nomeLabel)
+                    .addComponent(dataLabel))
                 .addGap(26, 26, 26)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(202, Short.MAX_VALUE))
+                .addGroup(painelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(turmaButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(professorButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(painelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(alunoButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(solicitacaoButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(painelGeral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(painelGeral, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    //Métodos de simplificação
+    
+    private void mudarIcone(FormularioButton button, String local) {
+        
+        button.mudarIcone(local);
+        
+    }
+    
+    
+    //Métodos de ação
+    
     private void sairPaginaButton2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairPaginaButton2MouseEntered
         Color corSelecionado = new Color(89, 89, 89);
         sairPaginaButton2.setForeground(corSelecionado);
@@ -210,40 +280,75 @@ public class DashboardCoordenador extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_sairPaginaButton2ActionPerformed
 
-    private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseEntered
-        jButton1.setForeground(Color.BLACK);
-    }//GEN-LAST:event_jButton1MouseEntered
+    private void sairButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairButtonMouseEntered
+        sairButton.setForeground(Color.BLACK);
+    }//GEN-LAST:event_sairButtonMouseEntered
 
-    private void jButton1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseExited
-        jButton1.setForeground(new Color(76, 95, 99));
-    }//GEN-LAST:event_jButton1MouseExited
+    private void sairButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairButtonMouseExited
+        sairButton.setForeground(new Color(76, 95, 99));
+    }//GEN-LAST:event_sairButtonMouseExited
 
-    
-    
-    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
+    private void cabecalhoPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cabecalhoPanelMousePressed
         mouseX = evt.getX();
         mouseY = evt.getY();
-    }//GEN-LAST:event_jPanel1MousePressed
+    }//GEN-LAST:event_cabecalhoPanelMousePressed
 
-    private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
+    private void cabecalhoPanelMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cabecalhoPanelMouseDragged
         this.setLocation(this.getX() + evt.getX() - mouseX, this.getY() + evt.getY() - mouseY); //evento de mover a janela
-    }//GEN-LAST:event_jPanel1MouseDragged
+    }//GEN-LAST:event_cabecalhoPanelMouseDragged
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void sairButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairButtonActionPerformed
         novaGestaoContaUsuario = new GestaoContaUsuario();
         novaGestaoContaUsuario.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_sairButtonActionPerformed
 
+    private void dataLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dataLabelMouseEntered
+        dataLabel.setForeground(Color.BLACK);
+    }//GEN-LAST:event_dataLabelMouseEntered
+
+    private void dataLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dataLabelMouseExited
+        dataLabel.setForeground(new Color(117, 117, 117));
+    }//GEN-LAST:event_dataLabelMouseExited
+
+    private void professorButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_professorButtonMouseEntered
+        mudarIcone(professorButton, "/_07gestaoacademica/images/professorB.png");
+    }//GEN-LAST:event_professorButtonMouseEntered
+
+    private void professorButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_professorButtonMouseExited
+        mudarIcone(professorButton, "/_07gestaoacademica/images/professorP.png");
+    }//GEN-LAST:event_professorButtonMouseExited
+
+    private void turmaButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_turmaButtonMouseEntered
+        mudarIcone(turmaButton, "/_07gestaoacademica/images/turmaB.png");
+    }//GEN-LAST:event_turmaButtonMouseEntered
+
+    private void turmaButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_turmaButtonMouseExited
+        mudarIcone(turmaButton, "/_07gestaoacademica/images/turmaP.png");
+    }//GEN-LAST:event_turmaButtonMouseExited
+
+    private void alunoButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_alunoButtonMouseEntered
+        mudarIcone(alunoButton, "/_07gestaoacademica/images/alunosB.png");
+    }//GEN-LAST:event_alunoButtonMouseEntered
+
+    private void alunoButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_alunoButtonMouseExited
+        mudarIcone(alunoButton, "/_07gestaoacademica/images/alunosP.png");
+    }//GEN-LAST:event_alunoButtonMouseExited
+
+    private void solicitacaoButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_solicitacaoButtonMouseEntered
+        mudarIcone(solicitacaoButton, "/_07gestaoacademica/images/emailB.png");
+    }//GEN-LAST:event_solicitacaoButtonMouseEntered
+
+    private void solicitacaoButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_solicitacaoButtonMouseExited
+        mudarIcone(solicitacaoButton, "/_07gestaoacademica/images/emailP.png");
+    }//GEN-LAST:event_solicitacaoButtonMouseExited
+
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -272,14 +377,16 @@ public class DashboardCoordenador extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private _07gestaoacademica.FormularioButton alunoButton;
+    private javax.swing.JPanel cabecalhoPanel;
+    private javax.swing.JLabel dataLabel;
+    private javax.swing.JLabel nomeLabel;
+    private javax.swing.JPanel painelGeral;
+    private _07gestaoacademica.FormularioButton professorButton;
+    private javax.swing.JButton sairButton;
     private javax.swing.JButton sairPaginaButton2;
+    private _07gestaoacademica.FormularioButton solicitacaoButton;
     private javax.swing.JLabel tituloCabecalhoLabel;
+    private _07gestaoacademica.FormularioButton turmaButton;
     // End of variables declaration//GEN-END:variables
 }

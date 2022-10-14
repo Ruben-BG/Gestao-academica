@@ -10,12 +10,13 @@ import java.util.List;
 public class BancoDeDados {
     
     private static List<Usuario> usuarios = new ArrayList<>();
-
+    private static Usuario usuarioLogado;
+    
     public static void cadastrarUsuario(Usuario usuario) {
         usuarios.add(usuario);
     }
     
-    public static boolean loguinProfessorAluno(int matricula, String senha) {
+    public static boolean loginProfessorAluno(int matricula, String senha) {
         
         for(Usuario usuario: usuarios) {
             
@@ -47,12 +48,19 @@ public class BancoDeDados {
             
             if(usuarioCoordenador) {
                 String nomeUsuarioAtual = ((UsuarioCoordenador)usuario).getNomeUsuario();
+                usuarioLogado = usuario;
                 return nomeUsuarioAtual.equals(nomeUsuario) && usuario.getSenha().equals(senha);
             }
             
         }
         
         return false;
+        
+    }
+    
+    public static Usuario pegaUsuarioCoordenador() {
+        
+        return usuarioLogado;
         
     }
     
