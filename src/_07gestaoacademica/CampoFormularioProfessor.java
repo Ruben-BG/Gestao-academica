@@ -293,7 +293,6 @@ public class CampoFormularioProfessor extends javax.swing.JPanel {
         professor.setEmail(emailTextField.getText());
         professor.setSenha(String.valueOf(senhaPasswordField.getPassword()));
         professor.setMatricula(Usuario.getProximaMatricula());
-        professor.isProfessor(); //identifica que é um professor
         
     }
     
@@ -306,7 +305,6 @@ public class CampoFormularioProfessor extends javax.swing.JPanel {
         aluno.setEmail(emailTextField.getText());
         aluno.setSenha(String.valueOf(senhaPasswordField.getPassword()));
         aluno.setMatricula(Usuario.getProximaMatricula());
-        aluno.isAluno(); //identifica que é um aluno
         
     }
     

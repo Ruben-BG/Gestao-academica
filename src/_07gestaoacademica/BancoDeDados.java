@@ -26,11 +26,13 @@ public class BancoDeDados {
             if (usuarioAluno) {
                 int matriculaAluno = ((UsuarioAluno)usuario).getMatricula();
                 if (matriculaAluno == matricula && usuario.getSenha().equals(senha)) 
+                    usuarioLogado = usuario;
                     return true;
                 
             }else if(usuarioProfessor) {
                 int matriculaProfessor = ((UsuarioProfessor)usuario).getMatricula();
                 if(matriculaProfessor == matricula && usuario.getSenha().equals(senha))
+                    usuarioLogado = usuario;
                     return true;
                 
             }
@@ -58,7 +60,28 @@ public class BancoDeDados {
         
     }
     
-    public static Usuario pegaUsuarioCoordenador() {
+    public static int quantidadeProfessor() {
+        
+        int quantidade = 0;
+        
+        for(Usuario usuario: usuarios) {
+            
+            Boolean usuarioProfessor = usuario instanceof UsuarioProfessor;
+            
+            if(usuarioProfessor) {
+                quantidade++;
+            }
+        
+        }
+    
+        return quantidade;
+    }
+
+    private static void criaUsuariosFakes() {
+        
+    }
+    
+    public static Usuario pegaUsuario() {
         
         return usuarioLogado;
         

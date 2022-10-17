@@ -8,7 +8,6 @@ public class Usuario{
     
     private String nome, telefone, email, cpf, endereco, senha;
     private static int matriculaAtual = 0;
-    private Boolean isProfessor, isAluno;
     
     //SETTERS
     public void setNome(String nome) {
@@ -33,16 +32,6 @@ public class Usuario{
 
     public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    public void isAluno() {
-        this.isAluno = true;
-        this.isProfessor = false;
-    }
-
-    public void isProfessor() {
-        this.isProfessor = true;
-        this.isAluno = false;
     }
     
     //GETTERS
@@ -73,14 +62,6 @@ public class Usuario{
     
     protected static int getProximaMatricula() {
         return ++matriculaAtual;
-    }
-
-    public Boolean getIsAluno() {
-        return isAluno;
-    }
-
-    public Boolean getIsProfessor() {
-        return isProfessor;
     }
     
 }

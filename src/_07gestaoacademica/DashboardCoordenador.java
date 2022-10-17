@@ -3,7 +3,6 @@ package _07gestaoacademica;
 import java.awt.Color;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import javax.swing.Timer;
 
 /**
  *
@@ -14,17 +13,17 @@ public class DashboardCoordenador extends javax.swing.JFrame {
     //Atributos
     private int mouseX, mouseY;
     GestaoContaUsuario novaGestaoContaUsuario;
+    ListagemProfessor novaListagemProfessor;
     
     public DashboardCoordenador() {
         initComponents();
         setLocationRelativeTo(null);
         
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         LocalDateTime ldt = LocalDateTime.now();
-        Timer tempo = new Timer(1000, (e) -> {dataLabel.setText(dtf.format(ldt));});//1000 = 1 segundo
         
-        nomeLabel.setText(BancoDeDados.pegaUsuarioCoordenador().getNome() + " | Coordenador");
-        //dataLabel.setText();
+        nomeLabel.setText(BancoDeDados.pegaUsuario().getNome() + " | Coordenador");
+        dataLabel.setText(dtf.format(ldt));
         
         professorButton.mudarIcone("/_07gestaoacademica/images/professorP.png");
         professorButton.mudarTexto("Professores");
@@ -34,9 +33,9 @@ public class DashboardCoordenador extends javax.swing.JFrame {
         solicitacaoButton.mudarIcone("/_07gestaoacademica/images/emailP.png");
         solicitacaoButton.mudarTexto("Solicitações");
         
-        
-        
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -144,6 +143,7 @@ public class DashboardCoordenador extends javax.swing.JFrame {
         sairButton.setText("Sair");
         sairButton.setBorder(null);
         sairButton.setContentAreaFilled(false);
+        sairButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         sairButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 sairButtonMouseEntered(evt);
@@ -159,6 +159,9 @@ public class DashboardCoordenador extends javax.swing.JFrame {
         });
 
         professorButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                professorButtonMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 professorButtonMouseEntered(evt);
             }
@@ -342,6 +345,12 @@ public class DashboardCoordenador extends javax.swing.JFrame {
     private void solicitacaoButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_solicitacaoButtonMouseExited
         mudarIcone(solicitacaoButton, "/_07gestaoacademica/images/emailP.png");
     }//GEN-LAST:event_solicitacaoButtonMouseExited
+
+    private void professorButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_professorButtonMouseClicked
+        novaListagemProfessor = new ListagemProfessor();
+        novaListagemProfessor.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_professorButtonMouseClicked
 
     
     /**

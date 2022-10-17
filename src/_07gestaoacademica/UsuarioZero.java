@@ -16,7 +16,7 @@ public class UsuarioZero extends UsuarioCoordenador{
         setEmail("alansantos3@gmail.com");
         setEndereco("Rua Jangurussu, 555 - Casa");
         setNomeUsuario("alan");
-        setSenha("12345678");
+        setSenha("123");
         setTelefone("123321");
     }    
     
