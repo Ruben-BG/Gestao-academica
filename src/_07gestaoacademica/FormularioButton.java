@@ -10,7 +10,6 @@ import java.awt.event.MouseEvent;
  */
 public class FormularioButton extends javax.swing.JPanel {
 
-    public float corAlfa = 1f;
     private javax.swing.JLabel iconeLabel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel numeroLabel;

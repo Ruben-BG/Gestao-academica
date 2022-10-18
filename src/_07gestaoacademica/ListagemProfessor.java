@@ -13,6 +13,13 @@ public class ListagemProfessor extends javax.swing.JFrame {
     public ListagemProfessor() {
         initComponents();
         setLocationRelativeTo(null);
+        
+        ModeloTabelaProfessor tableModel = new ModeloTabelaProfessor();
+        tabelaProfessor.setModel(tableModel);
+        
+        tabelaProfessor.getTableHeader().setOpaque(false);
+        tabelaProfessor.getTableHeader().setBackground(Color.red);
+        
     }
 
     /**
@@ -36,7 +43,7 @@ public class ListagemProfessor extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         campoDeEscrita2 = new _07gestaoacademica.CampoDeEscrita();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelaProfessor = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -134,7 +141,10 @@ public class ListagemProfessor extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Turma");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jScrollPane1.setBackground(new java.awt.Color(255, 0, 0));
+        jScrollPane1.setOpaque(false);
+
+        tabelaProfessor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -145,7 +155,12 @@ public class ListagemProfessor extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tabelaProfessor.setFocusable(false);
+        tabelaProfessor.setRowHeight(24);
+        tabelaProfessor.setSelectionBackground(new java.awt.Color(97, 122, 127));
+        tabelaProfessor.setShowHorizontalLines(true);
+        tabelaProfessor.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tabelaProfessor);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -246,11 +261,11 @@ public class ListagemProfessor extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel2MouseDragged
 
     private void tituloCabecalhoLabel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tituloCabecalhoLabel1MouseEntered
-        // TODO add your handling code here:
+        tituloCabecalhoLabel1.setForeground(new Color(51, 51, 51));
     }//GEN-LAST:event_tituloCabecalhoLabel1MouseEntered
 
     private void tituloCabecalhoLabel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tituloCabecalhoLabel1MouseExited
-        // TODO add your handling code here:
+        tituloCabecalhoLabel1.setForeground(new Color(102,102,102));
     }//GEN-LAST:event_tituloCabecalhoLabel1MouseExited
 
     private void tituloCabecalhoLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tituloCabecalhoLabel1MouseClicked
@@ -313,8 +328,8 @@ public class ListagemProfessor extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton sairPaginaButton2;
+    private javax.swing.JTable tabelaProfessor;
     private javax.swing.JLabel tituloCabecalhoLabel;
     private javax.swing.JLabel tituloCabecalhoLabel1;
     // End of variables declaration//GEN-END:variables

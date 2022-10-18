@@ -19,16 +19,15 @@ public class DashboardCoordenador extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-        LocalDateTime ldt = LocalDateTime.now();
-        
         nomeLabel.setText(BancoDeDados.pegaUsuario().getNome() + " | Coordenador");
-        dataLabel.setText(dtf.format(ldt));
+        dataHora();
         
         professorButton.mudarIcone("/_07gestaoacademica/images/professorP.png");
+        professorButton.mudarNumero(String.valueOf(BancoDeDados.quantidadeProfessor()));
         professorButton.mudarTexto("Professores");
         turmaButton.mudarIcone("/_07gestaoacademica/images/turmaP.png");
         turmaButton.mudarTexto("Turmas");
+        alunoButton.mudarNumero(String.valueOf(BancoDeDados.quantidadeAluno()));
         alunoButton.mudarTexto("Alunos");
         solicitacaoButton.mudarIcone("/_07gestaoacademica/images/emailP.png");
         solicitacaoButton.mudarTexto("Solicitações");
@@ -262,6 +261,27 @@ public class DashboardCoordenador extends javax.swing.JFrame {
     private void mudarIcone(FormularioButton button, String local) {
         
         button.mudarIcone(local);
+        
+    }
+    
+    private void dataHora() {
+        
+        Thread tempo = new Thread(){
+            @Override
+            public void run() {
+                try {
+                    while(true) {
+                        
+                        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                        LocalDateTime ldt = LocalDateTime.now();
+                        dataLabel.setText(dtf.format(ldt));
+                        sleep(1000);
+                    }
+                } catch (Exception e) {
+                }
+            }
+        };
+        tempo.start();
         
     }
     
