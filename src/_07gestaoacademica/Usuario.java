@@ -7,7 +7,7 @@ package _07gestaoacademica;
 public class Usuario{
     
     private String nome, telefone, email, cpf, endereco, senha;
-    private static int matriculaAtual = 0;
+    private static int matriculaAtual = 5;
     
     //SETTERS
     public void setNome(String nome) {

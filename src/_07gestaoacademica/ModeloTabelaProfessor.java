@@ -6,11 +6,9 @@ public class ModeloTabelaProfessor extends AbstractTableModel{
 
     String[] coluna = {"Nome", "Turmas", "Ações"};
     
-    
-    
     @Override
     public int getRowCount() {
-        return BancoDeDados.getUsuarios().size();
+        return BancoDeDados.quantidadeProfessor();
     }
 
     @Override
@@ -27,7 +25,8 @@ public class ModeloTabelaProfessor extends AbstractTableModel{
     public Object getValueAt(int linha, int coluna) {
         
         switch(coluna) {
-            case 0: BancoDeDados.getUsuarios().get(linha).getNome();
+            case 0: return BancoDeDados.retornarProfessores().get(linha).getNome();
+            case 1: return BancoDeDados.retornarProfessores().get(linha).retornaQuantidadeDeTurma();
         }
         
         return null;

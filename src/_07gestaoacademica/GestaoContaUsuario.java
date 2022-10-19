@@ -22,6 +22,7 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         BancoDeDados.cadastrarUsuario(alan);
+        BancoDeDados.criaUsuariosFakes();
     }
 
     /**

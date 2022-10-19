@@ -26,6 +26,7 @@ public class DashboardCoordenador extends javax.swing.JFrame {
         professorButton.mudarNumero(String.valueOf(BancoDeDados.quantidadeProfessor()));
         professorButton.mudarTexto("Professores");
         turmaButton.mudarIcone("/_07gestaoacademica/images/turmaP.png");
+        turmaButton.mudarNumero(String.valueOf(BancoDeDados.getTurmas().size()));
         turmaButton.mudarTexto("Turmas");
         alunoButton.mudarNumero(String.valueOf(BancoDeDados.quantidadeAluno()));
         alunoButton.mudarTexto("Alunos");
@@ -272,7 +273,7 @@ public class DashboardCoordenador extends javax.swing.JFrame {
                 try {
                     while(true) {
                         
-                        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
                         LocalDateTime ldt = LocalDateTime.now();
                         dataLabel.setText(dtf.format(ldt));
                         sleep(1000);

@@ -11,16 +11,16 @@ public class BancoDeDados {
     
     private static List<Usuario> usuarios = new ArrayList<>();
     private static Usuario usuarioLogado;
+    private static List<Turma> turmas = new ArrayList<>();
 
-    public static List<Usuario> getUsuarios() {
-        return usuarios;
+    public static List<Turma> getTurmas() {
+        return turmas;
     }
-    
-    
     
     public static void cadastrarUsuario(Usuario usuario) {
         usuarios.add(usuario);
     }
+    
     
     public static boolean loginProfessorAluno(int matricula, String senha) {
         
@@ -64,6 +64,7 @@ public class BancoDeDados {
         
     }
     
+    
     public static int quantidadeProfessor() {
         
         int quantidade = 0;
@@ -96,14 +97,40 @@ public class BancoDeDados {
         return quantidade;
         
     }
-
-    private static void criaUsuariosFakes() {
+    
+    public static List<UsuarioProfessor> retornarProfessores() {
         
-        /*UsuarioAluno aluno1;
+        List<UsuarioProfessor> professores = new ArrayList<>();
+        
+        for(Usuario usuario: usuarios) {
+            
+            Boolean usuarioProfessor = usuario instanceof UsuarioProfessor;
+            
+            if(usuarioProfessor){
+                professores.add((UsuarioProfessor) usuario);
+            }
+            
+        }
+        
+        return professores;
+    }
+    
+    public static Usuario pegaUsuario() {
+        
+        return usuarioLogado;
+        
+    }
+    
+    
+    public static void criaUsuariosFakes() {
+        
+        UsuarioAluno aluno1;
         UsuarioAluno aluno2;
         UsuarioAluno aluno3;
         UsuarioProfessor professor1;
         UsuarioProfessor professor2;
+        Turma turma1;
+        Turma turma2;
         
         aluno1 = new UsuarioAluno();
         aluno1.setMatricula(1);
@@ -120,26 +147,30 @@ public class BancoDeDados {
         aluno3 = new UsuarioAluno();
         aluno3.setMatricula(3);
         aluno3.setNome("Rodrigo Baltar");
-        aluno3.setSenha("122");
+        aluno3.setSenha("123");
         usuarios.add(aluno3);
         
         professor1 = new UsuarioProfessor();
         professor1.setMatricula(4);
         professor1.setNome("Silvio Pontes");
-        professor1.setSenha("541");
+        professor1.setSenha("123");
         usuarios.add(professor1);
+        turma1 = new Turma();
+        turma1.setProfessor(professor1);
+        turma1.setCodigo(1221);
+        professor1.adicionaTurma(turma1);
+        turmas.add(turma1);
         
         professor2 = new UsuarioProfessor();
         professor2.setMatricula(5);
         professor2.setNome("Paulo Mendes");
-        professor2.setSenha("541");
-        usuarios.add(professor2);*/
-        
-    }
-    
-    public static Usuario pegaUsuario() {
-        
-        return usuarioLogado;
+        professor2.setSenha("321");
+        usuarios.add(professor2);
+        turma2 = new Turma();
+        turma2.setProfessor(professor2);
+        turma2.setCodigo(2112);
+        professor2.adicionaTurma(turma2);
+        turmas.add(turma2);
         
     }
     

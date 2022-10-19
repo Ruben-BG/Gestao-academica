@@ -141,23 +141,16 @@ public class ListagemProfessor extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Turma");
 
-        jScrollPane1.setBackground(new java.awt.Color(255, 0, 0));
-        jScrollPane1.setOpaque(false);
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setForeground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setColumnHeader(null);
+        jScrollPane1.setColumnHeaderView(null);
+        jScrollPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        tabelaProfessor.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
+        tabelaProfessor.setBackground(new java.awt.Color(255, 255, 255));
         tabelaProfessor.setFocusable(false);
         tabelaProfessor.setRowHeight(24);
-        tabelaProfessor.setSelectionBackground(new java.awt.Color(97, 122, 127));
+        tabelaProfessor.setSelectionBackground(new java.awt.Color(169, 195, 200));
         tabelaProfessor.setShowHorizontalLines(true);
         tabelaProfessor.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tabelaProfessor);
@@ -218,8 +211,8 @@ public class ListagemProfessor extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(campoDeEscrita2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
