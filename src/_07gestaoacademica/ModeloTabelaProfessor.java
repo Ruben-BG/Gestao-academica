@@ -1,5 +1,6 @@
 package _07gestaoacademica;
 
+import javax.swing.DefaultListModel;
 import javax.swing.table.AbstractTableModel;
 
 public class ModeloTabelaProfessor extends AbstractTableModel{
@@ -27,9 +28,28 @@ public class ModeloTabelaProfessor extends AbstractTableModel{
         switch(coluna) {
             case 0: return BancoDeDados.retornarProfessores().get(linha).getNome();
             case 1: return BancoDeDados.retornarProfessores().get(linha).retornaQuantidadeDeTurma();
+            case 2: break;
         }
         
         return null;
+        
+    }
+
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return columnIndex == 2;
+    }
+    
+    public void removeRow(int linha) {
+        
+        BancoDeDados.excluirProfessorDaLista(linha);
+        fireTableRowsDeleted(linha, linha);
+        
+    }
+    
+    public void modeloDoFiltroDePesquisa(DefaultListModel<String> modelo, String filter) {
+        
+        
         
     }
     

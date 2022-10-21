@@ -12,7 +12,7 @@ public class BancoDeDados {
     private static List<Usuario> usuarios = new ArrayList<>();
     private static Usuario usuarioLogado;
     private static List<Turma> turmas = new ArrayList<>();
-
+    
     public static List<Turma> getTurmas() {
         return turmas;
     }
@@ -30,7 +30,7 @@ public class BancoDeDados {
             Boolean usuarioProfessor = usuario instanceof UsuarioProfessor;
             
             if (usuarioAluno) {
-                int matriculaAluno = ((UsuarioAluno)usuario).getMatricula();
+                int matriculaAluno = ((UsuarioAluno)usuario).getMatricula(); //tivemos cast aqui, cast é quando convertemos um valor de um tipo para outro tipo
                 if (matriculaAluno == matricula && usuario.getSenha().equals(senha))
                     return true;
                 
@@ -115,6 +115,26 @@ public class BancoDeDados {
         return professores;
     }
     
+    public static void excluirProfessorDaLista(int linhaSelecionada) {
+        
+        List<UsuarioProfessor> professores = new ArrayList<>();
+        int linhaProfessor;
+        
+        for(Usuario usuario: usuarios) {
+            
+            Boolean usuarioProfessor = usuario instanceof UsuarioProfessor;
+            
+            if(usuarioProfessor){
+                professores.add((UsuarioProfessor)usuario);
+            }
+            
+        }
+        
+        linhaProfessor = professores.get(linhaSelecionada).getMatricula();
+        usuarios.remove(linhaProfessor);
+        
+    }
+    
     public static Usuario pegaUsuario() {
         
         return usuarioLogado;
@@ -122,8 +142,9 @@ public class BancoDeDados {
     }
     
     
-    public static void criaUsuariosFakes() {
+    public final static void criaUsuariosFakes() {
         
+        UsuarioCoordenador coordenador;
         UsuarioAluno aluno1;
         UsuarioAluno aluno2;
         UsuarioAluno aluno3;
@@ -131,6 +152,16 @@ public class BancoDeDados {
         UsuarioProfessor professor2;
         Turma turma1;
         Turma turma2;
+        
+        coordenador = new UsuarioCoordenador();
+        coordenador.setNome("Alan Santos");
+        coordenador.setCpf("54345423478");
+        coordenador.setEmail("alansantos3@gmail.com");
+        coordenador.setEndereco("Rua Jangurussu, 555 - Casa");
+        coordenador.setNomeUsuario("alan");
+        coordenador.setSenha("123");
+        coordenador.setTelefone("123321");
+        usuarios.add(coordenador);
         
         aluno1 = new UsuarioAluno();
         aluno1.setMatricula(1);

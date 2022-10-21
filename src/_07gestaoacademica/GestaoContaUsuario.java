@@ -15,14 +15,11 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
     Icon ocultarIcon = new ImageIcon(getClass().getResource("/_07gestaoacademica/images/ocultar.png"));
     Icon iconeAtual = ocultarIcon;
     PopUp popUp;
-    private final UsuarioZero alan = new UsuarioZero();
     
     
     public GestaoContaUsuario() {
         initComponents();
         this.setLocationRelativeTo(null);
-        BancoDeDados.cadastrarUsuario(alan);
-        BancoDeDados.criaUsuariosFakes();
     }
 
     /**
@@ -388,6 +385,9 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
                 new GestaoContaUsuario().setVisible(true);
             }
         });
+        
+        BancoDeDados.criaUsuariosFakes();
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

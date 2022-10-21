@@ -1,6 +1,11 @@
 package _07gestaoacademica;
 
 import java.awt.Color;
+import java.awt.Cursor;
+import java.util.List;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 
 public class ListagemProfessor extends javax.swing.JFrame {
@@ -9,16 +14,21 @@ public class ListagemProfessor extends javax.swing.JFrame {
     private int mouseX, mouseY;
     GestaoContaUsuario novaGestaoContaUsuario;
     DashboardCoordenador voltarDashboardCoordenador;
+    private final ModeloTabelaProfessor tableModel = new ModeloTabelaProfessor();
+    private final TableRowSorter<TableModel> classificarLinha = new TableRowSorter<>(tableModel);
+    final ListagemProfessor essaJanela = this;
     
     public ListagemProfessor() {
         initComponents();
         setLocationRelativeTo(null);
         
-        ModeloTabelaProfessor tableModel = new ModeloTabelaProfessor();
         tabelaProfessor.setModel(tableModel);
+        TableColumn colunaDosBotoes = tabelaProfessor.getColumnModel().getColumn(2);
+        colunaDosBotoes.setCellRenderer(new BotoesRenderer());
+        colunaDosBotoes.setCellEditor(new BotoesEditor(tabelaProfessor, essaJanela, tableModel));
         
-        tabelaProfessor.getTableHeader().setOpaque(false);
-        tabelaProfessor.getTableHeader().setBackground(Color.red);
+        
+        pesquisarUsuarioButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
     }
 
@@ -32,17 +42,18 @@ public class ListagemProfessor extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        cabecalhoPanel = new javax.swing.JPanel();
         sairPaginaButton2 = new javax.swing.JButton();
-        tituloCabecalhoLabel = new javax.swing.JLabel();
-        tituloCabecalhoLabel1 = new javax.swing.JLabel();
-        campoDeEscrita1 = new _07gestaoacademica.CampoDeEscrita();
-        jLabel1 = new javax.swing.JLabel();
-        entrarContaBotton = new _07gestaoacademica.CustomizacaoBotao();
-        jSeparator1 = new javax.swing.JSeparator();
-        jLabel2 = new javax.swing.JLabel();
-        campoDeEscrita2 = new _07gestaoacademica.CampoDeEscrita();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        botaoVoltarLabel = new javax.swing.JLabel();
+        tituloDaPaginaLabel = new javax.swing.JLabel();
+        criarNovoProfessorButton = new _07gestaoacademica.CustomizacaoBotao();
+        separador = new javax.swing.JSeparator();
+        nomeLabel = new javax.swing.JLabel();
+        campoDeNome = new _07gestaoacademica.CampoDeEscrita();
+        turmaLabel = new javax.swing.JLabel();
+        campoDeTurma = new _07gestaoacademica.CampoDeEscrita();
+        pesquisarUsuarioButton = new _07gestaoacademica.CustomizacaoBotao();
+        jScrollPane2 = new javax.swing.JScrollPane();
         tabelaProfessor = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -52,15 +63,15 @@ public class ListagemProfessor extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setForeground(new java.awt.Color(204, 204, 204));
 
-        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        cabecalhoPanel.setBackground(new java.awt.Color(204, 204, 204));
+        cabecalhoPanel.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
-                jPanel2MouseDragged(evt);
+                cabecalhoPanelMouseDragged(evt);
             }
         });
-        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
+        cabecalhoPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel2MousePressed(evt);
+                cabecalhoPanelMousePressed(evt);
             }
         });
 
@@ -85,135 +96,149 @@ public class ListagemProfessor extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout cabecalhoPanelLayout = new javax.swing.GroupLayout(cabecalhoPanel);
+        cabecalhoPanel.setLayout(cabecalhoPanelLayout);
+        cabecalhoPanelLayout.setHorizontalGroup(
+            cabecalhoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cabecalhoPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(sairPaginaButton2)
                 .addGap(18, 18, 18))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        cabecalhoPanelLayout.setVerticalGroup(
+            cabecalhoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(sairPaginaButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        tituloCabecalhoLabel.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
-        tituloCabecalhoLabel.setForeground(new java.awt.Color(30, 30, 30));
-        tituloCabecalhoLabel.setText("Listagem de Professores");
-
-        tituloCabecalhoLabel1.setFont(new java.awt.Font("SansSerif", 0, 48)); // NOI18N
-        tituloCabecalhoLabel1.setForeground(new java.awt.Color(102, 102, 102));
-        tituloCabecalhoLabel1.setText("←");
-        tituloCabecalhoLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        tituloCabecalhoLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        botaoVoltarLabel.setFont(new java.awt.Font("SansSerif", 0, 48)); // NOI18N
+        botaoVoltarLabel.setForeground(new java.awt.Color(102, 102, 102));
+        botaoVoltarLabel.setText("←");
+        botaoVoltarLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        botaoVoltarLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tituloCabecalhoLabel1MouseClicked(evt);
+                botaoVoltarLabelMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                tituloCabecalhoLabel1MouseEntered(evt);
+                botaoVoltarLabelMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                tituloCabecalhoLabel1MouseExited(evt);
+                botaoVoltarLabelMouseExited(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Nome");
+        tituloDaPaginaLabel.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
+        tituloDaPaginaLabel.setForeground(new java.awt.Color(30, 30, 30));
+        tituloDaPaginaLabel.setText("Listagem de Professores");
 
-        entrarContaBotton.setForeground(new java.awt.Color(255, 255, 255));
-        entrarContaBotton.setText("Novo Professor");
-        entrarContaBotton.setCor(new java.awt.Color(36, 53, 61));
-        entrarContaBotton.setCorBorda(new java.awt.Color(255, 255, 255));
-        entrarContaBotton.setCorEntrou(new java.awt.Color(19, 176, 110));
-        entrarContaBotton.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        entrarContaBotton.addActionListener(new java.awt.event.ActionListener() {
+        criarNovoProfessorButton.setForeground(new java.awt.Color(255, 255, 255));
+        criarNovoProfessorButton.setText("Novo Professor");
+        criarNovoProfessorButton.setCor(new java.awt.Color(36, 53, 61));
+        criarNovoProfessorButton.setCorBorda(new java.awt.Color(255, 255, 255));
+        criarNovoProfessorButton.setCorEntrou(new java.awt.Color(19, 176, 110));
+        criarNovoProfessorButton.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        criarNovoProfessorButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                entrarContaBottonActionPerformed(evt);
+                criarNovoProfessorButtonActionPerformed(evt);
             }
         });
 
-        jSeparator1.setForeground(new java.awt.Color(234, 234, 234));
+        separador.setForeground(new java.awt.Color(234, 234, 234));
 
-        jLabel2.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Turma");
+        nomeLabel.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        nomeLabel.setForeground(new java.awt.Color(0, 0, 0));
+        nomeLabel.setText("Nome");
 
-        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane1.setForeground(new java.awt.Color(255, 255, 255));
-        jScrollPane1.setColumnHeader(null);
-        jScrollPane1.setColumnHeaderView(null);
-        jScrollPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        turmaLabel.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        turmaLabel.setForeground(new java.awt.Color(0, 0, 0));
+        turmaLabel.setText("Turma");
+
+        pesquisarUsuarioButton.setForeground(new java.awt.Color(255, 255, 255));
+        pesquisarUsuarioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/_07gestaoacademica/images/lupaP.png"))); // NOI18N
+        pesquisarUsuarioButton.setCor(new java.awt.Color(76, 95, 99));
+        pesquisarUsuarioButton.setCorBorda(new java.awt.Color(255, 255, 255));
+        pesquisarUsuarioButton.setCorClicou(new java.awt.Color(117, 146, 153));
+        pesquisarUsuarioButton.setCorEntrou(new java.awt.Color(117, 146, 153));
+        pesquisarUsuarioButton.setCorSaiu(new java.awt.Color(76, 95, 99));
+        pesquisarUsuarioButton.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        pesquisarUsuarioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pesquisarUsuarioButtonActionPerformed(evt);
+            }
+        });
+
+        jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane2.setFocusable(false);
+        jScrollPane2.setRowHeader(null);
 
         tabelaProfessor.setBackground(new java.awt.Color(255, 255, 255));
         tabelaProfessor.setFocusable(false);
-        tabelaProfessor.setRowHeight(24);
-        tabelaProfessor.setSelectionBackground(new java.awt.Color(169, 195, 200));
+        tabelaProfessor.setRowHeight(25);
         tabelaProfessor.setShowHorizontalLines(true);
         tabelaProfessor.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(tabelaProfessor);
+        jScrollPane2.setViewportView(tabelaProfessor);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(cabecalhoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(6, 6, 6)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(tituloCabecalhoLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tituloCabecalhoLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(entrarContaBotton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41))
+                        .addComponent(botaoVoltarLabel)
+                        .addGap(12, 12, 12)
+                        .addComponent(tituloDaPaginaLabel)
+                        .addGap(90, 90, 90)
+                        .addComponent(criarNovoProfessorButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(separador, javax.swing.GroupLayout.PREFERRED_SIZE, 588, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jSeparator1)
-                        .addContainerGap())
+                        .addComponent(nomeLabel)
+                        .addGap(199, 199, 199)
+                        .addComponent(turmaLabel))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(campoDeEscrita1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(campoDeEscrita2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(164, 164, 164))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())))
+                        .addComponent(campoDeNome, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(campoDeTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52)
+                        .addComponent(pesquisarUsuarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 6, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cabecalhoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(tituloCabecalhoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(entrarContaBotton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(botaoVoltarLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tituloDaPaginaLabel)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(tituloCabecalhoLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGap(4, 4, 4)
+                        .addComponent(criarNovoProfessorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(1, 1, 1)
+                .addComponent(separador, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nomeLabel)
+                    .addComponent(turmaLabel))
+                .addGap(1, 1, 1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pesquisarUsuarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(campoDeEscrita1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(campoDeEscrita2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(campoDeNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(campoDeTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(24, 24, 24)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        pesquisarUsuarioButton.getAccessibleContext().setAccessibleName("n");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -229,6 +254,13 @@ public class ListagemProfessor extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    //Métodos de simplificação
+    
+    
+    
+    //Métodos de ação
+    
     private void sairPaginaButton2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairPaginaButton2MouseEntered
         Color corSelecionado = new Color(89, 89, 89);
         sairPaginaButton2.setForeground(corSelecionado);
@@ -244,34 +276,44 @@ public class ListagemProfessor extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_sairPaginaButton2ActionPerformed
 
-    private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
+    private void cabecalhoPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cabecalhoPanelMousePressed
         mouseX = evt.getX();
         mouseY = evt.getY();
-    }//GEN-LAST:event_jPanel2MousePressed
+    }//GEN-LAST:event_cabecalhoPanelMousePressed
 
-    private void jPanel2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseDragged
+    private void cabecalhoPanelMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cabecalhoPanelMouseDragged
         this.setLocation(this.getX() + evt.getX() - mouseX, this.getY() + evt.getY() - mouseY);
-    }//GEN-LAST:event_jPanel2MouseDragged
+    }//GEN-LAST:event_cabecalhoPanelMouseDragged
 
-    private void tituloCabecalhoLabel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tituloCabecalhoLabel1MouseEntered
-        tituloCabecalhoLabel1.setForeground(new Color(51, 51, 51));
-    }//GEN-LAST:event_tituloCabecalhoLabel1MouseEntered
+    private void botaoVoltarLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoVoltarLabelMouseEntered
+        botaoVoltarLabel.setForeground(new Color(51, 51, 51));
+    }//GEN-LAST:event_botaoVoltarLabelMouseEntered
 
-    private void tituloCabecalhoLabel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tituloCabecalhoLabel1MouseExited
-        tituloCabecalhoLabel1.setForeground(new Color(102,102,102));
-    }//GEN-LAST:event_tituloCabecalhoLabel1MouseExited
+    private void botaoVoltarLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoVoltarLabelMouseExited
+        botaoVoltarLabel.setForeground(new Color(102,102,102));
+    }//GEN-LAST:event_botaoVoltarLabelMouseExited
 
-    private void tituloCabecalhoLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tituloCabecalhoLabel1MouseClicked
+    private void botaoVoltarLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoVoltarLabelMouseClicked
         voltarDashboardCoordenador = new DashboardCoordenador();
         voltarDashboardCoordenador.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_tituloCabecalhoLabel1MouseClicked
+    }//GEN-LAST:event_botaoVoltarLabelMouseClicked
 
-    private void entrarContaBottonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarContaBottonActionPerformed
+    private void criarNovoProfessorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_criarNovoProfessorButtonActionPerformed
 
         
 
-    }//GEN-LAST:event_entrarContaBottonActionPerformed
+    }//GEN-LAST:event_criarNovoProfessorButtonActionPerformed
+
+    private void pesquisarUsuarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisarUsuarioButtonActionPerformed
+        
+        List<UsuarioProfessor> professores; 
+        professores = BancoDeDados.retornarProfessores();
+        tabelaProfessor.setRowSorter(classificarLinha);
+    
+        
+        
+    }//GEN-LAST:event_pesquisarUsuarioButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -312,18 +354,19 @@ public class ListagemProfessor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private _07gestaoacademica.CampoDeEscrita campoDeEscrita1;
-    private _07gestaoacademica.CampoDeEscrita campoDeEscrita2;
-    private _07gestaoacademica.CustomizacaoBotao entrarContaBotton;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel botaoVoltarLabel;
+    private javax.swing.JPanel cabecalhoPanel;
+    private _07gestaoacademica.CampoDeEscrita campoDeNome;
+    private _07gestaoacademica.CampoDeEscrita campoDeTurma;
+    private _07gestaoacademica.CustomizacaoBotao criarNovoProfessorButton;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel nomeLabel;
+    private _07gestaoacademica.CustomizacaoBotao pesquisarUsuarioButton;
     private javax.swing.JButton sairPaginaButton2;
+    private javax.swing.JSeparator separador;
     private javax.swing.JTable tabelaProfessor;
-    private javax.swing.JLabel tituloCabecalhoLabel;
-    private javax.swing.JLabel tituloCabecalhoLabel1;
+    private javax.swing.JLabel tituloDaPaginaLabel;
+    private javax.swing.JLabel turmaLabel;
     // End of variables declaration//GEN-END:variables
 }

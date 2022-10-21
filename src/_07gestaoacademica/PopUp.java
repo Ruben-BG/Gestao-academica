@@ -1,9 +1,7 @@
 package _07gestaoacademica;
 
 import java.awt.Color;
-import java.awt.event.ComponentAdapter;
 import javax.swing.JTextField;
-import javax.swing.border.*;
 
 /**
  *
