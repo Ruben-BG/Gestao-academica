@@ -46,7 +46,11 @@ public class BotoesEditor extends AbstractCellEditor implements TableCellEditor 
 
         lista.get(1).addActionListener(e -> {
             //Ação do botão excluir na tabela
-            referenciaModel.removeRow(tabela.getSelectedRow());
+            
+            ConfirmacaoPopUp popUp = new ConfirmacaoPopUp();
+            popUp.setVisible(true);
+            popUp.confirmacaoParaRemoverLinha("Você deseja remover o professor " + BancoDeDados.retornarProfessores().get(tabela.getSelectedRow()).getNome() + "?", referenciaModel, tabela.getSelectedRow());
+        
         });
 
         EditandoManipuladorDeParada manipulador = new EditandoManipuladorDeParada();

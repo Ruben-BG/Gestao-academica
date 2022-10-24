@@ -31,13 +31,17 @@ public class BancoDeDados {
             
             if (usuarioAluno) {
                 int matriculaAluno = ((UsuarioAluno)usuario).getMatricula(); //tivemos cast aqui, cast é quando convertemos um valor de um tipo para outro tipo
-                if (matriculaAluno == matricula && usuario.getSenha().equals(senha))
+                if (matriculaAluno == matricula && usuario.getSenha().equals(senha)){
+                    usuarioLogado = usuario;
                     return true;
+                }
                 
             }else if(usuarioProfessor) {
                 int matriculaProfessor = ((UsuarioProfessor)usuario).getMatricula();
-                if(matriculaProfessor == matricula && usuario.getSenha().equals(senha))
+                if(matriculaProfessor == matricula && usuario.getSenha().equals(senha)){
+                    usuarioLogado = usuario;
                     return true;
+                }
                 
             }
             

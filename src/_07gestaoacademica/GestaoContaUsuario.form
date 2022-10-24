@@ -67,7 +67,7 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="entrarContaBotton" alignment="0" min="-2" pref="190" max="-2" attributes="0"/>
+                                      <Component id="entrarContaButton" alignment="0" min="-2" pref="190" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
                                           <Component id="identifiqueLabel1" min="-2" max="-2" attributes="0"/>
@@ -122,7 +122,7 @@
                       <Component id="mostrarSenhaButton" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="38" max="32767" attributes="0"/>
-                  <Component id="entrarContaBotton" min="-2" pref="45" max="-2" attributes="0"/>
+                  <Component id="entrarContaButton" min="-2" pref="45" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                   <Component id="identifiqueLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -304,8 +304,11 @@
               </Border>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="senhaPasswordFieldKeyPressed"/>
+          </Events>
         </Component>
-        <Component class="_07gestaoacademica.CustomizacaoBotao" name="entrarContaBotton">
+        <Component class="_07gestaoacademica.CustomizacaoBotao" name="entrarContaButton">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -325,7 +328,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="entrarContaBottonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="entrarContaButtonActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="identifiqueLabel1">

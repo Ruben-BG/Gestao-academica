@@ -1,5 +1,7 @@
 package _07gestaoacademica;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
@@ -43,7 +45,7 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
         matriculaTextField = new javax.swing.JTextField();
         senhaLabel = new javax.swing.JLabel();
         senhaPasswordField = new javax.swing.JPasswordField();
-        entrarContaBotton = new _07gestaoacademica.CustomizacaoBotao();
+        entrarContaButton = new _07gestaoacademica.CustomizacaoBotao();
         identifiqueLabel1 = new javax.swing.JLabel();
         novoCadastroBotton = new _07gestaoacademica.CustomizacaoBotao();
         mostrarSenhaButton = new javax.swing.JButton();
@@ -139,16 +141,21 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
 
         senhaPasswordField.setBackground(new java.awt.Color(255, 255, 255));
         senhaPasswordField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        senhaPasswordField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                senhaPasswordFieldKeyPressed(evt);
+            }
+        });
 
-        entrarContaBotton.setForeground(new java.awt.Color(255, 255, 255));
-        entrarContaBotton.setText("ENTRAR");
-        entrarContaBotton.setCor(new java.awt.Color(36, 53, 61));
-        entrarContaBotton.setCorBorda(new java.awt.Color(255, 255, 255));
-        entrarContaBotton.setCorEntrou(new java.awt.Color(19, 176, 110));
-        entrarContaBotton.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        entrarContaBotton.addActionListener(new java.awt.event.ActionListener() {
+        entrarContaButton.setForeground(new java.awt.Color(255, 255, 255));
+        entrarContaButton.setText("ENTRAR");
+        entrarContaButton.setCor(new java.awt.Color(36, 53, 61));
+        entrarContaButton.setCorBorda(new java.awt.Color(255, 255, 255));
+        entrarContaButton.setCorEntrou(new java.awt.Color(19, 176, 110));
+        entrarContaButton.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        entrarContaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                entrarContaBottonActionPerformed(evt);
+                entrarContaButtonActionPerformed(evt);
             }
         });
 
@@ -199,7 +206,7 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
                                 .addGap(72, 89, Short.MAX_VALUE))
                             .addGroup(gestaoPanelLayout.createSequentialGroup()
                                 .addGroup(gestaoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(entrarContaBotton, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(entrarContaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(gestaoPanelLayout.createSequentialGroup()
                                         .addGap(86, 86, 86)
                                         .addComponent(identifiqueLabel1)))
@@ -239,7 +246,7 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
                     .addComponent(senhaPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(mostrarSenhaButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                .addComponent(entrarContaBotton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(entrarContaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
                 .addComponent(identifiqueLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -261,7 +268,7 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void entrarContaBottonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarContaBottonActionPerformed
+    private void entrarContaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarContaButtonActionPerformed
         
         if(professorAlunoRadioButton.isSelected()) {
             
@@ -282,8 +289,17 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
                 BancoDeDados.loginProfessorAluno(Integer.parseInt(matriculaTextField.getText()), String.valueOf(senhaPasswordField.getPassword()));
                 
                 if (BancoDeDados.loginProfessorAluno(Integer.parseInt(matriculaTextField.getText()), String.valueOf(senhaPasswordField.getPassword())) == true) {
-                    popUp = new PopUp();
-                    popUp.entradaConta("SUCESSO", "Bem vindo!!!");
+                    
+                    if(BancoDeDados.pegaUsuario() instanceof UsuarioAluno) {
+                        DashboardAluno dashboardAluno = new DashboardAluno();
+                        dashboardAluno.setVisible(true);
+                    } else {
+                        DashBoardProfessor dashBoardProfessor = new DashBoardProfessor();
+                        dashBoardProfessor.setVisible(true);
+                    }
+                    
+                    this.dispose();
+
                 } else {
                     popUp = new PopUp();
                     popUp.entradaConta("ERRO", "Operação mal sucedida.");
@@ -321,7 +337,7 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
             
         }
         
-    }//GEN-LAST:event_entrarContaBottonActionPerformed
+    }//GEN-LAST:event_entrarContaButtonActionPerformed
 
     private void novoCadastroBottonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoCadastroBottonActionPerformed
         gerarFormulario = new FormularioContaUsuario();
@@ -351,6 +367,12 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_mostrarSenhaButtonActionPerformed
+
+    private void senhaPasswordFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_senhaPasswordFieldKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            entrarContaButtonActionPerformed(null);
+        }
+    }//GEN-LAST:event_senhaPasswordFieldKeyPressed
 
     /**
      * @param args the command line arguments
@@ -394,7 +416,7 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel bemVindoLabel;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JRadioButton coordenadorRadioButton;
-    private _07gestaoacademica.CustomizacaoBotao entrarContaBotton;
+    private _07gestaoacademica.CustomizacaoBotao entrarContaButton;
     private javax.swing.JPanel gestaoPanel;
     private javax.swing.JLabel identifiqueLabel;
     private javax.swing.JLabel identifiqueLabel1;
