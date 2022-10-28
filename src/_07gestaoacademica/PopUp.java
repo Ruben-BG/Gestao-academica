@@ -291,7 +291,7 @@ public class PopUp extends javax.swing.JFrame {
         });
     }
     
-    public void mensagemFinal(String textoCadastro, FormularioContaUsuario referenciaFormulario) {
+    public void mensagemFinalDoCadastroInicial(String textoCadastro, FormularioContaUsuario referenciaFormulario) {
         tituloLabel.setText("SUCESSO");
         mensagemCentralLabel.setText(textoCadastro);
         botaoFinalButton.setText("ENTRAR NO SISTEMA");
@@ -304,6 +304,27 @@ public class PopUp extends javax.swing.JFrame {
             novaGestaoContaUsuario.setVisible(true);
             
         });
+    }
+    
+    public void mensagemFinalDoCadastroDaLista(String textoCadastro, CadastroNovoProfessor referenciaFormulario) {
+        tituloLabel.setText("SUCESSO");
+        mensagemCentralLabel.setText(textoCadastro);
+        botaoFinalButton.setText("ENTRAR NO SISTEMA");
+        finalizacaoFrame();
+        botaoFinalButton.addActionListener((e) -> {
+           
+            this.dispose();
+            referenciaFormulario.dispose();
+            novaGestaoContaUsuario = new GestaoContaUsuario();
+            novaGestaoContaUsuario.setVisible(true);
+            
+        });
+    }
+    
+    public void mensagemFinalNovoProfessor(String texto) {
+        tituloLabel.setText("SUCESSO");
+        mensagemCentralLabel.setText(texto);
+        finalizacaoFrame();
     }
     
     public void entradaConta(String erro, String textoValidacao) {

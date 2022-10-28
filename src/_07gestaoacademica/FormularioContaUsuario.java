@@ -1,6 +1,7 @@
 package _07gestaoacademica;
 
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 
 /**
  *
@@ -10,27 +11,18 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
 
     //Atributos
     private int mouseX, mouseY;
-    private PopUp popUp;
     public FormularioContaUsuario esseFormulario = this;
     GestaoContaUsuario novaGestaoContaUsuario;
+    PopUp popUp;
     CampoFormularioCoordenador formularioCoordenador;
     CampoFormularioProfessor formularioProfessor;
-
-    public void pegaDados() {
-
-        /*String senha = new String(senhaPasswordField.getPassword());
-        
-        usuario.setNome(nomeTextField.getText());
-        usuario.setTelefone(telefoneTextField.getText());
-        usuario.setEmail(emailTextField.getText());
-        usuario.setCpf(cpfTextField.getText());
-        usuario.setEndereco(enderecoTextField.getText());
-        usuario.setSenha(senha);*/
-    }
+    UsuarioCoordenador coordenador;
+    UsuarioProfessor professor;
+    UsuarioAluno aluno;
 
     public FormularioContaUsuario() {
         initComponents();
-        formularioCoordenador = new CampoFormularioCoordenador(this);
+        formularioCoordenador = new CampoFormularioCoordenador(criarContaButton);
         jScrollPane1.setViewportView(formularioCoordenador); //adiciona Panel visual mesmo depois de construido 
     }
 
@@ -53,6 +45,9 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
         alunoRadioButton = new javax.swing.JRadioButton();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
+        entrarContaButton = new _07gestaoacademica.CustomizacaoBotao();
+        identifiqueLabel1 = new javax.swing.JLabel();
+        criarContaButton = new _07gestaoacademica.CustomizacaoBotao();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Criar Conta");
@@ -179,23 +174,67 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
+        entrarContaButton.setBackground(new java.awt.Color(102, 102, 102));
+        entrarContaButton.setForeground(new java.awt.Color(255, 255, 255));
+        entrarContaButton.setText("ENTRE NA SUA CONTA");
+        entrarContaButton.setCor(new java.awt.Color(102, 102, 102));
+        entrarContaButton.setCorBorda(new java.awt.Color(255, 255, 255));
+        entrarContaButton.setCorEntrou(new java.awt.Color(19, 176, 110));
+        entrarContaButton.setCorSaiu(new java.awt.Color(102, 102, 102));
+        entrarContaButton.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        entrarContaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                entrarContaButtonActionPerformed(evt);
+            }
+        });
+
+        identifiqueLabel1.setFont(new java.awt.Font("SansSerif", 2, 12)); // NOI18N
+        identifiqueLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        identifiqueLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        identifiqueLabel1.setText("ou");
+
+        criarContaButton.setForeground(new java.awt.Color(255, 255, 255));
+        criarContaButton.setText("CRIAR CONTA");
+        criarContaButton.setCor(new java.awt.Color(36, 53, 61));
+        criarContaButton.setCorBorda(new java.awt.Color(255, 255, 255));
+        criarContaButton.setCorEntrou(new java.awt.Color(19, 176, 110));
+        criarContaButton.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        criarContaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                criarContaButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout formularioGeralPanelLayout = new javax.swing.GroupLayout(formularioGeralPanel);
         formularioGeralPanel.setLayout(formularioGeralPanelLayout);
         formularioGeralPanelLayout.setHorizontalGroup(
             formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cabecalhoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(cabecalhoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(formularioGeralPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
+                .addGap(6, 6, 6)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(formularioGeralPanelLayout.createSequentialGroup()
+                .addGap(157, 157, 157)
+                .addComponent(entrarContaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(identifiqueLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(criarContaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         formularioGeralPanelLayout.setVerticalGroup(
             formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, formularioGeralPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(cabecalhoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(formularioGeralPanelLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(cabecalhoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addGroup(formularioGeralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(entrarContaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(formularioGeralPanelLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(identifiqueLabel1))
+                    .addComponent(criarContaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -213,15 +252,12 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public Boolean alunoRadioButtonSelected() {
-        return alunoRadioButton.isSelected();
-    }
-    
-    public Boolean professorRadioButtonSelected() {
-        return professorRadioButton.isSelected();
-    }
-    
 //Métodos para ações
+    
+    public void comecarAcaoDeCriarConta() {
+        criarContaButton.doClick();
+    }
+    
     private void cabecalhoPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cabecalhoPanelMousePressed
         mouseX = evt.getX(); //evento de mover a janela
         mouseY = evt.getY();
@@ -250,19 +286,73 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_sairPaginaButtonMouseExited
 
     private void professorRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_professorRadioButtonActionPerformed
-        formularioProfessor = new CampoFormularioProfessor(this);
+        formularioProfessor = new CampoFormularioProfessor(criarContaButton);
         jScrollPane1.setViewportView(formularioProfessor);
     }//GEN-LAST:event_professorRadioButtonActionPerformed
 
     private void alunoRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alunoRadioButtonActionPerformed
-        formularioProfessor = new CampoFormularioProfessor(this);
+        formularioProfessor = new CampoFormularioProfessor(criarContaButton);
         jScrollPane1.setViewportView(formularioProfessor);
     }//GEN-LAST:event_alunoRadioButtonActionPerformed
 
     private void coordenadorRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coordenadorRadioButtonActionPerformed
-        formularioCoordenador = new CampoFormularioCoordenador(this);
+        formularioCoordenador = new CampoFormularioCoordenador(criarContaButton);
         jScrollPane1.setViewportView(formularioCoordenador);
     }//GEN-LAST:event_coordenadorRadioButtonActionPerformed
+
+    private void entrarContaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarContaButtonActionPerformed
+        novaGestaoContaUsuario = new GestaoContaUsuario();
+        novaGestaoContaUsuario.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_entrarContaButtonActionPerformed
+
+    private void criarContaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_criarContaButtonActionPerformed
+
+        if (coordenadorRadioButton.isSelected()) {
+
+            if (!formularioCoordenador.gerarPopUp(popUp)) {
+
+                coordenador = new UsuarioCoordenador();
+                formularioCoordenador.pegaDados(coordenador);
+                BancoDeDados.cadastrarUsuario(coordenador);
+
+                popUp = new PopUp();
+                popUp.mensagemFinalDoCadastroInicial("Sua conta foi criada com sucesso! Acesse o sistema.", esseFormulario);
+                formularioCoordenador.limparCampos();
+
+            }
+
+        } else if (professorRadioButton.isSelected()) {
+
+            if (!formularioProfessor.gerarPopUp(popUp)) {
+
+                professor = new UsuarioProfessor();
+                formularioProfessor.pegaDadosProfessor(professor);
+                BancoDeDados.cadastrarUsuario(professor);
+
+                popUp = new PopUp();
+                popUp.mensagemFinalDoCadastroInicial("Sua conta foi criada com sucesso! Sua matrícula é " + professor.getMatricula() + ".", esseFormulario);
+                formularioProfessor.limparCampos();
+
+            }
+
+        } else {
+
+            if (!formularioProfessor.gerarPopUp(popUp)) {
+
+                aluno = new UsuarioAluno();
+                formularioProfessor.pegaDadosAluno(aluno);
+                BancoDeDados.cadastrarUsuario(aluno);
+
+                popUp = new PopUp();
+                popUp.mensagemFinalDoCadastroInicial("Sua conta foi criada com sucesso! Sua matrícula é " + aluno.getMatricula() + ".", esseFormulario);
+                formularioProfessor.limparCampos();
+
+            }
+
+        }
+
+    }//GEN-LAST:event_criarContaButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -304,7 +394,10 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel cabecalhoPanel;
     private javax.swing.JRadioButton coordenadorRadioButton;
+    private _07gestaoacademica.CustomizacaoBotao criarContaButton;
+    private _07gestaoacademica.CustomizacaoBotao entrarContaButton;
     private javax.swing.JPanel formularioGeralPanel;
+    private javax.swing.JLabel identifiqueLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JRadioButton professorRadioButton;

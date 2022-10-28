@@ -122,7 +122,6 @@ public class BancoDeDados {
     public static void excluirProfessorDaLista(int linhaSelecionada) {
         
         List<UsuarioProfessor> professores = new ArrayList<>();
-        int linhaProfessor;
         
         for(Usuario usuario: usuarios) {
             
@@ -134,14 +133,34 @@ public class BancoDeDados {
             
         }
         
-        linhaProfessor = professores.get(linhaSelecionada).getMatricula();
-        usuarios.remove(linhaProfessor);
+        usuarios.remove(professores.get(linhaSelecionada));
         
     }
     
     public static Usuario pegaUsuario() {
         
         return usuarioLogado;
+        
+    }
+    
+    public static List<UsuarioProfessor> pesquisarProfessor(String nome, String codigoTurma, String disciplinaTurma) {
+        
+        List<UsuarioProfessor> professores = new ArrayList<>();
+        
+        for(Usuario usuario :usuarios) {
+            
+            Boolean usuarioProfessor = usuario instanceof UsuarioProfessor;
+            Boolean validaNome = nome != null && !nome.equals("") && usuario.getNome().toUpperCase().contains(nome);
+            Boolean validaCodigoTurma = usuarioProfessor && ((UsuarioProfessor)usuario).validaCodigoDaTurma(codigoTurma);
+            Boolean validaDisciplinaDaTurma = usuarioProfessor && ((UsuarioProfessor)usuario).validaDisciplina(disciplinaTurma);
+            
+            if(usuarioProfessor && (validaNome || validaCodigoTurma || validaDisciplinaDaTurma)) {
+                professores.add((UsuarioProfessor)usuario);
+            }
+            
+        }
+        
+        return professores;
         
     }
     
@@ -192,6 +211,7 @@ public class BancoDeDados {
         usuarios.add(professor1);
         turma1 = new Turma();
         turma1.setProfessor(professor1);
+        turma1.setDisciplina("geografia");
         turma1.setCodigo(1221);
         professor1.adicionaTurma(turma1);
         turmas.add(turma1);
@@ -203,6 +223,7 @@ public class BancoDeDados {
         usuarios.add(professor2);
         turma2 = new Turma();
         turma2.setProfessor(professor2);
+        turma2.setDisciplina("ciências");
         turma2.setCodigo(2112);
         professor2.adicionaTurma(turma2);
         turmas.add(turma2);

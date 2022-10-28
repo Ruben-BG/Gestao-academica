@@ -24,4 +24,35 @@ public class UsuarioProfessor extends Usuario{
         return turmasDoProfessor.size();
     }
     
+    public Boolean validaDisciplina(String conteudoDaTurma) {
+        
+        for(Turma turma: turmasDoProfessor) {
+            
+            Boolean turmaContemDisciplina = turma.getDisciplina().toUpperCase().contains(conteudoDaTurma);
+            
+            if(turma.getDisciplina() != null && !conteudoDaTurma.equals("") && turmaContemDisciplina)
+                return true;
+            
+        }
+        
+        return false;
+        
+    }
+    
+    public Boolean validaCodigoDaTurma(String codigoTurma) {
+        
+        Boolean codigoIsnumeric = codigoTurma.chars().allMatch(Character::isDigit);
+        int codigo = codigoTurma.equals("") ? 0 : Integer.parseInt(codigoTurma);
+        
+        for(Turma turma: turmasDoProfessor) {
+            
+            if(!codigoTurma.equals("") && codigoIsnumeric && turma.getCodigo() == codigo)
+                return true;
+            
+        }
+        
+        return false;
+        
+    }
+    
 }

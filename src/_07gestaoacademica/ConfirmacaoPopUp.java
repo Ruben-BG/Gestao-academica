@@ -70,7 +70,7 @@ public class ConfirmacaoPopUp extends javax.swing.JFrame {
 
         tituloLabel.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         tituloLabel.setForeground(new java.awt.Color(0, 0, 0));
-        tituloLabel.setText("ERRO");
+        tituloLabel.setText("AVISO");
 
         javax.swing.GroupLayout cabecalhoPanelLayout = new javax.swing.GroupLayout(cabecalhoPanel);
         cabecalhoPanel.setLayout(cabecalhoPanelLayout);

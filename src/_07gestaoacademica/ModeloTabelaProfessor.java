@@ -1,15 +1,21 @@
 package _07gestaoacademica;
 
-import javax.swing.DefaultListModel;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 public class ModeloTabelaProfessor extends AbstractTableModel{
 
     String[] coluna = {"Nome", "Turmas", "Ações"};
+    List<UsuarioProfessor> professores = new ArrayList<>();
+    
+    public ModeloTabelaProfessor() {
+        professores = BancoDeDados.retornarProfessores();
+    }
     
     @Override
     public int getRowCount() {
-        return BancoDeDados.quantidadeProfessor();
+        return professores.size();
     }
 
     @Override
@@ -26,8 +32,8 @@ public class ModeloTabelaProfessor extends AbstractTableModel{
     public Object getValueAt(int linha, int coluna) {
         
         switch(coluna) {
-            case 0: return BancoDeDados.retornarProfessores().get(linha).getNome();
-            case 1: return BancoDeDados.retornarProfessores().get(linha).retornaQuantidadeDeTurma();
+            case 0: return professores.get(linha).getNome();
+            case 1: return professores.get(linha).retornaQuantidadeDeTurma();
             case 2: break;
         }
         
@@ -43,13 +49,27 @@ public class ModeloTabelaProfessor extends AbstractTableModel{
     public void removeRow(int linha) {
         
         BancoDeDados.excluirProfessorDaLista(linha);
+        professores.remove(linha);
         fireTableRowsDeleted(linha, linha);
         
     }
     
-    public void modeloDoFiltroDePesquisa(DefaultListModel<String> modelo, String filter) {
+    public void pesquisarProfessor(String nomeDoProfessor, String codigoDaTurma, String disciplinaDaTurma) {
         
-        
+        if(nomeDoProfessor.equals("") && codigoDaTurma.equals("") && disciplinaDaTurma.equals("")) {
+            professores = BancoDeDados.retornarProfessores();
+            fireTableDataChanged();
+        } else {
+            professores = BancoDeDados.pesquisarProfessor(nomeDoProfessor, codigoDaTurma, disciplinaDaTurma);
+            
+            if (professores.size() < 1) {
+                UsuarioProfessor linhaNula = new UsuarioProfessor();
+                linhaNula.setNome("Pesquisa inválida.");
+                professores.add(linhaNula);
+            }
+            
+            fireTableDataChanged();
+        }
         
     }
     

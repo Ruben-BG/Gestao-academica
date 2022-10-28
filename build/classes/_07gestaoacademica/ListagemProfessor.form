@@ -3,6 +3,9 @@
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+    </Property>
     <Property name="undecorated" type="boolean" value="true"/>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
@@ -48,38 +51,46 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="cabecalhoPanel" alignment="0" max="32767" attributes="0"/>
               <Group type="102" attributes="0">
-                  <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
+                          <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                           <Component id="botaoVoltarLabel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
-                          <Component id="tituloDaPaginaLabel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="90" pref="90" max="-2" attributes="0"/>
+                          <EmptySpace min="22" pref="22" max="-2" attributes="0"/>
+                          <Component id="tituloDaPaginaLabel" min="-2" pref="290" max="-2" attributes="0"/>
+                          <EmptySpace min="204" pref="204" max="-2" attributes="0"/>
                           <Component id="criarNovoProfessorButton" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="separador" min="-2" pref="588" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
+                          <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
                           <Component id="nomeLabel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="199" pref="199" max="-2" attributes="0"/>
-                          <Component id="turmaLabel" min="-2" max="-2" attributes="0"/>
+                          <Component id="codigoDaTurmaLabel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="29" pref="29" max="-2" attributes="0"/>
+                          <Component id="disciplinaTurmaLabel" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" attributes="0">
-                          <Component id="campoDeNome" min="-2" pref="222" max="-2" attributes="0"/>
-                          <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
-                          <Component id="campoDeTurma" min="-2" pref="222" max="-2" attributes="0"/>
-                          <EmptySpace min="52" pref="52" max="-2" attributes="0"/>
-                          <Component id="pesquisarUsuarioButton" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="jScrollPane2" alignment="1" min="-2" pref="660" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="campoDeNome" min="-2" pref="222" max="-2" attributes="0"/>
+                                  <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
+                                  <Component id="campoCodigoDaTurma" min="-2" pref="130" max="-2" attributes="0"/>
+                                  <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
+                                  <Component id="campoDisciplinaTurma" min="-2" pref="180" max="-2" attributes="0"/>
+                                  <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
+                                  <Component id="limparCampoButton" min="-2" pref="30" max="-2" attributes="0"/>
+                                  <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                                  <Component id="pesquisarUsuarioButton" min="-2" pref="30" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                   </Group>
-                  <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
+                  <EmptySpace min="16" pref="18" max="32767" attributes="0"/>
               </Group>
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane2" max="32767" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-              </Group>
+              <Component id="cabecalhoPanel" max="32767" attributes="0"/>
+              <Component id="separador" alignment="1" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -91,31 +102,28 @@
                       <Component id="botaoVoltarLabel" min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="tituloDaPaginaLabel" min="-2" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
-                          <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
+                          <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
                           <Component id="criarNovoProfessorButton" min="-2" pref="34" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                  <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
                   <Component id="separador" min="-2" pref="10" max="-2" attributes="0"/>
-                  <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                  <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="nomeLabel" min="-2" max="-2" attributes="0"/>
-                      <Component id="turmaLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="codigoDaTurmaLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="disciplinaTurmaLabel" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                  <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="pesquisarUsuarioButton" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="5" pref="5" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="campoDeNome" min="-2" max="-2" attributes="0"/>
-                              <Component id="campoDeTurma" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <Component id="campoDeNome" min="-2" max="-2" attributes="0"/>
+                      <Component id="campoCodigoDaTurma" min="-2" max="-2" attributes="0"/>
+                      <Component id="campoDisciplinaTurma" min="-2" max="-2" attributes="0"/>
+                      <Component id="limparCampoButton" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="pesquisarUsuarioButton" min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                  <Component id="jScrollPane2" pref="278" max="32767" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
+                  <Component id="jScrollPane2" min="-2" pref="290" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -249,8 +257,14 @@
           </Properties>
         </Component>
         <Component class="_07gestaoacademica.CampoDeEscrita" name="campoDeNome">
+          <Properties>
+            <Property name="text" type="java.lang.String" value=""/>
+          </Properties>
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="campoDeNomeKeyPressed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="turmaLabel">
+        <Component class="javax.swing.JLabel" name="codigoDaTurmaLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Verdana" size="14" style="0"/>
@@ -258,10 +272,69 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Turma"/>
+            <Property name="text" type="java.lang.String" value="C&#xf3;digo da Turma"/>
           </Properties>
         </Component>
-        <Component class="_07gestaoacademica.CampoDeEscrita" name="campoDeTurma">
+        <Component class="_07gestaoacademica.CampoDeEscrita" name="campoCodigoDaTurma">
+          <Properties>
+            <Property name="text" type="java.lang.String" value=""/>
+          </Properties>
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="campoCodigoDaTurmaKeyPressed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="disciplinaTurmaLabel">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Verdana" size="14" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="0" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Disciplina"/>
+          </Properties>
+        </Component>
+        <Component class="_07gestaoacademica.CampoDeEscrita" name="campoDisciplinaTurma">
+          <Properties>
+            <Property name="text" type="java.lang.String" value=""/>
+          </Properties>
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="campoDisciplinaTurmaKeyPressed"/>
+          </Events>
+        </Component>
+        <Component class="_07gestaoacademica.CustomizacaoBotao" name="limparCampoButton">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="bc" green="bc" red="bc" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/_07gestaoacademica/images/sairP.png"/>
+            </Property>
+            <Property name="cor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="bc" green="bc" red="bc" type="rgb"/>
+            </Property>
+            <Property name="corBorda" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="corClicou" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="99" green="92" red="75" type="rgb"/>
+            </Property>
+            <Property name="corEntrou" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="a3" green="9f" red="8e" type="rgb"/>
+            </Property>
+            <Property name="corSaiu" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="bc" green="bc" red="bc" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="SansSerif" size="14" style="0"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="limparCampoButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="_07gestaoacademica.CustomizacaoBotao" name="pesquisarUsuarioButton">
           <Properties>
@@ -269,7 +342,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/_07gestaoacademica/images/lupaP.png"/>
+              <Image iconType="3" name="/_07gestaoacademica/images/lupaB.png"/>
             </Property>
             <Property name="cor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="63" green="5f" red="4c" type="rgb"/>
@@ -281,7 +354,7 @@
               <Color blue="99" green="92" red="75" type="rgb"/>
             </Property>
             <Property name="corEntrou" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="99" green="92" red="75" type="rgb"/>
+              <Color blue="84" green="7b" red="57" type="rgb"/>
             </Property>
             <Property name="corSaiu" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="63" green="5f" red="4c" type="rgb"/>
@@ -302,12 +375,11 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="focusable" type="boolean" value="false"/>
-            <Property name="rowHeader" type="javax.swing.JViewport" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="null"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="null"/>
             </Property>
-            <Property name="rowHeaderView" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="default"/>
+            <Property name="viewportView" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="tabelaProfessor"/>
             </Property>
           </Properties>
           <AuxValues>
@@ -316,14 +388,17 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="tabelaProfessor">
+            <Component class="_07gestaoacademica.JTablePersonalizada" name="tabelaProfessor">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="focusable" type="boolean" value="false"/>
-                <Property name="rowHeight" type="int" value="25"/>
-                <Property name="showHorizontalLines" type="boolean" value="true"/>
+                <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="33" green="33" red="33" type="rgb"/>
+                </Property>
+                <Property name="selectionBackground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="6e" green="b0" red="13" type="rgb"/>
+                </Property>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                   <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                 </Property>

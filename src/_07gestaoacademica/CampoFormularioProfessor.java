@@ -1,8 +1,11 @@
 package _07gestaoacademica;
 
 import java.awt.Color;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JTextField;
 
 /**
@@ -15,48 +18,19 @@ public class CampoFormularioProfessor extends javax.swing.JPanel {
     Icon mostrarIcon = new ImageIcon(getClass().getResource("/_07gestaoacademica/images/mostrar.png"));
     Icon ocultarIcon = new ImageIcon(getClass().getResource("/_07gestaoacademica/images/ocultar.png"));
     Icon iconeAtual = ocultarIcon;
-    private PopUp popUp;
-    private GestaoContaUsuario telaPrincipal;
-    private UsuarioAluno aluno;
-    private UsuarioProfessor professor;
-    
-    public CampoFormularioProfessor(FormularioContaUsuario formulario) {
+
+    public CampoFormularioProfessor(JButton botao) {
         initComponents();
+        senhaPasswordField.setEchoChar((char) 0);
         
-        entrarContaBotton.addActionListener((e) -> {
-           
-            formulario.dispose();
-            telaPrincipal = new GestaoContaUsuario();
-            telaPrincipal.setVisible(true);
-            
-        });
-        
-        criarContaBotton.addActionListener((e) -> {
-        
-            popUp = null;
-        
-            gerarPopUp();
-        
-            if (popUp == null) {
-
-                if (formulario.alunoRadioButtonSelected()) {
-                    aluno = new UsuarioAluno();
-                    pegaDadosAluno();
-                    BancoDeDados.cadastrarUsuario(aluno);
-                    popUp = new PopUp();
-                    popUp.mensagemFinal("Sua conta foi criada com sucesso! Sua matrícula é " + aluno.getMatricula() + ".", formulario.esseFormulario);
-                } else if(formulario.professorRadioButtonSelected()) {
-                    professor = new UsuarioProfessor();
-                    pegaDadosProfessor();
-                    BancoDeDados.cadastrarUsuario(professor);
-                    popUp = new PopUp();
-                    popUp.mensagemFinal("Sua conta foi criada com sucesso! Sua matrícula é " + professor.getMatricula() + ".", formulario.esseFormulario);
-                }
-                
-
+        senhaPasswordField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER)
+                    pressionarEnterNoCampoSenha(botao);
             }
-            
         });
+        
     }
 
     /**
@@ -75,9 +49,6 @@ public class CampoFormularioProfessor extends javax.swing.JPanel {
         emailTextField = new _07gestaoacademica.CampoDeEscrita();
         senhaPasswordField = new javax.swing.JPasswordField();
         mostrarSenhaButton = new javax.swing.JButton();
-        entrarContaBotton = new _07gestaoacademica.CustomizacaoBotao();
-        identifiqueLabel1 = new javax.swing.JLabel();
-        criarContaBotton = new _07gestaoacademica.CustomizacaoBotao();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -90,6 +61,11 @@ public class CampoFormularioProfessor extends javax.swing.JPanel {
                 nomeTextFieldFocusLost(evt);
             }
         });
+        nomeTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                nomeTextFieldKeyPressed(evt);
+            }
+        });
 
         cpfTextField.setText("Digite seu CPF");
         cpfTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -98,6 +74,11 @@ public class CampoFormularioProfessor extends javax.swing.JPanel {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 cpfTextFieldFocusLost(evt);
+            }
+        });
+        cpfTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cpfTextFieldKeyPressed(evt);
             }
         });
 
@@ -110,6 +91,11 @@ public class CampoFormularioProfessor extends javax.swing.JPanel {
                 telefoneTextFieldFocusLost(evt);
             }
         });
+        telefoneTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                telefoneTextFieldKeyPressed(evt);
+            }
+        });
 
         enderecoTextField.setText("Digite seu endereço");
         enderecoTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -120,6 +106,11 @@ public class CampoFormularioProfessor extends javax.swing.JPanel {
                 enderecoTextFieldFocusLost(evt);
             }
         });
+        enderecoTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                enderecoTextFieldKeyPressed(evt);
+            }
+        });
 
         emailTextField.setText("Digite seu email");
         emailTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -128,6 +119,11 @@ public class CampoFormularioProfessor extends javax.swing.JPanel {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 emailTextFieldFocusLost(evt);
+            }
+        });
+        emailTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                emailTextFieldKeyPressed(evt);
             }
         });
 
@@ -157,26 +153,6 @@ public class CampoFormularioProfessor extends javax.swing.JPanel {
             }
         });
 
-        entrarContaBotton.setBackground(new java.awt.Color(102, 102, 102));
-        entrarContaBotton.setForeground(new java.awt.Color(255, 255, 255));
-        entrarContaBotton.setText("ENTRE NA SUA CONTA");
-        entrarContaBotton.setCor(new java.awt.Color(102, 102, 102));
-        entrarContaBotton.setCorBorda(new java.awt.Color(255, 255, 255));
-        entrarContaBotton.setCorEntrou(new java.awt.Color(19, 176, 110));
-        entrarContaBotton.setCorSaiu(new java.awt.Color(102, 102, 102));
-        entrarContaBotton.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-
-        identifiqueLabel1.setFont(new java.awt.Font("SansSerif", 2, 12)); // NOI18N
-        identifiqueLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        identifiqueLabel1.setText("ou");
-
-        criarContaBotton.setForeground(new java.awt.Color(255, 255, 255));
-        criarContaBotton.setText("CRIAR CONTA");
-        criarContaBotton.setCor(new java.awt.Color(36, 53, 61));
-        criarContaBotton.setCorBorda(new java.awt.Color(255, 255, 255));
-        criarContaBotton.setCorEntrou(new java.awt.Color(19, 176, 110));
-        criarContaBotton.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -186,7 +162,7 @@ public class CampoFormularioProfessor extends javax.swing.JPanel {
                     .addComponent(emailTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(nomeTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(telefoneTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cpfTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(enderecoTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
@@ -194,14 +170,6 @@ public class CampoFormularioProfessor extends javax.swing.JPanel {
                         .addComponent(senhaPasswordField)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(mostrarSenhaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(149, Short.MAX_VALUE)
-                .addComponent(entrarContaBotton, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(identifiqueLabel1)
-                .addGap(12, 12, 12)
-                .addComponent(criarContaBotton, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(147, 147, 147))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,72 +188,78 @@ public class CampoFormularioProfessor extends javax.swing.JPanel {
                         .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(senhaPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(mostrarSenhaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(entrarContaBotton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(identifiqueLabel1)
-                    .addComponent(criarContaBotton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addContainerGap(24, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    
     //Métodos para ações
-    public void gerarPopUp() {
-        
+    public Boolean gerarPopUp(PopUp popUp) {
+
         boolean telefoneNum = telefoneTextField.getText().chars().allMatch(Character::isDigit); //<- vê se o espaço "telefone" é numérico
         boolean cpfNum = cpfTextField.getText().chars().allMatch(Character::isDigit); //<- vê se o espaço "cpf" é numérico
         String[] provedoresEmail = {"@hotmail.com", "@outlook.com", "@gmail.com", "@yahoo.com"};
-        
-        if("Digite seu nome".equals(nomeTextField.getText())) {
+
+        if ("Digite seu nome".equals(nomeTextField.getText())) {
             popUp = new PopUp();
             popUp.semNome(nomeTextField);
-        } else if(nomeTextField.getText().chars().count() < 3) {
+            return true;
+        } else if (nomeTextField.getText().chars().count() < 3) {
             popUp = new PopUp();
             popUp.limiteNumero("nome", 2, nomeTextField);
-        } else if("Digite seu CPF".equals(cpfTextField.getText())) {
+            return true;
+        } else if ("Digite seu CPF".equals(cpfTextField.getText())) {
             popUp = new PopUp();
             popUp.campoNaoPreenchido("CPF", cpfTextField);
-        } else if("Digite seu email".equals(emailTextField.getText())) {
+            return true;
+        } else if ("Digite seu email".equals(emailTextField.getText())) {
             popUp = new PopUp();
             popUp.campoNaoPreenchido("Email", emailTextField);
-        } else if("senha".equals(String.valueOf(senhaPasswordField.getPassword()))) {
+            return true;
+        } else if ("senha".equals(String.valueOf(senhaPasswordField.getPassword()))) {
             popUp = new PopUp();
             popUp.campoNaoPreenchido("Senha", senhaPasswordField);
-        } else if(!"Digite seu telefone".equals(telefoneTextField.getText()) && !telefoneNum) {
+            return true;
+        } else if (!"Digite seu telefone".equals(telefoneTextField.getText()) && !telefoneNum) {
             popUp = new PopUp();
             popUp.naoNumerico("telefone", telefoneTextField);
-        } else if(!cpfNum) {
+            return true;
+        } else if (!cpfNum) {
             popUp = new PopUp();
             popUp.naoNumerico("CPF", cpfTextField);
-        } else if(!emailTextField.getText().contains(provedoresEmail[0]) && !emailTextField.getText().contains(provedoresEmail[1]) && !emailTextField.getText().contains(provedoresEmail[2]) && !emailTextField.getText().contains(provedoresEmail[3])) {
+            return true;
+        } else if (!emailTextField.getText().contains(provedoresEmail[0]) && !emailTextField.getText().contains(provedoresEmail[1]) && !emailTextField.getText().contains(provedoresEmail[2]) && !emailTextField.getText().contains(provedoresEmail[3])) {
             popUp = new PopUp();
             popUp.emailErrado(emailTextField);
-        } else if(String.valueOf(senhaPasswordField.getPassword()).length() < 8) {
+            return true;
+        } else if (String.valueOf(senhaPasswordField.getPassword()).length() < 8) {
             popUp = new PopUp();
             popUp.limiteNumero("senha", 8, senhaPasswordField);
+            return true;
         }
+        
+        return false;
 
     }
-    
+
     protected void campoComFoco(String texto, JTextField textField) {
-        if(texto.equals(textField.getText()))
+        if (texto.equals(textField.getText())) {
             textField.setText("");
-        else
-            textField.setForeground(new Color(81, 81, 81));
-    }
-    
-    protected void campoSemFoco(String texto, JTextField textField) {
-        if("".equals(textField.getText())) {
-            textField.setText(texto);
+        } else {
             textField.setForeground(new Color(81, 81, 81));
         }
-        else
-            textField.setForeground(Color.BLACK);
     }
-    
-    protected void pegaDadosProfessor() {
-        
+
+    protected void campoSemFoco(String texto, JTextField textField) {
+        if ("".equals(textField.getText())) {
+            textField.setText(texto);
+            textField.setForeground(new Color(81, 81, 81));
+        } else {
+            textField.setForeground(Color.BLACK);
+        }
+    }
+
+    public void pegaDadosProfessor(UsuarioProfessor professor) {
+
         professor.setNome(nomeTextField.getText());
         professor.setCpf(cpfTextField.getText());
         professor.setTelefone(telefoneTextField.getText());
@@ -293,11 +267,11 @@ public class CampoFormularioProfessor extends javax.swing.JPanel {
         professor.setEmail(emailTextField.getText());
         professor.setSenha(String.valueOf(senhaPasswordField.getPassword()));
         professor.setMatricula(Usuario.getProximaMatricula());
-        
+
     }
-    
-    protected void pegaDadosAluno() {
-        
+
+    protected void pegaDadosAluno(UsuarioAluno aluno) {
+
         aluno.setNome(nomeTextField.getText());
         aluno.setCpf(cpfTextField.getText());
         aluno.setTelefone(telefoneTextField.getText());
@@ -305,15 +279,24 @@ public class CampoFormularioProfessor extends javax.swing.JPanel {
         aluno.setEmail(emailTextField.getText());
         aluno.setSenha(String.valueOf(senhaPasswordField.getPassword()));
         aluno.setMatricula(Usuario.getProximaMatricula());
-        
+
     }
-    
+
+    public void limparCampos() {
+        nomeTextField.setText("");
+        cpfTextField.setText("");
+        telefoneTextField.setText("");
+        enderecoTextField.setText("");
+        emailTextField.setText("");
+        senhaPasswordField.setText("");
+    }
+
     private void mostrarSenhaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarSenhaButtonActionPerformed
-        if(iconeAtual == ocultarIcon) {
+        if (iconeAtual == ocultarIcon) {
             mostrarSenhaButton.setIcon(mostrarIcon);
             senhaPasswordField.setEchoChar((char) 0);
             iconeAtual = mostrarIcon;
-        } else{
+        } else {
             mostrarSenhaButton.setIcon(ocultarIcon);
             senhaPasswordField.setEchoChar((char) '*');
             iconeAtual = ocultarIcon;
@@ -322,10 +305,13 @@ public class CampoFormularioProfessor extends javax.swing.JPanel {
 
     private void senhaPasswordFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_senhaPasswordFieldFocusLost
         campoSemFoco("senha", senhaPasswordField);
+        if ("senha".equals(String.valueOf(senhaPasswordField.getPassword())))
+            senhaPasswordField.setEchoChar((char) 0);
     }//GEN-LAST:event_senhaPasswordFieldFocusLost
 
     private void senhaPasswordFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_senhaPasswordFieldFocusGained
         campoComFoco("senha", senhaPasswordField);
+        senhaPasswordField.setEchoChar((char) '*');
     }//GEN-LAST:event_senhaPasswordFieldFocusGained
 
     private void emailTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailTextFieldFocusLost
@@ -368,14 +354,39 @@ public class CampoFormularioProfessor extends javax.swing.JPanel {
         campoComFoco("Digite seu nome", nomeTextField);
     }//GEN-LAST:event_nomeTextFieldFocusGained
 
+    private void nomeTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nomeTextFieldKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+            cpfTextField.requestFocus();
+    }//GEN-LAST:event_nomeTextFieldKeyPressed
 
+    private void cpfTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cpfTextFieldKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+            telefoneTextField.requestFocus();
+    }//GEN-LAST:event_cpfTextFieldKeyPressed
+
+    private void telefoneTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telefoneTextFieldKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+            enderecoTextField.requestFocus();
+     }//GEN-LAST:event_telefoneTextFieldKeyPressed
+
+    private void enderecoTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_enderecoTextFieldKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+            emailTextField.requestFocus();
+    }//GEN-LAST:event_enderecoTextFieldKeyPressed
+
+    private void emailTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailTextFieldKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+            senhaPasswordField.requestFocus();
+    }//GEN-LAST:event_emailTextFieldKeyPressed
+
+    public void pressionarEnterNoCampoSenha(JButton botao) {
+        botao.doClick();
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private _07gestaoacademica.CampoDeEscrita cpfTextField;
-    private _07gestaoacademica.CustomizacaoBotao criarContaBotton;
     private _07gestaoacademica.CampoDeEscrita emailTextField;
     private _07gestaoacademica.CampoDeEscrita enderecoTextField;
-    private _07gestaoacademica.CustomizacaoBotao entrarContaBotton;
-    private javax.swing.JLabel identifiqueLabel1;
     private javax.swing.JButton mostrarSenhaButton;
     private _07gestaoacademica.CampoDeEscrita nomeTextField;
     private javax.swing.JPasswordField senhaPasswordField;

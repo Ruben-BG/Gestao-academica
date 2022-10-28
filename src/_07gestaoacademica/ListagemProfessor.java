@@ -2,10 +2,9 @@ package _07gestaoacademica;
 
 import java.awt.Color;
 import java.awt.Cursor;
-import java.util.List;
+import java.awt.event.KeyEvent;
+import javax.swing.JLabel;
 import javax.swing.table.TableColumn;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 
 
 public class ListagemProfessor extends javax.swing.JFrame {
@@ -15,19 +14,26 @@ public class ListagemProfessor extends javax.swing.JFrame {
     GestaoContaUsuario novaGestaoContaUsuario;
     DashboardCoordenador voltarDashboardCoordenador;
     private final ModeloTabelaProfessor tableModel = new ModeloTabelaProfessor();
-    private final TableRowSorter<TableModel> classificarLinha = new TableRowSorter<>(tableModel);
     final ListagemProfessor essaJanela = this;
     
     public ListagemProfessor() {
         initComponents();
         setLocationRelativeTo(null);
         
+        jScrollPane2.getViewport().setBackground(Color.WHITE);
         tabelaProfessor.setModel(tableModel);
         TableColumn colunaDosBotoes = tabelaProfessor.getColumnModel().getColumn(2);
         colunaDosBotoes.setCellRenderer(new BotoesRenderer());
         colunaDosBotoes.setCellEditor(new BotoesEditor(tabelaProfessor, essaJanela, tableModel));
+        /*usar para filtragem inválida
         
+        JLabel mensagem = new JLabel("Pesquisa inválida.");
+        mensagem.setFont(new java.awt.Font("Verdana", 0, 13));
+        mensagem.setVerticalAlignment(JLabel.TOP);
+        jScrollPane2.setViewportView(mensagem);
         
+        */
+        limparCampoButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         pesquisarUsuarioButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
     }
@@ -50,13 +56,17 @@ public class ListagemProfessor extends javax.swing.JFrame {
         separador = new javax.swing.JSeparator();
         nomeLabel = new javax.swing.JLabel();
         campoDeNome = new _07gestaoacademica.CampoDeEscrita();
-        turmaLabel = new javax.swing.JLabel();
-        campoDeTurma = new _07gestaoacademica.CampoDeEscrita();
+        codigoDaTurmaLabel = new javax.swing.JLabel();
+        campoCodigoDaTurma = new _07gestaoacademica.CampoDeEscrita();
+        disciplinaTurmaLabel = new javax.swing.JLabel();
+        campoDisciplinaTurma = new _07gestaoacademica.CampoDeEscrita();
+        limparCampoButton = new _07gestaoacademica.CustomizacaoBotao();
         pesquisarUsuarioButton = new _07gestaoacademica.CustomizacaoBotao();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tabelaProfessor = new javax.swing.JTable();
+        tabelaProfessor = new _07gestaoacademica.JTablePersonalizada();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
         setUndecorated(true);
         setResizable(false);
 
@@ -148,16 +158,56 @@ public class ListagemProfessor extends javax.swing.JFrame {
         nomeLabel.setForeground(new java.awt.Color(0, 0, 0));
         nomeLabel.setText("Nome");
 
-        turmaLabel.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        turmaLabel.setForeground(new java.awt.Color(0, 0, 0));
-        turmaLabel.setText("Turma");
+        campoDeNome.setText("");
+        campoDeNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                campoDeNomeKeyPressed(evt);
+            }
+        });
+
+        codigoDaTurmaLabel.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        codigoDaTurmaLabel.setForeground(new java.awt.Color(0, 0, 0));
+        codigoDaTurmaLabel.setText("Código da Turma");
+
+        campoCodigoDaTurma.setText("");
+        campoCodigoDaTurma.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                campoCodigoDaTurmaKeyPressed(evt);
+            }
+        });
+
+        disciplinaTurmaLabel.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        disciplinaTurmaLabel.setForeground(new java.awt.Color(0, 0, 0));
+        disciplinaTurmaLabel.setText("Disciplina");
+
+        campoDisciplinaTurma.setText("");
+        campoDisciplinaTurma.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                campoDisciplinaTurmaKeyPressed(evt);
+            }
+        });
+
+        limparCampoButton.setBackground(new java.awt.Color(188, 188, 188));
+        limparCampoButton.setForeground(new java.awt.Color(255, 255, 255));
+        limparCampoButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/_07gestaoacademica/images/sairP.png"))); // NOI18N
+        limparCampoButton.setCor(new java.awt.Color(188, 188, 188));
+        limparCampoButton.setCorBorda(new java.awt.Color(255, 255, 255));
+        limparCampoButton.setCorClicou(new java.awt.Color(117, 146, 153));
+        limparCampoButton.setCorEntrou(new java.awt.Color(142, 159, 163));
+        limparCampoButton.setCorSaiu(new java.awt.Color(188, 188, 188));
+        limparCampoButton.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        limparCampoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                limparCampoButtonActionPerformed(evt);
+            }
+        });
 
         pesquisarUsuarioButton.setForeground(new java.awt.Color(255, 255, 255));
-        pesquisarUsuarioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/_07gestaoacademica/images/lupaP.png"))); // NOI18N
+        pesquisarUsuarioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/_07gestaoacademica/images/lupaB.png"))); // NOI18N
         pesquisarUsuarioButton.setCor(new java.awt.Color(76, 95, 99));
         pesquisarUsuarioButton.setCorBorda(new java.awt.Color(255, 255, 255));
         pesquisarUsuarioButton.setCorClicou(new java.awt.Color(117, 146, 153));
-        pesquisarUsuarioButton.setCorEntrou(new java.awt.Color(117, 146, 153));
+        pesquisarUsuarioButton.setCorEntrou(new java.awt.Color(87, 123, 132));
         pesquisarUsuarioButton.setCorSaiu(new java.awt.Color(76, 95, 99));
         pesquisarUsuarioButton.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         pesquisarUsuarioButton.addActionListener(new java.awt.event.ActionListener() {
@@ -167,13 +217,12 @@ public class ListagemProfessor extends javax.swing.JFrame {
         });
 
         jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane2.setFocusable(false);
-        jScrollPane2.setRowHeader(null);
+        jScrollPane2.setBorder(null);
+        jScrollPane2.setViewportView(tabelaProfessor);
 
         tabelaProfessor.setBackground(new java.awt.Color(255, 255, 255));
-        tabelaProfessor.setFocusable(false);
-        tabelaProfessor.setRowHeight(25);
-        tabelaProfessor.setShowHorizontalLines(true);
+        tabelaProfessor.setGridColor(new java.awt.Color(51, 51, 51));
+        tabelaProfessor.setSelectionBackground(new java.awt.Color(19, 176, 110));
         tabelaProfessor.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tabelaProfessor);
 
@@ -181,32 +230,39 @@ public class ListagemProfessor extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cabecalhoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(6, 6, 6)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
                         .addComponent(botaoVoltarLabel)
-                        .addGap(12, 12, 12)
-                        .addComponent(tituloDaPaginaLabel)
-                        .addGap(90, 90, 90)
+                        .addGap(22, 22, 22)
+                        .addComponent(tituloDaPaginaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(204, 204, 204)
                         .addComponent(criarNovoProfessorButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(separador, javax.swing.GroupLayout.PREFERRED_SIZE, 588, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
                         .addComponent(nomeLabel)
                         .addGap(199, 199, 199)
-                        .addComponent(turmaLabel))
+                        .addComponent(codigoDaTurmaLabel)
+                        .addGap(29, 29, 29)
+                        .addComponent(disciplinaTurmaLabel))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(campoDeNome, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(campoDeTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52)
-                        .addComponent(pesquisarUsuarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 6, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2)
-                .addContainerGap())
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(campoDeNome, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(campoCodigoDaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(20, 20, 20)
+                                .addComponent(campoDisciplinaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(20, 20, 20)
+                                .addComponent(limparCampoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(pesquisarUsuarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(16, 18, Short.MAX_VALUE))
+            .addComponent(cabecalhoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(separador, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,25 +273,24 @@ public class ListagemProfessor extends javax.swing.JFrame {
                     .addComponent(botaoVoltarLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tituloDaPaginaLabel)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
+                        .addGap(2, 2, 2)
                         .addComponent(criarNovoProfessorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(1, 1, 1)
+                .addGap(3, 3, 3)
                 .addComponent(separador, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
+                .addGap(3, 3, 3)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(nomeLabel)
-                    .addComponent(turmaLabel))
-                .addGap(1, 1, 1)
+                    .addComponent(codigoDaTurmaLabel)
+                    .addComponent(disciplinaTurmaLabel))
+                .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pesquisarUsuarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(campoDeNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(campoDeTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(24, 24, 24)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
-                .addContainerGap())
+                    .addComponent(campoDeNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoCodigoDaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoDisciplinaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(limparCampoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pesquisarUsuarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pesquisarUsuarioButton.getAccessibleContext().setAccessibleName("n");
@@ -301,19 +356,50 @@ public class ListagemProfessor extends javax.swing.JFrame {
 
     private void criarNovoProfessorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_criarNovoProfessorButtonActionPerformed
 
-        
+        CadastroNovoProfessor criarNovoProfessor = new CadastroNovoProfessor();
+        criarNovoProfessor.setVisible(true);
+        this.dispose();
 
     }//GEN-LAST:event_criarNovoProfessorButtonActionPerformed
 
     private void pesquisarUsuarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisarUsuarioButtonActionPerformed
         
-        List<UsuarioProfessor> professores; 
-        professores = BancoDeDados.retornarProfessores();
-        tabelaProfessor.setRowSorter(classificarLinha);
-    
+        String nome = campoDeNome.getText().trim().toUpperCase();
+        String codigo = campoCodigoDaTurma.getText().trim().toUpperCase();
+        String disciplina = campoDisciplinaTurma.getText().trim().toUpperCase();
         
+        tableModel.pesquisarProfessor(nome, codigo, disciplina);
         
     }//GEN-LAST:event_pesquisarUsuarioButtonActionPerformed
+
+    private void limparCampoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparCampoButtonActionPerformed
+        
+        campoDeNome.setText("");
+        campoCodigoDaTurma.setText("");
+        campoDisciplinaTurma.setText("");
+        
+    }//GEN-LAST:event_limparCampoButtonActionPerformed
+
+    private void campoDeNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoDeNomeKeyPressed
+        
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+            pesquisarUsuarioButtonActionPerformed(null);
+        
+    }//GEN-LAST:event_campoDeNomeKeyPressed
+
+    private void campoCodigoDaTurmaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoCodigoDaTurmaKeyPressed
+        
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+            pesquisarUsuarioButtonActionPerformed(null);
+        
+    }//GEN-LAST:event_campoCodigoDaTurmaKeyPressed
+
+    private void campoDisciplinaTurmaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoDisciplinaTurmaKeyPressed
+        
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+            pesquisarUsuarioButtonActionPerformed(null);
+        
+    }//GEN-LAST:event_campoDisciplinaTurmaKeyPressed
 
     /**
      * @param args the command line arguments
@@ -356,17 +442,20 @@ public class ListagemProfessor extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel botaoVoltarLabel;
     private javax.swing.JPanel cabecalhoPanel;
+    private _07gestaoacademica.CampoDeEscrita campoCodigoDaTurma;
     private _07gestaoacademica.CampoDeEscrita campoDeNome;
-    private _07gestaoacademica.CampoDeEscrita campoDeTurma;
+    private _07gestaoacademica.CampoDeEscrita campoDisciplinaTurma;
+    private javax.swing.JLabel codigoDaTurmaLabel;
     private _07gestaoacademica.CustomizacaoBotao criarNovoProfessorButton;
+    private javax.swing.JLabel disciplinaTurmaLabel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
+    private _07gestaoacademica.CustomizacaoBotao limparCampoButton;
     private javax.swing.JLabel nomeLabel;
     private _07gestaoacademica.CustomizacaoBotao pesquisarUsuarioButton;
     private javax.swing.JButton sairPaginaButton2;
     private javax.swing.JSeparator separador;
-    private javax.swing.JTable tabelaProfessor;
+    private _07gestaoacademica.JTablePersonalizada tabelaProfessor;
     private javax.swing.JLabel tituloDaPaginaLabel;
-    private javax.swing.JLabel turmaLabel;
     // End of variables declaration//GEN-END:variables
 }

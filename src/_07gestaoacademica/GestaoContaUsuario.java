@@ -22,6 +22,7 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
     public GestaoContaUsuario() {
         initComponents();
         this.setLocationRelativeTo(null);
+        matriculaTextField.requestFocus();
     }
 
     /**
@@ -134,6 +135,11 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
         matriculaTextField.setBackground(new java.awt.Color(255, 255, 255));
         matriculaTextField.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         matriculaTextField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        matriculaTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                matriculaTextFieldKeyPressed(evt);
+            }
+        });
 
         senhaLabel.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         senhaLabel.setForeground(new java.awt.Color(0, 0, 0));
@@ -348,10 +354,12 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
 
     private void professorAlunoRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_professorAlunoRadioButtonActionPerformed
         this.matriculaLabel.setText("Digite sua Matrícula:");
+        matriculaTextField.requestFocus();
     }//GEN-LAST:event_professorAlunoRadioButtonActionPerformed
 
     private void coordenadorRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coordenadorRadioButtonActionPerformed
         this.matriculaLabel.setText("Digite seu nome de usuário:");
+        matriculaTextField.requestFocus();
     }//GEN-LAST:event_coordenadorRadioButtonActionPerformed
 
     private void mostrarSenhaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarSenhaButtonActionPerformed
@@ -373,6 +381,11 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
             entrarContaButtonActionPerformed(null);
         }
     }//GEN-LAST:event_senhaPasswordFieldKeyPressed
+
+    private void matriculaTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_matriculaTextFieldKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER && !"".equals(matriculaTextField.getText()))
+            senhaPasswordField.requestFocus();
+    }//GEN-LAST:event_matriculaTextFieldKeyPressed
 
     /**
      * @param args the command line arguments
