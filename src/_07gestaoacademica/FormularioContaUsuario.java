@@ -24,6 +24,7 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
         initComponents();
         formularioCoordenador = new CampoFormularioCoordenador(criarContaButton);
         jScrollPane1.setViewportView(formularioCoordenador); //adiciona Panel visual mesmo depois de construido 
+        formularioCoordenador.focarNoCampoNome();
     }
 
     /**
@@ -288,16 +289,19 @@ public class FormularioContaUsuario extends javax.swing.JFrame {
     private void professorRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_professorRadioButtonActionPerformed
         formularioProfessor = new CampoFormularioProfessor(criarContaButton);
         jScrollPane1.setViewportView(formularioProfessor);
+        formularioProfessor.focarNoCampoNome();
     }//GEN-LAST:event_professorRadioButtonActionPerformed
 
     private void alunoRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alunoRadioButtonActionPerformed
         formularioProfessor = new CampoFormularioProfessor(criarContaButton);
         jScrollPane1.setViewportView(formularioProfessor);
+        formularioProfessor.focarNoCampoNome();
     }//GEN-LAST:event_alunoRadioButtonActionPerformed
 
     private void coordenadorRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coordenadorRadioButtonActionPerformed
         formularioCoordenador = new CampoFormularioCoordenador(criarContaButton);
         jScrollPane1.setViewportView(formularioCoordenador);
+        formularioCoordenador.focarNoCampoNome();
     }//GEN-LAST:event_coordenadorRadioButtonActionPerformed
 
     private void entrarContaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarContaButtonActionPerformed

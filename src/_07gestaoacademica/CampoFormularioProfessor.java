@@ -290,6 +290,23 @@ public class CampoFormularioProfessor extends javax.swing.JPanel {
         emailTextField.setText("");
         senhaPasswordField.setText("");
     }
+    
+    public void focarNoCampoNome() {
+        nomeTextField.requestFocus();
+    }
+    
+    public void pegarDadosDoUsuario(int linha) {
+        
+        UsuarioProfessor professorSelecionado = BancoDeDados.retornarProfessores().get(linha);
+        
+        nomeTextField.setText(professorSelecionado.getNome());
+        cpfTextField.setText(professorSelecionado.getCpf());
+        telefoneTextField.setText(professorSelecionado.getTelefone());
+        enderecoTextField.setText(professorSelecionado.getEndereco());
+        emailTextField.setText(professorSelecionado.getEmail());
+        senhaPasswordField.setText(professorSelecionado.getSenha());
+        
+    }
 
     private void mostrarSenhaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarSenhaButtonActionPerformed
         if (iconeAtual == ocultarIcon) {

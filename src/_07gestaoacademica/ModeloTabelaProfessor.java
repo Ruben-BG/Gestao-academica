@@ -54,18 +54,22 @@ public class ModeloTabelaProfessor extends AbstractTableModel{
         
     }
     
-    public void pesquisarProfessor(String nomeDoProfessor, String codigoDaTurma, String disciplinaDaTurma) {
+    public void pesquisarProfessor(String nomeDoProfessor, String codigoDaTurma, String disciplinaDaTurma, JTablePersonalizada referenciaATabela, ListagemProfessor referenciaPaginaDeListagem) {
         
         if(nomeDoProfessor.equals("") && codigoDaTurma.equals("") && disciplinaDaTurma.equals("")) {
             professores = BancoDeDados.retornarProfessores();
+            referenciaATabela.setVisible(true);
+            referenciaPaginaDeListagem.mensagemDePesquisaBemSucedida();
             fireTableDataChanged();
         } else {
             professores = BancoDeDados.pesquisarProfessor(nomeDoProfessor, codigoDaTurma, disciplinaDaTurma);
             
             if (professores.size() < 1) {
-                UsuarioProfessor linhaNula = new UsuarioProfessor();
-                linhaNula.setNome("Pesquisa inválida.");
-                professores.add(linhaNula);
+                referenciaATabela.setVisible(false);
+                referenciaPaginaDeListagem.mensagemCasoPesquisaDeErrado();
+            } else {
+                referenciaATabela.setVisible(true);
+                referenciaPaginaDeListagem.mensagemDePesquisaBemSucedida();
             }
             
             fireTableDataChanged();

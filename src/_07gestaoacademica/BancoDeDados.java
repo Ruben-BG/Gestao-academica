@@ -13,10 +13,6 @@ public class BancoDeDados {
     private static Usuario usuarioLogado;
     private static List<Turma> turmas = new ArrayList<>();
     
-    public static List<Turma> getTurmas() {
-        return turmas;
-    }
-    
     public static void cadastrarUsuario(Usuario usuario) {
         usuarios.add(usuario);
     }
@@ -102,6 +98,11 @@ public class BancoDeDados {
         
     }
     
+    public static int quantidadeTurma() {
+        int quantidade = turmas.size();
+        return quantidade;
+    }
+    
     public static List<UsuarioProfessor> retornarProfessores() {
         
         List<UsuarioProfessor> professores = new ArrayList<>();
@@ -119,6 +120,10 @@ public class BancoDeDados {
         return professores;
     }
     
+    public static List<Turma> retornarTurmas() {
+        return turmas;
+    }
+    
     public static void excluirProfessorDaLista(int linhaSelecionada) {
         
         List<UsuarioProfessor> professores = new ArrayList<>();
@@ -133,7 +138,24 @@ public class BancoDeDados {
             
         }
         
+        turmas.removeAll(professores.get(linhaSelecionada).retornarTurmasDesseProfessor());
         usuarios.remove(professores.get(linhaSelecionada));
+        
+    }
+    
+    public static void excluirTurmaDaLista(int linhaSelecionada) {
+        
+        List<UsuarioProfessor> professores = retornarProfessores();
+        
+        for(UsuarioProfessor professor: professores) {
+            
+            if(turmas.get(linhaSelecionada).getProfessor().equals(professor)) {
+                professor.removeTurma(turmas.get(linhaSelecionada));
+            }
+            
+        }
+        
+        turmas.remove(linhaSelecionada);
         
     }
     
@@ -164,6 +186,19 @@ public class BancoDeDados {
         
     }
     
+    public static void editarProfessor(int professorSelecionado, UsuarioProfessor usuarioProfessor) {
+        
+        UsuarioProfessor professorEscolhido = retornarProfessores().get(professorSelecionado);
+        
+        professorEscolhido.setNome(usuarioProfessor.getNome());
+        professorEscolhido.setCpf(usuarioProfessor.getCpf());
+        professorEscolhido.setTelefone(usuarioProfessor.getTelefone());
+        professorEscolhido.setEndereco(usuarioProfessor.getEndereco());
+        professorEscolhido.setEmail(usuarioProfessor.getEmail());
+        professorEscolhido.setSenha(usuarioProfessor.getSenha());
+        
+    }
+    
     
     public final static void criaUsuariosFakes() {
         
@@ -175,6 +210,7 @@ public class BancoDeDados {
         UsuarioProfessor professor2;
         Turma turma1;
         Turma turma2;
+        Turma turma3;
         
         coordenador = new UsuarioCoordenador();
         coordenador.setNome("Alan Santos");
@@ -220,6 +256,8 @@ public class BancoDeDados {
         professor2.setMatricula(5);
         professor2.setNome("Paulo Mendes");
         professor2.setSenha("321");
+        professor2.setCpf("61158269340");
+        professor2.setEmail("pauloM@gmail.com");
         usuarios.add(professor2);
         turma2 = new Turma();
         turma2.setProfessor(professor2);
@@ -227,6 +265,12 @@ public class BancoDeDados {
         turma2.setCodigo(2112);
         professor2.adicionaTurma(turma2);
         turmas.add(turma2);
+        turma3 = new Turma();
+        turma3.setProfessor(professor2);
+        turma3.setDisciplina("biologia");
+        turma3.setCodigo(1212);
+        professor2.adicionaTurma(turma3);
+        turmas.add(turma3);
         
     }
     

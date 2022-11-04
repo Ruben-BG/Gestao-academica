@@ -179,12 +179,46 @@ public class ConfirmacaoPopUp extends javax.swing.JFrame {
         mouseY = evt.getY();
     }//GEN-LAST:event_cabecalhoPanelMousePressed
 
-    public void confirmacaoParaRemoverLinha(String textoMostrado, ModeloTabelaProfessor tableModel, int linha) {
+    public void confirmacaoParaRemoverLinhaDaTabelaProfessor(String textoMostrado, ModeloTabelaProfessor tableModel, int linha) {
         
         mensagemCentralLabel.setText(textoMostrado);
         
         botaoDeSim.addActionListener((e) -> {
             tableModel.removeRow(linha);
+            this.dispose();
+        });
+        
+        botaoDeNao.addActionListener((e) -> {
+            this.dispose();
+        });
+        
+    }
+    
+    public void confirmacaoParaAlterarDadosDoProfessor(String textoMostrado, EditarProfessor referenciaAJanela, int professorSelecionado, UsuarioProfessor usuarioProfessor) {
+        
+        tituloLabel.setText("ATENÇÃO");
+        mensagemCentralLabel.setText(textoMostrado);
+        
+        botaoDeSim.addActionListener((e) -> {
+            BancoDeDados.editarProfessor(professorSelecionado, usuarioProfessor);
+            referenciaAJanela.dispose();
+            ListagemProfessor listagemProfessor = new ListagemProfessor();
+            listagemProfessor.setVisible(true);
+            this.dispose();
+        });
+        
+        botaoDeNao.addActionListener((e) -> {
+            this.dispose();
+        });
+        
+    }
+    
+    public void confirmacaoParaRemoverLinhaDaTabelaTurma(String textoMostrado, ModeloTabelaTurma tableModel, int linha) {
+        
+        mensagemCentralLabel.setText(textoMostrado);
+        
+        botaoDeSim.addActionListener((e) -> {
+            tableModel.removeLinha(linha);
             this.dispose();
         });
         

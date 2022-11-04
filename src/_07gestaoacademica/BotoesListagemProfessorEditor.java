@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.List;
 
-public class BotoesEditor extends AbstractCellEditor implements TableCellEditor {
+public class BotoesListagemProfessorEditor extends AbstractCellEditor implements TableCellEditor {
 
     protected final BotoesPanel botoesPanel = new BotoesPanel();
     protected JTable tabela;
@@ -30,11 +30,11 @@ public class BotoesEditor extends AbstractCellEditor implements TableCellEditor 
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                EventQueue.invokeLater(BotoesEditor.this::fireEditingStopped);
+                EventQueue.invokeLater(BotoesListagemProfessorEditor.this::fireEditingStopped);
             }
         }
 
-    public BotoesEditor(JTable tabela, ListagemProfessor referenciaForm, ModeloTabelaProfessor referenciaModel) {
+    public BotoesListagemProfessorEditor(JTable tabela, ListagemProfessor referenciaForm, ModeloTabelaProfessor referenciaModel) {
 
         super();
         this.tabela = tabela;
@@ -42,6 +42,11 @@ public class BotoesEditor extends AbstractCellEditor implements TableCellEditor 
 
         lista.get(0).addActionListener(e -> {
             //Ação do botão editar na tabela
+            
+            referenciaForm.dispose();
+            EditarProfessor editarProfessor = new EditarProfessor(tabela.getSelectedRow());
+            editarProfessor.setVisible(true);
+            
         });
 
         lista.get(1).addActionListener(e -> {
@@ -49,8 +54,14 @@ public class BotoesEditor extends AbstractCellEditor implements TableCellEditor 
             
             ConfirmacaoPopUp popUp = new ConfirmacaoPopUp();
             popUp.setVisible(true);
-            popUp.confirmacaoParaRemoverLinha("Você deseja remover o professor " + BancoDeDados.retornarProfessores().get(tabela.getSelectedRow()).getNome() + "?", referenciaModel, tabela.getSelectedRow());
-        
+            
+            if(BancoDeDados.retornarProfessores().get(tabela.getSelectedRow()).retornaQuantidadeDeTurma() > 0) {
+                String texto = BancoDeDados.retornarProfessores().get(tabela.getSelectedRow()).getNome() + " está em " + BancoDeDados.retornarProfessores().get(tabela.getSelectedRow()).retornaQuantidadeDeTurma() + " turma(s), deseja removê-lo?";
+                popUp.confirmacaoParaRemoverLinhaDaTabelaProfessor(texto, referenciaModel, tabela.getSelectedRow());
+            } else {
+                popUp.confirmacaoParaRemoverLinhaDaTabelaProfessor("Você deseja remover o professor " + BancoDeDados.retornarProfessores().get(tabela.getSelectedRow()).getNome() + "?", referenciaModel, tabela.getSelectedRow());
+            }
+            
         });
 
         EditandoManipuladorDeParada manipulador = new EditandoManipuladorDeParada();

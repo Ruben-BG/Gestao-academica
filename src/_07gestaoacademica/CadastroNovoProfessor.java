@@ -17,6 +17,7 @@ public class CadastroNovoProfessor extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         formularioProfessor = new CampoFormularioProfessor(botaoSalvar);
         jScrollPane1.setViewportView(formularioProfessor);
+        formularioProfessor.focarNoCampoNome();
     }
 
     /**
@@ -225,7 +226,7 @@ public class CadastroNovoProfessor extends javax.swing.JFrame {
             BancoDeDados.cadastrarUsuario(professor);
 
             popUp = new PopUp();
-            popUp.mensagemFinalDoCadastroDaLista("Sua conta foi criada com sucesso! Sua matrícula é " + professor.getMatricula() + ".", this);
+            popUp.mensagemFinalDoCadastroDaLista("Conta criada com sucesso!", this);
             formularioProfessor.limparCampos();
 
         }

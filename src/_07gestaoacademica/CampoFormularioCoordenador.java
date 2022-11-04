@@ -302,6 +302,10 @@ public class CampoFormularioCoordenador extends javax.swing.JPanel {
         senhaPasswordField.setText("");
     }
     
+    public void focarNoCampoNome() {
+        nomeTextField.requestFocus();
+    }
+    
     
     //Métodos de ação
     private void senhaPasswordFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_senhaPasswordFieldFocusGained

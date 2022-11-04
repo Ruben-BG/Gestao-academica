@@ -1,6 +1,7 @@
 package _07gestaoacademica;
 
 import java.awt.Color;
+import javax.swing.JButton;
 import javax.swing.JTextField;
 
 /**
@@ -11,6 +12,7 @@ public class PopUp extends javax.swing.JFrame {
     
     private int mouseX, mouseY;
     GestaoContaUsuario novaGestaoContaUsuario;
+    ListagemProfessor listagemProfessor;
 
     /**
      * Creates new form PopUp
@@ -306,17 +308,32 @@ public class PopUp extends javax.swing.JFrame {
         });
     }
     
-    public void mensagemFinalDoCadastroDaLista(String textoCadastro, CadastroNovoProfessor referenciaFormulario) {
+    public void mensagemFinalDoCadastroDaLista(String textoCadastro, CadastroNovoProfessor referenciaAJanela) {
         tituloLabel.setText("SUCESSO");
         mensagemCentralLabel.setText(textoCadastro);
-        botaoFinalButton.setText("ENTRAR NO SISTEMA");
+        botaoFinalButton.setText("VOLTAR A LISTAGEM");
         finalizacaoFrame();
         botaoFinalButton.addActionListener((e) -> {
            
             this.dispose();
-            referenciaFormulario.dispose();
-            novaGestaoContaUsuario = new GestaoContaUsuario();
-            novaGestaoContaUsuario.setVisible(true);
+            referenciaAJanela.dispose();
+            listagemProfessor = new ListagemProfessor();
+            listagemProfessor.setVisible(true);
+            
+        });
+    }
+    
+    public void mensagemFinalDaEdicaoDoProfessor(String textoCadastro, EditarProfessor referenciaAJanela) {
+        tituloLabel.setText("SUCESSO");
+        mensagemCentralLabel.setText(textoCadastro);
+        botaoFinalButton.setText("VOLTAR A LISTAGEM");
+        finalizacaoFrame();
+        botaoFinalButton.addActionListener((e) -> {
+           
+            this.dispose();
+            referenciaAJanela.dispose();
+            listagemProfessor = new ListagemProfessor();
+            listagemProfessor.setVisible(true);
             
         });
     }

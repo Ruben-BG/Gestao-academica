@@ -20,21 +20,17 @@ public class ListagemProfessor extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         
+        campoDeNome.requestFocus();
+        
         jScrollPane2.getViewport().setBackground(Color.WHITE);
         tabelaProfessor.setModel(tableModel);
         TableColumn colunaDosBotoes = tabelaProfessor.getColumnModel().getColumn(2);
         colunaDosBotoes.setCellRenderer(new BotoesRenderer());
-        colunaDosBotoes.setCellEditor(new BotoesEditor(tabelaProfessor, essaJanela, tableModel));
-        /*usar para filtragem inválida
-        
-        JLabel mensagem = new JLabel("Pesquisa inválida.");
-        mensagem.setFont(new java.awt.Font("Verdana", 0, 13));
-        mensagem.setVerticalAlignment(JLabel.TOP);
-        jScrollPane2.setViewportView(mensagem);
-        
-        */
+        colunaDosBotoes.setCellEditor(new BotoesListagemProfessorEditor(tabelaProfessor, essaJanela, tableModel));
         limparCampoButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         pesquisarUsuarioButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        
+        tabelaProfessor.getColumnModel().getColumn(0).setPreferredWidth(200);
         
     }
 
@@ -312,6 +308,16 @@ public class ListagemProfessor extends javax.swing.JFrame {
     
     //Métodos de simplificação
     
+    public void mensagemCasoPesquisaDeErrado() {
+        JLabel mensagem = new JLabel("Pesquisa inválida.");
+        mensagem.setFont(new java.awt.Font("Verdana", 0, 13));
+        mensagem.setVerticalAlignment(JLabel.TOP);
+        jScrollPane2.setViewportView(mensagem);
+    }
+    
+    public void mensagemDePesquisaBemSucedida() {
+        jScrollPane2.setViewportView(tabelaProfessor);
+    }
     
     
     //Métodos de ação
@@ -368,7 +374,7 @@ public class ListagemProfessor extends javax.swing.JFrame {
         String codigo = campoCodigoDaTurma.getText().trim().toUpperCase();
         String disciplina = campoDisciplinaTurma.getText().trim().toUpperCase();
         
-        tableModel.pesquisarProfessor(nome, codigo, disciplina);
+        tableModel.pesquisarProfessor(nome, codigo, disciplina, tabelaProfessor, this);
         
     }//GEN-LAST:event_pesquisarUsuarioButtonActionPerformed
 
@@ -377,6 +383,8 @@ public class ListagemProfessor extends javax.swing.JFrame {
         campoDeNome.setText("");
         campoCodigoDaTurma.setText("");
         campoDisciplinaTurma.setText("");
+        pesquisarUsuarioButton.doClick();
+        campoDeNome.requestFocus();
         
     }//GEN-LAST:event_limparCampoButtonActionPerformed
 

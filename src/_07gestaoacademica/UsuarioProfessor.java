@@ -24,6 +24,14 @@ public class UsuarioProfessor extends Usuario{
         return turmasDoProfessor.size();
     }
     
+    public List<Turma> retornarTurmasDesseProfessor() {
+        return turmasDoProfessor;
+    }
+    
+    public void removeTurma(Turma turmaEscolhida) {
+        turmasDoProfessor.remove(turmaEscolhida);
+    }
+    
     public Boolean validaDisciplina(String conteudoDaTurma) {
         
         for(Turma turma: turmasDoProfessor) {

@@ -14,6 +14,7 @@ public class DashboardCoordenador extends javax.swing.JFrame {
     private int mouseX, mouseY;
     GestaoContaUsuario novaGestaoContaUsuario;
     ListagemProfessor novaListagemProfessor;
+    ListagemDeTurma novaListagemDeTurma;
     
     public DashboardCoordenador() {
         initComponents();
@@ -26,7 +27,7 @@ public class DashboardCoordenador extends javax.swing.JFrame {
         professorButton.mudarNumero(String.valueOf(BancoDeDados.quantidadeProfessor()));
         professorButton.mudarTexto("Professores");
         turmaButton.mudarIcone("/_07gestaoacademica/images/turmaP.png");
-        turmaButton.mudarNumero(String.valueOf(BancoDeDados.getTurmas().size()));
+        turmaButton.mudarNumero(String.valueOf(BancoDeDados.quantidadeTurma()));
         turmaButton.mudarTexto("Turmas");
         alunoButton.mudarNumero(String.valueOf(BancoDeDados.quantidadeAluno()));
         alunoButton.mudarTexto("Alunos");
@@ -171,6 +172,9 @@ public class DashboardCoordenador extends javax.swing.JFrame {
         });
 
         turmaButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                turmaButtonMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 turmaButtonMouseEntered(evt);
             }
@@ -372,6 +376,12 @@ public class DashboardCoordenador extends javax.swing.JFrame {
         novaListagemProfessor.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_professorButtonMouseClicked
+
+    private void turmaButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_turmaButtonMouseClicked
+        novaListagemDeTurma = new ListagemDeTurma();
+        novaListagemDeTurma.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_turmaButtonMouseClicked
 
     
     /**
