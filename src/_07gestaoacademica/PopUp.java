@@ -349,6 +349,11 @@ public class PopUp extends javax.swing.JFrame {
         mensagemCentralLabel.setText(textoValidacao);
         finalizacaoFrame();
     }
+    
+    public void avisoCadastroTurma(String texto) {
+        mensagemCentralLabel.setText(texto);
+        finalizacaoFrame();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private _07gestaoacademica.CustomizacaoBotao botaoFinalButton;

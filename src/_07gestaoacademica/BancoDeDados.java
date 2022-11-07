@@ -17,6 +17,10 @@ public class BancoDeDados {
         usuarios.add(usuario);
     }
     
+    public static void cadastrarTurma(Turma turma) {
+        turmas.add(turma);
+    }
+    
     
     public static boolean loginProfessorAluno(int matricula, String senha) {
         

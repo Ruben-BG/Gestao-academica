@@ -8,10 +8,16 @@ public class CadastroNovaTurma extends javax.swing.JFrame {
     GestaoContaUsuario novaGestaoContaUsuario;
     ListagemDeTurma voltarParaListagemDeTurma;
     int mouseX, mouseY;
-    
+
     public CadastroNovaTurma() {
+        
         initComponents();
         setLocationRelativeTo(null);
+        
+        for(UsuarioProfessor professor: BancoDeDados.retornarProfessores()) {
+            jComboBox1.addItem(professor.getNome());
+        }
+
     }
 
     /**
@@ -23,67 +29,76 @@ public class CadastroNovaTurma extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel5 = new javax.swing.JPanel();
-        cabecalhoPanel4 = new javax.swing.JPanel();
-        sairPaginaButton6 = new javax.swing.JButton();
+        jPanel = new javax.swing.JPanel();
+        cabecalhoPanel = new javax.swing.JPanel();
+        sairPaginaButton = new javax.swing.JButton();
         botaoVoltarLabel = new javax.swing.JLabel();
         tituloDaPaginaLabel = new javax.swing.JLabel();
         botaoSalvar = new _07gestaoacademica.CustomizacaoBotao();
         separador = new javax.swing.JSeparator();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        codigoLabel = new javax.swing.JLabel();
+        campoDeCodigo = new _07gestaoacademica.CampoDeEscrita();
+        disciplinaLabel = new javax.swing.JLabel();
+        campoDeDisciplina = new _07gestaoacademica.CampoDeEscrita();
+        horarioLabel = new javax.swing.JLabel();
+        campoDeHorario = new _07gestaoacademica.CampoDeEscrita();
+        quantidadeAlunosLabel = new javax.swing.JLabel();
+        campoDeQuantidadeAluno = new _07gestaoacademica.CampoDeEscrita();
+        professorLabel = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        cabecalhoPanel4.setBackground(new java.awt.Color(204, 204, 204));
-        cabecalhoPanel4.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        cabecalhoPanel.setBackground(new java.awt.Color(204, 204, 204));
+        cabecalhoPanel.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
-                cabecalhoPanel4MouseDragged(evt);
+                cabecalhoPanelMouseDragged(evt);
             }
         });
-        cabecalhoPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        cabecalhoPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                cabecalhoPanel4MousePressed(evt);
+                cabecalhoPanelMousePressed(evt);
             }
         });
 
-        sairPaginaButton6.setBackground(new java.awt.Color(255, 255, 255));
-        sairPaginaButton6.setFont(new java.awt.Font("Verdana", 1, 32)); // NOI18N
-        sairPaginaButton6.setForeground(new java.awt.Color(0, 0, 0));
-        sairPaginaButton6.setText("X");
-        sairPaginaButton6.setBorder(null);
-        sairPaginaButton6.setContentAreaFilled(false);
-        sairPaginaButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        sairPaginaButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+        sairPaginaButton.setBackground(new java.awt.Color(255, 255, 255));
+        sairPaginaButton.setFont(new java.awt.Font("Verdana", 1, 32)); // NOI18N
+        sairPaginaButton.setForeground(new java.awt.Color(0, 0, 0));
+        sairPaginaButton.setText("X");
+        sairPaginaButton.setBorder(null);
+        sairPaginaButton.setContentAreaFilled(false);
+        sairPaginaButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sairPaginaButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                sairPaginaButton6MouseEntered(evt);
+                sairPaginaButtonMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                sairPaginaButton6MouseExited(evt);
+                sairPaginaButtonMouseExited(evt);
             }
         });
-        sairPaginaButton6.addActionListener(new java.awt.event.ActionListener() {
+        sairPaginaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sairPaginaButton6ActionPerformed(evt);
+                sairPaginaButtonActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout cabecalhoPanel4Layout = new javax.swing.GroupLayout(cabecalhoPanel4);
-        cabecalhoPanel4.setLayout(cabecalhoPanel4Layout);
-        cabecalhoPanel4Layout.setHorizontalGroup(
-            cabecalhoPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cabecalhoPanel4Layout.createSequentialGroup()
+        javax.swing.GroupLayout cabecalhoPanelLayout = new javax.swing.GroupLayout(cabecalhoPanel);
+        cabecalhoPanel.setLayout(cabecalhoPanelLayout);
+        cabecalhoPanelLayout.setHorizontalGroup(
+            cabecalhoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cabecalhoPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(sairPaginaButton6)
+                .addComponent(sairPaginaButton)
                 .addGap(18, 18, 18))
         );
-        cabecalhoPanel4Layout.setVerticalGroup(
-            cabecalhoPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(sairPaginaButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        cabecalhoPanelLayout.setVerticalGroup(
+            cabecalhoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(sairPaginaButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         botaoVoltarLabel.setFont(new java.awt.Font("SansSerif", 0, 48)); // NOI18N
@@ -120,75 +135,223 @@ public class CadastroNovaTurma extends javax.swing.JFrame {
 
         separador.setForeground(new java.awt.Color(234, 234, 234));
 
-        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane1.setBorder(null);
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        codigoLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        codigoLabel.setForeground(new java.awt.Color(0, 0, 0));
+        codigoLabel.setText("Código");
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        campoDeCodigo.setText("Informe o código da turma");
+        campoDeCodigo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                campoDeCodigoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                campoDeCodigoFocusLost(evt);
+            }
+        });
+
+        disciplinaLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        disciplinaLabel.setForeground(new java.awt.Color(0, 0, 0));
+        disciplinaLabel.setText("Disciplina");
+
+        campoDeDisciplina.setText("Informe a disciplina");
+        campoDeDisciplina.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                campoDeDisciplinaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                campoDeDisciplinaFocusLost(evt);
+            }
+        });
+
+        horarioLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        horarioLabel.setForeground(new java.awt.Color(0, 0, 0));
+        horarioLabel.setText("Horário");
+
+        campoDeHorario.setText("Informe o horário das aulas. Ex.: Seg 08:00");
+        campoDeHorario.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                campoDeHorarioFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                campoDeHorarioFocusLost(evt);
+            }
+        });
+
+        quantidadeAlunosLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        quantidadeAlunosLabel.setForeground(new java.awt.Color(0, 0, 0));
+        quantidadeAlunosLabel.setText("Qtd. Máxima de Alunos");
+
+        campoDeQuantidadeAluno.setText("Informe a quantidade máxima de alunos");
+        campoDeQuantidadeAluno.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                campoDeQuantidadeAlunoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                campoDeQuantidadeAlunoFocusLost(evt);
+            }
+        });
+
+        professorLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        professorLabel.setForeground(new java.awt.Color(0, 0, 0));
+        professorLabel.setText("Professor");
+
+        jComboBox1.setBackground(new java.awt.Color(234, 234, 234));
+        jComboBox1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jComboBox1.setForeground(new java.awt.Color(0, 0, 0));
+        jComboBox1.setBorder(null);
+
+        javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
+        jPanel.setLayout(jPanelLayout);
+        jPanelLayout.setHorizontalGroup(
+            jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelLayout.createSequentialGroup()
                 .addGap(6, 6, 6)
                 .addComponent(botaoVoltarLabel)
                 .addGap(22, 22, 22)
                 .addComponent(tituloDaPaginaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 231, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(botaoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
-            .addComponent(cabecalhoPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(cabecalhoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(separador, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
+            .addGroup(jPanelLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(professorLabel)
+                    .addGroup(jPanelLayout.createSequentialGroup()
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(codigoLabel)
+                            .addComponent(horarioLabel)
+                            .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(campoDeCodigo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(campoDeHorario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)))
+                        .addGap(35, 35, 35)
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(quantidadeAlunosLabel)
+                            .addComponent(disciplinaLabel)
+                            .addComponent(campoDeDisciplina, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(campoDeQuantidadeAluno, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)))
+                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(cabecalhoPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        jPanelLayout.setVerticalGroup(
+            jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelLayout.createSequentialGroup()
+                .addComponent(cabecalhoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(botaoVoltarLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(tituloDaPaginaLabel)
                         .addComponent(botaoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(1, 1, 1)
                 .addComponent(separador, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelLayout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(codigoLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(campoDeCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelLayout.createSequentialGroup()
+                        .addComponent(disciplinaLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(campoDeDisciplina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(27, 27, 27)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(horarioLabel)
+                    .addComponent(quantidadeAlunosLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(campoDeHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoDeQuantidadeAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addComponent(professorLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(149, 149, 149))
         );
 
-        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 490));
+        getContentPane().add(jPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void sairPaginaButton6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairPaginaButton6MouseEntered
+    //Métodos de simplificação
+    public void mouseEntrouOuSaiuDoCampo(CampoDeEscrita campoDeTexto, String textoPadrao) {
+
+        if (campoDeTexto.hasFocus()) {
+
+            if (campoDeTexto.getText().equals(textoPadrao)) {
+                campoDeTexto.setText("");
+            } else {
+                campoDeTexto.setForeground(new Color(81, 81, 81));
+            }
+
+        } else {
+            
+            if (campoDeTexto.getText().equals("")) {
+                campoDeTexto.setText(textoPadrao);
+                campoDeTexto.setForeground(new Color(81, 81, 81));
+            } else {
+                campoDeTexto.setForeground(Color.BLACK);
+            }
+            
+        }
+
+    }
+    
+    private Boolean gerarPopUp() {
+        
+        PopUp p;
+        
+        if(campoDeCodigo.getText().equals("Informe o código da turma")){
+            p = new PopUp();
+            p.avisoCadastroTurma("Por favor preencha o campo de código.");
+            return true;
+        } else if(campoDeDisciplina.getText().equals("Informe a disciplina")) {
+            p = new PopUp();
+            p.avisoCadastroTurma("Por favor preencha o campo de disciplina.");
+            return true;
+        } else if(campoDeHorario.getText().equals("Informe o horário das aulas. Ex.: Seg 08:00")) {
+            p = new PopUp();
+            p.avisoCadastroTurma("Por favor preencha o campo de horário.");
+            return true;
+        } else if(campoDeQuantidadeAluno.getText().equals("Informe a quantidade máxima de alunos")) {
+            p = new PopUp();
+            p.avisoCadastroTurma("Por favor coloque a quantidade máxima de alunos.");
+            return true;
+        }
+        
+        return false;
+        
+    }
+
+    //Métodos de ação
+
+    private void sairPaginaButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairPaginaButtonMouseEntered
         Color corSelecionado = new Color(89, 89, 89);
-        sairPaginaButton2.setForeground(corSelecionado);
-    }//GEN-LAST:event_sairPaginaButton6MouseEntered
+        sairPaginaButton.setForeground(corSelecionado);
+    }//GEN-LAST:event_sairPaginaButtonMouseEntered
 
-    private void sairPaginaButton6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairPaginaButton6MouseExited
-        sairPaginaButton2.setForeground(Color.BLACK);
-    }//GEN-LAST:event_sairPaginaButton6MouseExited
+    private void sairPaginaButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairPaginaButtonMouseExited
+        sairPaginaButton.setForeground(Color.BLACK);
+    }//GEN-LAST:event_sairPaginaButtonMouseExited
 
-    private void sairPaginaButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairPaginaButton6ActionPerformed
+    private void sairPaginaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairPaginaButtonActionPerformed
         novaGestaoContaUsuario = new GestaoContaUsuario();
         novaGestaoContaUsuario.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_sairPaginaButton6ActionPerformed
+    }//GEN-LAST:event_sairPaginaButtonActionPerformed
 
-    private void cabecalhoPanel4MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cabecalhoPanel4MouseDragged
+    private void cabecalhoPanelMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cabecalhoPanelMouseDragged
         this.setLocation(this.getX() + evt.getX() - mouseX, this.getY() + evt.getY() - mouseY);
-    }//GEN-LAST:event_cabecalhoPanel4MouseDragged
+    }//GEN-LAST:event_cabecalhoPanelMouseDragged
 
-    private void cabecalhoPanel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cabecalhoPanel4MousePressed
+    private void cabecalhoPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cabecalhoPanelMousePressed
         mouseX = evt.getX();
         mouseY = evt.getY();
-    }//GEN-LAST:event_cabecalhoPanel4MousePressed
+    }//GEN-LAST:event_cabecalhoPanelMousePressed
 
     private void botaoVoltarLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoVoltarLabelMouseClicked
         voltarParaListagemDeTurma = new ListagemDeTurma();
@@ -206,8 +369,54 @@ public class CadastroNovaTurma extends javax.swing.JFrame {
 
     private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
 
-        
+        if(!gerarPopUp()) {
+            Turma turma = new Turma();
+            turma.setCodigo(Integer.parseInt(campoDeCodigo.getText()));
+            turma.setDisciplina(campoDeDisciplina.getText());
+            turma.setHorario(campoDeHorario.getText());
+            
+            for(UsuarioProfessor professor: BancoDeDados.retornarProfessores()) {
+                
+                
+                
+            }
+            
+            //turma.setProfessor(professor);
+        }
+
     }//GEN-LAST:event_botaoSalvarActionPerformed
+
+    private void campoDeCodigoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoDeCodigoFocusGained
+        mouseEntrouOuSaiuDoCampo(campoDeCodigo, "Informe o código da turma");
+    }//GEN-LAST:event_campoDeCodigoFocusGained
+
+    private void campoDeCodigoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoDeCodigoFocusLost
+        mouseEntrouOuSaiuDoCampo(campoDeCodigo, "Informe o código da turma");
+    }//GEN-LAST:event_campoDeCodigoFocusLost
+
+    private void campoDeDisciplinaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoDeDisciplinaFocusGained
+        mouseEntrouOuSaiuDoCampo(campoDeDisciplina, "Informe a disciplina");
+    }//GEN-LAST:event_campoDeDisciplinaFocusGained
+
+    private void campoDeDisciplinaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoDeDisciplinaFocusLost
+        mouseEntrouOuSaiuDoCampo(campoDeDisciplina, "Informe a disciplina");
+    }//GEN-LAST:event_campoDeDisciplinaFocusLost
+
+    private void campoDeHorarioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoDeHorarioFocusGained
+        mouseEntrouOuSaiuDoCampo(campoDeHorario, "Informe o horário das aulas. Ex.: Seg 08:00");
+    }//GEN-LAST:event_campoDeHorarioFocusGained
+
+    private void campoDeHorarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoDeHorarioFocusLost
+        mouseEntrouOuSaiuDoCampo(campoDeHorario, "Informe o horário das aulas. Ex.: Seg 08:00");
+    }//GEN-LAST:event_campoDeHorarioFocusLost
+
+    private void campoDeQuantidadeAlunoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoDeQuantidadeAlunoFocusGained
+        mouseEntrouOuSaiuDoCampo(campoDeQuantidadeAluno, "Informe a quantidade máxima de alunos");
+    }//GEN-LAST:event_campoDeQuantidadeAlunoFocusGained
+
+    private void campoDeQuantidadeAlunoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoDeQuantidadeAlunoFocusLost
+        mouseEntrouOuSaiuDoCampo(campoDeQuantidadeAluno, "Informe a quantidade máxima de alunos");
+    }//GEN-LAST:event_campoDeQuantidadeAlunoFocusLost
 
     /**
      * @param args the command line arguments
@@ -248,21 +457,18 @@ public class CadastroNovaTurma extends javax.swing.JFrame {
     private _07gestaoacademica.CustomizacaoBotao botaoSalvar;
     private javax.swing.JLabel botaoVoltarLabel;
     private javax.swing.JPanel cabecalhoPanel;
-    private javax.swing.JPanel cabecalhoPanel1;
-    private javax.swing.JPanel cabecalhoPanel2;
-    private javax.swing.JPanel cabecalhoPanel3;
-    private javax.swing.JPanel cabecalhoPanel4;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton sairPaginaButton2;
-    private javax.swing.JButton sairPaginaButton3;
-    private javax.swing.JButton sairPaginaButton4;
-    private javax.swing.JButton sairPaginaButton5;
-    private javax.swing.JButton sairPaginaButton6;
+    private _07gestaoacademica.CampoDeEscrita campoDeCodigo;
+    private _07gestaoacademica.CampoDeEscrita campoDeDisciplina;
+    private _07gestaoacademica.CampoDeEscrita campoDeHorario;
+    private _07gestaoacademica.CampoDeEscrita campoDeQuantidadeAluno;
+    private javax.swing.JLabel codigoLabel;
+    private javax.swing.JLabel disciplinaLabel;
+    private javax.swing.JLabel horarioLabel;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JPanel jPanel;
+    private javax.swing.JLabel professorLabel;
+    private javax.swing.JLabel quantidadeAlunosLabel;
+    private javax.swing.JButton sairPaginaButton;
     private javax.swing.JSeparator separador;
     private javax.swing.JLabel tituloDaPaginaLabel;
     // End of variables declaration//GEN-END:variables
