@@ -50,7 +50,9 @@ public class BotoesListagemTurmaEditor extends AbstractCellEditor implements Tab
         lista.get(0).addActionListener(e -> {
             //Ação do botão editar na tabela
             
-            
+            referenciaForm.dispose();
+            EditarTurma janelaEditarTurma = new EditarTurma();
+            janelaEditarTurma.setVisible(true);
             
         });
 

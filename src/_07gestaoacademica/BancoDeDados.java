@@ -190,6 +190,26 @@ public class BancoDeDados {
         
     }
     
+    public static List<Turma> pesquisaTurma(String codigo, String disciplina, String nomeDoProfessor) {
+        
+        List<Turma> turmasEscolhidas = new ArrayList<>();
+        
+        for(Turma turma: turmas) {
+            
+            Boolean validaCodigo = !codigo.equals("") && turma.getCodigo().contains(codigo);
+            Boolean validaDisciplina = !disciplina.equals("") && turma.getDisciplina().toUpperCase().contains(disciplina);
+            Boolean validaProfessor = !nomeDoProfessor.equals("") && turma.getProfessor().getNome().toUpperCase().contains(nomeDoProfessor);
+            
+            if(validaCodigo || validaDisciplina || validaProfessor) {
+                turmasEscolhidas.add(turma);
+            }
+            
+        }
+        
+        return turmasEscolhidas;
+        
+    }
+    
     public static void editarProfessor(int professorSelecionado, UsuarioProfessor usuarioProfessor) {
         
         UsuarioProfessor professorEscolhido = retornarProfessores().get(professorSelecionado);
@@ -252,7 +272,7 @@ public class BancoDeDados {
         turma1 = new Turma();
         turma1.setProfessor(professor1);
         turma1.setDisciplina("geografia");
-        turma1.setCodigo(1221);
+        turma1.setCodigo("GEO123");
         professor1.adicionaTurma(turma1);
         turmas.add(turma1);
         
@@ -266,13 +286,13 @@ public class BancoDeDados {
         turma2 = new Turma();
         turma2.setProfessor(professor2);
         turma2.setDisciplina("ciências");
-        turma2.setCodigo(2112);
+        turma2.setCodigo("CIE14S");
         professor2.adicionaTurma(turma2);
         turmas.add(turma2);
         turma3 = new Turma();
         turma3.setProfessor(professor2);
         turma3.setDisciplina("biologia");
-        turma3.setCodigo(1212);
+        turma3.setCodigo("BIO469");
         professor2.adicionaTurma(turma3);
         turmas.add(turma3);
         

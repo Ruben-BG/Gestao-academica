@@ -1,6 +1,7 @@
 package _07gestaoacademica;
 
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 
 public class CadastroNovaTurma extends javax.swing.JFrame {
 
@@ -17,6 +18,8 @@ public class CadastroNovaTurma extends javax.swing.JFrame {
         for(UsuarioProfessor professor: BancoDeDados.retornarProfessores()) {
             jComboBox1.addItem(professor.getNome());
         }
+        
+        campoDeCodigo.requestFocus();
 
     }
 
@@ -148,6 +151,11 @@ public class CadastroNovaTurma extends javax.swing.JFrame {
                 campoDeCodigoFocusLost(evt);
             }
         });
+        campoDeCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                campoDeCodigoKeyPressed(evt);
+            }
+        });
 
         disciplinaLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         disciplinaLabel.setForeground(new java.awt.Color(0, 0, 0));
@@ -160,6 +168,11 @@ public class CadastroNovaTurma extends javax.swing.JFrame {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 campoDeDisciplinaFocusLost(evt);
+            }
+        });
+        campoDeDisciplina.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                campoDeDisciplinaKeyPressed(evt);
             }
         });
 
@@ -176,6 +189,11 @@ public class CadastroNovaTurma extends javax.swing.JFrame {
                 campoDeHorarioFocusLost(evt);
             }
         });
+        campoDeHorario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                campoDeHorarioKeyPressed(evt);
+            }
+        });
 
         quantidadeAlunosLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         quantidadeAlunosLabel.setForeground(new java.awt.Color(0, 0, 0));
@@ -190,6 +208,11 @@ public class CadastroNovaTurma extends javax.swing.JFrame {
                 campoDeQuantidadeAlunoFocusLost(evt);
             }
         });
+        campoDeQuantidadeAluno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                campoDeQuantidadeAlunoKeyPressed(evt);
+            }
+        });
 
         professorLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         professorLabel.setForeground(new java.awt.Color(0, 0, 0));
@@ -199,6 +222,11 @@ public class CadastroNovaTurma extends javax.swing.JFrame {
         jComboBox1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jComboBox1.setForeground(new java.awt.Color(0, 0, 0));
         jComboBox1.setBorder(null);
+        jComboBox1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jComboBox1KeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
         jPanel.setLayout(jPanelLayout);
@@ -304,22 +332,40 @@ public class CadastroNovaTurma extends javax.swing.JFrame {
     private Boolean gerarPopUp() {
         
         PopUp p;
+        Boolean codigoJaExiste = false;
+        Boolean quantidadeAlunoIsNumeric = campoDeQuantidadeAluno.getText().chars().allMatch(Character::isDigit);
+        
+        for(Turma turma: BancoDeDados.retornarTurmas()) {
+            
+            if(turma.getCodigo().equals(campoDeCodigo.getText())) {
+                codigoJaExiste = true;
+            }
+            
+        }
         
         if(campoDeCodigo.getText().equals("Informe o código da turma")){
             p = new PopUp();
-            p.avisoCadastroTurma("Por favor preencha o campo de código.");
+            p.avisoCadastroTurma("Por favor preencha o campo de código.", campoDeCodigo);
+            return true;
+        } else if(codigoJaExiste.equals(true)) {
+            p = new PopUp();
+            p.avisoCadastroTurma("Código de turma já existente, por favor digite outro.", campoDeCodigo);
             return true;
         } else if(campoDeDisciplina.getText().equals("Informe a disciplina")) {
             p = new PopUp();
-            p.avisoCadastroTurma("Por favor preencha o campo de disciplina.");
+            p.avisoCadastroTurma("Por favor preencha o campo de disciplina.", campoDeDisciplina);
             return true;
         } else if(campoDeHorario.getText().equals("Informe o horário das aulas. Ex.: Seg 08:00")) {
             p = new PopUp();
-            p.avisoCadastroTurma("Por favor preencha o campo de horário.");
+            p.avisoCadastroTurma("Por favor preencha o campo de horário.", campoDeHorario);
             return true;
         } else if(campoDeQuantidadeAluno.getText().equals("Informe a quantidade máxima de alunos")) {
             p = new PopUp();
-            p.avisoCadastroTurma("Por favor coloque a quantidade máxima de alunos.");
+            p.avisoCadastroTurma("Por favor coloque a quantidade máxima de alunos.", campoDeQuantidadeAluno);
+            return true;
+        } else if(!quantidadeAlunoIsNumeric) {
+            p = new PopUp();
+            p.avisoCadastroTurma("Quantidade de alunos tem que ser numérica.", campoDeQuantidadeAluno);
             return true;
         }
         
@@ -371,17 +417,24 @@ public class CadastroNovaTurma extends javax.swing.JFrame {
 
         if(!gerarPopUp()) {
             Turma turma = new Turma();
-            turma.setCodigo(Integer.parseInt(campoDeCodigo.getText()));
+            turma.setCodigo(campoDeCodigo.getText().toUpperCase());
             turma.setDisciplina(campoDeDisciplina.getText());
             turma.setHorario(campoDeHorario.getText());
+            turma.setQuantidadeMaximaDeAlunos(Integer.parseInt(campoDeQuantidadeAluno.getText()));
+            String nomeDoProfessorSelecionado = String.valueOf(jComboBox1.getSelectedItem());
             
             for(UsuarioProfessor professor: BancoDeDados.retornarProfessores()) {
                 
-                
+                if(nomeDoProfessorSelecionado.equals(professor.getNome())) {
+                    professor.adicionaTurma(turma);
+                    turma.setProfessor(professor);
+                }
                 
             }
             
-            //turma.setProfessor(professor);
+            BancoDeDados.cadastrarTurma(turma);
+            PopUp popUp = new PopUp();
+            popUp.mensagemFinalDoCadastroDeTurma("Turma cadastrada com sucesso.", this);
         }
 
     }//GEN-LAST:event_botaoSalvarActionPerformed
@@ -417,6 +470,31 @@ public class CadastroNovaTurma extends javax.swing.JFrame {
     private void campoDeQuantidadeAlunoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoDeQuantidadeAlunoFocusLost
         mouseEntrouOuSaiuDoCampo(campoDeQuantidadeAluno, "Informe a quantidade máxima de alunos");
     }//GEN-LAST:event_campoDeQuantidadeAlunoFocusLost
+
+    private void campoDeCodigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoDeCodigoKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) 
+            campoDeDisciplina.requestFocus();
+    }//GEN-LAST:event_campoDeCodigoKeyPressed
+
+    private void campoDeDisciplinaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoDeDisciplinaKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+            campoDeHorario.requestFocus();
+    }//GEN-LAST:event_campoDeDisciplinaKeyPressed
+
+    private void campoDeHorarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoDeHorarioKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+            campoDeQuantidadeAluno.requestFocus();
+    }//GEN-LAST:event_campoDeHorarioKeyPressed
+
+    private void campoDeQuantidadeAlunoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoDeQuantidadeAlunoKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+            jComboBox1.requestFocus();
+    }//GEN-LAST:event_campoDeQuantidadeAlunoKeyPressed
+
+    private void jComboBox1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jComboBox1KeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+            botaoSalvar.doClick();
+    }//GEN-LAST:event_jComboBox1KeyPressed
 
     /**
      * @param args the command line arguments

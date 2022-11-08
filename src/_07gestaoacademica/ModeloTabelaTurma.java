@@ -51,5 +51,30 @@ public class ModeloTabelaTurma extends AbstractTableModel {
         fireTableRowsDeleted(linha, linha);
         
     }
+    
+    public void pesquisarTurma(String codigoTurma, String disciplinaTurma, String professorDaTurma, JTablePersonalizada tabela, ListagemDeTurma referenciaListagemDeTurma) {
+        
+        if(codigoTurma.equals("") && disciplinaTurma.equals("") && professorDaTurma.equals("")) {
+            turmas = BancoDeDados.retornarTurmas();
+            referenciaListagemDeTurma.casoDePesquisaNula();
+            tabela.setVisible(true);
+            fireTableDataChanged();
+        } else {
+            
+            turmas = BancoDeDados.pesquisaTurma(codigoTurma, disciplinaTurma, professorDaTurma);
+            
+            if(turmas.size() < 1) {
+                tabela.setVisible(false);
+                referenciaListagemDeTurma.mensagemCasoPesquisaDeErrado();
+            } else {
+                tabela.setVisible(true);
+                referenciaListagemDeTurma.casoDePesquisaNula();
+            }
+            
+            fireTableDataChanged();
+            
+        }
+        
+    }
 
 }

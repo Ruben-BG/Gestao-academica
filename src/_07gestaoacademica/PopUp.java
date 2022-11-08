@@ -1,7 +1,8 @@
 package _07gestaoacademica;
 
 import java.awt.Color;
-import javax.swing.JButton;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.JTextField;
 
 /**
@@ -171,6 +172,7 @@ public class PopUp extends javax.swing.JFrame {
 
     private void sairPaginaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairPaginaButtonActionPerformed
         this.dispose();
+        botaoFinalButton.doClick();
     }//GEN-LAST:event_sairPaginaButtonActionPerformed
 
     private void cabecalhoPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cabecalhoPanelMousePressed
@@ -338,6 +340,21 @@ public class PopUp extends javax.swing.JFrame {
         });
     }
     
+    public void mensagemFinalDoCadastroDeTurma(String texto, CadastroNovaTurma cadastroNovaTurma) {
+        tituloLabel.setText("SUCESSO");
+        mensagemCentralLabel.setText(texto);
+        botaoFinalButton.setText("VOLTAR A LISTAGEM");
+        finalizacaoFrame();
+        botaoFinalButton.addActionListener((e) -> {
+            
+            this.dispose();
+            cadastroNovaTurma.dispose();
+            ListagemDeTurma listagemDeTurma = new ListagemDeTurma();
+            listagemDeTurma.setVisible(true);
+            
+        });
+    }
+    
     public void mensagemFinalNovoProfessor(String texto) {
         tituloLabel.setText("SUCESSO");
         mensagemCentralLabel.setText(texto);
@@ -350,9 +367,16 @@ public class PopUp extends javax.swing.JFrame {
         finalizacaoFrame();
     }
     
-    public void avisoCadastroTurma(String texto) {
+    public void avisoCadastroTurma(String texto, JTextField campoDeTexto) {
         mensagemCentralLabel.setText(texto);
         finalizacaoFrame();
+        
+        botaoFinalButton.addActionListener((e) -> {
+            campoDeTexto.requestFocus();
+            campoDeTexto.selectAll();
+            this.dispose();
+        });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

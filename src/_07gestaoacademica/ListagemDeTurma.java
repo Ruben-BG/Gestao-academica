@@ -3,6 +3,7 @@ package _07gestaoacademica;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.KeyEvent;
+import javax.swing.JLabel;
 import javax.swing.table.TableColumn;
 
 public class ListagemDeTurma extends javax.swing.JFrame {
@@ -24,6 +25,8 @@ public class ListagemDeTurma extends javax.swing.JFrame {
         colunaDosBotoes.setCellEditor(new BotoesListagemTurmaEditor(tabelaTurma, this, tableModel));
         limparCampoButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         pesquisarTurmaButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        
+        campoDeCodigo.requestFocus();
         
     }
 
@@ -252,6 +255,20 @@ public class ListagemDeTurma extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Métodos de simplificação
+    public void mensagemCasoPesquisaDeErrado() {
+        JLabel mensagem = new JLabel("Pesquisa inválida.");
+        mensagem.setFont(new java.awt.Font("Verdana", 0, 13));
+        mensagem.setVerticalAlignment(JLabel.TOP);
+        jScrollPane1.setViewportView(mensagem);
+    }
+    
+    public void casoDePesquisaNula() {
+        jScrollPane1.setViewportView(tabelaTurma);
+    }
+    
+    
+    //Métodos de ação
     private void sairPaginaButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairPaginaButtonMouseEntered
         Color corSelecionado = new Color(89, 89, 89);
         sairPaginaButton.setForeground(corSelecionado);
@@ -330,7 +347,11 @@ public class ListagemDeTurma extends javax.swing.JFrame {
 
     private void pesquisarTurmaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisarTurmaButtonActionPerformed
 
+        String codigo = campoDeCodigo.getText().trim().toUpperCase();
+        String disciplina = campoDisciplinaDaTurma.getText().trim().toUpperCase();
+        String professor = campoProfessorTurma.getText().trim().toUpperCase();
         
+        tableModel.pesquisarTurma(codigo, disciplina, professor, tabelaTurma, this);
 
     }//GEN-LAST:event_pesquisarTurmaButtonActionPerformed
 

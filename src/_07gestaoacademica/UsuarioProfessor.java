@@ -49,12 +49,12 @@ public class UsuarioProfessor extends Usuario{
     
     public Boolean validaCodigoDaTurma(String codigoTurma) {
         
-        Boolean codigoIsnumeric = codigoTurma.chars().allMatch(Character::isDigit);
-        int codigo = codigoTurma.equals("") ? 0 : Integer.parseInt(codigoTurma);
+        //Boolean codigoIsnumeric = codigoTurma.chars().allMatch(Character::isDigit);
+        //int codigo = codigoTurma.equals("") ? 0 : Integer.parseInt(codigoTurma);
         
         for(Turma turma: turmasDoProfessor) {
             
-            if(!codigoTurma.equals("") && codigoIsnumeric && turma.getCodigo() == codigo)
+            if(!codigoTurma.equals("") && turma.getCodigo().equals(codigoTurma))
                 return true;
             
         }

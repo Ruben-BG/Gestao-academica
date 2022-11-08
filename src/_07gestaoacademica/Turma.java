@@ -5,15 +5,15 @@ import java.util.List;
 
 public class Turma{
     
-    private String disciplina, horario;
-    private int codigo, quantidadeMaximaDeAlunos;
+    private String disciplina, horario, codigo;
+    private int quantidadeMaximaDeAlunos;
     private UsuarioProfessor professor;
     private List<UsuarioAluno> alunosMatriculados = new ArrayList<>();
             
     
     //GETTERS
     
-    public int getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 
@@ -36,7 +36,7 @@ public class Turma{
     
     //SETTERS
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 
