@@ -8,9 +8,12 @@ public class CadastroNovaTurma extends javax.swing.JFrame {
     //Atributos
     GestaoContaUsuario novaGestaoContaUsuario;
     ListagemDeTurma voltarParaListagemDeTurma;
+    Turma turma;
+    PopUp popUp;
     int mouseX, mouseY;
-
-    public CadastroNovaTurma() {
+    Boolean telaDeCadastro;
+    
+    public CadastroNovaTurma(JTablePersonalizada tabela) {
         
         initComponents();
         setLocationRelativeTo(null);
@@ -18,8 +21,13 @@ public class CadastroNovaTurma extends javax.swing.JFrame {
         for(UsuarioProfessor professor: BancoDeDados.retornarProfessores()) {
             jComboBox1.addItem(professor.getNome());
         }
+        //jComboBox1.setModel(new ModeloComboboxProfessor<>());
         
         campoDeCodigo.requestFocus();
+        
+        botaoSalvar.addActionListener((e) -> {
+            acaoDoBotaoSalvar(tabela);
+        });
 
     }
 
@@ -130,11 +138,6 @@ public class CadastroNovaTurma extends javax.swing.JFrame {
         botaoSalvar.setCorBorda(new java.awt.Color(255, 255, 255));
         botaoSalvar.setCorEntrou(new java.awt.Color(19, 176, 110));
         botaoSalvar.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        botaoSalvar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoSalvarActionPerformed(evt);
-            }
-        });
 
         separador.setForeground(new java.awt.Color(234, 234, 234));
 
@@ -306,6 +309,27 @@ public class CadastroNovaTurma extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     //Métodos de simplificação
+    
+    public void mudarTituloDaPagina(Boolean isCadastro, JTablePersonalizada tabela) {
+        
+        if (isCadastro.equals(true)) {
+            tituloDaPaginaLabel.setText("Nova Turma");
+            telaDeCadastro = true;
+        } else {
+            
+            tituloDaPaginaLabel.setText("Editar Turma");
+            
+            turma = BancoDeDados.retornarTurmas().get(tabela.getSelectedRow());
+            campoDeCodigo.setText(turma.getCodigo());
+            campoDeDisciplina.setText(turma.getDisciplina());
+            campoDeHorario.setText(turma.getHorario());
+            campoDeQuantidadeAluno.setText(String.valueOf(turma.getQuantidadeMaximaDeAlunos()));
+            telaDeCadastro = false;
+            
+        }
+        
+    }
+    
     public void mouseEntrouOuSaiuDoCampo(CampoDeEscrita campoDeTexto, String textoPadrao) {
 
         if (campoDeTexto.hasFocus()) {
@@ -329,15 +353,15 @@ public class CadastroNovaTurma extends javax.swing.JFrame {
 
     }
     
-    private Boolean gerarPopUp() {
+    private Boolean gerarPopUp(char validarRepeticaoDeCodigo) {
         
         PopUp p;
         Boolean codigoJaExiste = false;
         Boolean quantidadeAlunoIsNumeric = campoDeQuantidadeAluno.getText().chars().allMatch(Character::isDigit);
         
-        for(Turma turma: BancoDeDados.retornarTurmas()) {
+        for(Turma turmaEscolhida: BancoDeDados.retornarTurmas()) {
             
-            if(turma.getCodigo().equals(campoDeCodigo.getText())) {
+            if(turmaEscolhida.getCodigo().equals(campoDeCodigo.getText())) {
                 codigoJaExiste = true;
             }
             
@@ -347,7 +371,7 @@ public class CadastroNovaTurma extends javax.swing.JFrame {
             p = new PopUp();
             p.avisoCadastroTurma("Por favor preencha o campo de código.", campoDeCodigo);
             return true;
-        } else if(codigoJaExiste.equals(true)) {
+        } else if(codigoJaExiste.equals(true) && validarRepeticaoDeCodigo == 'n') {
             p = new PopUp();
             p.avisoCadastroTurma("Código de turma já existente, por favor digite outro.", campoDeCodigo);
             return true;
@@ -372,8 +396,68 @@ public class CadastroNovaTurma extends javax.swing.JFrame {
         return false;
         
     }
+    
+    private void limparCampo() {
+        campoDeCodigo.setText("");
+        campoDeDisciplina.setText("");
+        campoDeHorario.setText("");
+        campoDeQuantidadeAluno.setText("");
+    }
+    
 
     //Métodos de ação
+    
+    private void acaoDoBotaoSalvar(JTablePersonalizada tabela) {
+        
+        if(telaDeCadastro && !gerarPopUp('n')) {
+            
+            turma = new Turma();
+            turma.setCodigo(campoDeCodigo.getText().toUpperCase());
+            turma.setDisciplina(campoDeDisciplina.getText());
+            turma.setHorario(campoDeHorario.getText());
+            turma.setQuantidadeMaximaDeAlunos(Integer.parseInt(campoDeQuantidadeAluno.getText()));
+            String nomeDoProfessorSelecionado = String.valueOf(jComboBox1.getSelectedItem());
+            
+            for(UsuarioProfessor professor: BancoDeDados.retornarProfessores()) {
+                
+                if(nomeDoProfessorSelecionado.equals(professor.getNome())) {
+                    professor.adicionaTurma(turma);
+                    turma.setProfessor(professor);
+                }
+                
+            }
+            
+            BancoDeDados.cadastrarTurma(turma);
+            popUp = new PopUp();
+            popUp.mensagemFinalDoCadastroDeTurma("Turma cadastrada com sucesso.", this);
+            limparCampo();
+            
+        } else if(!telaDeCadastro && !gerarPopUp('s')) {
+            
+            String nomeDoProfessorSelecionado = String.valueOf(jComboBox1.getSelectedItem());
+            turma = new Turma();
+            turma.setCodigo(campoDeCodigo.getText());
+            turma.setDisciplina(campoDeDisciplina.getText());
+            turma.setHorario(campoDeHorario.getText());
+            turma.setQuantidadeMaximaDeAlunos(Integer.parseInt(campoDeQuantidadeAluno.getText()));
+            
+            for(UsuarioProfessor professor: BancoDeDados.retornarProfessores()) {
+                
+                if(nomeDoProfessorSelecionado.equals(professor.getNome())) {
+                    professor.adicionaTurma(turma);
+                    turma.setProfessor(professor);
+                }
+                
+            }
+            
+            BancoDeDados.editarTurma(tabela.getSelectedRow(), turma);
+            popUp = new PopUp();
+            popUp.mensagemFinalDoCadastroDeTurma("Turma editada com sucesso.", this);
+            limparCampo();
+            
+        }
+        
+    }
 
     private void sairPaginaButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairPaginaButtonMouseEntered
         Color corSelecionado = new Color(89, 89, 89);
@@ -412,32 +496,6 @@ public class CadastroNovaTurma extends javax.swing.JFrame {
     private void botaoVoltarLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoVoltarLabelMouseExited
         botaoVoltarLabel.setForeground(new Color(102, 102, 102));
     }//GEN-LAST:event_botaoVoltarLabelMouseExited
-
-    private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
-
-        if(!gerarPopUp()) {
-            Turma turma = new Turma();
-            turma.setCodigo(campoDeCodigo.getText().toUpperCase());
-            turma.setDisciplina(campoDeDisciplina.getText());
-            turma.setHorario(campoDeHorario.getText());
-            turma.setQuantidadeMaximaDeAlunos(Integer.parseInt(campoDeQuantidadeAluno.getText()));
-            String nomeDoProfessorSelecionado = String.valueOf(jComboBox1.getSelectedItem());
-            
-            for(UsuarioProfessor professor: BancoDeDados.retornarProfessores()) {
-                
-                if(nomeDoProfessorSelecionado.equals(professor.getNome())) {
-                    professor.adicionaTurma(turma);
-                    turma.setProfessor(professor);
-                }
-                
-            }
-            
-            BancoDeDados.cadastrarTurma(turma);
-            PopUp popUp = new PopUp();
-            popUp.mensagemFinalDoCadastroDeTurma("Turma cadastrada com sucesso.", this);
-        }
-
-    }//GEN-LAST:event_botaoSalvarActionPerformed
 
     private void campoDeCodigoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoDeCodigoFocusGained
         mouseEntrouOuSaiuDoCampo(campoDeCodigo, "Informe o código da turma");
@@ -526,7 +584,7 @@ public class CadastroNovaTurma extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroNovaTurma().setVisible(true);
+                new CadastroNovaTurma(null).setVisible(true);
             }
         });
     }

@@ -41,7 +41,7 @@ public class BotoesListagemTurmaEditor extends AbstractCellEditor implements Tab
             }
         }
 
-    public BotoesListagemTurmaEditor(JTable tabela, ListagemDeTurma referenciaForm, ModeloTabelaTurma referenciaModel) {
+    public BotoesListagemTurmaEditor(JTablePersonalizada tabela, ListagemDeTurma referenciaForm, ModeloTabelaTurma referenciaModel) {
 
         super();
         this.tabela = tabela;
@@ -50,9 +50,10 @@ public class BotoesListagemTurmaEditor extends AbstractCellEditor implements Tab
         lista.get(0).addActionListener(e -> {
             //Ação do botão editar na tabela
             
+            CadastroNovaTurma cadastroNovaTurma = new CadastroNovaTurma(tabela);
+            cadastroNovaTurma.mudarTituloDaPagina(false, tabela);
+            cadastroNovaTurma.setVisible(true);
             referenciaForm.dispose();
-            EditarTurma janelaEditarTurma = new EditarTurma();
-            janelaEditarTurma.setVisible(true);
             
         });
 

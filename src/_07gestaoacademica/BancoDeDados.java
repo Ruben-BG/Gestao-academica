@@ -223,6 +223,18 @@ public class BancoDeDados {
         
     }
     
+    public static void editarTurma(int turmaSelecionada, Turma turmaParaEdicao) {
+        
+        Turma turma = turmas.get(turmaSelecionada);
+        
+        turma.setCodigo(turmaParaEdicao.getCodigo());
+        turma.setDisciplina(turmaParaEdicao.getDisciplina());
+        turma.setHorario(turmaParaEdicao.getHorario());
+        turma.setQuantidadeMaximaDeAlunos(turmaParaEdicao.getQuantidadeMaximaDeAlunos());
+        turma.setProfessor(turmaParaEdicao.getProfessor());
+        
+    }
+    
     
     public final static void criaUsuariosFakes() {
         
@@ -287,12 +299,14 @@ public class BancoDeDados {
         turma2.setProfessor(professor2);
         turma2.setDisciplina("ciências");
         turma2.setCodigo("CIE14S");
+        turma2.setQuantidadeMaximaDeAlunos(5);
         professor2.adicionaTurma(turma2);
         turmas.add(turma2);
         turma3 = new Turma();
         turma3.setProfessor(professor2);
         turma3.setDisciplina("biologia");
         turma3.setCodigo("BIO469");
+        turma3.setQuantidadeMaximaDeAlunos(12);
         professor2.adicionaTurma(turma3);
         turmas.add(turma3);
         

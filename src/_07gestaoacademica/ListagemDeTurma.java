@@ -309,7 +309,8 @@ public class ListagemDeTurma extends javax.swing.JFrame {
 
     private void criarNovaTurmaLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_criarNovaTurmaLabelActionPerformed
         
-        CadastroNovaTurma cadastroNovaTurma = new CadastroNovaTurma();
+        CadastroNovaTurma cadastroNovaTurma = new CadastroNovaTurma(tabelaTurma);
+        cadastroNovaTurma.mudarTituloDaPagina(true, tabelaTurma);
         cadastroNovaTurma.setVisible(true);
         this.dispose();
         

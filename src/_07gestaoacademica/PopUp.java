@@ -172,7 +172,6 @@ public class PopUp extends javax.swing.JFrame {
 
     private void sairPaginaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairPaginaButtonActionPerformed
         this.dispose();
-        botaoFinalButton.doClick();
     }//GEN-LAST:event_sairPaginaButtonActionPerformed
 
     private void cabecalhoPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cabecalhoPanelMousePressed
