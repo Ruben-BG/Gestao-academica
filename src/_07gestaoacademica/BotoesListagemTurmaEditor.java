@@ -50,7 +50,7 @@ public class BotoesListagemTurmaEditor extends AbstractCellEditor implements Tab
         lista.get(0).addActionListener(e -> {
             //Ação do botão editar na tabela
             
-            CadastroNovaTurma cadastroNovaTurma = new CadastroNovaTurma(tabela);
+            CadastroEdicaoDeTurma cadastroNovaTurma = new CadastroEdicaoDeTurma(tabela);
             cadastroNovaTurma.mudarTituloDaPagina(false, tabela);
             cadastroNovaTurma.setVisible(true);
             referenciaForm.dispose();

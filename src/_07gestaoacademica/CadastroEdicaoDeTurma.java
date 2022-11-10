@@ -3,25 +3,24 @@ package _07gestaoacademica;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 
-public class CadastroNovaTurma extends javax.swing.JFrame {
+public class CadastroEdicaoDeTurma extends javax.swing.JFrame {
 
     //Atributos
     GestaoContaUsuario novaGestaoContaUsuario;
     ListagemDeTurma voltarParaListagemDeTurma;
     Turma turma;
     PopUp popUp;
+    ModeloComboBoxProfessor<String> comboBoxModel = new ModeloComboBoxProfessor<>();
     int mouseX, mouseY;
     Boolean telaDeCadastro;
     
-    public CadastroNovaTurma(JTablePersonalizada tabela) {
+    public CadastroEdicaoDeTurma(JTablePersonalizada tabela) {
         
         initComponents();
         setLocationRelativeTo(null);
         
-        for(UsuarioProfessor professor: BancoDeDados.retornarProfessores()) {
-            jComboBox1.addItem(professor.getNome());
-        }
-        //jComboBox1.setModel(new ModeloComboboxProfessor<>());
+        jComboBox1.setModel(comboBoxModel);
+        jComboBox1.setSelectedIndex(0);
         
         campoDeCodigo.requestFocus();
         
@@ -59,6 +58,7 @@ public class CadastroNovaTurma extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(204, 204, 204));
         setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -324,6 +324,18 @@ public class CadastroNovaTurma extends javax.swing.JFrame {
             campoDeDisciplina.setText(turma.getDisciplina());
             campoDeHorario.setText(turma.getHorario());
             campoDeQuantidadeAluno.setText(String.valueOf(turma.getQuantidadeMaximaDeAlunos()));
+            
+            /*
+            método de mudar o professor de seleção para aquele já atribuido a turma.
+            */
+            int linhaDoItem = 0;
+            while(linhaDoItem < BancoDeDados.retornarProfessores().size()) {
+                if(turma.getProfessor().getNome().equals(BancoDeDados.retornarProfessores().get(linhaDoItem).getNome()))
+                    break;
+                ++linhaDoItem;
+            }
+            jComboBox1.setSelectedIndex(linhaDoItem);
+            
             telaDeCadastro = false;
             
         }
@@ -571,20 +583,23 @@ public class CadastroNovaTurma extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroNovaTurma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroEdicaoDeTurma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroNovaTurma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroEdicaoDeTurma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroNovaTurma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroEdicaoDeTurma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroNovaTurma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroEdicaoDeTurma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroNovaTurma(null).setVisible(true);
+                new CadastroEdicaoDeTurma(null).setVisible(true);
             }
         });
     }

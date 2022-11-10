@@ -1,6 +1,6 @@
 package _07gestaoacademica;
 
-import java.awt.event.ActionEvent;
+
 import java.awt.event.KeyEvent;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -17,7 +17,6 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
     Icon ocultarIcon = new ImageIcon(getClass().getResource("/_07gestaoacademica/images/ocultar.png"));
     Icon iconeAtual = ocultarIcon;
     PopUp popUp;
-    
     
     public GestaoContaUsuario() {
         initComponents();

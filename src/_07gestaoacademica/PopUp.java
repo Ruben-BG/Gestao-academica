@@ -1,8 +1,6 @@
 package _07gestaoacademica;
 
 import java.awt.Color;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import javax.swing.JTextField;
 
 /**
@@ -339,7 +337,7 @@ public class PopUp extends javax.swing.JFrame {
         });
     }
     
-    public void mensagemFinalDoCadastroDeTurma(String texto, CadastroNovaTurma cadastroNovaTurma) {
+    public void mensagemFinalDoCadastroDeTurma(String texto, CadastroEdicaoDeTurma cadastroNovaTurma) {
         tituloLabel.setText("SUCESSO");
         mensagemCentralLabel.setText(texto);
         botaoFinalButton.setText("VOLTAR A LISTAGEM");

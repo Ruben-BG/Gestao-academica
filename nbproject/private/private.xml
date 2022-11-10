@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/ravtec/Documentos/projects/test/_07GestaoAcademica/src/_07gestaoacademica/BancoDeDados.java</file>
-            <file>file:/home/ravtec/Documentos/projects/test/_07GestaoAcademica/src/_07gestaoacademica/ModeloComboboxProfessor.java</file>
+            <file>file:/home/ravtec/Documentos/projects/test/_07GestaoAcademica/src/_07gestaoacademica/GestaoContaUsuario.java</file>
+            <file>file:/home/ravtec/Documentos/projects/test/_07GestaoAcademica/src/_07gestaoacademica/ModeloComboBoxProfessor.java</file>
             <file>file:/home/ravtec/Documentos/projects/test/_07GestaoAcademica/src/_07gestaoacademica/ListagemDeTurma.java</file>
-            <file>file:/home/ravtec/Documentos/projects/test/_07GestaoAcademica/src/_07gestaoacademica/CadastroNovaTurma.java</file>
+            <file>file:/home/ravtec/Documentos/projects/test/_07GestaoAcademica/src/_07gestaoacademica/CadastroEdicaoDeTurma.java</file>
         </group>
     </open-files>
 </project-private>
