@@ -61,7 +61,6 @@ public class CadastroEdicaoDeTurma extends javax.swing.JFrame {
         setBackground(new java.awt.Color(204, 204, 204));
         setUndecorated(true);
         setResizable(false);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -303,7 +302,16 @@ public class CadastroEdicaoDeTurma extends javax.swing.JFrame {
                 .addGap(149, 149, 149))
         );
 
-        getContentPane().add(jPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -326,7 +334,7 @@ public class CadastroEdicaoDeTurma extends javax.swing.JFrame {
             campoDeQuantidadeAluno.setText(String.valueOf(turma.getQuantidadeMaximaDeAlunos()));
             
             /*
-            método de mudar o professor de seleção para aquele já atribuido a turma.
+            método de mudar o professor da seleção, na lista de turmas, para aquele já atribuído a turma.
             */
             int linhaDoItem = 0;
             while(linhaDoItem < BancoDeDados.retornarProfessores().size()) {

@@ -15,6 +15,7 @@ public class DashboardCoordenador extends javax.swing.JFrame {
     GestaoContaUsuario novaGestaoContaUsuario;
     ListagemProfessor novaListagemProfessor;
     ListagemDeTurma novaListagemDeTurma;
+    ListagemDeAluno novaListagemDeAluno;
     
     public DashboardCoordenador() {
         initComponents();
@@ -184,6 +185,9 @@ public class DashboardCoordenador extends javax.swing.JFrame {
         });
 
         alunoButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                alunoButtonMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 alunoButtonMouseEntered(evt);
             }
@@ -382,6 +386,12 @@ public class DashboardCoordenador extends javax.swing.JFrame {
         novaListagemDeTurma.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_turmaButtonMouseClicked
+
+    private void alunoButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_alunoButtonMouseClicked
+        novaListagemDeAluno = new ListagemDeAluno();
+        novaListagemDeAluno.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_alunoButtonMouseClicked
 
     
     /**

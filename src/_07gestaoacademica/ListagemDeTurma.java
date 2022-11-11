@@ -62,7 +62,6 @@ public class ListagemDeTurma extends javax.swing.JFrame {
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cabecalhoPanel.setBackground(new java.awt.Color(204, 204, 204));
         cabecalhoPanel.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -111,8 +110,6 @@ public class ListagemDeTurma extends javax.swing.JFrame {
             .addComponent(sairPaginaButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jPanel1.add(cabecalhoPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, -1));
-
         botaoVoltarLabel.setFont(new java.awt.Font("SansSerif", 0, 48)); // NOI18N
         botaoVoltarLabel.setForeground(new java.awt.Color(102, 102, 102));
         botaoVoltarLabel.setText("←");
@@ -128,12 +125,10 @@ public class ListagemDeTurma extends javax.swing.JFrame {
                 botaoVoltarLabelMouseExited(evt);
             }
         });
-        jPanel1.add(botaoVoltarLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 58, -1, 30));
 
         tituloDaPaginaLabel.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
         tituloDaPaginaLabel.setForeground(new java.awt.Color(30, 30, 30));
         tituloDaPaginaLabel.setText("Listagem de Turmas");
-        jPanel1.add(tituloDaPaginaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 58, 290, -1));
 
         criarNovaTurmaLabel.setForeground(new java.awt.Color(255, 255, 255));
         criarNovaTurmaLabel.setText("Nova Turma");
@@ -146,15 +141,12 @@ public class ListagemDeTurma extends javax.swing.JFrame {
                 criarNovaTurmaLabelActionPerformed(evt);
             }
         });
-        jPanel1.add(criarNovaTurmaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 60, -1, 34));
 
         separador.setForeground(new java.awt.Color(234, 234, 234));
-        jPanel1.add(separador, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 97, 710, 10));
 
         codigoTurmaLabel.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         codigoTurmaLabel.setForeground(new java.awt.Color(0, 0, 0));
         codigoTurmaLabel.setText("Código");
-        jPanel1.add(codigoTurmaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
         campoDeCodigo.setText("");
         campoDeCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -162,12 +154,10 @@ public class ListagemDeTurma extends javax.swing.JFrame {
                 campoDeCodigoKeyPressed(evt);
             }
         });
-        jPanel1.add(campoDeCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 170, -1));
 
         disciplinaTurmaLabel.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         disciplinaTurmaLabel.setForeground(new java.awt.Color(0, 0, 0));
         disciplinaTurmaLabel.setText("Disciplina");
-        jPanel1.add(disciplinaTurmaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, -1, -1));
 
         campoDisciplinaDaTurma.setText("");
         campoDisciplinaDaTurma.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -175,12 +165,10 @@ public class ListagemDeTurma extends javax.swing.JFrame {
                 campoDisciplinaDaTurmaKeyPressed(evt);
             }
         });
-        jPanel1.add(campoDisciplinaDaTurma, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 150, -1));
 
         professorTurmaLabel.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         professorTurmaLabel.setForeground(new java.awt.Color(0, 0, 0));
         professorTurmaLabel.setText("Professor");
-        jPanel1.add(professorTurmaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 110, -1, -1));
 
         campoProfessorTurma.setText("");
         campoProfessorTurma.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -188,7 +176,6 @@ public class ListagemDeTurma extends javax.swing.JFrame {
                 campoProfessorTurmaKeyPressed(evt);
             }
         });
-        jPanel1.add(campoProfessorTurma, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 140, 180, -1));
 
         limparCampoButton.setBackground(new java.awt.Color(188, 188, 188));
         limparCampoButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -204,7 +191,6 @@ public class ListagemDeTurma extends javax.swing.JFrame {
                 limparCampoButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(limparCampoButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 140, 30, 30));
 
         pesquisarTurmaButton.setForeground(new java.awt.Color(255, 255, 255));
         pesquisarTurmaButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/_07gestaoacademica/images/lupaB.png"))); // NOI18N
@@ -219,7 +205,6 @@ public class ListagemDeTurma extends javax.swing.JFrame {
                 pesquisarTurmaButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(pesquisarTurmaButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 140, 30, 30));
 
         jScrollPane1.setBorder(null);
 
@@ -239,7 +224,72 @@ public class ListagemDeTurma extends javax.swing.JFrame {
         tabelaTurma.setSelectionBackground(new java.awt.Color(19, 176, 110));
         jScrollPane1.setViewportView(tabelaTurma);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 190, 660, 290));
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(cabecalhoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(botaoVoltarLabel)
+                        .addGap(22, 22, 22)
+                        .addComponent(tituloDaPaginaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(204, 204, 204)
+                        .addComponent(criarNovaTurmaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(codigoTurmaLabel)
+                        .addGap(141, 141, 141)
+                        .addComponent(disciplinaTurmaLabel)
+                        .addGap(100, 100, 100)
+                        .addComponent(professorTurmaLabel))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(campoDeCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(campoDisciplinaDaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(campoProfessorTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50)
+                        .addComponent(limparCampoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(pesquisarTurmaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 28, Short.MAX_VALUE))
+            .addComponent(separador)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(cabecalhoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(botaoVoltarLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tituloDaPaginaLabel)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(criarNovaTurmaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(3, 3, 3)
+                .addComponent(separador, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(codigoTurmaLabel)
+                    .addComponent(disciplinaTurmaLabel)
+                    .addComponent(professorTurmaLabel))
+                .addGap(12, 12, 12)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(campoDeCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoDisciplinaDaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoProfessorTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(limparCampoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pesquisarTurmaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

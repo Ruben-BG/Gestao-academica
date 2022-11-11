@@ -228,6 +228,21 @@ public class ConfirmacaoPopUp extends javax.swing.JFrame {
         
     }
     
+    public void confirmacaoRemoverLinhaTabelaAluno(String textoMostrado, ModeloTabelaAluno tableModel, int linha) {
+        
+        mensagemCentralLabel.setText(textoMostrado);
+        
+        botaoDeSim.addActionListener((e) -> {
+            tableModel.removeLinha(linha);
+            this.dispose();
+        });
+        
+        botaoDeNao.addActionListener((e) -> {
+            this.dispose();
+        });
+        
+    }
+    
     /**
      * @param args the command line arguments
      */

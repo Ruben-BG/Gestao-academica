@@ -128,6 +128,24 @@ public class BancoDeDados {
         return turmas;
     }
     
+    public static List<UsuarioAluno> retornarAlunos() {
+        
+        List<UsuarioAluno> alunos = new ArrayList<>();
+        
+        for(Usuario usuario: usuarios) {
+            
+            Boolean usuarioAluno = usuario instanceof UsuarioAluno;
+            
+            if(usuarioAluno) {
+                alunos.add((UsuarioAluno) usuario);
+            }
+            
+        }
+        
+        return alunos;
+        
+    }
+    
     public static void excluirProfessorDaLista(int linhaSelecionada) {
         
         List<UsuarioProfessor> professores = new ArrayList<>();
@@ -142,7 +160,7 @@ public class BancoDeDados {
             
         }
         
-        turmas.removeAll(professores.get(linhaSelecionada).retornarTurmasDesseProfessor());
+        turmas.removeAll(professores.get(linhaSelecionada).retornarTurmasDesseProfessor());//usado para remover da lista todos os seus elementos contidos na coleção especificada.
         usuarios.remove(professores.get(linhaSelecionada));
         
     }
@@ -160,6 +178,14 @@ public class BancoDeDados {
         }
         
         turmas.remove(linhaSelecionada);
+        
+    }
+    
+    public static void excluirAlunoDaLista(int linhaSelecionada) {
+        
+        List<UsuarioAluno> alunos = retornarAlunos();
+        
+        //usuarios.get(alunos.get(linhaSelecionada));
         
     }
     
@@ -248,6 +274,7 @@ public class BancoDeDados {
         Turma turma2;
         Turma turma3;
         
+        
         coordenador = new UsuarioCoordenador();
         coordenador.setNome("Alan Santos");
         coordenador.setCpf("54345423478");
@@ -257,6 +284,7 @@ public class BancoDeDados {
         coordenador.setSenha("123");
         coordenador.setTelefone("123321");
         usuarios.add(coordenador);
+        
         
         aluno1 = new UsuarioAluno();
         aluno1.setMatricula(1);
@@ -276,17 +304,12 @@ public class BancoDeDados {
         aluno3.setSenha("123");
         usuarios.add(aluno3);
         
+        
         professor1 = new UsuarioProfessor();
         professor1.setMatricula(4);
         professor1.setNome("Silvio Pontes");
         professor1.setSenha("123");
         usuarios.add(professor1);
-        turma1 = new Turma();
-        turma1.setProfessor(professor1);
-        turma1.setDisciplina("geografia");
-        turma1.setCodigo("GEO123");
-        professor1.adicionaTurma(turma1);
-        turmas.add(turma1);
         
         professor2 = new UsuarioProfessor();
         professor2.setMatricula(5);
@@ -295,18 +318,33 @@ public class BancoDeDados {
         professor2.setCpf("61158269340");
         professor2.setEmail("pauloM@gmail.com");
         usuarios.add(professor2);
+        
+        
+        turma1 = new Turma();
+        turma1.setProfessor(professor1);
+        turma1.setDisciplina("geografia");
+        turma1.setCodigo("GEO123");
+        turma1.adicionarAluno(aluno1);
+        turma1.adicionarAluno(aluno3);
+        professor1.adicionaTurma(turma1);
+        turmas.add(turma1);
+        
         turma2 = new Turma();
         turma2.setProfessor(professor2);
         turma2.setDisciplina("ciências");
         turma2.setCodigo("CIE14S");
         turma2.setQuantidadeMaximaDeAlunos(5);
+        turma2.adicionarAluno(aluno1);
+        turma2.adicionarAluno(aluno2);
         professor2.adicionaTurma(turma2);
         turmas.add(turma2);
+        
         turma3 = new Turma();
         turma3.setProfessor(professor2);
         turma3.setDisciplina("biologia");
         turma3.setCodigo("BIO469");
         turma3.setQuantidadeMaximaDeAlunos(12);
+        turma3.adicionarAluno(aluno1);
         professor2.adicionaTurma(turma3);
         turmas.add(turma3);
         

@@ -32,7 +32,10 @@ public class Turma{
     public int getQuantidadeMaximaDeAlunos() {
         return quantidadeMaximaDeAlunos;
     }
-    
+
+    public List<UsuarioAluno> getAlunosMatriculados() {
+        return alunosMatriculados;
+    }
     
     //SETTERS
 
@@ -54,6 +57,11 @@ public class Turma{
 
     public void setQuantidadeMaximaDeAlunos(int quantidadeMaximaDeAlunos) {
         this.quantidadeMaximaDeAlunos = quantidadeMaximaDeAlunos;
+    }
+
+    public void adicionarAluno(UsuarioAluno aluno) {
+        this.alunosMatriculados.add(aluno);
+        aluno.atribuirATurma(this);
     }
     
 }
