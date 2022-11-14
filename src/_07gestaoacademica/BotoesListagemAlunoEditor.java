@@ -64,7 +64,7 @@ public class BotoesListagemAlunoEditor extends AbstractCellEditor implements Tab
             if(alunoSelecionado.getTurmasOndeAlunoEsta().size() < 1) {
                 popUp.confirmacaoRemoverLinhaTabelaAluno("Você deseja remover o aluno " + alunoSelecionado.getNome() + "?", referenciaModel, tabela.getSelectedRow());
             } else {
-                popUp.confirmacaoRemoverLinhaTabelaAluno(alunoSelecionado.getNome() + " está em " + alunoSelecionado.getTurmasOndeAlunoEsta().size() + " turmas, deseja excluí-lo?", referenciaModel, tabela.getSelectedRow());
+                popUp.confirmacaoRemoverLinhaTabelaAluno(alunoSelecionado.getNome() + " está em " + alunoSelecionado.getTurmasOndeAlunoEsta().size() + " turma(s), deseja excluí-lo?", referenciaModel, tabela.getSelectedRow());
             }
             
         });

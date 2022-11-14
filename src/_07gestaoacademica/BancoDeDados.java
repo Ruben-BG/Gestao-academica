@@ -185,7 +185,7 @@ public class BancoDeDados {
         
         List<UsuarioAluno> alunos = retornarAlunos();
         
-        //usuarios.get(alunos.get(linhaSelecionada));
+        usuarios.remove(alunos.get(linhaSelecionada));
         
     }
     
@@ -258,6 +258,10 @@ public class BancoDeDados {
         turma.setHorario(turmaParaEdicao.getHorario());
         turma.setQuantidadeMaximaDeAlunos(turmaParaEdicao.getQuantidadeMaximaDeAlunos());
         turma.setProfessor(turmaParaEdicao.getProfessor());
+        
+    }
+    
+    public static void editarAluno(int alunoSelecionado, UsuarioAluno alunoParaEdicao) {
         
     }
     

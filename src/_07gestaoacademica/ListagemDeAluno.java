@@ -11,6 +11,7 @@ public class ListagemDeAluno extends javax.swing.JFrame {
     private int mouseX, mouseY;
     GestaoContaUsuario novaGestaoContaUsuario;
     DashboardCoordenador voltarDashboardCoordenador;
+    CadastroEdicaoDeAluno novoCadastroEdicaoDeAluno;
     ModeloTabelaAluno tableModel = new ModeloTabelaAluno();
     
     
@@ -51,7 +52,7 @@ public class ListagemDeAluno extends javax.swing.JFrame {
         disciplinaLabel = new javax.swing.JLabel();
         campoDeDisciplina = new _07gestaoacademica.CampoDeEscrita();
         limparCampoButton = new _07gestaoacademica.CustomizacaoBotao();
-        pesquisarTurmaButton = new _07gestaoacademica.CustomizacaoBotao();
+        pesquisarAlunoButton = new _07gestaoacademica.CustomizacaoBotao();
         jScrollPane = new javax.swing.JScrollPane();
         tabelaAluno = new _07gestaoacademica.JTablePersonalizada();
 
@@ -204,20 +205,20 @@ public class ListagemDeAluno extends javax.swing.JFrame {
         });
         jPanel1.add(limparCampoButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 140, 30, 30));
 
-        pesquisarTurmaButton.setForeground(new java.awt.Color(255, 255, 255));
-        pesquisarTurmaButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/_07gestaoacademica/images/lupaB.png"))); // NOI18N
-        pesquisarTurmaButton.setCor(new java.awt.Color(76, 95, 99));
-        pesquisarTurmaButton.setCorBorda(new java.awt.Color(255, 255, 255));
-        pesquisarTurmaButton.setCorClicou(new java.awt.Color(117, 146, 153));
-        pesquisarTurmaButton.setCorEntrou(new java.awt.Color(87, 123, 132));
-        pesquisarTurmaButton.setCorSaiu(new java.awt.Color(76, 95, 99));
-        pesquisarTurmaButton.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        pesquisarTurmaButton.addActionListener(new java.awt.event.ActionListener() {
+        pesquisarAlunoButton.setForeground(new java.awt.Color(255, 255, 255));
+        pesquisarAlunoButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/_07gestaoacademica/images/lupaB.png"))); // NOI18N
+        pesquisarAlunoButton.setCor(new java.awt.Color(76, 95, 99));
+        pesquisarAlunoButton.setCorBorda(new java.awt.Color(255, 255, 255));
+        pesquisarAlunoButton.setCorClicou(new java.awt.Color(117, 146, 153));
+        pesquisarAlunoButton.setCorEntrou(new java.awt.Color(87, 123, 132));
+        pesquisarAlunoButton.setCorSaiu(new java.awt.Color(76, 95, 99));
+        pesquisarAlunoButton.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        pesquisarAlunoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pesquisarTurmaButtonActionPerformed(evt);
+                pesquisarAlunoButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(pesquisarTurmaButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 140, 30, 30));
+        jPanel1.add(pesquisarAlunoButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 140, 30, 30));
 
         jScrollPane.setBorder(null);
 
@@ -307,28 +308,30 @@ public class ListagemDeAluno extends javax.swing.JFrame {
 
     private void criarNovoAlunoLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_criarNovoAlunoLabelActionPerformed
 
-        
+        novoCadastroEdicaoDeAluno = new CadastroEdicaoDeAluno(tabelaAluno);
+        novoCadastroEdicaoDeAluno.setVisible(true);
+        this.dispose();
 
     }//GEN-LAST:event_criarNovoAlunoLabelActionPerformed
 
     private void campoDeNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoDeNomeKeyPressed
 
         if(evt.getKeyCode() == KeyEvent.VK_ENTER)
-        pesquisarTurmaButtonActionPerformed(null);
+        pesquisarAlunoButtonActionPerformed(null);
         
     }//GEN-LAST:event_campoDeNomeKeyPressed
 
     private void campoDeCodigoDaTurmaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoDeCodigoDaTurmaKeyPressed
 
         if(evt.getKeyCode() == KeyEvent.VK_ENTER)
-        pesquisarTurmaButtonActionPerformed(null);
+        pesquisarAlunoButtonActionPerformed(null);
         
     }//GEN-LAST:event_campoDeCodigoDaTurmaKeyPressed
 
     private void campoDeDisciplinaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoDeDisciplinaKeyPressed
 
         if(evt.getKeyCode() == KeyEvent.VK_ENTER)
-        pesquisarTurmaButtonActionPerformed(null);
+        pesquisarAlunoButtonActionPerformed(null);
         
     }//GEN-LAST:event_campoDeDisciplinaKeyPressed
 
@@ -337,15 +340,15 @@ public class ListagemDeAluno extends javax.swing.JFrame {
         campoDeNome.setText("");
         campoDeCodigoDaTurma.setText("");
         campoDeDisciplina.setText("");
-        pesquisarTurmaButton.doClick();
+        pesquisarAlunoButton.doClick();
         
     }//GEN-LAST:event_limparCampoButtonActionPerformed
 
-    private void pesquisarTurmaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisarTurmaButtonActionPerformed
+    private void pesquisarAlunoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisarAlunoButtonActionPerformed
 
         
         
-    }//GEN-LAST:event_pesquisarTurmaButtonActionPerformed
+    }//GEN-LAST:event_pesquisarAlunoButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -395,7 +398,7 @@ public class ListagemDeAluno extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane;
     private _07gestaoacademica.CustomizacaoBotao limparCampoButton;
     private javax.swing.JLabel nomeAlunoLabel;
-    private _07gestaoacademica.CustomizacaoBotao pesquisarTurmaButton;
+    private _07gestaoacademica.CustomizacaoBotao pesquisarAlunoButton;
     private javax.swing.JButton sairPaginaButton;
     private javax.swing.JSeparator separador;
     private _07gestaoacademica.JTablePersonalizada tabelaAluno;
