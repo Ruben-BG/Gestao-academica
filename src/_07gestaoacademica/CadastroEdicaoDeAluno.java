@@ -372,15 +372,15 @@ public class CadastroEdicaoDeAluno extends javax.swing.JFrame {
     //Métodos de simplificação
     public void mudarFuncaoDaJanela(Boolean isTelaDeCadastro, JTablePersonalizada tabela) {
 
-        if(isTelaDeCadastro.equals(true)) {
-            
+        if (isTelaDeCadastro.equals(true)) {
+
             tituloDaPaginaLabel.setText("Novo Aluno");
             telaDeCadastro = true;
-            
+
         } else {
-            
+
             tituloDaPaginaLabel.setText("Editar Aluno");
-            
+
             aluno = BancoDeDados.retornarAlunos().get(tabela.getSelectedRow());
             nomeTextField.setText(aluno.getNome());
             cpfTextField.setText(aluno.getCpf());
@@ -388,11 +388,11 @@ public class CadastroEdicaoDeAluno extends javax.swing.JFrame {
             enderecoTextField.setText(aluno.getEndereco());
             emailTextField.setText(aluno.getEmail());
             senhaPasswordField.setText(aluno.getSenha());
-            
+
             telaDeCadastro = false;
-            
+
         }
-        
+
     }
 
     public void mouseEntrouOuSaiuDoCampo(CampoDeEscrita campoDeTexto, String textoPadrao) {
@@ -416,6 +416,26 @@ public class CadastroEdicaoDeAluno extends javax.swing.JFrame {
 
         }
 
+    }
+
+    private void pegaDadosAluno(UsuarioAluno novoAluno) {
+
+        aluno.setNome(nomeTextField.getText());
+        aluno.setCpf(cpfTextField.getText());
+        aluno.setTelefone(telefoneTextField.getText());
+        aluno.setEndereco(enderecoTextField.getText());
+        aluno.setEmail(emailTextField.getText());
+        aluno.setSenha(String.valueOf(senhaPasswordField.getPassword()));
+
+    }
+
+    private void limpaCampos() {
+        nomeTextField.setText("");
+        cpfTextField.setText("");
+        telefoneTextField.setText("");
+        enderecoTextField.setText("");
+        emailTextField.setText("");
+        senhaPasswordField.setText("");
     }
 
     public Boolean gerarPopUp() {
@@ -472,34 +492,27 @@ public class CadastroEdicaoDeAluno extends javax.swing.JFrame {
 
         if (telaDeCadastro && !gerarPopUp()) {
 
-            //Aplicação de dados num novo objeto professor
+            //Aplicação de dados num novo objeto aluno
             aluno = new UsuarioAluno();
-            aluno.setNome(nomeTextField.getText());
-            aluno.setCpf(cpfTextField.getText());
-            aluno.setTelefone(telefoneTextField.getText());
-            aluno.setEndereco(enderecoTextField.getText());
-            aluno.setEmail(emailTextField.getText());
-            aluno.setSenha(String.valueOf(senhaPasswordField.getPassword()));
+            pegaDadosAluno(aluno);
             aluno.setMatricula(Usuario.getProximaMatricula());
-            
+
             //Cadastro do novo objeto na lista
             BancoDeDados.cadastrarUsuario(aluno);
-            
+
             //Pop-Up de confirmação da criação de novo usuário
             p = new PopUp();
             p.mensagemFinalDoCadastroDeAluno("Conta criada com sucesso!", this);
-            
-            //Limpeza de campos pós criação de usuário
-            nomeTextField.setText("");
-            cpfTextField.setText("");
-            telefoneTextField.setText("");
-            enderecoTextField.setText("");
-            emailTextField.setText("");
-            senhaPasswordField.setText("");
-            
+            limpaCampos();
+
         } else if (!telaDeCadastro && !gerarPopUp()) {
 
+            aluno = new UsuarioAluno();
+            pegaDadosAluno(aluno);
+            BancoDeDados.editarAluno(tabela.getSelectedRow(), aluno);
             
+            p = new PopUp();
+            p.mensagemFinalDoCadastroDeAluno("Edição finalizada com sucesso!", this);
             
         }
 

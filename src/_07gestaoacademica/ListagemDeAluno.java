@@ -346,7 +346,11 @@ public class ListagemDeAluno extends javax.swing.JFrame {
 
     private void pesquisarAlunoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisarAlunoButtonActionPerformed
 
+        String nomeAluno = campoDeNome.getText().trim().toUpperCase(), 
+                codigoTurma = campoDeCodigoDaTurma.getText().trim().toUpperCase(), 
+                disciplinaTurma = campoDeDisciplina.getText().trim().toUpperCase();
         
+        tableModel.pesquisarAluno(nomeAluno, codigoTurma, disciplinaTurma, this, tabelaAluno);
         
     }//GEN-LAST:event_pesquisarAlunoButtonActionPerformed
 

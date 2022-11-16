@@ -4,9 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/ravtec/Documentos/projects/test/_07GestaoAcademica/src/_07gestaoacademica/BancoDeDados.java</file>
-            <file>file:/home/ravtec/Documentos/projects/test/_07GestaoAcademica/src/_07gestaoacademica/CadastroEdicaoDeAluno.java</file>
             <file>file:/home/ravtec/Documentos/projects/test/_07GestaoAcademica/src/_07gestaoacademica/ListagemDeAluno.java</file>
-            <file>file:/home/ravtec/Documentos/projects/test/_07GestaoAcademica/src/_07gestaoacademica/CadastroEdicaoDeTurma.java</file>
+            <file>file:/home/ravtec/Documentos/projects/test/_07GestaoAcademica/src/_07gestaoacademica/ModeloTabelaProfessor.java</file>
+            <file>file:/home/ravtec/Documentos/projects/test/_07GestaoAcademica/src/_07gestaoacademica/ModeloTabelaAluno.java</file>
         </group>
     </open-files>
 </project-private>

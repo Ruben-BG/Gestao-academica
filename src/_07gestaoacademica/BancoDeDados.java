@@ -236,6 +236,34 @@ public class BancoDeDados {
         
     }
     
+    public static List<UsuarioAluno> pesquisarAluno(String nomeDoAluno, String codidoDaTurma, String disciplinaTurma) {
+        
+        List<UsuarioAluno> alunos = new ArrayList<>();
+        
+        for(UsuarioAluno aluno: retornarAlunos()) {
+            
+            Boolean validaNome = nomeDoAluno != null && aluno.getNome().toUpperCase().contains(nomeDoAluno);
+            Boolean validaCodigoDaTurma = false;
+            Boolean validaDisciplina = false;
+            
+            for (Turma turma: turmas) {
+                if(codidoDaTurma.toUpperCase().trim().equals(turma.getCodigo()))
+                    validaCodigoDaTurma = true;
+                
+                if(disciplinaTurma != null && !disciplinaTurma.equals("") && turma.getDisciplina().contains(disciplinaTurma))
+                    validaDisciplina = true;
+            }
+            
+            if (validaNome || validaCodigoDaTurma || validaDisciplina) {
+                alunos.add(aluno);
+            }
+            
+        }
+        
+        return alunos;
+        
+    }
+    
     public static void editarProfessor(int professorSelecionado, UsuarioProfessor usuarioProfessor) {
         
         UsuarioProfessor professorEscolhido = retornarProfessores().get(professorSelecionado);
@@ -262,6 +290,15 @@ public class BancoDeDados {
     }
     
     public static void editarAluno(int alunoSelecionado, UsuarioAluno alunoParaEdicao) {
+        
+        UsuarioAluno aluno = retornarAlunos().get(alunoSelecionado);
+        
+        aluno.setNome(alunoParaEdicao.getNome());
+        aluno.setCpf(alunoParaEdicao.getCpf());
+        aluno.setTelefone(alunoParaEdicao.getTelefone());
+        aluno.setEndereco(alunoParaEdicao.getEndereco());
+        aluno.setEmail(alunoParaEdicao.getEmail());
+        aluno.setSenha(alunoParaEdicao.getSenha());
         
     }
     

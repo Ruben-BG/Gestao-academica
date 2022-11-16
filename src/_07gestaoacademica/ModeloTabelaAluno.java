@@ -1,12 +1,17 @@
 package _07gestaoacademica;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 public class ModeloTabelaAluno extends AbstractTableModel {
 
-    List<UsuarioAluno> alunos = BancoDeDados.retornarAlunos();
+    List<UsuarioAluno> alunos = new ArrayList<>();
     private String[] colunas = {"Nome", "Turmas", "Ações"};
+    
+    public ModeloTabelaAluno() {
+        alunos = BancoDeDados.retornarAlunos();
+    }
     
     @Override
     public int getRowCount() {
@@ -46,6 +51,25 @@ public class ModeloTabelaAluno extends AbstractTableModel {
         BancoDeDados.excluirAlunoDaLista(linha);
         alunos.remove(linha);
         fireTableDataChanged();
+        
+    }
+    
+    public void pesquisarAluno(String nome, String codigo, String disciplina, ListagemDeAluno referenciaAListagem, JTablePersonalizada tabela) {
+        
+        if (nome.equals("") && codigo.equals("") && disciplina.equals("")) {
+            
+            alunos = BancoDeDados.retornarAlunos();
+            referenciaAListagem.casoDePesquisaNula();
+            fireTableDataChanged();
+        
+        } else {
+            
+            alunos = BancoDeDados.pesquisarAluno(nome, codigo, disciplina);
+            
+            
+            fireTableDataChanged();
+            
+        }
         
     }
     

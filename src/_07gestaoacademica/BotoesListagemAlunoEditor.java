@@ -41,7 +41,7 @@ public class BotoesListagemAlunoEditor extends AbstractCellEditor implements Tab
             }
         }
 
-    public BotoesListagemAlunoEditor(JTable tabela, ListagemDeAluno referenciaForm, ModeloTabelaAluno referenciaModel) {
+    public BotoesListagemAlunoEditor(JTablePersonalizada tabela, ListagemDeAluno referenciaForm, ModeloTabelaAluno referenciaModel) {
 
         super();
         this.tabela = tabela;
@@ -50,7 +50,10 @@ public class BotoesListagemAlunoEditor extends AbstractCellEditor implements Tab
         lista.get(0).addActionListener(e -> {
             //Ação do botão editar na tabela
             
-            //código
+            CadastroEdicaoDeAluno telaDeEdicao = new CadastroEdicaoDeAluno(tabela);
+            telaDeEdicao.mudarFuncaoDaJanela(false, tabela);
+            telaDeEdicao.setVisible(true);
+            referenciaForm.dispose();
             
         });
 
