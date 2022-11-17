@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package _07gestaoacademica;
 
 import java.awt.Color;
@@ -22,6 +18,14 @@ public class DashboardAluno extends javax.swing.JFrame {
         nomeLabel.setText(BancoDeDados.pegaUsuario().getNome() + " | Aluno(a)");
         dataHora();
         
+        turmaButton.mudarTexto("Suas turmas");
+        turmaButton.mudarNumero(String.valueOf(BancoDeDados.quantidadeTurmaAluno()));
+        turmaButton.mudarIcone("/_07gestaoacademica/images/turmaP.png");
+        solicitarMatriculaButton.igualarFonte();
+        solicitarMatriculaButton.mudarTexto("matrícula");
+        solicitarMatriculaButton.mudarNumero("Solicitar");
+        solicitarMatriculaButton.mudarIcone("/_07gestaoacademica/images/grupoP.png");
+        
     }
 
     /**
@@ -40,6 +44,8 @@ public class DashboardAluno extends javax.swing.JFrame {
         nomeLabel = new javax.swing.JLabel();
         dataLabel = new javax.swing.JLabel();
         sairButton = new javax.swing.JButton();
+        turmaButton = new _07gestaoacademica.FormularioButton();
+        solicitarMatriculaButton = new _07gestaoacademica.FormularioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -137,18 +143,47 @@ public class DashboardAluno extends javax.swing.JFrame {
             }
         });
 
+        turmaButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                turmaButtonMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                turmaButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                turmaButtonMouseExited(evt);
+            }
+        });
+
+        solicitarMatriculaButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                solicitarMatriculaButtonMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                solicitarMatriculaButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                solicitarMatriculaButtonMouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout painelGeralLayout = new javax.swing.GroupLayout(painelGeral);
         painelGeral.setLayout(painelGeralLayout);
         painelGeralLayout.setHorizontalGroup(
             painelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(cabecalhoJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(painelGeralLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelGeralLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(nomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(painelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(nomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(turmaButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
-                .addComponent(dataLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sairButton, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(painelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(solicitarMatriculaButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(painelGeralLayout.createSequentialGroup()
+                        .addComponent(dataLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(sairButton, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         painelGeralLayout.setVerticalGroup(
@@ -160,7 +195,11 @@ public class DashboardAluno extends javax.swing.JFrame {
                     .addComponent(sairButton)
                     .addComponent(nomeLabel)
                     .addComponent(dataLabel))
-                .addGap(0, 395, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
+                .addGroup(painelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(solicitarMatriculaButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(turmaButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 194, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -248,6 +287,34 @@ public class DashboardAluno extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_sairButtonActionPerformed
 
+    private void solicitarMatriculaButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_solicitarMatriculaButtonMouseClicked
+        
+    }//GEN-LAST:event_solicitarMatriculaButtonMouseClicked
+
+    private void solicitarMatriculaButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_solicitarMatriculaButtonMouseEntered
+        solicitarMatriculaButton.mudarIcone("/_07gestaoacademica/images/grupoB.png");
+    }//GEN-LAST:event_solicitarMatriculaButtonMouseEntered
+
+    private void solicitarMatriculaButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_solicitarMatriculaButtonMouseExited
+        solicitarMatriculaButton.mudarIcone("/_07gestaoacademica/images/grupoP.png");
+    }//GEN-LAST:event_solicitarMatriculaButtonMouseExited
+
+    private void turmaButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_turmaButtonMouseClicked
+        
+        ListagemTurmasAluno telaDeListagem = new ListagemTurmasAluno();
+        telaDeListagem.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_turmaButtonMouseClicked
+
+    private void turmaButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_turmaButtonMouseEntered
+        turmaButton.mudarIcone("/_07gestaoacademica/images/turmaB.png");
+    }//GEN-LAST:event_turmaButtonMouseEntered
+
+    private void turmaButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_turmaButtonMouseExited
+        turmaButton.mudarIcone("/_07gestaoacademica/images/turmaP.png");
+    }//GEN-LAST:event_turmaButtonMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -286,17 +353,13 @@ public class DashboardAluno extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel cabecalhoJPanel;
-    private javax.swing.JPanel cabecalhoPanel;
-    private javax.swing.JPanel cabecalhoPanel1;
     private javax.swing.JLabel dataLabel;
     private javax.swing.JLabel nomeLabel;
     private javax.swing.JPanel painelGeral;
     private javax.swing.JButton sairButton;
     private javax.swing.JButton sairPaginaButton;
-    private javax.swing.JButton sairPaginaButton2;
-    private javax.swing.JButton sairPaginaButton3;
-    private javax.swing.JLabel tituloCabecalhoLabel;
-    private javax.swing.JLabel tituloCabecalhoLabel1;
+    private _07gestaoacademica.FormularioButton solicitarMatriculaButton;
     private javax.swing.JLabel tituloDoCabecalhoLabel;
+    private _07gestaoacademica.FormularioButton turmaButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -107,6 +107,18 @@ public class BancoDeDados {
         return quantidade;
     }
     
+    public static int quantidadeTurmaAluno() {
+        
+        int quantidade = 0;
+        
+        if (usuarioLogado instanceof UsuarioAluno usuarioAluno) {
+            quantidade = usuarioAluno.getTurmasOndeAlunoEsta().size();
+        }
+        
+        return quantidade;
+        
+    }
+    
     public static List<UsuarioProfessor> retornarProfessores() {
         
         List<UsuarioProfessor> professores = new ArrayList<>();
@@ -242,17 +254,9 @@ public class BancoDeDados {
         
         for(UsuarioAluno aluno: retornarAlunos()) {
             
-            Boolean validaNome = nomeDoAluno != null && aluno.getNome().toUpperCase().contains(nomeDoAluno);
-            Boolean validaCodigoDaTurma = false;
-            Boolean validaDisciplina = false;
-            
-            for (Turma turma: turmas) {
-                if(codidoDaTurma.toUpperCase().trim().equals(turma.getCodigo()))
-                    validaCodigoDaTurma = true;
-                
-                if(disciplinaTurma != null && !disciplinaTurma.equals("") && turma.getDisciplina().contains(disciplinaTurma))
-                    validaDisciplina = true;
-            }
+            Boolean validaNome = nomeDoAluno != null && !nomeDoAluno.equals("") && aluno.getNome().toUpperCase().contains(nomeDoAluno);
+            Boolean validaCodigoDaTurma = aluno.validaCodigoDaTurma(codidoDaTurma);
+            Boolean validaDisciplina = aluno.validaDisciplinaDaTurma(disciplinaTurma);
             
             if (validaNome || validaCodigoDaTurma || validaDisciplina) {
                 alunos.add(aluno);
@@ -365,6 +369,7 @@ public class BancoDeDados {
         turma1.setProfessor(professor1);
         turma1.setDisciplina("geografia");
         turma1.setCodigo("GEO123");
+        turma1.setHorario("Seg.: 08:00");
         turma1.adicionarAluno(aluno1);
         turma1.adicionarAluno(aluno3);
         professor1.adicionaTurma(turma1);
@@ -374,6 +379,7 @@ public class BancoDeDados {
         turma2.setProfessor(professor2);
         turma2.setDisciplina("ciências");
         turma2.setCodigo("CIE14S");
+        turma2.setHorario("Seg.: 07:10");
         turma2.setQuantidadeMaximaDeAlunos(5);
         turma2.adicionarAluno(aluno1);
         turma2.adicionarAluno(aluno2);
@@ -384,6 +390,7 @@ public class BancoDeDados {
         turma3.setProfessor(professor2);
         turma3.setDisciplina("biologia");
         turma3.setCodigo("BIO469");
+        turma3.setHorario("Qua.: 09:00");
         turma3.setQuantidadeMaximaDeAlunos(12);
         turma3.adicionarAluno(aluno1);
         professor2.adicionaTurma(turma3);

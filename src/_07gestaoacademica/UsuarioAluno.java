@@ -24,4 +24,30 @@ public class UsuarioAluno extends Usuario{
         return turmasOndeAlunoEsta;
     }
     
+    public Boolean validaDisciplinaDaTurma(String disciplina) {
+        
+        for(Turma turma: turmasOndeAlunoEsta) {
+            
+            if (!disciplina.equals("") && turma.getDisciplina().toUpperCase().contains(disciplina))
+                return true;
+            
+        }
+        
+        return false;
+        
+    }
+    
+    public Boolean validaCodigoDaTurma(String codigo) {
+        
+        for(Turma turma: turmasOndeAlunoEsta) {
+            
+            if (!codigo.equals("") && turma.getCodigo().toUpperCase().equals(codigo))
+                return true;
+            
+        }
+        
+        return false;
+        
+    }
+    
 }

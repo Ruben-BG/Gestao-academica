@@ -194,7 +194,7 @@ public class ConfirmacaoPopUp extends javax.swing.JFrame {
         
     }
     
-    public void confirmacaoParaAlterarDadosDoProfessor(String textoMostrado, EditarProfessor referenciaAJanela, int professorSelecionado, UsuarioProfessor usuarioProfessor) {
+    public void confirmacaoParaAlterarDadosDoProfessor(String textoMostrado, CadastroEdicaoDeProfessor referenciaAJanela, int professorSelecionado, UsuarioProfessor usuarioProfessor) {
         
         tituloLabel.setText("ATENÇÃO");
         mensagemCentralLabel.setText(textoMostrado);

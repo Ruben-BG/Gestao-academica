@@ -307,22 +307,7 @@ public class PopUp extends javax.swing.JFrame {
         });
     }
     
-    public void mensagemFinalDoCadastroDaLista(String textoCadastro, CadastroNovoProfessor referenciaAJanela) {
-        tituloLabel.setText("SUCESSO");
-        mensagemCentralLabel.setText(textoCadastro);
-        botaoFinalButton.setText("VOLTAR A LISTAGEM");
-        finalizacaoFrame();
-        botaoFinalButton.addActionListener((e) -> {
-           
-            this.dispose();
-            referenciaAJanela.dispose();
-            listagemProfessor = new ListagemProfessor();
-            listagemProfessor.setVisible(true);
-            
-        });
-    }
-    
-    public void mensagemFinalDaEdicaoDoProfessor(String textoCadastro, EditarProfessor referenciaAJanela) {
+    public void mensagemFinalDoCadastroDaLista(String textoCadastro, CadastroEdicaoDeProfessor referenciaAJanela) {
         tituloLabel.setText("SUCESSO");
         mensagemCentralLabel.setText(textoCadastro);
         botaoFinalButton.setText("VOLTAR A LISTAGEM");

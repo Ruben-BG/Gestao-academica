@@ -66,6 +66,11 @@ public class ModeloTabelaAluno extends AbstractTableModel {
             
             alunos = BancoDeDados.pesquisarAluno(nome, codigo, disciplina);
             
+            if (alunos.size() < 1) {
+                referenciaAListagem.mensagemCasoPesquisaDeErrado();
+            } else {
+                referenciaAListagem.casoDePesquisaNula();
+            }
             
             fireTableDataChanged();
             

@@ -34,7 +34,7 @@ public class BotoesListagemProfessorEditor extends AbstractCellEditor implements
             }
         }
 
-    public BotoesListagemProfessorEditor(JTable tabela, ListagemProfessor referenciaForm, ModeloTabelaProfessor referenciaModel) {
+    public BotoesListagemProfessorEditor(JTablePersonalizada tabela, ListagemProfessor referenciaForm, ModeloTabelaProfessor referenciaModel) {
 
         super();
         this.tabela = tabela;
@@ -44,8 +44,9 @@ public class BotoesListagemProfessorEditor extends AbstractCellEditor implements
             //Ação do botão editar na tabela
             
             referenciaForm.dispose();
-            EditarProfessor editarProfessor = new EditarProfessor(tabela.getSelectedRow());
-            editarProfessor.setVisible(true);
+            CadastroEdicaoDeProfessor telaDeEdicao = new CadastroEdicaoDeProfessor(tabela);
+            telaDeEdicao.mudarFuncaoDaJanela(false, tabela);
+            telaDeEdicao.setVisible(true);
             
         });
 

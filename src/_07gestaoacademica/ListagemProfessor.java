@@ -362,7 +362,7 @@ public class ListagemProfessor extends javax.swing.JFrame {
 
     private void criarNovoProfessorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_criarNovoProfessorButtonActionPerformed
 
-        CadastroNovoProfessor criarNovoProfessor = new CadastroNovoProfessor();
+        CadastroEdicaoDeProfessor criarNovoProfessor = new CadastroEdicaoDeProfessor(tabelaProfessor);
         criarNovoProfessor.setVisible(true);
         this.dispose();
 
