@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.List;
 import javax.swing.AbstractCellEditor;
 import javax.swing.ButtonModel;
 import javax.swing.JButton;
@@ -50,7 +49,9 @@ public class BotaoListagemTurmaAlunoEditor extends AbstractCellEditor implements
         botao.addActionListener((e) -> {
             //Ação do botão
             
-            
+            NotasDaTurmaAluno telaDeNotas = new NotasDaTurmaAluno();
+            telaDeNotas.setVisible(true);
+            referenciaForm.dispose();
             
         });
 

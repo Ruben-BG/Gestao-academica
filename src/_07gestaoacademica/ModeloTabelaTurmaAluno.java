@@ -24,6 +24,11 @@ public class ModeloTabelaTurmaAluno extends AbstractTableModel{
     }
 
     @Override
+    public boolean isCellEditable(int linha, int coluna) {
+        return coluna == 4;
+    }
+
+    @Override
     public Object getValueAt(int linha, int coluna) {
         
         Turma selecaoTurma = turmas.get(linha);
@@ -35,6 +40,30 @@ public class ModeloTabelaTurmaAluno extends AbstractTableModel{
             case 3: return selecaoTurma.getHorario();
             case 4: return null;
             default: return null;
+        }
+        
+    }
+    
+    public void pesquisarTurma(String codigo, String disciplina, String professor, String horario, ListagemTurmasAluno referenciaTabela) {
+
+        if(codigo.equals("") && disciplina.equals("") && professor.equals("") && horario.equals("")){
+            
+            turmas = BancoDeDados.retornarTurmas();
+            referenciaTabela.mensagemCasoPesquisaNula();
+            fireTableDataChanged();
+            
+        } else {
+            
+            turmas = BancoDeDados.pesquisarTurmaAluno(codigo, disciplina, professor, horario);
+            
+            if (turmas.size() < 1) {
+                referenciaTabela.mensagemCasoPesquisaDeErrado();
+            } else {
+                referenciaTabela.mensagemCasoPesquisaNula();
+            }
+            
+            fireTableDataChanged();
+            
         }
         
     }

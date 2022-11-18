@@ -3,6 +3,7 @@ package _07gestaoacademica;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.KeyEvent;
+import javax.swing.JLabel;
 import javax.swing.table.TableColumn;
 
 public class ListagemTurmasAluno extends javax.swing.JFrame {
@@ -21,10 +22,14 @@ public class ListagemTurmasAluno extends javax.swing.JFrame {
         campoDeCodigo.requestFocus();
         
         jScrollPane1.getViewport().setBackground(Color.WHITE);
+        
         tabelaTurma.setModel(tableModel);
         TableColumn colunaDosBotoes = tabelaTurma.getColumnModel().getColumn(4);
         colunaDosBotoes.setCellRenderer(new BotaoListagemTurmaAlunoRenderer());
         colunaDosBotoes.setCellEditor(new BotaoListagemTurmaAlunoEditor(tabelaTurma, this, tableModel));
+        
+        professorComboBox.setModel(new ModeloComboBoxProfessor<String>());
+        
         limparCampoButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         pesquisarTurmaButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
@@ -51,7 +56,7 @@ public class ListagemTurmasAluno extends javax.swing.JFrame {
         disciplinaTurmaLabel = new javax.swing.JLabel();
         campoDisciplinaDaTurma = new _07gestaoacademica.CampoDeEscrita();
         professorTurmaLabel = new javax.swing.JLabel();
-        campoProfessorTurma = new _07gestaoacademica.CampoDeEscrita();
+        professorComboBox = new javax.swing.JComboBox<>();
         horarioTurmaLabel = new javax.swing.JLabel();
         campoHorarioDaTurma = new _07gestaoacademica.CampoDeEscrita();
         limparCampoButton = new _07gestaoacademica.CustomizacaoBotao();
@@ -172,12 +177,10 @@ public class ListagemTurmasAluno extends javax.swing.JFrame {
         professorTurmaLabel.setForeground(new java.awt.Color(0, 0, 0));
         professorTurmaLabel.setText("Professor");
 
-        campoProfessorTurma.setText("");
-        campoProfessorTurma.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                campoProfessorTurmaKeyPressed(evt);
-            }
-        });
+        professorComboBox.setBackground(new java.awt.Color(234, 234, 234));
+        professorComboBox.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        professorComboBox.setForeground(new java.awt.Color(81, 81, 81));
+        professorComboBox.setBorder(null);
 
         horarioTurmaLabel.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         horarioTurmaLabel.setForeground(new java.awt.Color(0, 0, 0));
@@ -221,6 +224,7 @@ public class ListagemTurmasAluno extends javax.swing.JFrame {
 
         jScrollPane1.setBorder(null);
 
+        tabelaTurma.setBackground(new java.awt.Color(255, 255, 255));
         tabelaTurma.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -232,6 +236,7 @@ public class ListagemTurmasAluno extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tabelaTurma.setSelectionBackground(new java.awt.Color(19, 176, 110));
         jScrollPane1.setViewportView(tabelaTurma);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -249,9 +254,9 @@ public class ListagemTurmasAluno extends javax.swing.JFrame {
                     .addComponent(disciplinaTurmaLabel)
                     .addComponent(campoDisciplinaDaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(professorTurmaLabel)
-                    .addComponent(campoProfessorTurma, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
+                    .addComponent(professorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -298,10 +303,10 @@ public class ListagemTurmasAluno extends javax.swing.JFrame {
                             .addComponent(disciplinaTurmaLabel)
                             .addComponent(professorTurmaLabel))
                         .addGap(12, 12, 12)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(campoDeCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(campoDisciplinaDaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(campoProfessorTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(campoDeCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(campoDisciplinaDaTurma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(professorComboBox)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(horarioTurmaLabel)
                         .addGap(12, 12, 12)
@@ -327,6 +332,20 @@ public class ListagemTurmasAluno extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Métodos de simplificação
+    public void mensagemCasoPesquisaDeErrado() {
+        JLabel mensagem = new JLabel("Pesquisa inválida.");
+        mensagem.setFont(new java.awt.Font("Verdana", 0, 13));
+        mensagem.setVerticalAlignment(JLabel.TOP);
+        jScrollPane1.setViewportView(mensagem);
+    }
+    
+    public void mensagemCasoPesquisaNula() {
+        jScrollPane1.setViewportView(tabelaTurma);
+    }
+    
+    
+    //Métodos de ação
     private void sairPaginaButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairPaginaButtonMouseEntered
         Color corSelecionado = new Color(89, 89, 89);
         sairPaginaButton.setForeground(corSelecionado);
@@ -367,7 +386,9 @@ public class ListagemTurmasAluno extends javax.swing.JFrame {
 
     private void criarNovaTurmaLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_criarNovaTurmaLabelActionPerformed
 
-        
+        SolicitarMatriculaAluno janelaSolicitacaoMatricula = new SolicitarMatriculaAluno();
+        janelaSolicitacaoMatricula.setVisible(true);
+        this.dispose();
 
     }//GEN-LAST:event_criarNovaTurmaLabelActionPerformed
 
@@ -385,23 +406,26 @@ public class ListagemTurmasAluno extends javax.swing.JFrame {
         
     }//GEN-LAST:event_campoDisciplinaDaTurmaKeyPressed
 
-    private void campoProfessorTurmaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoProfessorTurmaKeyPressed
-
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
-            pesquisarTurmaButtonActionPerformed(null);
-        
-    }//GEN-LAST:event_campoProfessorTurmaKeyPressed
-
     private void limparCampoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparCampoButtonActionPerformed
 
         campoDeCodigo.setText("");
         campoDisciplinaDaTurma.setText("");
-        campoProfessorTurma.setText("");
+        professorComboBox.setSelectedIndex(-1);
+        professorComboBox.requestFocus();
+        campoHorarioDaTurma.setText("");
+        pesquisarTurmaButton.requestFocus();
         pesquisarTurmaButton.doClick();
+        
     }//GEN-LAST:event_limparCampoButtonActionPerformed
 
     private void pesquisarTurmaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisarTurmaButtonActionPerformed
 
+        String codigo = campoDeCodigo.getText().trim().toUpperCase();
+        String disciplina = campoDisciplinaDaTurma.getText().trim().toUpperCase();
+        String nomeProfessor = professorComboBox.getSelectedIndex() < 0 ? "" : professorComboBox.getSelectedItem().toString().trim().toUpperCase();
+        String horario = campoHorarioDaTurma.getText().trim().toUpperCase();
+        
+        tableModel.pesquisarTurma(codigo, disciplina, nomeProfessor, horario, this);
         
     }//GEN-LAST:event_pesquisarTurmaButtonActionPerformed
 
@@ -456,7 +480,6 @@ public class ListagemTurmasAluno extends javax.swing.JFrame {
     private _07gestaoacademica.CampoDeEscrita campoDeCodigo;
     private _07gestaoacademica.CampoDeEscrita campoDisciplinaDaTurma;
     private _07gestaoacademica.CampoDeEscrita campoHorarioDaTurma;
-    private _07gestaoacademica.CampoDeEscrita campoProfessorTurma;
     private javax.swing.JLabel codigoTurmaLabel;
     private _07gestaoacademica.CustomizacaoBotao criarNovaTurmaLabel;
     private javax.swing.JLabel disciplinaTurmaLabel;
@@ -465,6 +488,7 @@ public class ListagemTurmasAluno extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private _07gestaoacademica.CustomizacaoBotao limparCampoButton;
     private _07gestaoacademica.CustomizacaoBotao pesquisarTurmaButton;
+    private javax.swing.JComboBox<String> professorComboBox;
     private javax.swing.JLabel professorTurmaLabel;
     private javax.swing.JButton sairPaginaButton;
     private javax.swing.JSeparator separador;
