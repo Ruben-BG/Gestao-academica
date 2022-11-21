@@ -290,6 +290,7 @@ public class DashboardAluno extends javax.swing.JFrame {
     private void solicitarMatriculaButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_solicitarMatriculaButtonMouseClicked
         
         SolicitarMatriculaAluno janelaSolicitacao = new SolicitarMatriculaAluno();
+        janelaSolicitacao.voltarAoDashBoard(true);
         janelaSolicitacao.setVisible(true);
         this.dispose();
         

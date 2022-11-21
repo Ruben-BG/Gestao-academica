@@ -7,12 +7,24 @@ public class NotasDaTurmaAluno extends javax.swing.JFrame {
 
     //Atributos
     private int mouseX, mouseY;
-    GestaoContaUsuario novaGestaoContaUsuario;
+    private GestaoContaUsuario novaGestaoContaUsuario;
+    private ModeloTabelaTurmaAluno tableModelParaCampos = new ModeloTabelaTurmaAluno();
     
-    public NotasDaTurmaAluno() {
+    public NotasDaTurmaAluno(int linhaSelecionada) {
         
         initComponents();
         setLocationRelativeTo(null);
+        
+        //campos
+        Turma turmaSelecionada = tableModelParaCampos.getTurmaSelecionada(linhaSelecionada);
+        campoDeCodigo.setText(turmaSelecionada.getCodigo());
+        campoDisciplinaDaTurma.setText(turmaSelecionada.getDisciplina());
+        campoHorarioDaTurma.setText(turmaSelecionada.getHorario());
+        campoNomeProfessor.setText(turmaSelecionada.getProfessor().getNome());
+        
+        //tabela
+        jScrollPane1.getViewport().setBackground(Color.WHITE);
+        //tabelaNota.setModel(tableModel);
         
     }
 
@@ -31,6 +43,20 @@ public class NotasDaTurmaAluno extends javax.swing.JFrame {
         botaoVoltarLabel = new javax.swing.JLabel();
         tituloDaPaginaLabel = new javax.swing.JLabel();
         separador = new javax.swing.JSeparator();
+        codigoTurmaLabel = new javax.swing.JLabel();
+        campoDeCodigo = new _07gestaoacademica.CampoDeEscrita();
+        disciplinaTurmaLabel = new javax.swing.JLabel();
+        campoDisciplinaDaTurma = new _07gestaoacademica.CampoDeEscrita();
+        professorTurmaLabel = new javax.swing.JLabel();
+        campoNomeProfessor = new _07gestaoacademica.CampoDeEscrita();
+        horarioTurmaLabel = new javax.swing.JLabel();
+        campoHorarioDaTurma = new _07gestaoacademica.CampoDeEscrita();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabelaNota = new _07gestaoacademica.JTablePersonalizada();
+        mediaLabel = new javax.swing.JLabel();
+        notaLabel = new javax.swing.JLabel();
+        situacaoLabel = new javax.swing.JLabel();
+        aprovacaoLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -107,6 +133,67 @@ public class NotasDaTurmaAluno extends javax.swing.JFrame {
 
         separador.setForeground(new java.awt.Color(234, 234, 234));
 
+        codigoTurmaLabel.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        codigoTurmaLabel.setForeground(new java.awt.Color(0, 0, 0));
+        codigoTurmaLabel.setText("Código");
+
+        campoDeCodigo.setEditable(false);
+        campoDeCodigo.setForeground(new java.awt.Color(127, 127, 127));
+        campoDeCodigo.setText("");
+
+        disciplinaTurmaLabel.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        disciplinaTurmaLabel.setForeground(new java.awt.Color(0, 0, 0));
+        disciplinaTurmaLabel.setText("Disciplina");
+
+        campoDisciplinaDaTurma.setEditable(false);
+        campoDisciplinaDaTurma.setForeground(new java.awt.Color(127, 127, 127));
+        campoDisciplinaDaTurma.setText("");
+
+        professorTurmaLabel.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        professorTurmaLabel.setForeground(new java.awt.Color(0, 0, 0));
+        professorTurmaLabel.setText("Professor");
+
+        campoNomeProfessor.setEditable(false);
+        campoNomeProfessor.setForeground(new java.awt.Color(127, 127, 127));
+        campoNomeProfessor.setText("");
+
+        horarioTurmaLabel.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        horarioTurmaLabel.setForeground(new java.awt.Color(0, 0, 0));
+        horarioTurmaLabel.setText("Horário");
+
+        campoHorarioDaTurma.setEditable(false);
+        campoHorarioDaTurma.setForeground(new java.awt.Color(127, 127, 127));
+        campoHorarioDaTurma.setText("");
+
+        tabelaNota.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tabelaNota);
+
+        mediaLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        mediaLabel.setForeground(new java.awt.Color(0, 0, 0));
+        mediaLabel.setText("Média: ");
+
+        notaLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        notaLabel.setForeground(new java.awt.Color(0, 0, 0));
+        notaLabel.setText("nota");
+
+        situacaoLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        situacaoLabel.setForeground(new java.awt.Color(0, 0, 0));
+        situacaoLabel.setText("Situação:");
+
+        aprovacaoLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        aprovacaoLabel.setForeground(new java.awt.Color(0, 0, 0));
+        aprovacaoLabel.setText("nota");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -118,7 +205,38 @@ public class NotasDaTurmaAluno extends javax.swing.JFrame {
                 .addComponent(botaoVoltarLabel)
                 .addGap(22, 22, 22)
                 .addComponent(tituloDaPaginaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 397, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(codigoTurmaLabel)
+                            .addComponent(campoDeCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(disciplinaTurmaLabel)
+                            .addComponent(campoDisciplinaDaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(campoNomeProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(professorTurmaLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(horarioTurmaLabel)
+                            .addComponent(campoHorarioDaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(16, 16, 16))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(situacaoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(mediaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(notaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(aprovacaoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(65, 65, 65))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,7 +248,35 @@ public class NotasDaTurmaAluno extends javax.swing.JFrame {
                     .addComponent(tituloDaPaginaLabel))
                 .addGap(6, 6, 6)
                 .addComponent(separador, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 373, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(codigoTurmaLabel)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(professorTurmaLabel)
+                                .addComponent(horarioTurmaLabel)))
+                        .addGap(12, 12, 12)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(campoDeCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(campoNomeProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(campoHorarioDaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(disciplinaTurmaLabel)
+                        .addGap(12, 12, 12)
+                        .addComponent(campoDisciplinaDaTurma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(28, 28, 28)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(mediaLabel)
+                    .addComponent(notaLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(situacaoLabel)
+                    .addComponent(aprovacaoLabel))
+                .addGap(11, 11, 11))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -147,6 +293,12 @@ public class NotasDaTurmaAluno extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Métodos de simplificação
+    
+    
+    
+    //Métodos de ação
+    
     private void sairPaginaButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairPaginaButtonMouseEntered
         Color corSelecionado = new Color(89, 89, 89);
         sairPaginaButton.setForeground(corSelecionado);
@@ -217,17 +369,31 @@ public class NotasDaTurmaAluno extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NotasDaTurmaAluno().setVisible(true);
+                new NotasDaTurmaAluno(0).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel aprovacaoLabel;
     private javax.swing.JLabel botaoVoltarLabel;
     private javax.swing.JPanel cabecalhoPanel;
+    private _07gestaoacademica.CampoDeEscrita campoDeCodigo;
+    private _07gestaoacademica.CampoDeEscrita campoDisciplinaDaTurma;
+    private _07gestaoacademica.CampoDeEscrita campoHorarioDaTurma;
+    private _07gestaoacademica.CampoDeEscrita campoNomeProfessor;
+    private javax.swing.JLabel codigoTurmaLabel;
+    private javax.swing.JLabel disciplinaTurmaLabel;
+    private javax.swing.JLabel horarioTurmaLabel;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel mediaLabel;
+    private javax.swing.JLabel notaLabel;
+    private javax.swing.JLabel professorTurmaLabel;
     private javax.swing.JButton sairPaginaButton;
     private javax.swing.JSeparator separador;
+    private javax.swing.JLabel situacaoLabel;
+    private _07gestaoacademica.JTablePersonalizada tabelaNota;
     private javax.swing.JLabel tituloDaPaginaLabel;
     // End of variables declaration//GEN-END:variables
 }

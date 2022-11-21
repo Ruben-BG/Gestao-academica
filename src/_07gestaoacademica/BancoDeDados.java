@@ -213,14 +213,13 @@ public class BancoDeDados {
         
         List<UsuarioProfessor> professores = new ArrayList<>();
         
-        for(Usuario usuario :usuarios) {
+        for(UsuarioProfessor usuario : retornarProfessores()) {
             
-            Boolean usuarioProfessor = usuario instanceof UsuarioProfessor;
-            Boolean validaNome = nome != null && !nome.equals("") && usuario.getNome().toUpperCase().contains(nome);
-            Boolean validaCodigoTurma = usuarioProfessor && ((UsuarioProfessor)usuario).validaCodigoDaTurma(codigoTurma);
-            Boolean validaDisciplinaDaTurma = usuarioProfessor && ((UsuarioProfessor)usuario).validaDisciplina(disciplinaTurma);
+            Boolean validaNome = nome == null || nome.equals("") || usuario.getNome().toUpperCase().contains(nome);
+            Boolean validaCodigoTurma = codigoTurma == null || codigoTurma.equals("") || usuario.validaCodigoDaTurma(codigoTurma);
+            Boolean validaDisciplinaDaTurma = disciplinaTurma == null || disciplinaTurma.equals("") || usuario.validaDisciplina(disciplinaTurma);
             
-            if(usuarioProfessor && (validaNome || validaCodigoTurma || validaDisciplinaDaTurma)) {
+            if(validaNome && validaCodigoTurma && validaDisciplinaDaTurma) {
                 professores.add((UsuarioProfessor)usuario);
             }
             
@@ -236,11 +235,11 @@ public class BancoDeDados {
         
         for(Turma turma: turmas) {
             
-            Boolean validaCodigo = !codigo.equals("") && turma.getCodigo().contains(codigo);
-            Boolean validaDisciplina = !disciplina.equals("") && turma.getDisciplina().toUpperCase().contains(disciplina);
-            Boolean validaProfessor = !nomeDoProfessor.equals("") && turma.getProfessor().getNome().toUpperCase().contains(nomeDoProfessor);
+            Boolean validaCodigo = codigo.equals("") || turma.getCodigo().contains(codigo);
+            Boolean validaDisciplina = disciplina.equals("") || turma.getDisciplina().toUpperCase().contains(disciplina);
+            Boolean validaProfessor = nomeDoProfessor.equals("") || turma.getProfessor().getNome().toUpperCase().contains(nomeDoProfessor);
             
-            if(validaCodigo || validaDisciplina || validaProfessor) {
+            if(validaCodigo && validaDisciplina && validaProfessor) {
                 turmasEscolhidas.add(turma);
             }
             
@@ -256,11 +255,11 @@ public class BancoDeDados {
         
         for(UsuarioAluno aluno: retornarAlunos()) {
             
-            Boolean validaNome = nomeDoAluno != null && !nomeDoAluno.equals("") && aluno.getNome().toUpperCase().contains(nomeDoAluno);
-            Boolean validaCodigoDaTurma = aluno.validaCodigoDaTurma(codidoDaTurma);
-            Boolean validaDisciplina = aluno.validaDisciplinaDaTurma(disciplinaTurma);
+            Boolean validaNome = nomeDoAluno == null || nomeDoAluno.equals("") || aluno.getNome().toUpperCase().contains(nomeDoAluno);
+            Boolean validaCodigoDaTurma = codidoDaTurma == null || codidoDaTurma.equals("") || aluno.validaCodigoDaTurma(codidoDaTurma);
+            Boolean validaDisciplina = disciplinaTurma == null || disciplinaTurma.equals("") || aluno.validaDisciplinaDaTurma(disciplinaTurma);
             
-            if (validaNome || validaCodigoDaTurma || validaDisciplina) {
+            if (validaNome && validaCodigoDaTurma && validaDisciplina) {
                 alunos.add(aluno);
             }
             
@@ -276,12 +275,12 @@ public class BancoDeDados {
         
         for(Turma turma: turmas) {
             
-            Boolean validaCodigo = codigoDaTurma != null && !codigoDaTurma.equals("") && turma.getCodigo().equals(codigoDaTurma);
-            Boolean validaDisciplina = disciplinaDaTurma != null && !disciplinaDaTurma.equals("") && turma.getDisciplina().toUpperCase().contains(disciplinaDaTurma);
-            Boolean validaProfessor = nomeProfessorDaTurma != null && !nomeProfessorDaTurma.equals("") && turma.getProfessor().getNome().toUpperCase().contains(nomeProfessorDaTurma);
-            Boolean validaHorario = horarioDaTurma != null && !horarioDaTurma.equals("") && turma.getHorario().toUpperCase().contains(horarioDaTurma);
+            Boolean validaCodigo = codigoDaTurma == null || codigoDaTurma.equals("") || turma.getCodigo().equals(codigoDaTurma);
+            Boolean validaDisciplina = disciplinaDaTurma == null || disciplinaDaTurma.equals("") || turma.getDisciplina().toUpperCase().contains(disciplinaDaTurma);
+            Boolean validaProfessor = nomeProfessorDaTurma == null || nomeProfessorDaTurma.equals("") || turma.getProfessor().getNome().toUpperCase().contains(nomeProfessorDaTurma);
+            Boolean validaHorario = horarioDaTurma == null || horarioDaTurma.equals("") || turma.getHorario().toUpperCase().contains(horarioDaTurma);
             
-            if (validaCodigo || validaDisciplina || validaProfessor || validaHorario) {
+            if (validaCodigo && validaDisciplina && validaProfessor && validaHorario) {
                 turmasEscolhidas.add(turma);
             }
             
@@ -326,6 +325,22 @@ public class BancoDeDados {
         aluno.setEndereco(alunoParaEdicao.getEndereco());
         aluno.setEmail(alunoParaEdicao.getEmail());
         aluno.setSenha(alunoParaEdicao.getSenha());
+        
+    }
+    
+    public static List<Turma> TurmasOndeAlunoNaoEsta(UsuarioAluno alunoSelecionado) {
+        
+        List<Turma> turmasAlunoNaoEsta = new ArrayList<>();
+        
+        for(Turma turma : retornarTurmas()) {
+            
+            if (!turma.getAlunosMatriculados().contains(alunoSelecionado)) {
+                turmasAlunoNaoEsta.add(turma);
+            }
+            
+        }
+        
+        return turmasAlunoNaoEsta;
         
     }
     

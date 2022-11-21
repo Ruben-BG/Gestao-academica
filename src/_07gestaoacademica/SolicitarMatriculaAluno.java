@@ -1,22 +1,37 @@
 package _07gestaoacademica;
 
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class SolicitarMatriculaAluno extends javax.swing.JFrame {
 
     //Atributos
     private int mouseX, mouseY;
     GestaoContaUsuario novaGestaoContaUsuario;
-    ModeloCBTurmaAluno<String> comboBoxModel = new ModeloCBTurmaAluno<>();
-    
+    ModeloCBTurmaAluno<String> comboBoxModel = new ModeloCBTurmaAluno<>((UsuarioAluno) BancoDeDados.pegaUsuario());
+    private SolicitarMatriculaAluno essaTela = this;
+
     public SolicitarMatriculaAluno() {
-        
+
         initComponents();
         setLocationRelativeTo(null);
-        
-        turmaComboBox.setModel(comboBoxModel);
-        turmaComboBox.setSelectedIndex(0);
-        
+
+        if (comboBoxModel.quantidadesDeTurmasDisponiveis() > 0) {
+
+            turmaComboBox.setModel(comboBoxModel);
+            turmaComboBox.setSelectedIndex(0);
+
+        } else {
+
+            turmaComboBox.setEnabled(false);
+            botaoSolicitar.setVisible(false);
+            avisoLabel.setForeground(Color.red);
+            avisoLabel.setFont(new java.awt.Font("SansSerif", 0, 14));
+            avisoLabel.setText("Não tem turma disponível para solicitação de entrada.");
+
+        }
+
     }
 
     /**
@@ -105,9 +120,6 @@ public class SolicitarMatriculaAluno extends javax.swing.JFrame {
         botaoVoltarLabel.setText("←");
         botaoVoltarLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         botaoVoltarLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                botaoVoltarLabelMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 botaoVoltarLabelMouseEntered(evt);
             }
@@ -241,6 +253,35 @@ public class SolicitarMatriculaAluno extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void voltarAoDashBoard(Boolean opcao) {
+
+        if (opcao) {
+            botaoVoltarLabel.addMouseListener(new MouseAdapter() {
+
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    DashboardAluno voltarDashboardAluno = new DashboardAluno();
+                    voltarDashboardAluno.setVisible(true);
+                    essaTela.dispose();
+                }
+
+            });
+        } else if (!opcao) {
+            botaoVoltarLabel.addMouseListener(new MouseAdapter() {
+
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    ListagemTurmasAluno voltarListagem = new ListagemTurmasAluno();
+                    voltarListagem.setVisible(true);
+                    essaTela.dispose();
+                }
+
+            });
+
+        }
+
+    }
+
     private void sairPaginaButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairPaginaButtonMouseEntered
         Color corSelecionado = new Color(89, 89, 89);
         sairPaginaButton.setForeground(corSelecionado);
@@ -265,12 +306,6 @@ public class SolicitarMatriculaAluno extends javax.swing.JFrame {
         mouseY = evt.getY();
     }//GEN-LAST:event_cabecalhoPanelMousePressed
 
-    private void botaoVoltarLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoVoltarLabelMouseClicked
-        ListagemTurmasAluno voltarListagem = new ListagemTurmasAluno();
-        voltarListagem.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_botaoVoltarLabelMouseClicked
-
     private void botaoVoltarLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoVoltarLabelMouseEntered
         botaoVoltarLabel.setForeground(new Color(51, 51, 51));
     }//GEN-LAST:event_botaoVoltarLabelMouseEntered
@@ -280,13 +315,13 @@ public class SolicitarMatriculaAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoVoltarLabelMouseExited
 
     private void turmaComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_turmaComboBoxActionPerformed
-        
+
         int quantidadeMax = comboBoxModel.quantidadeMaximaDeAlunosSuportados(turmaComboBox.getSelectedIndex());
         int quantidadeMatricula = comboBoxModel.quantidadeAlunosMatriculados(turmaComboBox.getSelectedIndex());
-        
+
         campoMaximoAluno.setText(String.valueOf(quantidadeMax));
         campoAlunoMatriculado.setText(String.valueOf(quantidadeMatricula));
-        
+
     }//GEN-LAST:event_turmaComboBoxActionPerformed
 
     /**

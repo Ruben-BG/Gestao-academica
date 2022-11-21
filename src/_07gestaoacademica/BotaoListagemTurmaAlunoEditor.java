@@ -49,7 +49,7 @@ public class BotaoListagemTurmaAlunoEditor extends AbstractCellEditor implements
         botao.addActionListener((e) -> {
             //Ação do botão
             
-            NotasDaTurmaAluno telaDeNotas = new NotasDaTurmaAluno();
+            NotasDaTurmaAluno telaDeNotas = new NotasDaTurmaAluno(tabela.getSelectedRow());
             telaDeNotas.setVisible(true);
             referenciaForm.dispose();
             

@@ -68,4 +68,8 @@ public class ModeloTabelaTurmaAluno extends AbstractTableModel{
         
     }
     
+    public Turma getTurmaSelecionada(int linhaSelecionada) {
+        return turmas.get(linhaSelecionada);
+    }
+    
 }
