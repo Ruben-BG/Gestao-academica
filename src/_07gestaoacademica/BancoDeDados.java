@@ -12,8 +12,7 @@ public class BancoDeDados {
     private static List<Usuario> usuarios = new ArrayList<>();
     private static Usuario usuarioLogado;
     private static List<Turma> turmas = new ArrayList<>();
-    
-    private static List<String> solicitacoes = new ArrayList<>();
+    private static List<TurmaSolicitacaoDeAluno> solicitacoesDeAlunos = new ArrayList<>();
     
     public static void cadastrarUsuario(Usuario usuario) {
         usuarios.add(usuario);
@@ -21,6 +20,10 @@ public class BancoDeDados {
     
     public static void cadastrarTurma(Turma turma) {
         turmas.add(turma);
+    }
+    
+    public static void enviarSolicitacao(TurmaSolicitacaoDeAluno solicitacao) {
+        solicitacoesDeAlunos.add(solicitacao);
     }
     
     
@@ -374,6 +377,7 @@ public class BancoDeDados {
         aluno1.setNome("Mário Gentili");
         aluno1.setSenha("123");
         usuarios.add(aluno1);
+        NotaDeAluno notaAluno1 = new NotaDeAluno();
         
         aluno2 = new UsuarioAluno();
         aluno2.setMatricula(2);
@@ -413,6 +417,9 @@ public class BancoDeDados {
         turma1.adicionarAluno(aluno3);
         professor1.adicionaTurma(turma1);
         turmas.add(turma1);
+        notaAluno1.adicionarNota(aluno1, turma1, 5);
+        notaAluno1.adicionarNota(aluno1, turma1, 8);
+        notaAluno1.adicionarNota(aluno1, turma1, 8.5);
         
         turma2 = new Turma();
         turma2.setProfessor(professor2);

@@ -1,4 +1,3 @@
-
 package _07gestaoacademica;
 
 import java.awt.Color;
@@ -9,23 +8,30 @@ public class NotasDaTurmaAluno extends javax.swing.JFrame {
     private int mouseX, mouseY;
     private GestaoContaUsuario novaGestaoContaUsuario;
     private ModeloTabelaTurmaAluno tableModelParaCampos = new ModeloTabelaTurmaAluno();
-    
+    private ModeloTabelaNotaAluno tableModel;
+
     public NotasDaTurmaAluno(int linhaSelecionada) {
-        
+
         initComponents();
         setLocationRelativeTo(null);
-        
+
         //campos
         Turma turmaSelecionada = tableModelParaCampos.getTurmaSelecionada(linhaSelecionada);
         campoDeCodigo.setText(turmaSelecionada.getCodigo());
         campoDisciplinaDaTurma.setText(turmaSelecionada.getDisciplina());
         campoHorarioDaTurma.setText(turmaSelecionada.getHorario());
         campoNomeProfessor.setText(turmaSelecionada.getProfessor().getNome());
-        
+
         //tabela
+        tableModel = new ModeloTabelaNotaAluno(tableModelParaCampos, linhaSelecionada);
         jScrollPane1.getViewport().setBackground(Color.WHITE);
-        //tabelaNota.setModel(tableModel);
+        tabelaNota.setModel(tableModel);
         
+        //Média
+        Double media = tableModelParaCampos.getTurmaSelecionada(linhaSelecionada).getNotas().get(linhaSelecionada).getMedia();
+        notaLabel.setText(String.valueOf(Math.floor(media)));
+        
+
     }
 
     /**
@@ -165,6 +171,8 @@ public class NotasDaTurmaAluno extends javax.swing.JFrame {
         campoHorarioDaTurma.setForeground(new java.awt.Color(127, 127, 127));
         campoHorarioDaTurma.setText("");
 
+        jScrollPane1.setBorder(null);
+
         tabelaNota.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -294,11 +302,8 @@ public class NotasDaTurmaAluno extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     //Métodos de simplificação
-    
-    
-    
     //Métodos de ação
-    
+
     private void sairPaginaButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairPaginaButtonMouseEntered
         Color corSelecionado = new Color(89, 89, 89);
         sairPaginaButton.setForeground(corSelecionado);
@@ -324,11 +329,11 @@ public class NotasDaTurmaAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_cabecalhoPanelMousePressed
 
     private void botaoVoltarLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoVoltarLabelMouseClicked
-        
+
         ListagemTurmasAluno voltarParaListagem = new ListagemTurmasAluno();
         voltarParaListagem.setVisible(true);
         this.dispose();
-        
+
     }//GEN-LAST:event_botaoVoltarLabelMouseClicked
 
     private void botaoVoltarLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoVoltarLabelMouseEntered
@@ -336,7 +341,7 @@ public class NotasDaTurmaAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoVoltarLabelMouseEntered
 
     private void botaoVoltarLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoVoltarLabelMouseExited
-        botaoVoltarLabel.setForeground(new Color(102,102,102));
+        botaoVoltarLabel.setForeground(new Color(102, 102, 102));
     }//GEN-LAST:event_botaoVoltarLabelMouseExited
 
     /**

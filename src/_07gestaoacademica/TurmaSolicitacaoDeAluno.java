@@ -1,11 +1,14 @@
 package _07gestaoacademica;
 
+import java.time.LocalDateTime;
+
 public class TurmaSolicitacaoDeAluno {
     
     //pegar aluno, passar nome, disciplina da turma, data de requerimento usando Time
     
     private UsuarioAluno aluno;
     private Turma turma;
+    LocalDateTime dataAtual;
 
     //SETTERS
     public void setAluno(UsuarioAluno aluno) {
@@ -16,8 +19,8 @@ public class TurmaSolicitacaoDeAluno {
         this.turma = turma;
     }
     
-    public void setDataRequerimento() {
-        
+    public void adicionarDataAtual() {
+        dataAtual = LocalDateTime.now();
     }
 
     //GETTERS
@@ -35,6 +38,10 @@ public class TurmaSolicitacaoDeAluno {
     
     public String getDisciplinaDaTurma() {
         return turma.getDisciplina();
+    }
+
+    public LocalDateTime getDataAtual() {
+        return dataAtual;
     }
     
 }

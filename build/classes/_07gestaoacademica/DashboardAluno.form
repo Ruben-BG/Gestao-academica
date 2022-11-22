@@ -46,9 +46,10 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="cabecalhoJPanel" alignment="0" max="32767" attributes="0"/>
-              <Group type="102" alignment="1" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="suasSolicitacoesButton" min="-2" max="-2" attributes="0"/>
                       <Component id="nomeLabel" min="-2" pref="250" max="-2" attributes="0"/>
                       <Component id="turmaButton" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -60,6 +61,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="sairButton" min="-2" pref="72" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="suasNotasButton" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -80,7 +82,12 @@
                       <Component id="solicitarMatriculaButton" min="-2" max="-2" attributes="0"/>
                       <Component id="turmaButton" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="0" pref="194" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="suasSolicitacoesButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="suasNotasButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="0" pref="11" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -217,6 +224,20 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="solicitarMatriculaButtonMouseClicked"/>
             <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="solicitarMatriculaButtonMouseEntered"/>
             <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="solicitarMatriculaButtonMouseExited"/>
+          </Events>
+        </Component>
+        <Component class="_07gestaoacademica.FormularioButton" name="suasSolicitacoesButton">
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="suasSolicitacoesButtonMouseClicked"/>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="suasSolicitacoesButtonMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="suasSolicitacoesButtonMouseExited"/>
+          </Events>
+        </Component>
+        <Component class="_07gestaoacademica.FormularioButton" name="suasNotasButton">
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="suasNotasButtonMouseClicked"/>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="suasNotasButtonMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="suasNotasButtonMouseExited"/>
           </Events>
         </Component>
       </SubComponents>

@@ -6,22 +6,39 @@ import javax.swing.table.AbstractTableModel;
 
 public class ModeloTabelaNotaAluno extends AbstractTableModel{
     
-    private Object[] colunas = {"Período", "Nota"};
-    private List<Double> notas = new ArrayList<>();
+    private String[] colunas = {"Período", "Nota"};
+    private List<NotaDeAluno> notas = new ArrayList<>();
+    
+    public ModeloTabelaNotaAluno(ModeloTabelaTurmaAluno referenciaOutroModelo, int linha) {
+
+        notas = referenciaOutroModelo.getTurmaSelecionada(linha).getNotas();
+        
+    }
 
     @Override
     public int getRowCount() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return notas.size();
     }
 
     @Override
     public int getColumnCount() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return colunas.length;
     }
 
     @Override
-    public Object getValueAt(int rowIndex, int columnIndex) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public String getColumnName(int coluna) {
+        return colunas[coluna];
+    }
+
+    @Override
+    public Object getValueAt(int linha, int coluna) {
+        
+        switch(coluna) {
+            case 0: return ++linha + "°";
+            case 1: return notas.get(linha).getNota(linha);
+            default: return null;
+        }
+        
     }
     
 }

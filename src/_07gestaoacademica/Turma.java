@@ -9,7 +9,15 @@ public class Turma{
     private int quantidadeMaximaDeAlunos;
     private UsuarioProfessor professor;
     private List<UsuarioAluno> alunosMatriculados = new ArrayList<>();
-            
+    private List<NotaDeAluno> notas = new ArrayList<>();
+
+    public void adicionarNotaAoAluno(NotaDeAluno notaDeAluno) {
+        notas.add(notaDeAluno);
+    }
+
+    public List<NotaDeAluno> getNotas() {
+        return notas;
+    }
     
     //GETTERS
     

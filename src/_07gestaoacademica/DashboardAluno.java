@@ -12,19 +12,30 @@ public class DashboardAluno extends javax.swing.JFrame {
     int mouseX, mouseY;
     
     public DashboardAluno() {
+        
         initComponents();
         setLocationRelativeTo(null);
         
         nomeLabel.setText(BancoDeDados.pegaUsuario().getNome() + " | Aluno(a)");
         dataHora();
         
+        
         turmaButton.mudarTexto("Suas turmas");
         turmaButton.mudarNumero(String.valueOf(BancoDeDados.quantidadeTurmaAluno()));
         turmaButton.mudarIcone("/_07gestaoacademica/images/turmaP.png");
+        
         solicitarMatriculaButton.igualarFonte();
         solicitarMatriculaButton.mudarTexto("matrícula");
         solicitarMatriculaButton.mudarNumero("Solicitar");
         solicitarMatriculaButton.mudarIcone("/_07gestaoacademica/images/grupoP.png");
+        
+        suasSolicitacoesButton.mudarTexto("Suas solicitações");
+        suasSolicitacoesButton.mudarNumero("4");
+        suasSolicitacoesButton.mudarIcone("/_07gestaoacademica/images/emailP.png");
+        
+        suasNotasButton.mudarTexto("Suas notas");
+        suasNotasButton.mudarNumero("0");
+        suasNotasButton.mudarIcone("/_07gestaoacademica/images/notasP.png");
         
     }
 
@@ -46,6 +57,8 @@ public class DashboardAluno extends javax.swing.JFrame {
         sairButton = new javax.swing.JButton();
         turmaButton = new _07gestaoacademica.FormularioButton();
         solicitarMatriculaButton = new _07gestaoacademica.FormularioButton();
+        suasSolicitacoesButton = new _07gestaoacademica.FormularioButton();
+        suasNotasButton = new _07gestaoacademica.FormularioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -167,14 +180,39 @@ public class DashboardAluno extends javax.swing.JFrame {
             }
         });
 
+        suasSolicitacoesButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                suasSolicitacoesButtonMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                suasSolicitacoesButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                suasSolicitacoesButtonMouseExited(evt);
+            }
+        });
+
+        suasNotasButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                suasNotasButtonMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                suasNotasButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                suasNotasButtonMouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout painelGeralLayout = new javax.swing.GroupLayout(painelGeral);
         painelGeral.setLayout(painelGeralLayout);
         painelGeralLayout.setHorizontalGroup(
             painelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(cabecalhoJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelGeralLayout.createSequentialGroup()
+            .addGroup(painelGeralLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(painelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(suasSolicitacoesButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(turmaButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
@@ -183,7 +221,8 @@ public class DashboardAluno extends javax.swing.JFrame {
                     .addGroup(painelGeralLayout.createSequentialGroup()
                         .addComponent(dataLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sairButton, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(sairButton, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(suasNotasButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         painelGeralLayout.setVerticalGroup(
@@ -199,7 +238,11 @@ public class DashboardAluno extends javax.swing.JFrame {
                 .addGroup(painelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(solicitarMatriculaButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(turmaButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 194, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(painelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(suasSolicitacoesButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(suasNotasButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 11, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -320,6 +363,34 @@ public class DashboardAluno extends javax.swing.JFrame {
         turmaButton.mudarIcone("/_07gestaoacademica/images/turmaP.png");
     }//GEN-LAST:event_turmaButtonMouseExited
 
+    private void suasSolicitacoesButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suasSolicitacoesButtonMouseClicked
+        
+        ListagemDeSolicitacoes telaDeListagem = new ListagemDeSolicitacoes();
+        telaDeListagem.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_suasSolicitacoesButtonMouseClicked
+
+    private void suasSolicitacoesButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suasSolicitacoesButtonMouseEntered
+        suasSolicitacoesButton.mudarIcone("/_07gestaoacademica/images/emailB.png");
+    }//GEN-LAST:event_suasSolicitacoesButtonMouseEntered
+
+    private void suasSolicitacoesButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suasSolicitacoesButtonMouseExited
+        suasSolicitacoesButton.mudarIcone("/_07gestaoacademica/images/emailP.png");
+    }//GEN-LAST:event_suasSolicitacoesButtonMouseExited
+
+    private void suasNotasButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suasNotasButtonMouseClicked
+        
+    }//GEN-LAST:event_suasNotasButtonMouseClicked
+
+    private void suasNotasButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suasNotasButtonMouseEntered
+        suasNotasButton.mudarIcone("/_07gestaoacademica/images/notasB.png");
+    }//GEN-LAST:event_suasNotasButtonMouseEntered
+
+    private void suasNotasButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suasNotasButtonMouseExited
+        suasNotasButton.mudarIcone("/_07gestaoacademica/images/notasP.png");
+    }//GEN-LAST:event_suasNotasButtonMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -364,6 +435,8 @@ public class DashboardAluno extends javax.swing.JFrame {
     private javax.swing.JButton sairButton;
     private javax.swing.JButton sairPaginaButton;
     private _07gestaoacademica.FormularioButton solicitarMatriculaButton;
+    private _07gestaoacademica.FormularioButton suasNotasButton;
+    private _07gestaoacademica.FormularioButton suasSolicitacoesButton;
     private javax.swing.JLabel tituloDoCabecalhoLabel;
     private _07gestaoacademica.FormularioButton turmaButton;
     // End of variables declaration//GEN-END:variables
