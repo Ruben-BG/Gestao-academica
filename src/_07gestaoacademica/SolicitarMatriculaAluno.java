@@ -3,6 +3,7 @@ package _07gestaoacademica;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.table.TableModel;
 
 public class SolicitarMatriculaAluno extends javax.swing.JFrame {
 
@@ -11,6 +12,7 @@ public class SolicitarMatriculaAluno extends javax.swing.JFrame {
     GestaoContaUsuario novaGestaoContaUsuario;
     ModeloCBTurmaAluno<String> comboBoxModel = new ModeloCBTurmaAluno<>((UsuarioAluno) BancoDeDados.pegaUsuario());
     private SolicitarMatriculaAluno essaTela = this;
+    private TurmaSolicitacaoDeAluno solicitar;
 
     public SolicitarMatriculaAluno() {
 
@@ -172,6 +174,11 @@ public class SolicitarMatriculaAluno extends javax.swing.JFrame {
         botaoSolicitar.setCorBorda(new java.awt.Color(255, 255, 255));
         botaoSolicitar.setCorEntrou(new java.awt.Color(19, 176, 110));
         botaoSolicitar.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        botaoSolicitar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoSolicitarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -323,6 +330,29 @@ public class SolicitarMatriculaAluno extends javax.swing.JFrame {
         campoAlunoMatriculado.setText(String.valueOf(quantidadeMatricula));
 
     }//GEN-LAST:event_turmaComboBoxActionPerformed
+
+    private void botaoSolicitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSolicitarActionPerformed
+        
+        solicitar = new TurmaSolicitacaoDeAluno();
+        solicitar.setAluno((UsuarioAluno) BancoDeDados.pegaUsuario());
+        
+        //Analisar a turma pega.
+        for(Turma turma : BancoDeDados.retornarTurmas()) {
+            
+            if (turma.getDisciplina().equals(turmaComboBox.getSelectedItem().toString())) {
+                solicitar.setTurma(turma);
+            }
+            
+        }
+        
+        solicitar.adicionarStatus(0);
+        solicitar.adicionarDataAtual();
+        BancoDeDados.enviarSolicitacao(solicitar);
+        
+        PopUp p = new PopUp();
+        p.mensagemFinalNovoProfessor("Solicitação feita com sucesso!");
+        
+    }//GEN-LAST:event_botaoSolicitarActionPerformed
 
     /**
      * @param args the command line arguments

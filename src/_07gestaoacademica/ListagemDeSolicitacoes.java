@@ -2,12 +2,15 @@ package _07gestaoacademica;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import javax.swing.table.TableColumn;
 
 public class ListagemDeSolicitacoes extends javax.swing.JFrame {
 
     //Atributos
     private GestaoContaUsuario novaGestaoContaUsuario;
     private DashboardAluno voltarDashboardAluno;
+    private ModeloTabelaSolicitacoesAluno tableModel = new ModeloTabelaSolicitacoesAluno();
+    private ModeloCBStatusSolicitacaoAluno comboBoxModel = new ModeloCBStatusSolicitacaoAluno();
     private int mouseX, mouseY;
     
     public ListagemDeSolicitacoes() {
@@ -15,8 +18,16 @@ public class ListagemDeSolicitacoes extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         
+        //Campos
+        statusComboBox.setModel(comboBoxModel);
+        statusComboBox.setSelectedIndex(0);
+        
         //Tabela
         jScrollPane1.getViewport().setBackground(Color.WHITE);
+        tabelaSolicitacoes.setModel(tableModel);
+        TableColumn colunaDosBotoes = tabelaSolicitacoes.getColumnModel().getColumn(3);
+        colunaDosBotoes.setCellRenderer(new BotaoListagemSolicitacaoAlunoRenderer(false, false, true));
+        colunaDosBotoes.setCellEditor(new BotaoListagemSolicitacaoAlunoEditor(tabelaSolicitacoes));
         
     }
 
@@ -29,6 +40,7 @@ public class ListagemDeSolicitacoes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        dateChooser1 = new com.raven.datechooser.DateChooser();
         jPanel1 = new javax.swing.JPanel();
         cabecalhoPanel = new javax.swing.JPanel();
         sairPaginaButton = new javax.swing.JButton();
@@ -48,6 +60,8 @@ public class ListagemDeSolicitacoes extends javax.swing.JFrame {
         pesquisarTurmaButton = new _07gestaoacademica.CustomizacaoBotao();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaSolicitacoes = new _07gestaoacademica.JTablePersonalizada();
+
+        dateChooser1.setTextRefernce(campoDataInicial);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -151,7 +165,6 @@ public class ListagemDeSolicitacoes extends javax.swing.JFrame {
         dataLabel.setForeground(new java.awt.Color(0, 0, 0));
         dataLabel.setText("Data");
 
-        campoDataInicial.setText("");
         campoDataInicial.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 campoDataInicialKeyPressed(evt);
@@ -210,17 +223,6 @@ public class ListagemDeSolicitacoes extends javax.swing.JFrame {
         jScrollPane1.setBorder(null);
 
         tabelaSolicitacoes.setBackground(new java.awt.Color(255, 255, 255));
-        tabelaSolicitacoes.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
         tabelaSolicitacoes.setGridColor(new java.awt.Color(51, 51, 51));
         tabelaSolicitacoes.setSelectionBackground(new java.awt.Color(19, 176, 110));
         jScrollPane1.setViewportView(tabelaSolicitacoes);
@@ -243,33 +245,32 @@ public class ListagemDeSolicitacoes extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(disciplinaTurmaLabel)
+                        .addGap(0, 102, Short.MAX_VALUE))
+                    .addComponent(campoDisciplinaDaTurma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(disciplinaTurmaLabel)
-                                .addGap(0, 102, Short.MAX_VALUE))
-                            .addComponent(campoDisciplinaDaTurma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(campoDataInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(aLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(campoDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dataLabel))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(statusComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(campoDataInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(aLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(campoDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(dataLabel))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(statusComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(limparCampoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(pesquisarTurmaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(statusLabel))
-                        .addGap(28, 28, 28))))
+                        .addComponent(limparCampoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pesquisarTurmaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(statusLabel))
+                .addGap(28, 28, 28))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -292,8 +293,7 @@ public class ListagemDeSolicitacoes extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(pesquisarTurmaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(limparCampoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(limparCampoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(dataLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -302,8 +302,8 @@ public class ListagemDeSolicitacoes extends javax.swing.JFrame {
                             .addComponent(campoDataFinal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(aLabel)
                             .addComponent(campoDataInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(campoDisciplinaDaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(12, 12, 12)))
+                            .addComponent(campoDisciplinaDaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(12, 12, 12)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -387,7 +387,9 @@ public class ListagemDeSolicitacoes extends javax.swing.JFrame {
     private void limparCampoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparCampoButtonActionPerformed
 
         campoDisciplinaDaTurma.setText("");
-        statusComboBox.setSelectedIndex(-1);
+        campoDataInicial.setText("");
+        campoDataFinal.setText("");
+        statusComboBox.setSelectedIndex(0);
         statusComboBox.requestFocus();
         pesquisarTurmaButton.requestFocus();
         pesquisarTurmaButton.doClick();
@@ -442,6 +444,7 @@ public class ListagemDeSolicitacoes extends javax.swing.JFrame {
     private _07gestaoacademica.CampoDeEscrita campoDataInicial;
     private _07gestaoacademica.CampoDeEscrita campoDisciplinaDaTurma;
     private javax.swing.JLabel dataLabel;
+    private com.raven.datechooser.DateChooser dateChooser1;
     private javax.swing.JLabel disciplinaTurmaLabel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

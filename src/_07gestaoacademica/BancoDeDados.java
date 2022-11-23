@@ -124,6 +124,22 @@ public class BancoDeDados {
         
     }
     
+    public static int quantidadeSolicitacaoDeUmAluno() {
+        
+        UsuarioAluno alunoSelecionado = (UsuarioAluno) usuarioLogado;
+        int quantidade = 0;
+        
+        for(TurmaSolicitacaoDeAluno solicitacao : solicitacoesDeAlunos) {
+            
+            if (solicitacao.getAluno().equals(alunoSelecionado))
+                ++quantidade;
+            
+        }
+        
+        return quantidade;
+        
+    }
+    
     public static List<UsuarioProfessor> retornarProfessores() {
         
         List<UsuarioProfessor> professores = new ArrayList<>();
@@ -160,6 +176,24 @@ public class BancoDeDados {
         }
         
         return alunos;
+        
+    }
+    
+    public static List<TurmaSolicitacaoDeAluno> retornarSolicitacoesDeUmAluno(UsuarioAluno alunoSelecionado) {
+        
+        List<TurmaSolicitacaoDeAluno> solicitacoes = new ArrayList<>();
+        
+        for(TurmaSolicitacaoDeAluno solicitacao : solicitacoesDeAlunos) {
+            
+            if (solicitacao.getAluno().equals(alunoSelecionado)) {
+                
+                solicitacoes.add(solicitacao);
+                
+            }
+            
+        }
+        
+        return solicitacoes;
         
     }
     
@@ -290,6 +324,23 @@ public class BancoDeDados {
         }
         
         return turmasEscolhidas;
+        
+    }
+    
+    public static List<TurmaSolicitacaoDeAluno> pesquisarSolicitacaoAluno(String disciplinaDaTurma, String dataInicial, String dataFinal, String statusDaSolicitacao) {
+        
+        List<TurmaSolicitacaoDeAluno> solicitacoes = new ArrayList<>();
+        
+        for(TurmaSolicitacaoDeAluno solicitacao : solicitacoesDeAlunos) {
+            
+            Boolean validaDisciplina = disciplinaDaTurma == null || disciplinaDaTurma.equals("");
+            Boolean validaDataInicial;
+            Boolean validaDataFinal;
+            Boolean validaStatus;
+            
+        }
+        
+        return solicitacoes;
         
     }
     

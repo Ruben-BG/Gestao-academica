@@ -30,7 +30,7 @@ public class DashboardAluno extends javax.swing.JFrame {
         solicitarMatriculaButton.mudarIcone("/_07gestaoacademica/images/grupoP.png");
         
         suasSolicitacoesButton.mudarTexto("Suas solicitações");
-        suasSolicitacoesButton.mudarNumero("4");
+        suasSolicitacoesButton.mudarNumero(String.valueOf(BancoDeDados.quantidadeSolicitacaoDeUmAluno()));
         suasSolicitacoesButton.mudarIcone("/_07gestaoacademica/images/emailP.png");
         
         suasNotasButton.mudarTexto("Suas notas");

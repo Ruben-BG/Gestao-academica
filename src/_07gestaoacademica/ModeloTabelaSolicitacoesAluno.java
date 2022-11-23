@@ -1,22 +1,46 @@
 package _07gestaoacademica;
 
+import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 public class ModeloTabelaSolicitacoesAluno extends AbstractTableModel{
 
+    List<TurmaSolicitacaoDeAluno> solicitacoes = BancoDeDados.retornarSolicitacoesDeUmAluno((UsuarioAluno)BancoDeDados.pegaUsuario());
+    String[] colunas = {"Disciplina", "Data", "Status", "Ações"};
+    
     @Override
     public int getRowCount() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return solicitacoes.size();
     }
 
     @Override
     public int getColumnCount() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return colunas.length;
     }
 
     @Override
-    public Object getValueAt(int rowIndex, int columnIndex) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public String getColumnName(int coluna) {
+        return colunas[coluna];
+    }
+
+    @Override
+    public boolean isCellEditable(int linha, int coluna) {
+        return coluna == 3;
+    }
+
+    @Override
+    public Object getValueAt(int linha, int coluna) {
+        switch (coluna) {
+            case 0: return solicitacoes.get(linha).getTurma().getDisciplina();
+            case 1: return solicitacoes.get(linha).getDataDeSolicitacaoFormatada();
+            case 2: return solicitacoes.get(linha).getStatusDeAprovacao();
+            case 3: return null;
+            default: return null;
+        }
+    }
+    
+    public void pesquisarSolicitacoes(String disciplina, String dataInicio, String dataFinal, String status) {
+        
     }
     
 }
