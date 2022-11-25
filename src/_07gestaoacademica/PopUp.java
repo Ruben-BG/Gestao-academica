@@ -358,6 +358,11 @@ public class PopUp extends javax.swing.JFrame {
         finalizacaoFrame();
     }
     
+    public void mensagemFinalDeErro(String texto) {
+        mensagemCentralLabel.setText(texto);
+        finalizacaoFrame();
+    }
+    
     public void entradaConta(String erro, String textoValidacao) {
         tituloLabel.setText(erro);
         mensagemCentralLabel.setText(textoValidacao);

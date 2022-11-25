@@ -1,7 +1,9 @@
 package _07gestaoacademica;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class TurmaSolicitacaoDeAluno {
     
@@ -9,8 +11,20 @@ public class TurmaSolicitacaoDeAluno {
     
     private UsuarioAluno aluno;
     private Turma turma;
+    private status valorStatus;
     private LocalDateTime dataAtual;
-    private int status; //0 = pendente, 1 = aprovado, 2 = rejeitado
+    
+    //ENUM STATUS
+    public enum status {
+        P("Pendente"), A("Aprovada"), R("Rejeitada");
+        
+        public String valorDoStatus;
+        
+        status(String associacaoStatus) {
+            valorDoStatus = associacaoStatus;
+        }
+        
+    }
 
     //SETTERS
     public void setAluno(UsuarioAluno aluno) {
@@ -25,14 +39,8 @@ public class TurmaSolicitacaoDeAluno {
         dataAtual = LocalDateTime.now();
     }
     
-    public void adicionarStatus(int statusPedido) {
-        
-        if (statusPedido < 0 && statusPedido > 2) {
-            status = -1;
-        } else {
-            status = statusPedido;
-        }
-        
+    public void adicionarStatus(status statusPedido) {
+        valorStatus = statusPedido;
     }
 
     //GETTERS
@@ -59,14 +67,24 @@ public class TurmaSolicitacaoDeAluno {
         
     }
     
+    public Date getDataAtualParaData() {
+        
+        return Date.from(dataAtual.atZone(ZoneId.systemDefault()).toInstant());
+        
+    }
+
+    public LocalDateTime getDataAtual() {
+        return dataAtual;
+    }
+    
     public String getStatusDeAprovacao() {
         
-        return switch (status) {
-            case 0 -> "Pendente";
-            case 1 -> "Aprovada";
-            case 2 -> "Rejeitada";
-            default -> null;
-        };
+        if (valorStatus == status.P)
+            return status.P.valorDoStatus;
+        else if (valorStatus == status.A)
+            return status.A.valorDoStatus;
+        else
+            return status.R.valorDoStatus;
         
     }
     

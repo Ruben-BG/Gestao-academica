@@ -147,38 +147,43 @@ public final class Dates extends javax.swing.JPanel {
         setLayout(new java.awt.GridLayout(7, 7));
 
         cmdMo.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 5, 1));
-        cmdMo.setForeground(new java.awt.Color(118, 118, 118));
-        cmdMo.setText("Mo");
+        cmdMo.setForeground(new java.awt.Color(255, 1, 1));
+        cmdMo.setText("Dom");
+        cmdMo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdMoActionPerformed(evt);
+            }
+        });
         add(cmdMo);
 
         cmdTu.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 5, 1));
         cmdTu.setForeground(new java.awt.Color(118, 118, 118));
-        cmdTu.setText("Tu");
+        cmdTu.setText("Seg");
         add(cmdTu);
 
         cmdWe.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 5, 1));
         cmdWe.setForeground(new java.awt.Color(118, 118, 118));
-        cmdWe.setText("We");
+        cmdWe.setText("Ter");
         add(cmdWe);
 
         cmdTh.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 5, 1));
         cmdTh.setForeground(new java.awt.Color(118, 118, 118));
-        cmdTh.setText("Th");
+        cmdTh.setText("Qua");
         add(cmdTh);
 
         cmdFr.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 5, 1));
         cmdFr.setForeground(new java.awt.Color(118, 118, 118));
-        cmdFr.setText("Fr");
+        cmdFr.setText("Qui");
         add(cmdFr);
 
         cmdSa.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 5, 1));
         cmdSa.setForeground(new java.awt.Color(118, 118, 118));
-        cmdSa.setText("Sa");
+        cmdSa.setText("Sex");
         add(cmdSa);
 
         cmdSu.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 5, 1));
         cmdSu.setForeground(new java.awt.Color(255, 1, 1));
-        cmdSu.setText("Su");
+        cmdSu.setText("Sab");
         add(cmdSu);
 
         cmd1.setForeground(new java.awt.Color(75, 75, 75));
@@ -380,6 +385,10 @@ public final class Dates extends javax.swing.JPanel {
         cmd42.setName("day"); // NOI18N
         add(cmd42);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cmdMoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdMoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmdMoActionPerformed
 
     public Event getEvent() {
         return event;

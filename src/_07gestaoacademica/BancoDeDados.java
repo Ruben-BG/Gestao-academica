@@ -1,6 +1,8 @@
 package _07gestaoacademica;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,6 +26,12 @@ public class BancoDeDados {
     
     public static void enviarSolicitacao(TurmaSolicitacaoDeAluno solicitacao) {
         solicitacoesDeAlunos.add(solicitacao);
+    }
+    
+    public static Usuario pegaUsuario() {
+        
+        return usuarioLogado;
+        
     }
     
     
@@ -240,12 +248,6 @@ public class BancoDeDados {
         
     }
     
-    public static Usuario pegaUsuario() {
-        
-        return usuarioLogado;
-        
-    }
-    
     public static List<UsuarioProfessor> pesquisarProfessor(String nome, String codigoTurma, String disciplinaTurma) {
         
         List<UsuarioProfessor> professores = new ArrayList<>();
@@ -327,22 +329,27 @@ public class BancoDeDados {
         
     }
     
-    public static List<TurmaSolicitacaoDeAluno> pesquisarSolicitacaoAluno(String disciplinaDaTurma, String dataInicial, String dataFinal, String statusDaSolicitacao) {
+    public static List<TurmaSolicitacaoDeAluno> pesquisarSolicitacaoAluno(String disciplinaDaTurma, Date dataInicial, Date dataFinal, String statusDaSolicitacao) {
         
         List<TurmaSolicitacaoDeAluno> solicitacoes = new ArrayList<>();
         
         for(TurmaSolicitacaoDeAluno solicitacao : solicitacoesDeAlunos) {
             
-            Boolean validaDisciplina = disciplinaDaTurma == null || disciplinaDaTurma.equals("");
-            Boolean validaDataInicial;
-            Boolean validaDataFinal;
-            Boolean validaStatus;
+            Boolean validaDisciplina = disciplinaDaTurma == null || disciplinaDaTurma.equals("") || solicitacao.getTurma().getDisciplina().trim().toUpperCase().contains(disciplinaDaTurma);
+            Boolean validaDataInicial = dataInicial == null || dataInicial.before(solicitacao.getDataAtualParaData()) || dataInicial.equals(solicitacao.getDataAtualParaData());
+            Boolean validaDataFinal = dataFinal == null || dataFinal.after(solicitacao.getDataAtualParaData());
+            Boolean validaStatus = statusDaSolicitacao == null || statusDaSolicitacao.equals("") || solicitacao.getStatusDeAprovacao().equals(statusDaSolicitacao) || statusDaSolicitacao.equals("Todos");
+            
+            if (validaDisciplina && validaDataInicial && validaDataFinal && validaStatus) {
+                solicitacoes.add(solicitacao);
+            }
             
         }
         
         return solicitacoes;
         
     }
+    
     
     public static void editarProfessor(int professorSelecionado, UsuarioProfessor usuarioProfessor) {
         
@@ -388,13 +395,31 @@ public class BancoDeDados {
         
         for(Turma turma : retornarTurmas()) {
             
-            if (!turma.getAlunosMatriculados().contains(alunoSelecionado)) {
+            Boolean contemAlunoSelecionado = !turma.getAlunosMatriculados().contains(alunoSelecionado);
+            Boolean turmaNaoEstaCheia = turma.getAlunosMatriculados().size() < turma.getQuantidadeMaximaDeAlunos();
+            
+            if (contemAlunoSelecionado && turmaNaoEstaCheia) {
                 turmasAlunoNaoEsta.add(turma);
             }
             
         }
         
         return turmasAlunoNaoEsta;
+        
+    }
+    
+    public static Boolean verificarSeTurmaJaFoiSolicitada(Turma turmaSelecionada) {
+        
+        Boolean alunoSolicitouEntrarNaTurma = false;
+        
+        for(TurmaSolicitacaoDeAluno solicitacao : solicitacoesDeAlunos) {
+            
+            if (solicitacao.getTurma().equals(turmaSelecionada))
+                alunoSolicitouEntrarNaTurma = true;
+            
+        }
+        
+        return alunoSolicitouEntrarNaTurma;
         
     }
     

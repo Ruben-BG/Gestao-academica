@@ -1,7 +1,9 @@
 package _07gestaoacademica;
 
+import java.util.Date;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableColumn;
 
 public class ModeloTabelaSolicitacoesAluno extends AbstractTableModel{
 
@@ -39,7 +41,53 @@ public class ModeloTabelaSolicitacoesAluno extends AbstractTableModel{
         }
     }
     
-    public void pesquisarSolicitacoes(String disciplina, String dataInicio, String dataFinal, String status) {
+    public void pesquisarSolicitacoes(ListagemDeSolicitacoesMatriculaAluno referenciaTelaListagem, String disciplinaDigitada, Date dataInicial, Date dataFinal, String statusSelecionado) {
+        
+        if (disciplinaDigitada.equals("") && dataInicial == null && dataFinal == null && statusSelecionado.equals("")) {
+            
+            solicitacoes = BancoDeDados.retornarSolicitacoesDeUmAluno((UsuarioAluno)BancoDeDados.pegaUsuario());
+            referenciaTelaListagem.mensagemCasoPesquisaDeNulo();
+            fireTableDataChanged();
+            
+        } else {
+            
+            solicitacoes = BancoDeDados.pesquisarSolicitacaoAluno(disciplinaDigitada, dataInicial, dataFinal, statusSelecionado);
+            
+            if (solicitacoes.size() < 1)
+                referenciaTelaListagem.mensagemCasoPesquisaDeErrado();
+            else
+                referenciaTelaListagem.mensagemCasoPesquisaDeNulo();
+            
+            fireTableDataChanged();
+            
+        }
+        
+    }
+    
+    public void definirBotoesParaCadaStatus(JTablePersonalizada tabelaReferencia) {
+        
+        TableColumn colunaDosBotoes = tabelaReferencia.getColumnModel().getColumn(3);
+        
+        for(TurmaSolicitacaoDeAluno solicitacao : solicitacoes) {
+            
+            if (solicitacao.getStatusDeAprovacao().equals("Pendente")) {
+                
+                colunaDosBotoes.setCellRenderer(new BotaoCancelarAlunoRenderer());
+                colunaDosBotoes.setCellEditor(new BotaoCancelarAlunoEditor());
+                
+            } else if (solicitacao.getStatusDeAprovacao().equals("Aprovada")) {
+                
+                colunaDosBotoes.setCellRenderer(new BotaoRemoverSolicitacaoAlunoRenderer());
+                colunaDosBotoes.setCellEditor(new BotaoRemoverSolicitacaoAlunoEditor());
+                
+            } else {
+                
+                colunaDosBotoes.setCellRenderer(new BotaoCancelarReenviarAlunoRenderer());
+                colunaDosBotoes.setCellEditor(new BotaoCancelarReenviarAlunoEditor(tabelaReferencia));
+                
+            }
+            
+        }
         
     }
     

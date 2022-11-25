@@ -3,7 +3,6 @@ package _07gestaoacademica;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.table.TableModel;
 
 public class SolicitarMatriculaAluno extends javax.swing.JFrame {
 
@@ -260,9 +259,9 @@ public class SolicitarMatriculaAluno extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void voltarAoDashBoard(Boolean opcao) {
+    public void voltarAoDashBoard(Boolean entrouPeloDashboard, Boolean entrouPelaListagemDeTurma, Boolean entrouPelaListagemDeSolicitacoes) {
 
-        if (opcao) {
+        if (entrouPeloDashboard) {
             botaoVoltarLabel.addMouseListener(new MouseAdapter() {
 
                 @Override
@@ -273,7 +272,7 @@ public class SolicitarMatriculaAluno extends javax.swing.JFrame {
                 }
 
             });
-        } else if (!opcao) {
+        } else if (entrouPelaListagemDeTurma) {
             botaoVoltarLabel.addMouseListener(new MouseAdapter() {
 
                 @Override
@@ -285,6 +284,17 @@ public class SolicitarMatriculaAluno extends javax.swing.JFrame {
 
             });
 
+        } else if (entrouPelaListagemDeSolicitacoes) {
+            botaoVoltarLabel.addMouseListener(new MouseAdapter() {
+
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    ListagemDeSolicitacoesMatriculaAluno voltarListagem = new ListagemDeSolicitacoesMatriculaAluno();
+                    voltarListagem.setVisible(true);
+                    essaTela.dispose();
+                }
+
+            });
         }
 
     }
@@ -332,26 +342,37 @@ public class SolicitarMatriculaAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_turmaComboBoxActionPerformed
 
     private void botaoSolicitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSolicitarActionPerformed
-        
+
         solicitar = new TurmaSolicitacaoDeAluno();
         solicitar.setAluno((UsuarioAluno) BancoDeDados.pegaUsuario());
-        
+
         //Analisar a turma pega.
-        for(Turma turma : BancoDeDados.retornarTurmas()) {
-            
+        for (Turma turma : BancoDeDados.retornarTurmas()) {
+
             if (turma.getDisciplina().equals(turmaComboBox.getSelectedItem().toString())) {
                 solicitar.setTurma(turma);
             }
-            
+
         }
-        
-        solicitar.adicionarStatus(0);
+
+        solicitar.adicionarStatus(TurmaSolicitacaoDeAluno.status.P);
         solicitar.adicionarDataAtual();
-        BancoDeDados.enviarSolicitacao(solicitar);
-        
-        PopUp p = new PopUp();
-        p.mensagemFinalNovoProfessor("Solicitação feita com sucesso!");
-        
+
+        if (BancoDeDados.verificarSeTurmaJaFoiSolicitada(solicitar.getTurma())) {
+
+            PopUp p = new PopUp();
+            p.mensagemFinalDeErro("Turma já solicitada, aguarde a análise.");
+
+        } else {
+
+            BancoDeDados.enviarSolicitacao(solicitar);
+
+            PopUp p = new PopUp();
+
+            p.mensagemFinalNovoProfessor("Solicitação feita com sucesso!");
+
+        }
+
     }//GEN-LAST:event_botaoSolicitarActionPerformed
 
     /**

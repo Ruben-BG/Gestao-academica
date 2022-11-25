@@ -388,7 +388,7 @@ public class ListagemTurmasAluno extends javax.swing.JFrame {
 
         SolicitarMatriculaAluno janelaSolicitacaoMatricula = new SolicitarMatriculaAluno();
         janelaSolicitacaoMatricula.setVisible(true);
-        janelaSolicitacaoMatricula.voltarAoDashBoard(false);
+        janelaSolicitacaoMatricula.voltarAoDashBoard(false, true, false);
         this.dispose();
 
     }//GEN-LAST:event_criarNovaSolicitacaoActionPerformed
