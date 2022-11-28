@@ -41,6 +41,14 @@ public class ModeloTabelaSolicitacoesAluno extends AbstractTableModel{
         }
     }
     
+    public void cancelarSolicitacao(JTablePersonalizada tabela) {
+        
+        solicitacoes.remove(tabela.getSelectedRow());
+        BancoDeDados.excluirSolicitacaoDeUmAluno(tabela.getSelectedRow(), (UsuarioAluno) BancoDeDados.pegaUsuario());
+        fireTableDataChanged();
+        
+    }
+    
     public void pesquisarSolicitacoes(ListagemDeSolicitacoesMatriculaAluno referenciaTelaListagem, String disciplinaDigitada, Date dataInicial, Date dataFinal, String statusSelecionado) {
         
         if (disciplinaDigitada.equals("") && dataInicial == null && dataFinal == null && statusSelecionado.equals("")) {
@@ -73,17 +81,17 @@ public class ModeloTabelaSolicitacoesAluno extends AbstractTableModel{
             if (solicitacao.getStatusDeAprovacao().equals("Pendente")) {
                 
                 colunaDosBotoes.setCellRenderer(new BotaoCancelarAlunoRenderer());
-                colunaDosBotoes.setCellEditor(new BotaoCancelarAlunoEditor());
+                colunaDosBotoes.setCellEditor(new BotaoCancelarAlunoEditor(tabelaReferencia, this));
                 
             } else if (solicitacao.getStatusDeAprovacao().equals("Aprovada")) {
                 
                 colunaDosBotoes.setCellRenderer(new BotaoRemoverSolicitacaoAlunoRenderer());
-                colunaDosBotoes.setCellEditor(new BotaoRemoverSolicitacaoAlunoEditor());
+                colunaDosBotoes.setCellEditor(new BotaoRemoverSolicitacaoAlunoEditor(tabelaReferencia, this));
                 
             } else {
                 
                 colunaDosBotoes.setCellRenderer(new BotaoCancelarReenviarAlunoRenderer());
-                colunaDosBotoes.setCellEditor(new BotaoCancelarReenviarAlunoEditor(tabelaReferencia));
+                colunaDosBotoes.setCellEditor(new BotaoCancelarReenviarAlunoEditor(tabelaReferencia, this));
                 
             }
             

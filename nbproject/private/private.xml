@@ -4,9 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/ravtec/Documentos/projects/test/_07GestaoAcademica/src/_07gestaoacademica/BancoDeDados.java</file>
-            <file>file:/home/ravtec/Documentos/projects/test/_07GestaoAcademica/src/_07gestaoacademica/TurmaSolicitacaoDeAluno.java</file>
-            <file>file:/home/ravtec/Documentos/projects/test/_07GestaoAcademica/src/_07gestaoacademica/ListagemDeSolicitacoesMatriculaAluno.java</file>
-            <file>file:/home/ravtec/Documentos/projects/test/_07GestaoAcademica/src/_07gestaoacademica/ModeloTabelaSolicitacoesAluno.java</file>
+            <file>file:/home/ravtec/Documentos/projects/test/_07GestaoAcademica/src/_07gestaoacademica/BotoesSolicitacoesCoordenadorEditor.java</file>
+            <file>file:/home/ravtec/Documentos/projects/test/_07GestaoAcademica/src/_07gestaoacademica/ModeloTabelaSolicitacoesCoordenador.java</file>
+            <file>file:/home/ravtec/Documentos/projects/test/_07GestaoAcademica/src/_07gestaoacademica/ListagemDeSolicitacoesCoordenador.java</file>
+            <file>file:/home/ravtec/Documentos/projects/test/_07GestaoAcademica/src/_07gestaoacademica/Status.java</file>
         </group>
     </open-files>
 </project-private>

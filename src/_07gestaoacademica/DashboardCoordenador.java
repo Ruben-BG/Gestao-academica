@@ -33,6 +33,7 @@ public class DashboardCoordenador extends javax.swing.JFrame {
         alunoButton.mudarNumero(String.valueOf(BancoDeDados.quantidadeAluno()));
         alunoButton.mudarTexto("Alunos");
         solicitacaoButton.mudarIcone("/_07gestaoacademica/images/emailP.png");
+        solicitacaoButton.mudarNumero(String.valueOf(BancoDeDados.retornarSolicitacoesPendentesDeAlunos().size()));
         solicitacaoButton.mudarTexto("Solicitações");
         
     }
@@ -197,6 +198,9 @@ public class DashboardCoordenador extends javax.swing.JFrame {
         });
 
         solicitacaoButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                solicitacaoButtonMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 solicitacaoButtonMouseEntered(evt);
             }
@@ -392,6 +396,12 @@ public class DashboardCoordenador extends javax.swing.JFrame {
         novaListagemDeAluno.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_alunoButtonMouseClicked
+
+    private void solicitacaoButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_solicitacaoButtonMouseClicked
+        ListagemDeSolicitacoesCoordenador novaListagem = new ListagemDeSolicitacoesCoordenador();
+        novaListagem.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_solicitacaoButtonMouseClicked
 
     
     /**

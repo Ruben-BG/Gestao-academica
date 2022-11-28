@@ -40,7 +40,7 @@ public class BotaoCancelarAlunoEditor extends AbstractCellEditor implements Tabl
             }
         }
     
-    public BotaoCancelarAlunoEditor() {
+    public BotaoCancelarAlunoEditor(JTablePersonalizada tabela, ModeloTabelaSolicitacoesAluno modeloDaTabela) {
         
         super();
         this.tabela = tabela;
@@ -49,6 +49,9 @@ public class BotaoCancelarAlunoEditor extends AbstractCellEditor implements Tabl
         botao.addActionListener((e) -> {
             //Ação do botão
             
+            ConfirmacaoPopUp p = new ConfirmacaoPopUp();
+            p.confirmacaoCancelarSolicitacaoPendente(tabela, modeloDaTabela);
+            p.setVisible(true);
             
         });
 

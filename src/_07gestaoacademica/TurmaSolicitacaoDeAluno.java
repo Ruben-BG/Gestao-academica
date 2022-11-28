@@ -11,20 +11,8 @@ public class TurmaSolicitacaoDeAluno {
     
     private UsuarioAluno aluno;
     private Turma turma;
-    private status valorStatus;
+    private Status valorStatus;
     private LocalDateTime dataAtual;
-    
-    //ENUM STATUS
-    public enum status {
-        P("Pendente"), A("Aprovada"), R("Rejeitada");
-        
-        public String valorDoStatus;
-        
-        status(String associacaoStatus) {
-            valorDoStatus = associacaoStatus;
-        }
-        
-    }
 
     //SETTERS
     public void setAluno(UsuarioAluno aluno) {
@@ -39,7 +27,7 @@ public class TurmaSolicitacaoDeAluno {
         dataAtual = LocalDateTime.now();
     }
     
-    public void adicionarStatus(status statusPedido) {
+    public void adicionarStatus(Status statusPedido) {
         valorStatus = statusPedido;
     }
 
@@ -79,12 +67,12 @@ public class TurmaSolicitacaoDeAluno {
     
     public String getStatusDeAprovacao() {
         
-        if (valorStatus == status.P)
-            return status.P.valorDoStatus;
-        else if (valorStatus == status.A)
-            return status.A.valorDoStatus;
+        if (valorStatus == Status.PENDENTE)
+            return Status.PENDENTE.valorDoStatus;
+        else if (valorStatus == Status.APROVADA)
+            return Status.APROVADA.valorDoStatus;
         else
-            return status.R.valorDoStatus;
+            return Status.REJEITADA.valorDoStatus;
         
     }
     

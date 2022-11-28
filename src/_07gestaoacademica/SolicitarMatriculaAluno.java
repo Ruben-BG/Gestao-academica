@@ -355,7 +355,7 @@ public class SolicitarMatriculaAluno extends javax.swing.JFrame {
 
         }
 
-        solicitar.adicionarStatus(TurmaSolicitacaoDeAluno.status.P);
+        solicitar.adicionarStatus(Status.PENDENTE);
         solicitar.adicionarDataAtual();
 
         if (BancoDeDados.verificarSeTurmaJaFoiSolicitada(solicitar.getTurma())) {

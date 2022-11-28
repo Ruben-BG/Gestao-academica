@@ -1,6 +1,5 @@
 package _07gestaoacademica;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -186,6 +185,21 @@ public class BancoDeDados {
         return alunos;
         
     }
+
+    public static List<TurmaSolicitacaoDeAluno> retornarSolicitacoesPendentesDeAlunos() {
+        
+        List<TurmaSolicitacaoDeAluno> solicitacoesPendentes = new ArrayList<>();
+        
+        for(TurmaSolicitacaoDeAluno solicitacao : solicitacoesDeAlunos) {
+            
+            if (solicitacao.getStatusDeAprovacao().equals(Status.PENDENTE.valorDoStatus))
+                solicitacoesPendentes.add(solicitacao);
+            
+        }
+        
+        return solicitacoesPendentes;
+        
+    }
     
     public static List<TurmaSolicitacaoDeAluno> retornarSolicitacoesDeUmAluno(UsuarioAluno alunoSelecionado) {
         
@@ -247,6 +261,13 @@ public class BancoDeDados {
         usuarios.remove(alunos.get(linhaSelecionada));
         
     }
+    
+    public static void excluirSolicitacaoDeUmAluno(int solicitacaoSelecionada, UsuarioAluno aluno) {
+        
+        solicitacoesDeAlunos.remove(retornarSolicitacoesDeUmAluno(aluno).get(solicitacaoSelecionada));
+        
+    }
+    
     
     public static List<UsuarioProfessor> pesquisarProfessor(String nome, String codigoTurma, String disciplinaTurma) {
         

@@ -243,6 +243,25 @@ public class ConfirmacaoPopUp extends javax.swing.JFrame {
         
     }
     
+    public void confirmacaoCancelarSolicitacaoPendente(JTablePersonalizada referenciaTabela, ModeloTabelaSolicitacoesAluno tableModel) {
+        
+        mensagemCentralLabel.setText("Deseja cancelar sua solicitação?");
+        
+        botaoDeSim.addActionListener((e) -> {
+            
+            tableModel.cancelarSolicitacao(referenciaTabela);
+            this.dispose();
+            
+        });
+        
+        botaoDeNao.addActionListener((e) -> {
+            
+            this.dispose();
+            
+        });
+        
+    }
+    
     /**
      * @param args the command line arguments
      */
