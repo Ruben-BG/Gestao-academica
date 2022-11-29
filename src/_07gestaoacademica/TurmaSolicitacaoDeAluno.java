@@ -65,6 +65,18 @@ public class TurmaSolicitacaoDeAluno {
         return dataAtual;
     }
     
+    public Boolean isPendente() {
+        return valorStatus.isPendente();
+    }
+    
+    public Boolean isAprovada() {
+        return valorStatus.isAprovada();
+    }
+    
+    public Boolean isRejeitada() {
+        return valorStatus.isRejeitada();
+    }
+    
     public String getStatusDeAprovacao() {
         
         if (valorStatus == Status.PENDENTE)

@@ -1,4 +1,3 @@
-
 package _07gestaoacademica;
 
 import java.awt.Component;
@@ -7,15 +6,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 import javax.swing.AbstractCellEditor;
 import javax.swing.ButtonModel;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.TableCellEditor;
 
-public class BotaoRemoverSolicitacaoAlunoEditor extends AbstractCellEditor implements TableCellEditor {
+public class BotoesSolicitacaoAlunoEditor extends AbstractCellEditor implements TableCellEditor {
 
-    private final BotaoRemoverSolicitacaoAlunoPanel botaoPanel = new BotaoRemoverSolicitacaoAlunoPanel();
+    private final BotoesSolicitacaoAlunoPanel botoesPanel = new BotoesSolicitacaoAlunoPanel();
     private JTable tabela;
     
             class EditandoManipuladorDeParada extends MouseAdapter implements ActionListener {
@@ -30,37 +30,54 @@ public class BotaoRemoverSolicitacaoAlunoEditor extends AbstractCellEditor imple
                 } else if(o instanceof JButton) {
                     ButtonModel m = ((JButton) e.getComponent()).getModel();
                     if(m.isPressed() && e.isControlDown()){
-                        botaoPanel.setBackground(tabela.getBackground());
+                        botoesPanel.setBackground(tabela.getBackground());
                     }
                 }
             }
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                EventQueue.invokeLater(BotaoRemoverSolicitacaoAlunoEditor.this::fireEditingStopped);
+                EventQueue.invokeLater(BotoesSolicitacaoAlunoEditor.this::fireEditingStopped);
             }
         }
-            
-    public BotaoRemoverSolicitacaoAlunoEditor(JTablePersonalizada tabela, ModeloTabelaSolicitacoesAluno modeloDeTabela) {
+    
+    public BotoesSolicitacaoAlunoEditor(JTablePersonalizada tabela) {
         
         super();
-        JButton botao = botaoPanel.getBotao();
-        
-        botao.addActionListener((e) -> {
-            //Ação do botão
+        this.tabela = tabela;
+        List<JButton> lista =  botoesPanel.getButtons();
+
+        lista.get(0).addActionListener(e -> {
+            //Ação do botão cancelar na tabela
             
-            modeloDeTabela.cancelarSolicitacao(tabela);
+            
             
         });
 
-        BotaoRemoverSolicitacaoAlunoEditor.EditandoManipuladorDeParada manipulador = new BotaoRemoverSolicitacaoAlunoEditor.EditandoManipuladorDeParada();
-        botao.addMouseListener(manipulador);
-        botao.addActionListener(manipulador);
+        lista.get(1).addActionListener(e -> {
+            //Ação do botão reenviar na tabela
+            
+            
+            
+        });
+        
+        lista.get(2).addActionListener((e) -> {
+            //Ação do botão remover na tabela
+            
+            
+            
+        });
 
-        botaoPanel.addMouseListener(manipulador);
+        BotoesSolicitacaoAlunoEditor.EditandoManipuladorDeParada manipulador = new BotoesSolicitacaoAlunoEditor.EditandoManipuladorDeParada();
+        for(JButton b : lista) {
+            b.addMouseListener(manipulador);
+            b.addActionListener(manipulador);
+        }
+
+        botoesPanel.addMouseListener(manipulador);
         
     }
-            
+    
     @Override
     public Object getCellEditorValue() {
         return "";
@@ -68,8 +85,8 @@ public class BotaoRemoverSolicitacaoAlunoEditor extends AbstractCellEditor imple
 
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-        botaoPanel.setBackground(table.getBackground());
-        return botaoPanel;
+        botoesPanel.setBackground(table.getBackground());
+        return botoesPanel;
     }
     
 }

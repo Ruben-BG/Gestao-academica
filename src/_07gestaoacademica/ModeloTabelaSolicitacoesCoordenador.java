@@ -45,8 +45,8 @@ public class ModeloTabelaSolicitacoesCoordenador extends AbstractTableModel {
     
     public void rejeitarSolicitacao(int solicitacaoSelecionada) {
         
+        BancoDeDados.editarStatusDeSolicitacao(solicitacoes.get(solicitacaoSelecionada), Status.REJEITADA);
         solicitacoes.remove(solicitacaoSelecionada);
-        BancoDeDados.retornarSolicitacoesPendentesDeAlunos().get(solicitacaoSelecionada).adicionarStatus(Status.REJEITADA);
         fireTableDataChanged();
         
     }

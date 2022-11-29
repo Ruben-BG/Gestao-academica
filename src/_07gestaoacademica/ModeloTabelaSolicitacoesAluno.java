@@ -1,9 +1,9 @@
 package _07gestaoacademica;
 
 import java.util.Date;
+import java.util.EnumSet;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableColumn;
 
 public class ModeloTabelaSolicitacoesAluno extends AbstractTableModel{
 
@@ -36,7 +36,16 @@ public class ModeloTabelaSolicitacoesAluno extends AbstractTableModel{
             case 0: return solicitacoes.get(linha).getTurma().getDisciplina();
             case 1: return solicitacoes.get(linha).getDataDeSolicitacaoFormatada();
             case 2: return solicitacoes.get(linha).getStatusDeAprovacao();
-            case 3: return null;
+            case 3: 
+                
+                if (solicitacoes.get(linha).isPendente()) {
+                    return EnumSet.of(AcoesBotoesSolicitacaoAluno.CANCELAR);
+                } else if (solicitacoes.get(linha).isAprovada()) {
+                    return EnumSet.of(AcoesBotoesSolicitacaoAluno.REMOVER);
+                } else if (solicitacoes.get(linha).isRejeitada()) {
+                    return EnumSet.of(AcoesBotoesSolicitacaoAluno.CANCELAR, AcoesBotoesSolicitacaoAluno.REENVIAR);
+                }
+                
             default: return null;
         }
     }
@@ -74,24 +83,19 @@ public class ModeloTabelaSolicitacoesAluno extends AbstractTableModel{
     
     public void definirBotoesParaCadaStatus(JTablePersonalizada tabelaReferencia) {
         
-        TableColumn colunaDosBotoes = tabelaReferencia.getColumnModel().getColumn(3);
-        
-        for(TurmaSolicitacaoDeAluno solicitacao : solicitacoes) {
+        for (int linha = 0 ; linha < solicitacoes.size() ; linha++) {
             
-            if (solicitacao.getStatusDeAprovacao().equals("Pendente")) {
+            if (solicitacoes.get(linha).isPendente()) {
                 
-                colunaDosBotoes.setCellRenderer(new BotaoCancelarAlunoRenderer());
-                colunaDosBotoes.setCellEditor(new BotaoCancelarAlunoEditor(tabelaReferencia, this));
+                setValueAt(EnumSet.of(AcoesBotoesSolicitacaoAluno.CANCELAR), linha, 3);
                 
-            } else if (solicitacao.getStatusDeAprovacao().equals("Aprovada")) {
+            } else if (solicitacoes.get(linha).getStatusDeAprovacao().equals("Aprovada")) {
                 
-                colunaDosBotoes.setCellRenderer(new BotaoRemoverSolicitacaoAlunoRenderer());
-                colunaDosBotoes.setCellEditor(new BotaoRemoverSolicitacaoAlunoEditor(tabelaReferencia, this));
+                setValueAt(EnumSet.of(AcoesBotoesSolicitacaoAluno.REMOVER), linha, 3);
                 
             } else {
                 
-                colunaDosBotoes.setCellRenderer(new BotaoCancelarReenviarAlunoRenderer());
-                colunaDosBotoes.setCellEditor(new BotaoCancelarReenviarAlunoEditor(tabelaReferencia, this));
+                setValueAt(EnumSet.of(AcoesBotoesSolicitacaoAluno.CANCELAR, AcoesBotoesSolicitacaoAluno.REENVIAR), linha, 3);
                 
             }
             

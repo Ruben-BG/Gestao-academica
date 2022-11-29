@@ -51,8 +51,8 @@ public class BotoesSolicitacoesCoordenadorEditor extends AbstractCellEditor impl
             //Ação do botão rejeitar na tabela
             
             modeloDaTabela.rejeitarSolicitacao(referenciaTabela.getSelectedRow());
-            //PopUp p = new PopUp();
-            //p.mensagemFinalNovoProfessor("Solicitação rejeitada.");
+            PopUp p = new PopUp();
+            p.mensagemFinalNovoProfessor("Solicitação rejeitada.");
             
         });
 

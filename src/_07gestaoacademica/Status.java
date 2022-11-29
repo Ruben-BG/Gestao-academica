@@ -6,8 +6,20 @@ public enum Status {
 
     public String valorDoStatus;
 
-    Status(String associacaoStatus) {
+    private Status(String associacaoStatus) {
         valorDoStatus = associacaoStatus;
+    }
+    
+    public Boolean isPendente() {
+        return equals(PENDENTE);
+    }
+    
+    public Boolean isAprovada() {
+        return equals(APROVADA);
+    }
+    
+    public Boolean isRejeitada() {
+        return equals(REJEITADA);
     }
 
 }

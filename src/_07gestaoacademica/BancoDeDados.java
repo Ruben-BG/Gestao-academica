@@ -410,6 +410,18 @@ public class BancoDeDados {
         
     }
     
+    public static void editarStatusDeSolicitacao(TurmaSolicitacaoDeAluno solicitacaoSelecionada, Status novoStatus) {
+        
+        for(TurmaSolicitacaoDeAluno solicitacao : solicitacoesDeAlunos) {
+            
+            if (solicitacao.getDisciplinaDaTurma().equals(solicitacaoSelecionada.getDisciplinaDaTurma()))
+                solicitacao.adicionarStatus(novoStatus);
+            
+        }
+        
+    }
+    
+    
     public static List<Turma> TurmasOndeAlunoNaoEsta(UsuarioAluno alunoSelecionado) {
         
         List<Turma> turmasAlunoNaoEsta = new ArrayList<>();
