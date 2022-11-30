@@ -262,6 +262,44 @@ public class ConfirmacaoPopUp extends javax.swing.JFrame {
         
     }
     
+    public void confirmacaoRejeitarSolicitacao(String texto, ModeloTabelaSolicitacoesCoordenador modeloDaTabela, int solicitacaoSelecionada) {
+        
+        mensagemCentralLabel.setText(texto);
+        
+        botaoDeSim.addActionListener((e) -> {
+            
+            modeloDaTabela.rejeitarSolicitacao(solicitacaoSelecionada);
+            this.dispose();
+            
+        });
+        
+        botaoDeNao.addActionListener((e) -> {
+            
+            this.dispose();
+            
+        });
+        
+    }
+    
+    public void confirmacaoAceitarSolicitacao(String texto, ModeloTabelaSolicitacoesCoordenador modeloDaTabela, int solicitacaoSelecionada) {
+        
+        mensagemCentralLabel.setText(texto);
+        
+        botaoDeSim.addActionListener((e) -> {
+            
+            modeloDaTabela.aprovarSolicitacao(solicitacaoSelecionada);
+            this.dispose();
+            
+        });
+        
+        botaoDeNao.addActionListener((e) -> {
+            
+            this.dispose();
+            
+        });
+        
+    }
+    
     /**
      * @param args the command line arguments
      */

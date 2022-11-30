@@ -1,5 +1,6 @@
 package _07gestaoacademica;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -41,7 +42,7 @@ public class BotoesSolicitacaoAlunoEditor extends AbstractCellEditor implements 
             }
         }
     
-    public BotoesSolicitacaoAlunoEditor(JTablePersonalizada tabela) {
+    public BotoesSolicitacaoAlunoEditor(JTablePersonalizada tabela, ModeloTabelaSolicitacoesAluno modeloTabela) {
         
         super();
         this.tabela = tabela;
@@ -50,21 +51,22 @@ public class BotoesSolicitacaoAlunoEditor extends AbstractCellEditor implements 
         lista.get(0).addActionListener(e -> {
             //Ação do botão cancelar na tabela
             
-            
+            modeloTabela.cancelarSolicitacao(tabela);
             
         });
 
         lista.get(1).addActionListener(e -> {
             //Ação do botão reenviar na tabela
             
-            
+            BancoDeDados.editarStatusDeSolicitacao(modeloTabela.pegaSolicitacaoSelecionada(tabela.getSelectedRow()), Status.PENDENTE);
+            modeloTabela.fireTableDataChanged();
             
         });
         
         lista.get(2).addActionListener((e) -> {
             //Ação do botão remover na tabela
             
-            
+            modeloTabela.cancelarSolicitacao(tabela);
             
         });
 
@@ -86,6 +88,10 @@ public class BotoesSolicitacaoAlunoEditor extends AbstractCellEditor implements 
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
         botoesPanel.setBackground(table.getBackground());
+        
+        if (isSelected)
+            botoesPanel.setBackground(Color.green);
+        
         return botoesPanel;
     }
     

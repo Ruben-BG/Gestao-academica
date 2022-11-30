@@ -46,20 +46,25 @@ public class BotoesSolicitacoesCoordenadorEditor extends AbstractCellEditor impl
         super();
         this.tabela = tabela;
         List<JButton> lista =  botoesPanel.getButtons();
+        ConfirmacaoPopUp popUp = new ConfirmacaoPopUp();
 
         lista.get(0).addActionListener(e -> {
             //Ação do botão rejeitar na tabela
             
-            modeloDaTabela.rejeitarSolicitacao(referenciaTabela.getSelectedRow());
-            PopUp p = new PopUp();
-            p.mensagemFinalNovoProfessor("Solicitação rejeitada.");
+            String mensagem = "Deseja rejeitar a solicitação de " + modeloDaTabela.pegaNomeAluno(referenciaTabela.getSelectedRow()) + "?";
+            
+            popUp.setVisible(true);
+            popUp.confirmacaoRejeitarSolicitacao(mensagem , modeloDaTabela, referenciaTabela.getSelectedRow());
             
         });
 
         lista.get(1).addActionListener(e -> {
             //Ação do botão aprovar na tabela
             
+            String mensagem = "Deseja aprovar a solicitação de " + modeloDaTabela.pegaNomeAluno(referenciaTabela.getSelectedRow()) + "?";
             
+            popUp.setVisible(true);
+            popUp.confirmacaoAceitarSolicitacao(mensagem, modeloDaTabela, referenciaTabela.getSelectedRow());
             
         });
 

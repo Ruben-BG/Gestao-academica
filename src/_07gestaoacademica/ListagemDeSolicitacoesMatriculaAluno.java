@@ -34,7 +34,7 @@ public class ListagemDeSolicitacoesMatriculaAluno extends javax.swing.JFrame {
         tabelaSolicitacoes.setModel(tableModel);
         TableColumn colunaDosBotoes = tabelaSolicitacoes.getColumnModel().getColumn(3);
         colunaDosBotoes.setCellRenderer(new BotoesSolicitacaoAlunoRenderer());
-        colunaDosBotoes.setCellEditor(new BotoesSolicitacaoAlunoEditor(tabelaSolicitacoes));
+        colunaDosBotoes.setCellEditor(new BotoesSolicitacaoAlunoEditor(tabelaSolicitacoes, tableModel));
         
         //Ação de um botão
         pesquisarTurmaButton.addActionListener((e) -> {

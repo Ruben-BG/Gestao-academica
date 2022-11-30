@@ -33,6 +33,7 @@ public class ModeloTabelaSolicitacoesAluno extends AbstractTableModel{
     @Override
     public Object getValueAt(int linha, int coluna) {
         switch (coluna) {
+            
             case 0: return solicitacoes.get(linha).getTurma().getDisciplina();
             case 1: return solicitacoes.get(linha).getDataDeSolicitacaoFormatada();
             case 2: return solicitacoes.get(linha).getStatusDeAprovacao();
@@ -47,6 +48,7 @@ public class ModeloTabelaSolicitacoesAluno extends AbstractTableModel{
                 }
                 
             default: return null;
+            
         }
     }
     
@@ -55,6 +57,12 @@ public class ModeloTabelaSolicitacoesAluno extends AbstractTableModel{
         solicitacoes.remove(tabela.getSelectedRow());
         BancoDeDados.excluirSolicitacaoDeUmAluno(tabela.getSelectedRow(), (UsuarioAluno) BancoDeDados.pegaUsuario());
         fireTableDataChanged();
+        
+    }
+    
+    public TurmaSolicitacaoDeAluno pegaSolicitacaoSelecionada(int solicitacaoSelecionada) {
+        
+        return solicitacoes.get(solicitacaoSelecionada);
         
     }
     
@@ -76,28 +84,6 @@ public class ModeloTabelaSolicitacoesAluno extends AbstractTableModel{
                 referenciaTelaListagem.mensagemCasoPesquisaDeNulo();
             
             fireTableDataChanged();
-            
-        }
-        
-    }
-    
-    public void definirBotoesParaCadaStatus(JTablePersonalizada tabelaReferencia) {
-        
-        for (int linha = 0 ; linha < solicitacoes.size() ; linha++) {
-            
-            if (solicitacoes.get(linha).isPendente()) {
-                
-                setValueAt(EnumSet.of(AcoesBotoesSolicitacaoAluno.CANCELAR), linha, 3);
-                
-            } else if (solicitacoes.get(linha).getStatusDeAprovacao().equals("Aprovada")) {
-                
-                setValueAt(EnumSet.of(AcoesBotoesSolicitacaoAluno.REMOVER), linha, 3);
-                
-            } else {
-                
-                setValueAt(EnumSet.of(AcoesBotoesSolicitacaoAluno.CANCELAR, AcoesBotoesSolicitacaoAluno.REENVIAR), linha, 3);
-                
-            }
             
         }
         

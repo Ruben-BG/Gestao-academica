@@ -2,6 +2,12 @@ package _07gestaoacademica;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JLabel;
 import javax.swing.table.TableColumn;
 
 public class ListagemDeSolicitacoesCoordenador extends javax.swing.JFrame {
@@ -17,12 +23,27 @@ public class ListagemDeSolicitacoesCoordenador extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         
+        //Campos
+        campoDataInicial.setText("");
+        campoDataFinal.setText("");
+        
         //Tabela
         tabelaSolicitacoes.setModel(tableModel);
         jScrollPane1.getViewport().setBackground(Color.white);
         TableColumn colunaDosBotoes = tabelaSolicitacoes.getColumnModel().getColumn(3);
         colunaDosBotoes.setCellRenderer(new BotoesSolicitacoesCoordenadorRenderer());
         colunaDosBotoes.setCellEditor(new BotoesSolicitacoesCoordenadorEditor(tabelaSolicitacoes, tableModel));
+        
+        //Ação de um botão
+        pesquisarTurmaButton.addActionListener((e) -> {
+            
+            try {
+                acaoBotaoPesquisar();
+            } catch (ParseException ex) {
+                Logger.getLogger(ListagemDeSolicitacoesCoordenador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        });
         
     }
 
@@ -35,6 +56,8 @@ public class ListagemDeSolicitacoesCoordenador extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        dateChooser1 = new com.raven.datechooser.DateChooser();
+        dateChooser2 = new com.raven.datechooser.DateChooser();
         jPanel = new javax.swing.JPanel();
         cabecalhoPanel = new javax.swing.JPanel();
         sairPaginaButton = new javax.swing.JButton();
@@ -53,6 +76,13 @@ public class ListagemDeSolicitacoesCoordenador extends javax.swing.JFrame {
         pesquisarTurmaButton = new _07gestaoacademica.CustomizacaoBotao();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaSolicitacoes = new _07gestaoacademica.JTablePersonalizada();
+
+        dateChooser1.setForeground(new java.awt.Color(237, 165, 60));
+        dateChooser1.setDateFormat("dd/MM/yyyy");
+        dateChooser1.setTextRefernce(campoDataInicial);
+
+        dateChooser2.setDateFormat("dd/MM/yyyy");
+        dateChooser2.setTextRefernce(campoDataFinal);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -284,6 +314,32 @@ public class ListagemDeSolicitacoesCoordenador extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    //Métodos de simplificação
+    public void mensagemCasoPesquisaDeErrado() {
+        JLabel mensagem = new JLabel("Pesquisa inválida.");
+        mensagem.setFont(new java.awt.Font("Verdana", 0, 13));
+        mensagem.setVerticalAlignment(JLabel.TOP);
+        jScrollPane1.setViewportView(mensagem);
+    }
+    
+    public void mensagemCasoPesquisaDeNulo() {
+        jScrollPane1.setViewportView(tabelaSolicitacoes);
+    }
+    
+    
+    //Métodos de ação
+    public void acaoBotaoPesquisar() throws ParseException {
+        
+        String disciplina = campoDisciplinaDaTurma.getText().trim().toUpperCase();
+        Date data1 = campoDataInicial.getText().equals("") ? null : new SimpleDateFormat("dd/MM/yyyy").parse(campoDataInicial.getText());
+        Date data2 = campoDataFinal.getText().equals("") ? null : new SimpleDateFormat("dd/MM/yyyy").parse(campoDataFinal.getText());
+        String nomeAluno = campoAluno.getText().trim().toUpperCase();
+        
+        tableModel.pesquisarSolicitacoes(disciplina, data1, data2, nomeAluno, this);
+        
+    }
+    
     private void sairPaginaButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairPaginaButtonMouseEntered
         sairPaginaButton.setForeground(new Color(89, 89, 89));
     }//GEN-LAST:event_sairPaginaButtonMouseEntered
@@ -343,7 +399,10 @@ public class ListagemDeSolicitacoesCoordenador extends javax.swing.JFrame {
 
     private void limparCampoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparCampoButtonActionPerformed
 
-        
+        campoDisciplinaDaTurma.setText("");
+        campoDataInicial.setText("");
+        campoDataFinal.setText("");
+        campoAluno.setText("");
         pesquisarTurmaButton.doClick();
         
     }//GEN-LAST:event_limparCampoButtonActionPerformed
@@ -398,6 +457,8 @@ public class ListagemDeSolicitacoesCoordenador extends javax.swing.JFrame {
     private _07gestaoacademica.CampoDeEscrita campoDataInicial;
     private _07gestaoacademica.CampoDeEscrita campoDisciplinaDaTurma;
     private javax.swing.JLabel dataLabel;
+    private com.raven.datechooser.DateChooser dateChooser1;
+    private com.raven.datechooser.DateChooser dateChooser2;
     private javax.swing.JLabel disciplinaTurmaLabel;
     private javax.swing.JPanel jPanel;
     private javax.swing.JScrollPane jScrollPane1;

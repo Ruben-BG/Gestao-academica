@@ -1,13 +1,16 @@
 package _07gestaoacademica;
 
+import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class BotoesSolicitacaoAlunoPanel extends JPanel {
+public class BotoesSolicitacaoAlunoPanel extends JPanel{
 
     public final List<JButton> buttons = new ArrayList<>();
 
@@ -15,12 +18,31 @@ public class BotoesSolicitacaoAlunoPanel extends JPanel {
         
         super(new FlowLayout(FlowLayout.LEFT));
         setOpaque(true);
+        //setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
         
         for (AcoesBotoesSolicitacaoAluno a : AcoesBotoesSolicitacaoAluno.values()) {
             
             JButton b = new JButton(a.toString());
             b.setFocusable(false);
             b.setRolloverEnabled(false);
+            b.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            b.setForeground(Color.WHITE);
+            
+            switch (a) {
+                case CANCELAR -> {
+                    b.setText(AcoesBotoesSolicitacaoAluno.CANCELAR.valorOpcoesENum);
+                    b.setBackground(new Color(212, 67, 81));
+                }
+                case REENVIAR -> {
+                    b.setText(AcoesBotoesSolicitacaoAluno.REENVIAR.valorOpcoesENum);
+                    b.setBackground(new Color(76, 95, 99));
+                }
+                default -> {
+                    b.setText(AcoesBotoesSolicitacaoAluno.REMOVER.valorOpcoesENum);
+                    b.setBackground(new Color(76, 95, 99));
+                }
+            }
+            
             add(b);
             buttons.add(b);
             
