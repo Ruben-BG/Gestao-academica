@@ -7,8 +7,6 @@ import java.util.Date;
 
 public class TurmaSolicitacaoDeAluno {
     
-    //pegar aluno, passar nome, disciplina da turma, data de requerimento usando Time
-    
     private UsuarioAluno aluno;
     private Turma turma;
     private Status valorStatus;
@@ -79,9 +77,9 @@ public class TurmaSolicitacaoDeAluno {
     
     public String getStatusDeAprovacao() {
         
-        if (valorStatus == Status.PENDENTE)
+        if (isPendente())
             return Status.PENDENTE.valorDoStatus;
-        else if (valorStatus == Status.APROVADA)
+        else if (isAprovada())
             return Status.APROVADA.valorDoStatus;
         else
             return Status.REJEITADA.valorDoStatus;

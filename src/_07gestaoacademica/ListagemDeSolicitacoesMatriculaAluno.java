@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 
 public class ListagemDeSolicitacoesMatriculaAluno extends javax.swing.JFrame {
@@ -32,9 +33,13 @@ public class ListagemDeSolicitacoesMatriculaAluno extends javax.swing.JFrame {
         //Tabela
         jScrollPane1.getViewport().setBackground(Color.WHITE);
         tabelaSolicitacoes.setModel(tableModel);
-        TableColumn colunaDosBotoes = tabelaSolicitacoes.getColumnModel().getColumn(3);
-        colunaDosBotoes.setCellRenderer(new BotoesSolicitacaoAlunoRenderer());
-        colunaDosBotoes.setCellEditor(new BotoesSolicitacaoAlunoEditor(tabelaSolicitacoes, tableModel));
+        
+            //Colunas dos status da tabela
+            StatusCorRenderer colunaStatus = new StatusCorRenderer(2);
+            tabelaSolicitacoes.getColumnModel().getColumn(2).setCellRenderer(colunaStatus);
+            TableColumn colunaDosBotoes = tabelaSolicitacoes.getColumnModel().getColumn(3);
+            colunaDosBotoes.setCellRenderer(new BotoesSolicitacaoAlunoRenderer());
+            colunaDosBotoes.setCellEditor(new BotoesSolicitacaoAlunoEditor(tabelaSolicitacoes, tableModel));
         
         //Ação de um botão
         pesquisarTurmaButton.addActionListener((e) -> {

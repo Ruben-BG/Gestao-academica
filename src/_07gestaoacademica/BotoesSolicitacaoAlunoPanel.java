@@ -18,7 +18,6 @@ public class BotoesSolicitacaoAlunoPanel extends JPanel{
         
         super(new FlowLayout(FlowLayout.LEFT));
         setOpaque(true);
-        //setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
         
         for (AcoesBotoesSolicitacaoAluno a : AcoesBotoesSolicitacaoAluno.values()) {
             

@@ -8,6 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 import javax.swing.AbstractCellEditor;
+import javax.swing.BorderFactory;
 import javax.swing.ButtonModel;
 import javax.swing.JButton;
 import javax.swing.JTable;
@@ -78,7 +79,8 @@ public class BotoesListagemTurmaEditor extends AbstractCellEditor implements Tab
 
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-        botoesPanel.setBackground(table.getBackground());
+        botoesPanel.setBackground(table.getSelectionBackground());
+        botoesPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
         return botoesPanel;
     }
 

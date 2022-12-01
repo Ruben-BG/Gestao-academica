@@ -243,25 +243,6 @@ public class ConfirmacaoPopUp extends javax.swing.JFrame {
         
     }
     
-    public void confirmacaoCancelarSolicitacaoPendente(JTablePersonalizada referenciaTabela, ModeloTabelaSolicitacoesAluno tableModel) {
-        
-        mensagemCentralLabel.setText("Deseja cancelar sua solicitação?");
-        
-        botaoDeSim.addActionListener((e) -> {
-            
-            tableModel.cancelarSolicitacao(referenciaTabela);
-            this.dispose();
-            
-        });
-        
-        botaoDeNao.addActionListener((e) -> {
-            
-            this.dispose();
-            
-        });
-        
-    }
-    
     public void confirmacaoRejeitarSolicitacao(String texto, ModeloTabelaSolicitacoesCoordenador modeloDaTabela, int solicitacaoSelecionada) {
         
         mensagemCentralLabel.setText(texto);
@@ -288,6 +269,44 @@ public class ConfirmacaoPopUp extends javax.swing.JFrame {
         botaoDeSim.addActionListener((e) -> {
             
             modeloDaTabela.aprovarSolicitacao(solicitacaoSelecionada);
+            this.dispose();
+            
+        });
+        
+        botaoDeNao.addActionListener((e) -> {
+            
+            this.dispose();
+            
+        });
+        
+    }
+    
+    public void confirmacaoCancelarOuRemoverSolicitacao(String texto, JTablePersonalizada tabela, ModeloTabelaSolicitacoesAluno modeloDaTabela) {
+        
+        mensagemCentralLabel.setText(texto);
+        
+        botaoDeSim.addActionListener((e) -> {
+            
+            modeloDaTabela.cancelarSolicitacao(tabela);
+            this.dispose();
+            
+        });
+        
+        botaoDeNao.addActionListener((e) -> {
+            
+            this.dispose();
+            
+        });
+        
+    }
+    
+    public void confirmacaoReenviarSolicitacaoAluno(JTablePersonalizada tabela, ModeloTabelaSolicitacoesAluno modeloDaTabela) {
+        
+        mensagemCentralLabel.setText("Deseja reenviar sua solicitação?");
+        
+        botaoDeSim.addActionListener((e) -> {
+            
+            modeloDaTabela.reenviarSolicitacao(tabela);
             this.dispose();
             
         });

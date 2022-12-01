@@ -1,6 +1,5 @@
 package _07gestaoacademica;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -9,6 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 import javax.swing.AbstractCellEditor;
+import javax.swing.BorderFactory;
 import javax.swing.ButtonModel;
 import javax.swing.JButton;
 import javax.swing.JTable;
@@ -51,22 +51,27 @@ public class BotoesSolicitacaoAlunoEditor extends AbstractCellEditor implements 
         lista.get(0).addActionListener(e -> {
             //Ação do botão cancelar na tabela
             
-            modeloTabela.cancelarSolicitacao(tabela);
+            ConfirmacaoPopUp p = new ConfirmacaoPopUp();
+            p.confirmacaoCancelarOuRemoverSolicitacao("Deseja cancelar sua solicitação?", tabela, modeloTabela);
+            p.setVisible(true);
             
         });
 
         lista.get(1).addActionListener(e -> {
             //Ação do botão reenviar na tabela
             
-            BancoDeDados.editarStatusDeSolicitacao(modeloTabela.pegaSolicitacaoSelecionada(tabela.getSelectedRow()), Status.PENDENTE);
-            modeloTabela.fireTableDataChanged();
+            ConfirmacaoPopUp p = new ConfirmacaoPopUp();
+            p.confirmacaoReenviarSolicitacaoAluno(tabela, modeloTabela);
+            p.setVisible(true);
             
         });
         
         lista.get(2).addActionListener((e) -> {
             //Ação do botão remover na tabela
             
-            modeloTabela.cancelarSolicitacao(tabela);
+            ConfirmacaoPopUp p = new ConfirmacaoPopUp();
+            p.confirmacaoCancelarOuRemoverSolicitacao("Deseja remover sua solicitação?", tabela, modeloTabela);
+            p.setVisible(true);
             
         });
 
@@ -87,10 +92,11 @@ public class BotoesSolicitacaoAlunoEditor extends AbstractCellEditor implements 
 
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-        botoesPanel.setBackground(table.getBackground());
+        //Durante edição este método faz alteração da célula quando focada
         
-        if (isSelected)
-            botoesPanel.setBackground(Color.green);
+        botoesPanel.setBackground(table.getSelectionBackground());
+        botoesPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        botoesPanel.updateButtons(value);
         
         return botoesPanel;
     }

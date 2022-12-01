@@ -60,11 +60,14 @@ public class ModeloTabelaSolicitacoesAluno extends AbstractTableModel{
         
     }
     
-    public TurmaSolicitacaoDeAluno pegaSolicitacaoSelecionada(int solicitacaoSelecionada) {
+    public void reenviarSolicitacao(JTablePersonalizada tabela) {
         
-        return solicitacoes.get(solicitacaoSelecionada);
+        BancoDeDados.editarStatusDeSolicitacao(solicitacoes.get(tabela.getSelectedRow()), Status.PENDENTE);
+        fireTableDataChanged();
         
     }
+    
+    
     
     public void pesquisarSolicitacoes(ListagemDeSolicitacoesMatriculaAluno referenciaTelaListagem, String disciplinaDigitada, Date dataInicial, Date dataFinal, String statusSelecionado) {
         

@@ -77,7 +77,8 @@ public class BotoesListagemProfessorEditor extends AbstractCellEditor implements
 
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-        botoesPanel.setBackground(table.getBackground());
+        botoesPanel.setBackground(table.getSelectionBackground());
+        botoesPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
         return botoesPanel;
     }
 
