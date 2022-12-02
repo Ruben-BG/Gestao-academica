@@ -3,9 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/ravtec/Documentos/projects/test/_07GestaoAcademica/src/_07gestaoacademica/ListagemDeSolicitacoesMatriculaAluno.java</file>
-            <file>file:/home/ravtec/Documentos/projects/test/_07GestaoAcademica/src/_07gestaoacademica/StatusCorRenderer.java</file>
-            <file>file:/home/ravtec/Documentos/projects/test/_07GestaoAcademica/src/_07gestaoacademica/ModeloTabelaSolicitacoesAluno.java</file>
+            <file>file:/home/ravtec/Documentos/projects/test/_07GestaoAcademica/src/_07gestaoacademica/BancoDeDados.java</file>
+            <file>file:/home/ravtec/Documentos/projects/test/_07GestaoAcademica/src/_07gestaoacademica/ModeloTabelaTurmaProfessor.java</file>
+            <file>file:/home/ravtec/Documentos/projects/test/_07GestaoAcademica/src/_07gestaoacademica/ListagemVisualizacaoTurma.java</file>
         </group>
     </open-files>
 </project-private>

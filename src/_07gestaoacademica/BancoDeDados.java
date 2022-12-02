@@ -130,6 +130,17 @@ public class BancoDeDados {
         return quantidade;
 
     }
+    
+    public static int quantidadeTurmaProfessor() {
+        
+        int quantidade = 0;
+        
+        if (pegaUsuario() instanceof UsuarioProfessor)
+            quantidade = ((UsuarioProfessor)pegaUsuario()).retornaQuantidadeDeTurma();
+        
+        return quantidade;
+        
+    }
 
     public static int quantidadeSolicitacaoDeUmAluno() {
 
@@ -392,6 +403,33 @@ public class BancoDeDados {
         return solicitacoesFiltradas;
 
     }
+    
+    public static List<Turma> pesquisarTurmasDoProfessor(String codigoDigitado, String disciplinaDigitada, String alunoDigitado, String horarioDigitado) {
+        
+        List<Turma> turmasFiltradas = new ArrayList<>();
+        
+        for (Turma turma : ((UsuarioProfessor)BancoDeDados.pegaUsuario()).retornarTurmasDesseProfessor()) {
+            
+            Boolean validaCodigo = codigoDigitado == null || codigoDigitado.equals("") || turma.getCodigo().trim().toUpperCase().equals(codigoDigitado);
+            Boolean validaDisciplina = disciplinaDigitada == null || disciplinaDigitada.equals("") || turma.getDisciplina().trim().toUpperCase().contains(disciplinaDigitada);
+            Boolean validaAluno = alunoDigitado == null || alunoDigitado.equals("");
+            Boolean validaHorario = horarioDigitado == null || horarioDigitado.equals("") || turma.getHorario().trim().toUpperCase().contains(horarioDigitado);
+            
+            //Validação de nome digitado
+            for (UsuarioAluno aluno : turma.getAlunosMatriculados()) {
+                if (aluno.getNome().trim().toUpperCase().contains(alunoDigitado))
+                    validaAluno = true;
+            }
+            
+            //condição
+            if (validaCodigo && validaDisciplina && validaAluno && validaHorario)
+                turmasFiltradas.add(turma);
+            
+        }
+        
+        return turmasFiltradas;
+        
+    }
 
     public static void editarProfessor(int professorSelecionado, UsuarioProfessor usuarioProfessor) {
 
@@ -543,7 +581,7 @@ public class BancoDeDados {
         turma1.setDisciplina("geografia");
         turma1.setCodigo("GEO123");
         turma1.setHorario("Seg.: 08:00");
-        turma1.setQuantidadeMaximaDeAlunos(25);
+        turma1.setQuantidadeMaximaDeAlunos(30);
         turma1.adicionarAluno(aluno1);
         turma1.adicionarAluno(aluno3);
         professor1.adicionaTurma(turma1);
@@ -557,7 +595,7 @@ public class BancoDeDados {
         turma2.setDisciplina("ciências");
         turma2.setCodigo("CIE14S");
         turma2.setHorario("Seg.: 07:10");
-        turma2.setQuantidadeMaximaDeAlunos(12);
+        turma2.setQuantidadeMaximaDeAlunos(40);
         turma2.adicionarAluno(aluno1);
         turma2.adicionarAluno(aluno2);
         professor2.adicionaTurma(turma2);
@@ -568,7 +606,7 @@ public class BancoDeDados {
         turma3.setDisciplina("biologia");
         turma3.setCodigo("BIO469");
         turma3.setHorario("Qua.: 09:00");
-        turma3.setQuantidadeMaximaDeAlunos(5);
+        turma3.setQuantidadeMaximaDeAlunos(15);
         turma3.adicionarAluno(aluno1);
         professor2.adicionaTurma(turma3);
         turmas.add(turma3);

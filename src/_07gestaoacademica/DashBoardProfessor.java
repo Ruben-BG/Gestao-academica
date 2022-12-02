@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package _07gestaoacademica;
 
 import java.awt.Color;
@@ -9,10 +5,6 @@ import static java.lang.Thread.sleep;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-/**
- *
- * @author ravtec
- */
 public class DashBoardProfessor extends javax.swing.JFrame {
 
     //Atributos
@@ -23,8 +15,19 @@ public class DashBoardProfessor extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         
+        //Cabeçalho
         nomeLabel.setText(BancoDeDados.pegaUsuario().getNome() + " | Professor(a)");
         dataHora();
+        
+        //Botões
+        suasTurmasButton.mudarTexto("Suas turmas");
+        suasTurmasButton.mudarNumero(String.valueOf(BancoDeDados.quantidadeTurmaProfessor()));
+        suasTurmasButton.mudarIcone("/_07gestaoacademica/images/turmaP.png");
+        
+        lancarNotasButton.igualarFonte();
+        lancarNotasButton.mudarTexto("Lançar notas");
+        lancarNotasButton.mudarNumero("");
+        lancarNotasButton.mudarIcone("/_07gestaoacademica/images/notasP.png");
         
     }
 
@@ -44,6 +47,8 @@ public class DashBoardProfessor extends javax.swing.JFrame {
         nomeLabel = new javax.swing.JLabel();
         dataLabel = new javax.swing.JLabel();
         sairButton = new javax.swing.JButton();
+        suasTurmasButton = new _07gestaoacademica.FormularioButton();
+        lancarNotasButton = new _07gestaoacademica.FormularioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -141,6 +146,30 @@ public class DashBoardProfessor extends javax.swing.JFrame {
             }
         });
 
+        suasTurmasButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                suasTurmasButtonMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                suasTurmasButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                suasTurmasButtonMouseExited(evt);
+            }
+        });
+
+        lancarNotasButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lancarNotasButtonMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lancarNotasButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lancarNotasButtonMouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout painelGeralLayout = new javax.swing.GroupLayout(painelGeral);
         painelGeral.setLayout(painelGeralLayout);
         painelGeralLayout.setHorizontalGroup(
@@ -148,11 +177,16 @@ public class DashBoardProfessor extends javax.swing.JFrame {
             .addComponent(cabecalhoJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(painelGeralLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(nomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(painelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(suasTurmasButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
-                .addComponent(dataLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(sairButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(painelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelGeralLayout.createSequentialGroup()
+                        .addComponent(dataLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(sairButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lancarNotasButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12))
         );
         painelGeralLayout.setVerticalGroup(
@@ -164,7 +198,11 @@ public class DashBoardProfessor extends javax.swing.JFrame {
                     .addComponent(sairButton)
                     .addComponent(nomeLabel)
                     .addComponent(dataLabel))
-                .addGap(0, 395, Short.MAX_VALUE))
+                .addGap(38, 38, 38)
+                .addGroup(painelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(suasTurmasButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lancarNotasButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 192, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -252,6 +290,36 @@ public class DashBoardProfessor extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_sairButtonActionPerformed
 
+    private void suasTurmasButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suasTurmasButtonMouseClicked
+
+        ListagemDeTurmasProfessor novaListagem = new ListagemDeTurmasProfessor();
+        novaListagem.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_suasTurmasButtonMouseClicked
+
+    private void suasTurmasButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suasTurmasButtonMouseEntered
+        suasTurmasButton.mudarIcone("/_07gestaoacademica/images/turmaB.png");
+    }//GEN-LAST:event_suasTurmasButtonMouseEntered
+
+    private void suasTurmasButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suasTurmasButtonMouseExited
+        suasTurmasButton.mudarIcone("/_07gestaoacademica/images/turmaP.png");
+    }//GEN-LAST:event_suasTurmasButtonMouseExited
+
+    private void lancarNotasButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lancarNotasButtonMouseClicked
+        
+        
+        
+    }//GEN-LAST:event_lancarNotasButtonMouseClicked
+
+    private void lancarNotasButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lancarNotasButtonMouseEntered
+        lancarNotasButton.mudarIcone("/_07gestaoacademica/images/notasB.png");
+    }//GEN-LAST:event_lancarNotasButtonMouseEntered
+
+    private void lancarNotasButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lancarNotasButtonMouseExited
+        lancarNotasButton.mudarIcone("/_07gestaoacademica/images/notasP.png");
+    }//GEN-LAST:event_lancarNotasButtonMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -290,10 +358,12 @@ public class DashBoardProfessor extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel cabecalhoJPanel;
     private javax.swing.JLabel dataLabel;
+    private _07gestaoacademica.FormularioButton lancarNotasButton;
     private javax.swing.JLabel nomeLabel;
     private javax.swing.JPanel painelGeral;
     private javax.swing.JButton sairButton;
     private javax.swing.JButton sairPaginaButton;
+    private _07gestaoacademica.FormularioButton suasTurmasButton;
     private javax.swing.JLabel tituloCabecalho;
     // End of variables declaration//GEN-END:variables
 }

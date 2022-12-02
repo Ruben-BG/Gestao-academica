@@ -48,11 +48,19 @@
               <Component id="cabecalhoJPanel" alignment="0" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="nomeLabel" min="-2" pref="250" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="suasTurmasButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="nomeLabel" min="-2" pref="250" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace pref="80" max="32767" attributes="0"/>
-                  <Component id="dataLabel" min="-2" pref="180" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="sairButton" min="-2" pref="60" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="dataLabel" min="-2" pref="180" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="sairButton" min="-2" pref="60" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="lancarNotasButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -67,7 +75,12 @@
                       <Component id="nomeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="dataLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="0" pref="395" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="suasTurmasButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="lancarNotasButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="0" pref="192" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -190,6 +203,20 @@
             <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="sairButtonMouseEntered"/>
             <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="sairButtonMouseExited"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sairButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="_07gestaoacademica.FormularioButton" name="suasTurmasButton">
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="suasTurmasButtonMouseClicked"/>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="suasTurmasButtonMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="suasTurmasButtonMouseExited"/>
+          </Events>
+        </Component>
+        <Component class="_07gestaoacademica.FormularioButton" name="lancarNotasButton">
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lancarNotasButtonMouseClicked"/>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lancarNotasButtonMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lancarNotasButtonMouseExited"/>
           </Events>
         </Component>
       </SubComponents>
