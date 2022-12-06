@@ -308,7 +308,9 @@ public class DashBoardProfessor extends javax.swing.JFrame {
 
     private void lancarNotasButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lancarNotasButtonMouseClicked
         
-        
+        LancarNotasProfessor novaListagem = new LancarNotasProfessor(true, null);
+        novaListagem.setVisible(true);
+        this.dispose();
         
     }//GEN-LAST:event_lancarNotasButtonMouseClicked
 

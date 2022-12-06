@@ -4,16 +4,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- *
- * @author ravtec
- */
 public class BancoDeDados {
 
     private static List<Usuario> usuarios = new ArrayList<>();
     private static Usuario usuarioLogado;
     private static List<Turma> turmas = new ArrayList<>();
     private static List<TurmaSolicitacaoDeAluno> solicitacoesDeAlunos = new ArrayList<>();
+    private static List<NotaDeAluno> notas = new ArrayList<>();
 
     public static void cadastrarUsuario(Usuario usuario) {
         usuarios.add(usuario);
@@ -26,6 +23,15 @@ public class BancoDeDados {
     public static void enviarSolicitacao(TurmaSolicitacaoDeAluno solicitacao) {
         solicitacoesDeAlunos.add(solicitacao);
     }
+    
+    public static void adicionarNota(Turma turma, UsuarioAluno aluno, Double novaNota) {
+        
+        NotaDeAluno nota = new NotaDeAluno();
+        nota.adicionarNota(aluno, turma, novaNota);
+        notas.add(nota);
+        
+    }
+    
 
     public static Usuario pegaUsuario() {
 

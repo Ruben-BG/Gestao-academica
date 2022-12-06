@@ -1,24 +1,38 @@
 package _07gestaoacademica;
 
-import javax.swing.table.AbstractTableModel;
+import java.util.List;
+import javax.swing.AbstractListModel;
+import javax.swing.ComboBoxModel;
 
-public class ModeloCBSelecaoTurmaProfessor extends AbstractTableModel{
+public class ModeloCBSelecaoTurmaProfessor<E> extends AbstractListModel<String> implements ComboBoxModel<String>{
 
-    
+    private List<Turma> turmas = ((UsuarioProfessor)BancoDeDados.pegaUsuario()).retornarTurmasDesseProfessor();
+    private Object obj;
     
     @Override
-    public int getRowCount() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public int getSize() {
+        return turmas.size();
     }
 
     @Override
-    public int getColumnCount() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public String getElementAt(int index) {
+        return turmas.get(index).getCodigo();
     }
 
     @Override
-    public Object getValueAt(int rowIndex, int columnIndex) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void setSelectedItem(Object anItem) {
+        obj = anItem;
+    }
+
+    @Override
+    public Object getSelectedItem() {
+        return obj;
     }
     
+    public Turma getTurmaEspecifica(int turmaSelecionada) {
+
+        return turmas.get(turmaSelecionada);
+        
+    }
+
 }

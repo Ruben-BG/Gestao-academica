@@ -54,7 +54,10 @@ public class BotoesTurmaProfessorEditor extends AbstractCellEditor implements Ta
         lista.get(0).addActionListener(e -> {
             //Ação do botão Notas na tabela
             
-            
+            LancarNotasProfessor novaListagem = new LancarNotasProfessor(false, tableModel.pegarTurmaSelecionada(tabela.getSelectedRow()));
+            novaListagem.mudarPainelParaListagemIndicandoTurma(tableModel.pegarTurmaSelecionada(tabela.getSelectedRow()));
+            novaListagem.setVisible(true);
+            referenciaListagem.dispose();
             
         });
 

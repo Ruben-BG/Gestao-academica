@@ -1,20 +1,58 @@
 package _07gestaoacademica;
 
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class LancarNotasProfessor extends javax.swing.JFrame {
 
     //Atributos
     private GestaoContaUsuario novaGestaoContaUsuario;
     private int mouseX, mouseY;
-    
-    
-    public LancarNotasProfessor() {
-        
+    LancarNotasSelecaoTurmaPanel telaVisualizacao1;
+    LancarNotasListagemTurmaPanel telaVisualizacao2;
+    private LancarNotasProfessor essaTela = this;
+
+    public LancarNotasProfessor(Boolean veioDoDashboard, Turma turmaSelecionada) {
+
         initComponents();
         setLocationRelativeTo(null);
-        
-        
+
+        if (veioDoDashboard) {
+
+            telaVisualizacao1 = new LancarNotasSelecaoTurmaPanel(this);
+            telaVisualizacao1.setVisible(true);
+            jScrollPane1.setViewportView(telaVisualizacao1);
+
+        } else {
+
+            telaVisualizacao2 = new LancarNotasListagemTurmaPanel(turmaSelecionada);
+            telaVisualizacao2.setVisible(true);
+
+        }
+
+        //Ações
+        botaoVoltarLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+                if (veioDoDashboard) {
+
+                    DashBoardProfessor voltarAoDashBoard = new DashBoardProfessor();
+                    voltarAoDashBoard.setVisible(true);
+                    essaTela.dispose();
+
+                } else {
+
+                    ListagemDeTurmasProfessor voltarAListagem = new ListagemDeTurmasProfessor();
+                    voltarAListagem.setVisible(true);
+                    essaTela.dispose();
+
+                }
+
+            }
+        });
+
     }
 
     /**
@@ -93,9 +131,6 @@ public class LancarNotasProfessor extends javax.swing.JFrame {
         botaoVoltarLabel.setText("←");
         botaoVoltarLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         botaoVoltarLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                botaoVoltarLabelMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 botaoVoltarLabelMouseEntered(evt);
             }
@@ -122,6 +157,7 @@ public class LancarNotasProfessor extends javax.swing.JFrame {
 
         separador.setForeground(new java.awt.Color(234, 234, 234));
 
+        jScrollPane1.setBorder(null);
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
@@ -133,13 +169,17 @@ public class LancarNotasProfessor extends javax.swing.JFrame {
             .addComponent(separador)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(6, 6, 6)
-                .addComponent(botaoVoltarLabel)
-                .addGap(22, 22, 22)
-                .addComponent(tituloDaPaginaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(salvarAlteracoesButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
-            .addComponent(jScrollPane1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(botaoVoltarLabel)
+                        .addGap(22, 22, 22)
+                        .addComponent(tituloDaPaginaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(salvarAlteracoesButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,6 +211,32 @@ public class LancarNotasProfessor extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void mudarPainel(Boolean isListagem) {
+
+        if (isListagem) {
+
+            telaVisualizacao1.setVisible(false);
+            telaVisualizacao2 = new LancarNotasListagemTurmaPanel(telaVisualizacao1.getTurmaSelecionado());
+            telaVisualizacao2.setVisible(true);
+            jScrollPane1.setViewportView(telaVisualizacao2);
+
+        } else {
+
+            telaVisualizacao2.setVisible(false);
+            telaVisualizacao1 = new LancarNotasSelecaoTurmaPanel(this);
+            telaVisualizacao1.setVisible(true);
+            jScrollPane1.setViewportView(telaVisualizacao1);
+
+        }
+
+    }
+
+    public void mudarPainelParaListagemIndicandoTurma(Turma turmaSelecionada) {
+        telaVisualizacao2 = new LancarNotasListagemTurmaPanel(turmaSelecionada);
+        telaVisualizacao2.setVisible(true);
+        jScrollPane1.setViewportView(telaVisualizacao2);
+    }
+
     private void sairPaginaButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairPaginaButtonMouseEntered
         Color corSelecionado = new Color(89, 89, 89);
         sairPaginaButton.setForeground(corSelecionado);
@@ -195,22 +261,16 @@ public class LancarNotasProfessor extends javax.swing.JFrame {
         mouseY = evt.getY();
     }//GEN-LAST:event_cabecalhoPanelMousePressed
 
-    private void botaoVoltarLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoVoltarLabelMouseClicked
-        
-        this.dispose();
-    }//GEN-LAST:event_botaoVoltarLabelMouseClicked
-
     private void botaoVoltarLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoVoltarLabelMouseEntered
         botaoVoltarLabel.setForeground(new Color(51, 51, 51));
     }//GEN-LAST:event_botaoVoltarLabelMouseEntered
 
     private void botaoVoltarLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoVoltarLabelMouseExited
-        botaoVoltarLabel.setForeground(new Color(102,102,102));
+        botaoVoltarLabel.setForeground(new Color(102, 102, 102));
     }//GEN-LAST:event_botaoVoltarLabelMouseExited
 
     private void salvarAlteracoesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarAlteracoesButtonActionPerformed
 
-        
 
     }//GEN-LAST:event_salvarAlteracoesButtonActionPerformed
 
@@ -244,7 +304,7 @@ public class LancarNotasProfessor extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LancarNotasProfessor().setVisible(true);
+                new LancarNotasProfessor(null, null).setVisible(true);
             }
         });
     }
@@ -252,7 +312,6 @@ public class LancarNotasProfessor extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel botaoVoltarLabel;
     private javax.swing.JPanel cabecalhoPanel;
-    private _07gestaoacademica.CustomizacaoBotao criarNovaTurmaLabel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton sairPaginaButton;

@@ -3,9 +3,33 @@ package _07gestaoacademica;
 public class LancarNotasSelecaoTurmaPanel extends javax.swing.JPanel {
 
     //Atributos
-    
-    public LancarNotasSelecaoTurmaPanel() {
+    ModeloCBSelecaoTurmaProfessor<String> comboBoxModel = new ModeloCBSelecaoTurmaProfessor<>();
+
+    public LancarNotasSelecaoTurmaPanel(LancarNotasProfessor referenciaAPaginaPrincipal) {
+
         initComponents();
+        turmaComboBox.setModel(comboBoxModel);
+
+        turmaComboBox.addActionListener((e) -> {
+            
+            String itemSelecionado = turmaComboBox.getSelectedItem().toString();
+
+                if (itemSelecionado == null || itemSelecionado.equals("")) {
+
+                } else {
+                    
+                    referenciaAPaginaPrincipal.mudarPainel(true);
+
+                }
+            
+        });
+
+    }
+
+    public Turma getTurmaSelecionado() {
+
+        return comboBoxModel.getTurmaEspecifica(turmaComboBox.getSelectedIndex());
+
     }
 
     /**
@@ -17,16 +41,16 @@ public class LancarNotasSelecaoTurmaPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
+        turmaComboBox = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
-
-        jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Turma");
+
+        turmaComboBox.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -36,22 +60,22 @@ public class LancarNotasSelecaoTurmaPanel extends javax.swing.JPanel {
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(619, Short.MAX_VALUE))
+                    .addComponent(turmaComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(607, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(turmaComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(314, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JComboBox<String> turmaComboBox;
     // End of variables declaration//GEN-END:variables
 }
