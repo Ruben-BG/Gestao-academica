@@ -25,8 +25,8 @@ public class DashBoardProfessor extends javax.swing.JFrame {
         suasTurmasButton.mudarIcone("/_07gestaoacademica/images/turmaP.png");
         
         lancarNotasButton.igualarFonte();
-        lancarNotasButton.mudarTexto("Lançar notas");
-        lancarNotasButton.mudarNumero("");
+        lancarNotasButton.mudarTexto("⠀⠀");
+        lancarNotasButton.mudarNumero("Lançar notas");
         lancarNotasButton.mudarIcone("/_07gestaoacademica/images/notasP.png");
         
     }

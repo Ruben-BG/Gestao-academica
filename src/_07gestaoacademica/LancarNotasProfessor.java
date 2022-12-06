@@ -2,28 +2,18 @@ package _07gestaoacademica;
 
 import java.awt.Color;
 
-public class ListagemVisualizacaoTurma extends javax.swing.JFrame {
+public class LancarNotasProfessor extends javax.swing.JFrame {
 
     //Atributos
-    private int mouseX, mouseY;
     private GestaoContaUsuario novaGestaoContaUsuario;
-    private ListagemDeTurmasProfessor voltarParaListagem;
+    private int mouseX, mouseY;
     
-    public ListagemVisualizacaoTurma(JTablePersonalizada tabela, ModeloTabelaTurmaProfessor referenciaAModelo) {
+    
+    public LancarNotasProfessor() {
         
         initComponents();
         setLocationRelativeTo(null);
         
-        //Campos
-        Turma turmaSelecionada = referenciaAModelo.pegarTurmaSelecionada(tabela.getSelectedRow());
-        campoDeCodigo.setText(turmaSelecionada.getCodigo());
-        campoDisciplinaDaTurma.setText(turmaSelecionada.getDisciplina());
-        campoAlunoMatriculado.setText(String.valueOf(turmaSelecionada.getAlunosMatriculados().size()) + "/" + String.valueOf(turmaSelecionada.getQuantidadeMaximaDeAlunos()));
-        campoHorarioDaTurma.setText(turmaSelecionada.getHorario());
-        
-        //tabela
-        jScrollPane1.getViewport().setBackground(Color.white);
-        tabelaAluno.setModel(new ModeloVisualizacaoTurmaProfessor(turmaSelecionada));
         
     }
 
@@ -41,18 +31,9 @@ public class ListagemVisualizacaoTurma extends javax.swing.JFrame {
         sairPaginaButton = new javax.swing.JButton();
         botaoVoltarLabel = new javax.swing.JLabel();
         tituloDaPaginaLabel = new javax.swing.JLabel();
+        salvarAlteracoesButton = new _07gestaoacademica.CustomizacaoBotao();
         separador = new javax.swing.JSeparator();
-        codigoTurmaLabel = new javax.swing.JLabel();
-        campoDeCodigo = new _07gestaoacademica.CampoDeEscrita();
-        disciplinaTurmaLabel = new javax.swing.JLabel();
-        campoDisciplinaDaTurma = new _07gestaoacademica.CampoDeEscrita();
-        alunoMatriculadoLabel = new javax.swing.JLabel();
-        campoAlunoMatriculado = new _07gestaoacademica.CampoDeEscrita();
-        horarioTurmaLabel = new javax.swing.JLabel();
-        campoHorarioDaTurma = new _07gestaoacademica.CampoDeEscrita();
-        tituloDaPaginaLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaAluno = new _07gestaoacademica.JTablePersonalizada();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -98,7 +79,7 @@ public class ListagemVisualizacaoTurma extends javax.swing.JFrame {
         cabecalhoPanelLayout.setHorizontalGroup(
             cabecalhoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cabecalhoPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(722, Short.MAX_VALUE)
                 .addComponent(sairPaginaButton)
                 .addGap(18, 18, 18))
         );
@@ -125,58 +106,24 @@ public class ListagemVisualizacaoTurma extends javax.swing.JFrame {
 
         tituloDaPaginaLabel.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
         tituloDaPaginaLabel.setForeground(new java.awt.Color(30, 30, 30));
-        tituloDaPaginaLabel.setText("Visualizar Turma");
+        tituloDaPaginaLabel.setText("Lançar Notas");
+
+        salvarAlteracoesButton.setForeground(new java.awt.Color(255, 255, 255));
+        salvarAlteracoesButton.setText("Salvar");
+        salvarAlteracoesButton.setCor(new java.awt.Color(36, 53, 61));
+        salvarAlteracoesButton.setCorBorda(new java.awt.Color(255, 255, 255));
+        salvarAlteracoesButton.setCorEntrou(new java.awt.Color(19, 176, 110));
+        salvarAlteracoesButton.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        salvarAlteracoesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salvarAlteracoesButtonActionPerformed(evt);
+            }
+        });
 
         separador.setForeground(new java.awt.Color(234, 234, 234));
 
-        codigoTurmaLabel.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        codigoTurmaLabel.setForeground(new java.awt.Color(0, 0, 0));
-        codigoTurmaLabel.setText("Código");
-
-        campoDeCodigo.setEditable(false);
-        campoDeCodigo.setText("");
-
-        disciplinaTurmaLabel.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        disciplinaTurmaLabel.setForeground(new java.awt.Color(0, 0, 0));
-        disciplinaTurmaLabel.setText("Disciplina");
-
-        campoDisciplinaDaTurma.setEditable(false);
-        campoDisciplinaDaTurma.setText("");
-
-        alunoMatriculadoLabel.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        alunoMatriculadoLabel.setForeground(new java.awt.Color(0, 0, 0));
-        alunoMatriculadoLabel.setText("Alunos Matrículados");
-
-        campoAlunoMatriculado.setEditable(false);
-        campoAlunoMatriculado.setText("");
-
-        horarioTurmaLabel.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        horarioTurmaLabel.setForeground(new java.awt.Color(0, 0, 0));
-        horarioTurmaLabel.setText("Horário");
-
-        campoHorarioDaTurma.setEditable(false);
-        campoHorarioDaTurma.setText("");
-
-        tituloDaPaginaLabel1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        tituloDaPaginaLabel1.setForeground(new java.awt.Color(30, 30, 30));
-        tituloDaPaginaLabel1.setText("Alunos:");
-
-        jScrollPane1.setBorder(null);
-
-        tabelaAluno.setBackground(new java.awt.Color(255, 255, 255));
-        tabelaAluno.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        tabelaAluno.setSelectionBackground(new java.awt.Color(19, 176, 110));
-        jScrollPane1.setViewportView(tabelaAluno);
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -189,32 +136,10 @@ public class ListagemVisualizacaoTurma extends javax.swing.JFrame {
                 .addComponent(botaoVoltarLabel)
                 .addGap(22, 22, 22)
                 .addComponent(tituloDaPaginaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tituloDaPaginaLabel1)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(codigoTurmaLabel)
-                            .addComponent(campoDeCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(disciplinaTurmaLabel)
-                            .addComponent(campoDisciplinaDaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(alunoMatriculadoLabel)
-                            .addComponent(campoAlunoMatriculado, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(horarioTurmaLabel)
-                            .addComponent(campoHorarioDaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(26, 26, 26))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(salvarAlteracoesButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
+            .addComponent(jScrollPane1)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,30 +148,13 @@ public class ListagemVisualizacaoTurma extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(botaoVoltarLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tituloDaPaginaLabel))
-                .addGap(6, 6, 6)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tituloDaPaginaLabel)
+                        .addComponent(salvarAlteracoesButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(5, 5, 5)
                 .addComponent(separador, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(codigoTurmaLabel)
-                            .addComponent(disciplinaTurmaLabel)
-                            .addComponent(alunoMatriculadoLabel))
-                        .addGap(12, 12, 12)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(campoDisciplinaDaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(campoAlunoMatriculado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(campoDeCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(horarioTurmaLabel)
-                        .addGap(12, 12, 12)
-                        .addComponent(campoHorarioDaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(tituloDaPaginaLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -288,8 +196,7 @@ public class ListagemVisualizacaoTurma extends javax.swing.JFrame {
     }//GEN-LAST:event_cabecalhoPanelMousePressed
 
     private void botaoVoltarLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoVoltarLabelMouseClicked
-        voltarParaListagem = new ListagemDeTurmasProfessor();
-        voltarParaListagem.setVisible(true);
+        
         this.dispose();
     }//GEN-LAST:event_botaoVoltarLabelMouseClicked
 
@@ -300,6 +207,12 @@ public class ListagemVisualizacaoTurma extends javax.swing.JFrame {
     private void botaoVoltarLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoVoltarLabelMouseExited
         botaoVoltarLabel.setForeground(new Color(102,102,102));
     }//GEN-LAST:event_botaoVoltarLabelMouseExited
+
+    private void salvarAlteracoesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarAlteracoesButtonActionPerformed
+
+        
+
+    }//GEN-LAST:event_salvarAlteracoesButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -318,41 +231,33 @@ public class ListagemVisualizacaoTurma extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ListagemVisualizacaoTurma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LancarNotasProfessor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ListagemVisualizacaoTurma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LancarNotasProfessor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ListagemVisualizacaoTurma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LancarNotasProfessor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ListagemVisualizacaoTurma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LancarNotasProfessor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ListagemVisualizacaoTurma(null, null).setVisible(true);
+                new LancarNotasProfessor().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel alunoMatriculadoLabel;
     private javax.swing.JLabel botaoVoltarLabel;
     private javax.swing.JPanel cabecalhoPanel;
-    private _07gestaoacademica.CampoDeEscrita campoAlunoMatriculado;
-    private _07gestaoacademica.CampoDeEscrita campoDeCodigo;
-    private _07gestaoacademica.CampoDeEscrita campoDisciplinaDaTurma;
-    private _07gestaoacademica.CampoDeEscrita campoHorarioDaTurma;
-    private javax.swing.JLabel codigoTurmaLabel;
-    private javax.swing.JLabel disciplinaTurmaLabel;
-    private javax.swing.JLabel horarioTurmaLabel;
+    private _07gestaoacademica.CustomizacaoBotao criarNovaTurmaLabel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton sairPaginaButton;
+    private _07gestaoacademica.CustomizacaoBotao salvarAlteracoesButton;
     private javax.swing.JSeparator separador;
-    private _07gestaoacademica.JTablePersonalizada tabelaAluno;
     private javax.swing.JLabel tituloDaPaginaLabel;
-    private javax.swing.JLabel tituloDaPaginaLabel1;
     // End of variables declaration//GEN-END:variables
 }

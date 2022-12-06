@@ -28,8 +28,8 @@ public class NotasDaTurmaAluno extends javax.swing.JFrame {
         tabelaNota.setModel(tableModel);
         
         //Média
-        Double media = tableModelParaCampos.getTurmaSelecionada(linhaSelecionada).getNotas().get(linhaSelecionada).getMedia();
-        notaLabel.setText(String.valueOf(Math.floor(media)));
+        //Double media = tableModelParaCampos.getTurmaSelecionada(linhaSelecionada).getNotas().get(linhaSelecionada);
+        //notaLabel.setText(String.valueOf(Math.floor(media)));
         
 
     }

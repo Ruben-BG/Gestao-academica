@@ -35,7 +35,7 @@ public class ModeloTabelaNotaAluno extends AbstractTableModel{
         
         switch(coluna) {
             case 0: return ++linha + "°";
-            case 1: return notas.get(linha).getNota(linha);
+            case 1: return null;
             default: return null;
         }
         

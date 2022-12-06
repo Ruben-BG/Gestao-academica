@@ -45,7 +45,7 @@ public class BotoesTurmaProfessorEditor extends AbstractCellEditor implements Ta
         }
     
     
-    public BotoesTurmaProfessorEditor(JTablePersonalizada tabela) {
+    public BotoesTurmaProfessorEditor(JTablePersonalizada tabela, ModeloTabelaTurmaProfessor tableModel, ListagemDeTurmasProfessor referenciaListagem) {
         
         super();
         this.tabela = tabela;
@@ -61,7 +61,9 @@ public class BotoesTurmaProfessorEditor extends AbstractCellEditor implements Ta
         lista.get(1).addActionListener(e -> {
             //Ação do botão Visualizar na tabela
             
-            
+            ListagemVisualizacaoTurma novaListagem = new ListagemVisualizacaoTurma(tabela, tableModel);
+            novaListagem.setVisible(true);
+            referenciaListagem.dispose();
             
         });
 

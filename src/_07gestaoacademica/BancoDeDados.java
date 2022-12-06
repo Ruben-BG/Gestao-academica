@@ -231,6 +231,14 @@ public class BancoDeDados {
         return solicitacoes;
 
     }
+    
+    public static List<UsuarioAluno> retornarAlunosDaTurma(Turma turmaSelecionada) {
+        
+        List<UsuarioAluno> alunos = turmaSelecionada.getAlunosMatriculados();
+        return alunos;
+        
+    }
+    
 
     public static void excluirProfessorDaLista(int linhaSelecionada) {
 
@@ -546,6 +554,9 @@ public class BancoDeDados {
         aluno1 = new UsuarioAluno();
         aluno1.setMatricula(1);
         aluno1.setNome("Mário Gentili");
+        aluno1.setCpf("43568632469");
+        aluno1.setTelefone("(85) 99999-0550");
+        aluno1.setEmail("gentiliM@hotmail.com");
         aluno1.setSenha("123");
         usuarios.add(aluno1);
         NotaDeAluno notaAluno1 = new NotaDeAluno();
@@ -553,12 +564,18 @@ public class BancoDeDados {
         aluno2 = new UsuarioAluno();
         aluno2.setMatricula(2);
         aluno2.setNome("Andréa Silva");
+        aluno2.setCpf("65654322345");
+        aluno2.setTelefone("(85) 99999-0010");
+        aluno2.setEmail("anSilva@hotmail.com");
         aluno2.setSenha("321");
         usuarios.add(aluno2);
 
         aluno3 = new UsuarioAluno();
         aluno3.setMatricula(3);
         aluno3.setNome("Rodrigo Baltar");
+        aluno3.setCpf("61098789902");
+        aluno3.setTelefone("(85) 99999-1011");
+        aluno3.setEmail("rodr1g0_B@gmail.com");
         aluno3.setSenha("123");
         usuarios.add(aluno3);
 

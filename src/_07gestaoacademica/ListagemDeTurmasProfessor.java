@@ -24,7 +24,7 @@ public class ListagemDeTurmasProfessor extends javax.swing.JFrame {
         
         TableColumn colunaDosBotoes = tabelaTurma.getColumnModel().getColumn(4);
         colunaDosBotoes.setCellRenderer(new BotoesTurmaProfessorRenderer());
-        colunaDosBotoes.setCellEditor(new BotoesTurmaProfessorEditor(tabelaTurma));
+        colunaDosBotoes.setCellEditor(new BotoesTurmaProfessorEditor(tabelaTurma, tableModel, this));
         
     }
 
