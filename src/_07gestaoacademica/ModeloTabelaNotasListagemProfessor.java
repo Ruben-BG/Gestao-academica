@@ -8,11 +8,13 @@ public class ModeloTabelaNotasListagemProfessor extends AbstractTableModel {
 
     private List<UsuarioAluno> alunos = new ArrayList<>();
     private String[] colunas = {"Matrícula", "Nome", "1º P", "2º P", "3º P", "4º P", "Média"};
+    private Turma turma;
     
     
     public ModeloTabelaNotasListagemProfessor(Turma turmaDosAlunos) {
         
         alunos = turmaDosAlunos.getAlunosMatriculados();
+        turma = turmaDosAlunos;
         
     }
     
@@ -59,10 +61,10 @@ public class ModeloTabelaNotasListagemProfessor extends AbstractTableModel {
             
             case 0: return aluno.getMatricula();
             case 1: return aluno.getNome();
-            case 2: return null;
-            case 3: return null;
-            case 4: return null;
-            case 5: return null;
+            case 2: return BancoDeDados.retornarNotasDoAluno(aluno, turma, 1);
+            case 3: return BancoDeDados.retornarNotasDoAluno(aluno, turma, 2);
+            case 4: return BancoDeDados.retornarNotasDoAluno(aluno, turma, 3);
+            case 5: return BancoDeDados.retornarNotasDoAluno(aluno, turma, 4);
             case 6: return null;
             
             default: return null;

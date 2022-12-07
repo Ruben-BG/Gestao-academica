@@ -1,11 +1,14 @@
 package _07gestaoacademica;
 
 import java.awt.Color;
+import javax.swing.table.TableColumn;
 
 public class LancarNotasListagemTurmaPanel extends javax.swing.JPanel {
 
     //Atributos
     private ModeloTabelaNotasListagemProfessor tableModel;
+    private LancarNotasCampoRenderer camposRenderer = new LancarNotasCampoRenderer();
+    private LancarNotasCampoEditor camposEditor;
     
     
     public LancarNotasListagemTurmaPanel(Turma turmaSelecionada) {
@@ -23,6 +26,20 @@ public class LancarNotasListagemTurmaPanel extends javax.swing.JPanel {
         tableModel = new ModeloTabelaNotasListagemProfessor(turmaSelecionada);
         tabelaNotas.setModel(tableModel);
         
+        camposEditor = new LancarNotasCampoEditor(tabelaNotas, tableModel);
+        pegarColuna(2).setCellRenderer(camposRenderer);
+        pegarColuna(2).setCellEditor(camposEditor);
+        pegarColuna(3).setCellRenderer(camposRenderer);
+        pegarColuna(3).setCellEditor(camposEditor);
+        pegarColuna(4).setCellRenderer(camposRenderer);
+        pegarColuna(4).setCellEditor(camposEditor);
+        pegarColuna(5).setCellRenderer(camposRenderer);
+        pegarColuna(5).setCellEditor(camposEditor);
+        
+    }
+    
+    public TableColumn pegarColuna(int colunaEscolhida) {
+        return tabelaNotas.getColumnModel().getColumn(colunaEscolhida);
     }
 
     /**
@@ -85,6 +102,11 @@ public class LancarNotasListagemTurmaPanel extends javax.swing.JPanel {
         tabelaNotas.setBackground(new java.awt.Color(255, 255, 255));
         tabelaNotas.setGridColor(new java.awt.Color(51, 51, 51));
         tabelaNotas.setSelectionBackground(new java.awt.Color(19, 176, 110));
+        tabelaNotas.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tabelaNotasFocusGained(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabelaNotas);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -143,6 +165,14 @@ public class LancarNotasListagemTurmaPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tabelaNotasFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tabelaNotasFocusGained
+        
+        //String notaPega = camposEditor.getValorNaCelula();
+        //tableModel.setValueAt(notaPega, tabelaNotas.getSelectedRow(), tabelaNotas.getSelectedColumn());
+        //tableModel.fireTableDataChanged();
+        
+    }//GEN-LAST:event_tabelaNotasFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -6,13 +6,14 @@ public class NotaDeAluno {
     private UsuarioAluno aluno;
     private Turma turma;
     private Double nota;
+    private int periodo;
 
     //Métodos
-    public void adicionarNota(UsuarioAluno alunoSelecionado, Turma turmaDoAluno, double novaNota) {
+    public void adicionarNota(UsuarioAluno alunoSelecionado, Turma turmaDoAluno, double novaNota, int periodo) {
         aluno = alunoSelecionado;
         turma = turmaDoAluno;
         nota = novaNota;
-        turmaDoAluno.adicionarNotaAoAluno(this);
+        this.periodo = periodo;
     }
 
     public UsuarioAluno getAluno() {
@@ -21,6 +22,10 @@ public class NotaDeAluno {
     
     public Double getNota() {
         return nota;
+    }
+
+    public int getPeriodo() {
+        return periodo;
     }
 
     public Turma getTurma() {

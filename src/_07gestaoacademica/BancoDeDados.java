@@ -24,10 +24,10 @@ public class BancoDeDados {
         solicitacoesDeAlunos.add(solicitacao);
     }
     
-    public static void adicionarNota(Turma turma, UsuarioAluno aluno, Double novaNota) {
+    public static void adicionarNota(Turma turma, UsuarioAluno aluno, Double novaNota, int periodo) {
         
         NotaDeAluno nota = new NotaDeAluno();
-        nota.adicionarNota(aluno, turma, novaNota);
+        nota.adicionarNota(aluno, turma, novaNota, periodo);
         notas.add(nota);
         
     }
@@ -242,6 +242,23 @@ public class BancoDeDados {
         
         List<UsuarioAluno> alunos = turmaSelecionada.getAlunosMatriculados();
         return alunos;
+        
+    }
+    
+    public static Double retornarNotasDoAluno(UsuarioAluno alunoSelecionado, Turma turmaDoAluno, int periodo) {
+        
+        Double notaPorPeriodo = 0.0;
+        
+        for(NotaDeAluno nota : notas) {
+            
+            Boolean validaAluno = nota.getAluno().equals(alunoSelecionado) && nota.getTurma().equals(turmaDoAluno);
+            
+            if (validaAluno && periodo == nota.getPeriodo())
+                notaPorPeriodo = nota.getNota();
+            
+        }
+        
+        return notaPorPeriodo;
         
     }
     
@@ -499,6 +516,25 @@ public class BancoDeDados {
         }
 
     }
+    
+    public static void editarOuLancarNotaEspecifica(JTablePersonalizada tabela, ModeloTabelaNotasListagemProfessor tableModel, Turma turmaSelecionada, UsuarioAluno alunoSelecionado, Double valorDaNota, int periodoEscolhido) {
+        
+        for (NotaDeAluno nota : notas) {
+            
+            if (nota.getTurma().equals(turmaSelecionada) && nota.getAluno().equals(alunoSelecionado) && nota.getPeriodo() == periodoEscolhido)
+                tableModel.setValueAt(valorDaNota, tabela.getSelectedRow(), tabela.getSelectedColumn());
+            else {
+                
+                NotaDeAluno novaNota = new NotaDeAluno();
+                novaNota.adicionarNota(alunoSelecionado, turmaSelecionada, valorDaNota, periodoEscolhido);
+                notas.add(novaNota);
+                
+            }
+            
+        }
+        
+    }
+    
 
     public static List<Turma> TurmasOndeAlunoNaoEsta(UsuarioAluno alunoSelecionado) {
 
@@ -565,7 +601,9 @@ public class BancoDeDados {
         aluno1.setEmail("gentiliM@hotmail.com");
         aluno1.setSenha("123");
         usuarios.add(aluno1);
-        NotaDeAluno notaAluno1 = new NotaDeAluno();
+        NotaDeAluno notaAluno1P1 = new NotaDeAluno();
+        NotaDeAluno notaAluno1P2 = new NotaDeAluno();
+        NotaDeAluno notaAluno1P3 = new NotaDeAluno();
 
         aluno2 = new UsuarioAluno();
         aluno2.setMatricula(2);
@@ -609,9 +647,12 @@ public class BancoDeDados {
         turma1.adicionarAluno(aluno3);
         professor1.adicionaTurma(turma1);
         turmas.add(turma1);
-        notaAluno1.adicionarNota(aluno1, turma1, 5);
-        notaAluno1.adicionarNota(aluno1, turma1, 8);
-        notaAluno1.adicionarNota(aluno1, turma1, 8.5);
+        notaAluno1P1.adicionarNota(aluno1, turma1, 5.0, 1);
+        notaAluno1P2.adicionarNota(aluno1, turma1, 8.5, 2);
+        notaAluno1P3.adicionarNota(aluno1, turma1, 7, 3);
+        notas.add(notaAluno1P1);
+        notas.add(notaAluno1P2);
+        notas.add(notaAluno1P3);
 
         turma2 = new Turma();
         turma2.setProfessor(professor2);
