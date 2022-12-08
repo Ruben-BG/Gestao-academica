@@ -194,9 +194,6 @@
               <Color blue="6e" green="b0" red="13" type="rgb"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tabelaNotasFocusGained"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>

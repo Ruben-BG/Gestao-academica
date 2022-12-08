@@ -17,7 +17,7 @@ public class LancarNotasCampoRenderer extends LancarNotasCampoPanel implements T
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         
         setBackground(isSelected ? table.getSelectionBackground(): table.getBackground());
-        getCampoDeTexto().setText(value.toString());
+        getCampoDeTexto().setText(value == null || value.equals("") ? "" : value.toString());
         return this;
         
     }

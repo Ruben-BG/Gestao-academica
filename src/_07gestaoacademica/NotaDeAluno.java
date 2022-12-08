@@ -15,7 +15,15 @@ public class NotaDeAluno {
         nota = novaNota;
         this.periodo = periodo;
     }
-
+    
+    
+    //SETTERS
+    public void setNovaNota(Double nota) {
+        this.nota = nota;
+    }
+    
+    
+    //GETTERS
     public UsuarioAluno getAluno() {
         return aluno;
     }

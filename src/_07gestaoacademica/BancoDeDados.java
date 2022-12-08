@@ -245,16 +245,16 @@ public class BancoDeDados {
         
     }
     
-    public static Double retornarNotasDoAluno(UsuarioAluno alunoSelecionado, Turma turmaDoAluno, int periodo) {
+    public static List<NotaDeAluno> retornarNotasDosAlunos(UsuarioAluno alunoSelecionado, Turma turmaDoAluno) {
         
-        Double notaPorPeriodo = 0.0;
+        List<NotaDeAluno> notaPorPeriodo = new ArrayList<>();
         
         for(NotaDeAluno nota : notas) {
             
             Boolean validaAluno = nota.getAluno().equals(alunoSelecionado) && nota.getTurma().equals(turmaDoAluno);
             
-            if (validaAluno && periodo == nota.getPeriodo())
-                notaPorPeriodo = nota.getNota();
+            if (validaAluno)
+                notaPorPeriodo.add(nota);
             
         }
         
@@ -262,7 +262,7 @@ public class BancoDeDados {
         
     }
     
-
+        
     public static void excluirProfessorDaLista(int linhaSelecionada) {
 
         List<UsuarioProfessor> professores = new ArrayList<>();
@@ -622,6 +622,10 @@ public class BancoDeDados {
         aluno3.setEmail("rodr1g0_B@gmail.com");
         aluno3.setSenha("123");
         usuarios.add(aluno3);
+        NotaDeAluno notaAluno3P1 = new NotaDeAluno();
+        NotaDeAluno notaAluno3P2 = new NotaDeAluno();
+        NotaDeAluno notaAluno3P3 = new NotaDeAluno();
+        NotaDeAluno notaAluno3P4 = new NotaDeAluno();
 
         professor1 = new UsuarioProfessor();
         professor1.setMatricula(4);
@@ -653,6 +657,14 @@ public class BancoDeDados {
         notas.add(notaAluno1P1);
         notas.add(notaAluno1P2);
         notas.add(notaAluno1P3);
+        notaAluno3P1.adicionarNota(aluno3, turma1, 7.5, 1);
+        notaAluno3P2.adicionarNota(aluno3, turma1, 5.0, 2);
+        notaAluno3P3.adicionarNota(aluno3, turma1, 9, 3);
+        notaAluno3P4.adicionarNota(aluno3, turma1, 6.5, 4);
+        notas.add(notaAluno3P1);
+        notas.add(notaAluno3P2);
+        notas.add(notaAluno3P3);
+        notas.add(notaAluno3P4);
 
         turma2 = new Turma();
         turma2.setProfessor(professor2);
