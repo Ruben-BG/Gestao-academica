@@ -9,6 +9,7 @@ import javax.swing.table.TableCellEditor;
 public class LancarNotasCampoEditor extends AbstractCellEditor implements TableCellEditor{
 
     LancarNotasCampoPanel panel = new LancarNotasCampoPanel();
+    private int coluna;
     
     @Override
     public Object getCellEditorValue() {
@@ -21,6 +22,7 @@ public class LancarNotasCampoEditor extends AbstractCellEditor implements TableC
         panel.setBackground(table.getSelectionBackground());
         panel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
         panel.getCampoDeTexto().setText(value == null || value.equals("") ? "" : value.toString());
+        coluna = column;
         return panel;
         
     }
@@ -29,6 +31,10 @@ public class LancarNotasCampoEditor extends AbstractCellEditor implements TableC
         
         return panel.getCampoDeTexto().getText();
         
+    }
+
+    public int getColuna() {
+        return coluna;
     }
     
 }

@@ -6,21 +6,21 @@ import javax.swing.table.AbstractTableModel;
 
 public class ModeloTabelaNotasListagemProfessor extends AbstractTableModel {
 
-    private List<UsuarioAluno> alunos = new ArrayList<>();
-    private List<NotaDeAluno> notas = new ArrayList<>();
-    private String[] colunas = {"Matrícula", "Nome", "1º P", "2º P", "3º P", "4º P", "Média"};
     private Turma turma;
+    private List<AlunoNotas> notas = new ArrayList<>();
+    
+    private String[] colunas = {"Matrícula", "Nome", "1º P", "2º P", "3º P", "4º P", "Média"};
 
     public ModeloTabelaNotasListagemProfessor(Turma turmaDosAlunos) {
 
-        alunos = turmaDosAlunos.getAlunosMatriculados();
         turma = turmaDosAlunos;
+        notas = BancoDeDados.retornarNotas(turmaDosAlunos);
 
     }
 
     @Override
     public int getRowCount() {
-        return alunos.size();
+        return notas.size();
     }
 
     @Override
@@ -63,8 +63,8 @@ public class ModeloTabelaNotasListagemProfessor extends AbstractTableModel {
     @Override
     public Object getValueAt(int linha, int coluna) {
 
-        UsuarioAluno aluno = alunos.get(linha);
-        notas = BancoDeDados.retornarNotasDosAlunos(aluno, turma);
+        AlunoNotas alunoNota = notas.get(linha);
+        UsuarioAluno aluno = alunoNota.aluno;
 
         switch (coluna) {
 
@@ -73,15 +73,15 @@ public class ModeloTabelaNotasListagemProfessor extends AbstractTableModel {
             case 1:
                 return aluno.getNome();
             case 2:
-                return retornarNota(aluno, turma, 1);
+                return retornarNota(alunoNota, 1);
             case 3:
-                return retornarNota(aluno, turma, 2);
+                return retornarNota(alunoNota, 2);
             case 4:
-                return retornarNota(aluno, turma, 3);
+                return retornarNota(alunoNota, 3);
             case 5:
-                return retornarNota(aluno, turma, 4);
+                return retornarNota(alunoNota, 4);
             case 6:
-                return null;
+                return alunoNota.getMedia();
 
             default:
                 return null;
@@ -90,16 +90,15 @@ public class ModeloTabelaNotasListagemProfessor extends AbstractTableModel {
 
     }
 
-    public Double retornarNota(UsuarioAluno aluno, Turma turma, int periodo) {
+    public Double retornarNota(AlunoNotas alunoSelecionado, int periodo) {
 
         Double notaPega = null;
 
-        for (NotaDeAluno nota : notas) {
-
-            if (nota.getTurma().equals(turma) && nota.getAluno().equals(aluno) && periodo == nota.getPeriodo()) {
-                notaPega = nota.getNota();
-            }
-
+        for (NotaPeriodo nota : alunoSelecionado.notas) {
+            
+            if (nota.periodo == periodo)
+                notaPega = nota.nota;
+            
         }
 
         return notaPega;
@@ -108,11 +107,15 @@ public class ModeloTabelaNotasListagemProfessor extends AbstractTableModel {
 
     public void modificarValorDaNota(int linha, int coluna, Turma turmaEscolhida, String novoValor) {
 
-        NotaDeAluno nota = new NotaDeAluno();
+        AlunoNotas alunoN = notas.get(linha);
         
-        for (NotaDeAluno notaPega : notas) {
+        for (NotaPeriodo notaPega : alunoN.notas) {
             
-            Boolean validaAluno = notaPega.getTurma().equals(turma) && notaPega.getAluno().equals(alunos.get(linha));
+            if (notaPega.periodo == coluna - 1) {
+                notaPega.nota = Double.valueOf(novoValor);
+            }
+            
+            /*Boolean validaAluno = notaPega.getTurma().equals(turma) && notaPega.getAluno().equals(alunos.get(linha));
             
             if (validaAluno && notaPega.getPeriodo() == 1 && coluna == 2)
                 notaPega.setNovaNota(Double.valueOf(novoValor));
@@ -121,7 +124,7 @@ public class ModeloTabelaNotasListagemProfessor extends AbstractTableModel {
             else if (validaAluno && notaPega.getPeriodo() == 3 && coluna == 4)
                 notaPega.setNovaNota(Double.valueOf(novoValor));
             else if (validaAluno && notaPega.getPeriodo() == 4 && coluna == 5)
-                notaPega.setNovaNota(Double.valueOf(novoValor));
+                notaPega.setNovaNota(Double.valueOf(novoValor));*/
             
         }
         

@@ -23,15 +23,14 @@ public class BancoDeDados {
     public static void enviarSolicitacao(TurmaSolicitacaoDeAluno solicitacao) {
         solicitacoesDeAlunos.add(solicitacao);
     }
-    
+
     public static void adicionarNota(Turma turma, UsuarioAluno aluno, Double novaNota, int periodo) {
-        
+
         NotaDeAluno nota = new NotaDeAluno();
         nota.adicionarNota(aluno, turma, novaNota, periodo);
         notas.add(nota);
-        
+
     }
-    
 
     public static Usuario pegaUsuario() {
 
@@ -136,16 +135,17 @@ public class BancoDeDados {
         return quantidade;
 
     }
-    
+
     public static int quantidadeTurmaProfessor() {
-        
+
         int quantidade = 0;
-        
-        if (pegaUsuario() instanceof UsuarioProfessor)
-            quantidade = ((UsuarioProfessor)pegaUsuario()).retornaQuantidadeDeTurma();
-        
+
+        if (pegaUsuario() instanceof UsuarioProfessor) {
+            quantidade = ((UsuarioProfessor) pegaUsuario()).retornaQuantidadeDeTurma();
+        }
+
         return quantidade;
-        
+
     }
 
     public static int quantidadeSolicitacaoDeUmAluno() {
@@ -237,32 +237,50 @@ public class BancoDeDados {
         return solicitacoes;
 
     }
-    
+
     public static List<UsuarioAluno> retornarAlunosDaTurma(Turma turmaSelecionada) {
-        
+
         List<UsuarioAluno> alunos = turmaSelecionada.getAlunosMatriculados();
         return alunos;
-        
+
     }
-    
-    public static List<NotaDeAluno> retornarNotasDosAlunos(UsuarioAluno alunoSelecionado, Turma turmaDoAluno) {
-        
-        List<NotaDeAluno> notaPorPeriodo = new ArrayList<>();
-        
-        for(NotaDeAluno nota : notas) {
-            
-            Boolean validaAluno = nota.getAluno().equals(alunoSelecionado) && nota.getTurma().equals(turmaDoAluno);
-            
-            if (validaAluno)
-                notaPorPeriodo.add(nota);
-            
+
+    public static List<AlunoNotas> retornarNotas(Turma turmaEscolhida) {
+
+        List<AlunoNotas> alunoNotas = new ArrayList<>();
+
+        for (NotaDeAluno nota : notas) {
+
+            Boolean validaAluno = false;
+            AlunoNotas alunoExistente = new AlunoNotas();
+
+            for (AlunoNotas alunoN : alunoNotas) {
+
+                if (alunoN.aluno.getMatricula() == nota.getAluno().getMatricula()) {
+                    validaAluno = true;
+                    alunoExistente = alunoN;
+                    break;
+                }
+
+            }
+
+            if (!validaAluno) {
+                alunoExistente.aluno = nota.getAluno();
+                alunoExistente.notas = new ArrayList<>();
+                alunoNotas.add(alunoExistente);
+            }
+
+            NotaPeriodo novoNotaPeriodo = new NotaPeriodo();
+            novoNotaPeriodo.nota = nota.getNota();
+            novoNotaPeriodo.periodo = nota.getPeriodo();
+            alunoExistente.notas.add(novoNotaPeriodo);
+
         }
-        
-        return notaPorPeriodo;
-        
+
+        return alunoNotas;
+
     }
-    
-        
+
     public static void excluirProfessorDaLista(int linhaSelecionada) {
 
         List<UsuarioProfessor> professores = new ArrayList<>();
@@ -434,32 +452,34 @@ public class BancoDeDados {
         return solicitacoesFiltradas;
 
     }
-    
+
     public static List<Turma> pesquisarTurmasDoProfessor(String codigoDigitado, String disciplinaDigitada, String alunoDigitado, String horarioDigitado) {
-        
+
         List<Turma> turmasFiltradas = new ArrayList<>();
-        
-        for (Turma turma : ((UsuarioProfessor)BancoDeDados.pegaUsuario()).retornarTurmasDesseProfessor()) {
-            
+
+        for (Turma turma : ((UsuarioProfessor) BancoDeDados.pegaUsuario()).retornarTurmasDesseProfessor()) {
+
             Boolean validaCodigo = codigoDigitado == null || codigoDigitado.equals("") || turma.getCodigo().trim().toUpperCase().equals(codigoDigitado);
             Boolean validaDisciplina = disciplinaDigitada == null || disciplinaDigitada.equals("") || turma.getDisciplina().trim().toUpperCase().contains(disciplinaDigitada);
             Boolean validaAluno = alunoDigitado == null || alunoDigitado.equals("");
             Boolean validaHorario = horarioDigitado == null || horarioDigitado.equals("") || turma.getHorario().trim().toUpperCase().contains(horarioDigitado);
-            
+
             //Validação de nome digitado
             for (UsuarioAluno aluno : turma.getAlunosMatriculados()) {
-                if (aluno.getNome().trim().toUpperCase().contains(alunoDigitado))
+                if (aluno.getNome().trim().toUpperCase().contains(alunoDigitado)) {
                     validaAluno = true;
+                }
             }
-            
+
             //condição
-            if (validaCodigo && validaDisciplina && validaAluno && validaHorario)
+            if (validaCodigo && validaDisciplina && validaAluno && validaHorario) {
                 turmasFiltradas.add(turma);
-            
+            }
+
         }
-        
+
         return turmasFiltradas;
-        
+
     }
 
     public static void editarProfessor(int professorSelecionado, UsuarioProfessor usuarioProfessor) {
@@ -508,33 +528,33 @@ public class BancoDeDados {
 
                 solicitacao.adicionarStatus(novoStatus);
 
-                if (novoStatus.isAprovada())
+                if (novoStatus.isAprovada()) {
                     solicitacao.getTurma().adicionarAluno(solicitacao.getAluno());
+                }
 
             }
 
         }
 
     }
-    
+
     public static void editarOuLancarNotaEspecifica(JTablePersonalizada tabela, ModeloTabelaNotasListagemProfessor tableModel, Turma turmaSelecionada, UsuarioAluno alunoSelecionado, Double valorDaNota, int periodoEscolhido) {
-        
+
         for (NotaDeAluno nota : notas) {
-            
-            if (nota.getTurma().equals(turmaSelecionada) && nota.getAluno().equals(alunoSelecionado) && nota.getPeriodo() == periodoEscolhido)
+
+            if (nota.getTurma().equals(turmaSelecionada) && nota.getAluno().equals(alunoSelecionado) && nota.getPeriodo() == periodoEscolhido) {
                 tableModel.setValueAt(valorDaNota, tabela.getSelectedRow(), tabela.getSelectedColumn());
-            else {
-                
+            } else {
+
                 NotaDeAluno novaNota = new NotaDeAluno();
                 novaNota.adicionarNota(alunoSelecionado, turmaSelecionada, valorDaNota, periodoEscolhido);
                 notas.add(novaNota);
-                
+
             }
-            
+
         }
-        
+
     }
-    
 
     public static List<Turma> TurmasOndeAlunoNaoEsta(UsuarioAluno alunoSelecionado) {
 

@@ -42,7 +42,7 @@ public class LancarNotasListagemTurmaPanel extends javax.swing.JPanel {
             @Override
             public void focusGained(FocusEvent e) {
                 String notaPega = camposEditor.getValorNaCelula();
-                tableModel.modificarValorDaNota(tabelaNotas.getSelectedRow(), tabelaNotas.getSelectedColumn(), turmaSelecionada, notaPega);
+                tableModel.modificarValorDaNota(tabelaNotas.getSelectedRow(), camposEditor.getColuna(), turmaSelecionada, notaPega);
             }
 
             @Override
