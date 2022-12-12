@@ -18,6 +18,17 @@ public class LancarNotasCampoPanel extends JPanel{
                 if (!"0987654321.".contains(e.getKeyChar() + ""))
                     e.consume();
             }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                
+                Double num = campoDeTexto.getText().equals("") || campoDeTexto.getText() == null ? 0.0 : Double.valueOf(campoDeTexto.getText());
+                
+                if (num > 10)
+                    campoDeTexto.setText("");
+                
+            }
+            
         });
         
         add(campoDeTexto);

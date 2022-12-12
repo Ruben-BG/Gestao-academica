@@ -8,7 +8,7 @@ public class ModeloTabelaNotasListagemProfessor extends AbstractTableModel {
 
     private Turma turma;
     private List<AlunoNotas> notas = new ArrayList<>();
-    
+
     private String[] colunas = {"Matrícula", "Nome", "1º P", "2º P", "3º P", "4º P", "Média"};
 
     public ModeloTabelaNotasListagemProfessor(Turma turmaDosAlunos) {
@@ -36,27 +36,24 @@ public class ModeloTabelaNotasListagemProfessor extends AbstractTableModel {
     @Override
     public boolean isCellEditable(int linha, int coluna) {
 
-        switch (coluna) {
-
-            case 0:
-                return false;
-            case 1:
-                return false;
-            case 2:
-                return true;
-            case 3:
-                return true;
-            case 4:
-                return true;
-            case 5:
-                return true;
-            case 6:
-                return false;
-
-            default:
-                return false;
-
-        }
+        return switch (coluna) {
+            case 0 ->
+                false;
+            case 1 ->
+                false;
+            case 2 ->
+                true;
+            case 3 ->
+                true;
+            case 4 ->
+                true;
+            case 5 ->
+                true;
+            case 6 ->
+                false;
+            default ->
+                false;
+        };
 
     }
 
@@ -64,29 +61,26 @@ public class ModeloTabelaNotasListagemProfessor extends AbstractTableModel {
     public Object getValueAt(int linha, int coluna) {
 
         AlunoNotas alunoNota = notas.get(linha);
-        UsuarioAluno aluno = alunoNota.aluno;
+        UsuarioAluno aluno = alunoNota.getAluno();
 
-        switch (coluna) {
-
-            case 0:
-                return aluno.getMatricula();
-            case 1:
-                return aluno.getNome();
-            case 2:
-                return retornarNota(alunoNota, 1);
-            case 3:
-                return retornarNota(alunoNota, 2);
-            case 4:
-                return retornarNota(alunoNota, 3);
-            case 5:
-                return retornarNota(alunoNota, 4);
-            case 6:
-                return alunoNota.getMedia();
-
-            default:
-                return null;
-
-        }
+        return switch (coluna) {
+            case 0 ->
+                aluno.getMatricula();
+            case 1 ->
+                aluno.getNome();
+            case 2 ->
+                retornarNota(alunoNota, 1);
+            case 3 ->
+                retornarNota(alunoNota, 2);
+            case 4 ->
+                retornarNota(alunoNota, 3);
+            case 5 ->
+                retornarNota(alunoNota, 4);
+            case 6 ->
+                alunoNota.getMedia();
+            default ->
+                null;
+        };
 
     }
 
@@ -94,11 +88,12 @@ public class ModeloTabelaNotasListagemProfessor extends AbstractTableModel {
 
         Double notaPega = null;
 
-        for (NotaPeriodo nota : alunoSelecionado.notas) {
-            
-            if (nota.periodo == periodo)
-                notaPega = nota.nota;
-            
+        for (NotaPeriodo nota : alunoSelecionado.getNotas()) {
+
+            if (nota.getPeriodo() == periodo) {
+                notaPega = nota.getNota();
+            }
+
         }
 
         return notaPega;
@@ -108,30 +103,48 @@ public class ModeloTabelaNotasListagemProfessor extends AbstractTableModel {
     public void modificarValorDaNota(int linha, int coluna, Turma turmaEscolhida, String novoValor) {
 
         AlunoNotas alunoN = notas.get(linha);
-        
-        for (NotaPeriodo notaPega : alunoN.notas) {
-            
-            if (notaPega.periodo == coluna - 1) {
-                notaPega.nota = Double.valueOf(novoValor);
+
+        for (NotaPeriodo notaPega : alunoN.getNotas()) {
+
+            if (notaPega.getPeriodo() == coluna - 1 && coluna > 1 && coluna < 6) {
+                notaPega.setNota(novoValor.equals("") || novoValor == null ? 0.0 : Double.parseDouble(novoValor));
             }
-            
-            /*Boolean validaAluno = notaPega.getTurma().equals(turma) && notaPega.getAluno().equals(alunos.get(linha));
-            
-            if (validaAluno && notaPega.getPeriodo() == 1 && coluna == 2)
-                notaPega.setNovaNota(Double.valueOf(novoValor));
-            else if (validaAluno && notaPega.getPeriodo() == 2 && coluna == 3)
-                notaPega.setNovaNota(Double.valueOf(novoValor));
-            else if (validaAluno && notaPega.getPeriodo() == 3 && coluna == 4)
-                notaPega.setNovaNota(Double.valueOf(novoValor));
-            else if (validaAluno && notaPega.getPeriodo() == 4 && coluna == 5)
-                notaPega.setNovaNota(Double.valueOf(novoValor));*/
-            
+
         }
-        
-        //nota.setNovaNota(Double.valueOf(novoValor));
 
         fireTableDataChanged();
 
+    }
+
+    public void atribuirNotaACampoVazio(int linha, int coluna, String valorDigitado) {
+
+        AlunoNotas alunoNota = notas.get(linha);
+        UsuarioAluno aluno = alunoNota.getAluno();
+        Turma turmaDoAluno = turma;
+        int periodo = coluna - 1;
+        Boolean notaExiste = BancoDeDados.verificarSeNotaExiste(aluno, turmaDoAluno, periodo);
+
+        if (!notaExiste) {
+
+            Double notaAdicionada = valorDigitado.equals("") || valorDigitado == null ? 0.0 : Double.valueOf(valorDigitado);
+            
+            NotaPeriodo novaNota = new NotaPeriodo();
+            novaNota.setNota(notaAdicionada);
+            novaNota.setPeriodo(periodo);
+            
+            alunoNota.adicionarNota(novaNota);
+            BancoDeDados.adicionarNota(turma, aluno, notaAdicionada, periodo);
+
+        }
+
+        fireTableDataChanged();
+
+    }
+    
+    public List<AlunoNotas> retornarAlteracoesFeitas() {
+        
+        return notas;
+        
     }
 
 }

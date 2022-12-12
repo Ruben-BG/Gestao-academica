@@ -11,11 +11,13 @@ public class LancarNotasListagemTurmaPanel extends javax.swing.JPanel {
     private ModeloTabelaNotasListagemProfessor tableModel;
     private LancarNotasCampoRenderer camposRenderer = new LancarNotasCampoRenderer();
     private LancarNotasCampoEditor camposEditor;
+    private Turma turma;
     
     
     public LancarNotasListagemTurmaPanel(Turma turmaSelecionada) {
         
         initComponents();
+        turma = turmaSelecionada;
         
         //Campos
         campoDeCodigo.setText(turmaSelecionada.getCodigo());
@@ -27,6 +29,8 @@ public class LancarNotasListagemTurmaPanel extends javax.swing.JPanel {
         jScrollPane1.getViewport().setBackground(Color.white);
         tableModel = new ModeloTabelaNotasListagemProfessor(turmaSelecionada);
         tabelaNotas.setModel(tableModel);
+        tabelaNotas.getTableHeader().setResizingAllowed(false); //impedir que usuário redimensione coluna.
+        tabelaNotas.getTableHeader().setReorderingAllowed(false); //impedir reordenamento da coluna.
         
         camposEditor = new LancarNotasCampoEditor();
         pegarColuna(2).setCellRenderer(camposRenderer);
@@ -38,24 +42,50 @@ public class LancarNotasListagemTurmaPanel extends javax.swing.JPanel {
         pegarColuna(5).setCellRenderer(camposRenderer);
         pegarColuna(5).setCellEditor(camposEditor);
         
+        //Textos pós tabela
+        periodo1Label.setText(BancoDeDados.retornarMediaPeriodoTurma(tableModel.retornarAlteracoesFeitas(), 1).toString());
+        periodo2Label.setText(BancoDeDados.retornarMediaPeriodoTurma(tableModel.retornarAlteracoesFeitas(), 2).toString());
+        periodo3Label.setText(BancoDeDados.retornarMediaPeriodoTurma(tableModel.retornarAlteracoesFeitas(), 3).toString());
+        periodo4Label.setText(BancoDeDados.retornarMediaPeriodoTurma(tableModel.retornarAlteracoesFeitas(), 4).toString());
+        
         tabelaNotas.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
                 String notaPega = camposEditor.getValorNaCelula();
-                tableModel.modificarValorDaNota(tabelaNotas.getSelectedRow(), camposEditor.getColuna(), turmaSelecionada, notaPega);
+                tableModel.modificarValorDaNota(camposEditor.getLinha(), camposEditor.getColuna(), turmaSelecionada, notaPega);
+                
+                //textos
+                periodo1Label.setText(BancoDeDados.retornarMediaPeriodoTurma(tableModel.retornarAlteracoesFeitas(), 1).toString());
+                periodo2Label.setText(BancoDeDados.retornarMediaPeriodoTurma(tableModel.retornarAlteracoesFeitas(), 2).toString());
+                periodo3Label.setText(BancoDeDados.retornarMediaPeriodoTurma(tableModel.retornarAlteracoesFeitas(), 3).toString());
+                periodo4Label.setText(BancoDeDados.retornarMediaPeriodoTurma(tableModel.retornarAlteracoesFeitas(), 4).toString());
+                
             }
 
             @Override
             public void focusLost(FocusEvent e) {
-                
+                String notaPega = camposEditor.getValorNaCelula();
+                tableModel.atribuirNotaACampoVazio(camposEditor.getLinha(), camposEditor.getColuna(), notaPega);
             }
-            
         });
         
     }
     
     public TableColumn pegarColuna(int colunaEscolhida) {
         return tabelaNotas.getColumnModel().getColumn(colunaEscolhida);
+    }
+    
+    public void salvarAlteracoesDeNotas() {
+        
+        for (AlunoNotas alunoNota : tableModel.retornarAlteracoesFeitas()) {
+            
+            BancoDeDados.salvarNotasAlteradas(alunoNota, turma);
+            
+        }
+        
+        PopUp p = new PopUp();
+        p.mensagemFinalNovoProfessor("Alterações salvas com sucesso!");
+        
     }
 
     /**
@@ -78,6 +108,11 @@ public class LancarNotasListagemTurmaPanel extends javax.swing.JPanel {
         alunosLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaNotas = new _07gestaoacademica.JTablePersonalizada();
+        mediaLabel = new javax.swing.JLabel();
+        periodo1Label = new javax.swing.JLabel();
+        periodo2Label = new javax.swing.JLabel();
+        periodo3Label = new javax.swing.JLabel();
+        periodo4Label = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -120,6 +155,26 @@ public class LancarNotasListagemTurmaPanel extends javax.swing.JPanel {
         tabelaNotas.setSelectionBackground(new java.awt.Color(19, 176, 110));
         jScrollPane1.setViewportView(tabelaNotas);
 
+        mediaLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        mediaLabel.setForeground(new java.awt.Color(0, 0, 0));
+        mediaLabel.setText("Média");
+
+        periodo1Label.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        periodo1Label.setForeground(new java.awt.Color(0, 0, 0));
+        periodo1Label.setText("P.1");
+
+        periodo2Label.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        periodo2Label.setForeground(new java.awt.Color(0, 0, 0));
+        periodo2Label.setText("P.2");
+
+        periodo3Label.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        periodo3Label.setForeground(new java.awt.Color(0, 0, 0));
+        periodo3Label.setText("P.3");
+
+        periodo4Label.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        periodo4Label.setForeground(new java.awt.Color(0, 0, 0));
+        periodo4Label.setText("P.4");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -145,11 +200,23 @@ public class LancarNotasListagemTurmaPanel extends javax.swing.JPanel {
                                 .addComponent(horarioTurmaLabel)
                                 .addGap(0, 101, Short.MAX_VALUE))
                             .addComponent(campoHorarioDaTurma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(alunosLabel)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(129, 129, 129)
+                .addComponent(mediaLabel)
+                .addGap(87, 87, 87)
+                .addComponent(periodo1Label)
+                .addGap(88, 88, 88)
+                .addComponent(periodo2Label)
+                .addGap(83, 83, 83)
+                .addComponent(periodo3Label)
+                .addGap(89, 89, 89)
+                .addComponent(periodo4Label)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,7 +240,15 @@ public class LancarNotasListagemTurmaPanel extends javax.swing.JPanel {
                 .addGap(28, 28, 28)
                 .addComponent(alunosLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(mediaLabel)
+                    .addComponent(periodo1Label)
+                    .addComponent(periodo2Label)
+                    .addComponent(periodo3Label)
+                    .addComponent(periodo4Label))
+                .addGap(13, 13, 13))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -189,6 +264,11 @@ public class LancarNotasListagemTurmaPanel extends javax.swing.JPanel {
     private javax.swing.JLabel disciplinaTurmaLabel;
     private javax.swing.JLabel horarioTurmaLabel;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel mediaLabel;
+    private javax.swing.JLabel periodo1Label;
+    private javax.swing.JLabel periodo2Label;
+    private javax.swing.JLabel periodo3Label;
+    private javax.swing.JLabel periodo4Label;
     private _07gestaoacademica.JTablePersonalizada tabelaNotas;
     // End of variables declaration//GEN-END:variables
 }

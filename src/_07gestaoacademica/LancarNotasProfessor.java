@@ -271,6 +271,7 @@ public class LancarNotasProfessor extends javax.swing.JFrame {
 
     private void salvarAlteracoesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarAlteracoesButtonActionPerformed
 
+        telaVisualizacao2.salvarAlteracoesDeNotas();
 
     }//GEN-LAST:event_salvarAlteracoesButtonActionPerformed
 

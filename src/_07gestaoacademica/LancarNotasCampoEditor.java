@@ -4,11 +4,14 @@ import java.awt.Component;
 import javax.swing.AbstractCellEditor;
 import javax.swing.BorderFactory;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.TableCellEditor;
 
 public class LancarNotasCampoEditor extends AbstractCellEditor implements TableCellEditor{
 
     LancarNotasCampoPanel panel = new LancarNotasCampoPanel();
+    JTextField campoDeTexto = panel.getCampoDeTexto();
+    private int linha;
     private int coluna;
     
     @Override
@@ -21,20 +24,25 @@ public class LancarNotasCampoEditor extends AbstractCellEditor implements TableC
         
         panel.setBackground(table.getSelectionBackground());
         panel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
-        panel.getCampoDeTexto().setText(value == null || value.equals("") ? "" : value.toString());
+        campoDeTexto.setText(value == null || value.equals("") ? "" : value.toString());
         coluna = column;
+        linha = row;
         return panel;
         
     }
     
     public String getValorNaCelula() {
         
-        return panel.getCampoDeTexto().getText();
+        return campoDeTexto.getText();
         
     }
 
     public int getColuna() {
         return coluna;
+    }
+
+    public int getLinha() {
+        return linha;
     }
     
 }

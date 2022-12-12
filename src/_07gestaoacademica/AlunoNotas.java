@@ -5,8 +5,8 @@ import java.util.List;
 
 public class AlunoNotas {
     
-    UsuarioAluno aluno;
-    List<NotaPeriodo> notas = new ArrayList<>();
+    private UsuarioAluno aluno;
+    private List<NotaPeriodo> notas = new ArrayList<>();
 
     public void setAluno(UsuarioAluno aluno) {
         this.aluno = aluno;
@@ -14,6 +14,10 @@ public class AlunoNotas {
 
     public void setNotas(List<NotaPeriodo> notas) {
         this.notas = notas;
+    }
+    
+    public void adicionarNota(NotaPeriodo novaNota) {
+        notas.add(novaNota);
     }
 
     public UsuarioAluno getAluno() {
@@ -26,16 +30,15 @@ public class AlunoNotas {
     
     public Double getMedia() {
         
-        Double media = 0.0;
         Double somaDeNota = 0.0;
         
         for (NotaPeriodo nota : notas) {
             
-            somaDeNota += nota.nota;
+            somaDeNota += nota.getNota();
             
         }
         
-        return somaDeNota/notas.size();
+        return Math.floor(somaDeNota/notas.size());
         
     }
     

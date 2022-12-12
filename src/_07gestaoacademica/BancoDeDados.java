@@ -31,6 +31,41 @@ public class BancoDeDados {
         notas.add(nota);
 
     }
+    
+    public static void salvarNotasAlteradas(AlunoNotas alunoNotaEscolhido, Turma turmaEscolhida) {
+        
+        for (NotaDeAluno nota : notas) {
+            
+            Boolean validaAluno = nota.getAluno().equals(alunoNotaEscolhido.getAluno()) && nota.getTurma().equals(turmaEscolhida);
+            
+            for (NotaPeriodo notaPorPeriodo : alunoNotaEscolhido.getNotas()) {
+                
+                int periodo = notaPorPeriodo.getPeriodo();
+                
+                if (validaAluno && periodo == 1 && nota.getPeriodo() == 1) {
+                    
+                    nota.setNovaNota(notaPorPeriodo.getNota());
+                    
+                } else if (validaAluno && periodo == 2 && nota.getPeriodo() == 2) {
+                    
+                    nota.setNovaNota(notaPorPeriodo.getNota());
+                    
+                } else if (validaAluno && periodo == 3 && nota.getPeriodo() == 3) {
+                    
+                    nota.setNovaNota(notaPorPeriodo.getNota());
+                    
+                } else if (validaAluno && periodo == 4 && nota.getPeriodo() == 4) {
+                    
+                    nota.setNovaNota(notaPorPeriodo.getNota());
+                    
+                }
+                
+            }
+            
+        }
+        
+    }
+    
 
     public static Usuario pegaUsuario() {
 
@@ -256,7 +291,7 @@ public class BancoDeDados {
 
             for (AlunoNotas alunoN : alunoNotas) {
 
-                if (alunoN.aluno.getMatricula() == nota.getAluno().getMatricula()) {
+                if (alunoN.getAluno().getMatricula() == nota.getAluno().getMatricula()) {
                     validaAluno = true;
                     alunoExistente = alunoN;
                     break;
@@ -265,21 +300,43 @@ public class BancoDeDados {
             }
 
             if (!validaAluno) {
-                alunoExistente.aluno = nota.getAluno();
-                alunoExistente.notas = new ArrayList<>();
+                alunoExistente.setAluno(nota.getAluno());
                 alunoNotas.add(alunoExistente);
             }
 
             NotaPeriodo novoNotaPeriodo = new NotaPeriodo();
-            novoNotaPeriodo.nota = nota.getNota();
-            novoNotaPeriodo.periodo = nota.getPeriodo();
-            alunoExistente.notas.add(novoNotaPeriodo);
+            novoNotaPeriodo.setNota(nota.getNota());
+            novoNotaPeriodo.setPeriodo(nota.getPeriodo());
+            alunoExistente.adicionarNota(novoNotaPeriodo);
 
         }
 
         return alunoNotas;
 
     }
+    
+    public static Double retornarMediaPeriodoTurma(List<AlunoNotas> alunoNotas, int periodoEscolhido) {
+        
+        Double mediaPeriodo = 0.0;
+        int quantidadeAlunos = 0;
+        
+        for (AlunoNotas nota : alunoNotas) {
+            
+            for (NotaPeriodo notaP : nota.getNotas()) {
+                
+                if (notaP.getPeriodo() == periodoEscolhido) {
+                    mediaPeriodo += notaP.getNota();
+                    ++quantidadeAlunos;
+                }
+                
+            }
+            
+        }
+        
+        return Math.floor(mediaPeriodo/quantidadeAlunos);
+        
+    }
+    
 
     public static void excluirProfessorDaLista(int linhaSelecionada) {
 
@@ -574,6 +631,7 @@ public class BancoDeDados {
         return turmasAlunoNaoEsta;
 
     }
+    
 
     public static Boolean verificarSeTurmaJaFoiSolicitada(Turma turmaSelecionada) {
 
@@ -589,6 +647,25 @@ public class BancoDeDados {
 
         return alunoSolicitouEntrarNaTurma;
 
+    }
+    
+    public static Boolean verificarSeNotaExiste(UsuarioAluno alunoSelecionado, Turma turmaSelecionada, int periodoEscolhido) {
+        
+        Boolean validaNota = false;
+        
+        for (NotaDeAluno nota : notas) {
+            
+            Boolean validaAluno = nota.getAluno().equals(alunoSelecionado);
+            Boolean validaTurma = nota.getTurma().equals(turmaSelecionada);
+            Boolean validaPeriodo = nota.getPeriodo() == periodoEscolhido;
+            
+            if (validaAluno && validaTurma && validaPeriodo)
+                validaNota = true;
+            
+        }
+        
+        return validaNota;
+        
     }
 
     public final static void criaUsuariosFakes() {
