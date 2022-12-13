@@ -5,12 +5,14 @@ import javax.swing.table.AbstractTableModel;
 
 public class ModeloVisualizacaoTurmaProfessor extends AbstractTableModel {
     
+    Turma turma;
     List<UsuarioAluno> alunosNaTurma;
     String[] colunas = {"Matrícula", "Nome", "Telefone", "Email", "Média"};
     
     public ModeloVisualizacaoTurmaProfessor(Turma turmaSelecionada) {
         
         alunosNaTurma = BancoDeDados.retornarAlunosDaTurma(turmaSelecionada);
+        turma = turmaSelecionada;
         
     }
 
@@ -34,16 +36,14 @@ public class ModeloVisualizacaoTurmaProfessor extends AbstractTableModel {
         
         UsuarioAluno aluno = alunosNaTurma.get(linha);
         
-        switch (coluna) {
-            
-            case 0: return aluno.getMatricula();
-            case 1: return aluno.getNome();
-            case 2: return aluno.getTelefone();
-            case 3: return aluno.getEmail();
-            case 4: return null;
-            default: return null;
-            
-        }
+        return switch (coluna) {
+            case 0 -> aluno.getMatricula();
+            case 1 -> aluno.getNome();
+            case 2 -> aluno.getTelefone();
+            case 3 -> aluno.getEmail();
+            case 4 -> BancoDeDados.retornarMediaDoAlunoNaTurma(aluno, turma);
+            default -> null;
+        };
         
     }
     

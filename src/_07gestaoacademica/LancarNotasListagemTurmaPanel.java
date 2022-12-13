@@ -3,6 +3,7 @@ package _07gestaoacademica;
 import java.awt.Color;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import javax.swing.JLabel;
 import javax.swing.table.TableColumn;
 
 public class LancarNotasListagemTurmaPanel extends javax.swing.JPanel {
@@ -42,11 +43,21 @@ public class LancarNotasListagemTurmaPanel extends javax.swing.JPanel {
         pegarColuna(5).setCellRenderer(camposRenderer);
         pegarColuna(5).setCellEditor(camposEditor);
         
+            //Coluna da média com cor.
+            LancarNotaCorRenderer corDasMedias = new LancarNotaCorRenderer(6);
+            pegarColuna(6).setCellRenderer(corDasMedias);
+        
         //Textos pós tabela
-        periodo1Label.setText(BancoDeDados.retornarMediaPeriodoTurma(tableModel.retornarAlteracoesFeitas(), 1).toString());
-        periodo2Label.setText(BancoDeDados.retornarMediaPeriodoTurma(tableModel.retornarAlteracoesFeitas(), 2).toString());
-        periodo3Label.setText(BancoDeDados.retornarMediaPeriodoTurma(tableModel.retornarAlteracoesFeitas(), 3).toString());
-        periodo4Label.setText(BancoDeDados.retornarMediaPeriodoTurma(tableModel.retornarAlteracoesFeitas(), 4).toString());
+        periodo1Label.setText(BancoDeDados.retornarMediaPeriodoTurma(tableModel.retornarAlteracoesFeitas(), 1));
+        periodo2Label.setText(BancoDeDados.retornarMediaPeriodoTurma(tableModel.retornarAlteracoesFeitas(), 2));
+        periodo3Label.setText(BancoDeDados.retornarMediaPeriodoTurma(tableModel.retornarAlteracoesFeitas(), 3));
+        periodo4Label.setText(BancoDeDados.retornarMediaPeriodoTurma(tableModel.retornarAlteracoesFeitas(), 4));
+        mediaDasMedias.setText(BancoDeDados.retornarMediasDasMediasTurma(tableModel.retornarAlteracoesFeitas()));
+        alterarCorDaMedia(periodo1Label);
+        alterarCorDaMedia(periodo2Label);
+        alterarCorDaMedia(periodo3Label);
+        alterarCorDaMedia(periodo4Label);
+        alterarCorDaMedia(mediaDasMedias);
         
         tabelaNotas.addFocusListener(new FocusAdapter() {
             @Override
@@ -55,10 +66,16 @@ public class LancarNotasListagemTurmaPanel extends javax.swing.JPanel {
                 tableModel.modificarValorDaNota(camposEditor.getLinha(), camposEditor.getColuna(), turmaSelecionada, notaPega);
                 
                 //textos
-                periodo1Label.setText(BancoDeDados.retornarMediaPeriodoTurma(tableModel.retornarAlteracoesFeitas(), 1).toString());
-                periodo2Label.setText(BancoDeDados.retornarMediaPeriodoTurma(tableModel.retornarAlteracoesFeitas(), 2).toString());
-                periodo3Label.setText(BancoDeDados.retornarMediaPeriodoTurma(tableModel.retornarAlteracoesFeitas(), 3).toString());
-                periodo4Label.setText(BancoDeDados.retornarMediaPeriodoTurma(tableModel.retornarAlteracoesFeitas(), 4).toString());
+                periodo1Label.setText(BancoDeDados.retornarMediaPeriodoTurma(tableModel.retornarAlteracoesFeitas(), 1));
+                alterarCorDaMedia(periodo1Label);
+                periodo2Label.setText(BancoDeDados.retornarMediaPeriodoTurma(tableModel.retornarAlteracoesFeitas(), 2));
+                alterarCorDaMedia(periodo2Label);
+                periodo3Label.setText(BancoDeDados.retornarMediaPeriodoTurma(tableModel.retornarAlteracoesFeitas(), 3));
+                alterarCorDaMedia(periodo3Label);
+                periodo4Label.setText(BancoDeDados.retornarMediaPeriodoTurma(tableModel.retornarAlteracoesFeitas(), 4));
+                alterarCorDaMedia(periodo4Label);
+                mediaDasMedias.setText(BancoDeDados.retornarMediasDasMediasTurma(tableModel.retornarAlteracoesFeitas()));
+                alterarCorDaMedia(mediaDasMedias);
                 
             }
 
@@ -87,6 +104,22 @@ public class LancarNotasListagemTurmaPanel extends javax.swing.JPanel {
         p.mensagemFinalNovoProfessor("Alterações salvas com sucesso!");
         
     }
+    
+    private void alterarCorDaMedia(JLabel textoDaMedia) {
+        
+        Double valor = Double.valueOf(textoDaMedia.getText());
+        
+        if (valor < 0.0) {
+            textoDaMedia.setText("-");
+        }
+        
+        if (valor < 7) {
+            textoDaMedia.setForeground(Color.RED);
+        } else {
+            textoDaMedia.setForeground(new Color(19, 176, 110));
+        }
+        
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -106,13 +139,14 @@ public class LancarNotasListagemTurmaPanel extends javax.swing.JPanel {
         horarioTurmaLabel = new javax.swing.JLabel();
         campoHorarioDaTurma = new _07gestaoacademica.CampoDeEscrita();
         alunosLabel = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaNotas = new _07gestaoacademica.JTablePersonalizada();
         mediaLabel = new javax.swing.JLabel();
         periodo1Label = new javax.swing.JLabel();
         periodo2Label = new javax.swing.JLabel();
         periodo3Label = new javax.swing.JLabel();
         periodo4Label = new javax.swing.JLabel();
+        mediaDasMedias = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabelaNotas = new _07gestaoacademica.JTablePersonalizadaLancarNota();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -148,13 +182,6 @@ public class LancarNotasListagemTurmaPanel extends javax.swing.JPanel {
         alunosLabel.setForeground(new java.awt.Color(0, 0, 0));
         alunosLabel.setText("Alunos");
 
-        jScrollPane1.setBorder(null);
-
-        tabelaNotas.setBackground(new java.awt.Color(255, 255, 255));
-        tabelaNotas.setGridColor(new java.awt.Color(51, 51, 51));
-        tabelaNotas.setSelectionBackground(new java.awt.Color(19, 176, 110));
-        jScrollPane1.setViewportView(tabelaNotas);
-
         mediaLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         mediaLabel.setForeground(new java.awt.Color(0, 0, 0));
         mediaLabel.setText("Média");
@@ -175,80 +202,102 @@ public class LancarNotasListagemTurmaPanel extends javax.swing.JPanel {
         periodo4Label.setForeground(new java.awt.Color(0, 0, 0));
         periodo4Label.setText("P.4");
 
+        mediaDasMedias.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        mediaDasMedias.setForeground(new java.awt.Color(0, 0, 0));
+        mediaDasMedias.setText("M");
+
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setBorder(null);
+
+        tabelaNotas.setBackground(new java.awt.Color(255, 255, 255));
+        tabelaNotas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tabelaNotas.setSelectionBackground(new java.awt.Color(19, 176, 110));
+        tabelaNotas.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setViewportView(tabelaNotas);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(campoDeCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(codigoTurmaLabel))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(disciplinaTurmaLabel)
-                            .addComponent(campoDisciplinaDaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(alunoMatriculadoLabel)
-                            .addComponent(campoAlunoMatriculado, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(horarioTurmaLabel)
-                                .addGap(0, 101, Short.MAX_VALUE))
-                            .addComponent(campoHorarioDaTurma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jScrollPane1)
+                        .addGap(6, 6, 6)
+                        .addComponent(codigoTurmaLabel)
+                        .addGap(139, 139, 139)
+                        .addComponent(disciplinaTurmaLabel)
+                        .addGap(128, 128, 128)
+                        .addComponent(alunoMatriculadoLabel)
+                        .addGap(50, 50, 50)
+                        .addComponent(horarioTurmaLabel))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(alunosLabel)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(129, 129, 129)
-                .addComponent(mediaLabel)
-                .addGap(87, 87, 87)
-                .addComponent(periodo1Label)
-                .addGap(88, 88, 88)
-                .addComponent(periodo2Label)
-                .addGap(83, 83, 83)
-                .addComponent(periodo3Label)
-                .addGap(89, 89, 89)
-                .addComponent(periodo4Label)
+                        .addGap(6, 6, 6)
+                        .addComponent(campoDeCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(campoDisciplinaDaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(campoAlunoMatriculado, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(campoHorarioDaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(alunosLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(146, 146, 146)
+                        .addComponent(mediaLabel)
+                        .addGap(70, 70, 70)
+                        .addComponent(periodo1Label)
+                        .addGap(88, 88, 88)
+                        .addComponent(periodo2Label)
+                        .addGap(83, 83, 83)
+                        .addComponent(periodo3Label)
+                        .addGap(89, 89, 89)
+                        .addComponent(periodo4Label)
+                        .addGap(85, 85, 85)
+                        .addComponent(mediaDasMedias)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(codigoTurmaLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(campoDeCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(horarioTurmaLabel)
-                            .addComponent(alunoMatriculadoLabel)
-                            .addComponent(disciplinaTurmaLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(campoHorarioDaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(campoAlunoMatriculado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(campoDisciplinaDaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(codigoTurmaLabel)
+                    .addComponent(disciplinaTurmaLabel)
+                    .addComponent(alunoMatriculadoLabel)
+                    .addComponent(horarioTurmaLabel))
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(campoDeCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoDisciplinaDaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoAlunoMatriculado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoHorarioDaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addComponent(alunosLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(mediaLabel)
                     .addComponent(periodo1Label)
                     .addComponent(periodo2Label)
                     .addComponent(periodo3Label)
-                    .addComponent(periodo4Label))
-                .addGap(13, 13, 13))
+                    .addComponent(periodo4Label)
+                    .addComponent(mediaDasMedias)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -264,11 +313,12 @@ public class LancarNotasListagemTurmaPanel extends javax.swing.JPanel {
     private javax.swing.JLabel disciplinaTurmaLabel;
     private javax.swing.JLabel horarioTurmaLabel;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel mediaDasMedias;
     private javax.swing.JLabel mediaLabel;
     private javax.swing.JLabel periodo1Label;
     private javax.swing.JLabel periodo2Label;
     private javax.swing.JLabel periodo3Label;
     private javax.swing.JLabel periodo4Label;
-    private _07gestaoacademica.JTablePersonalizada tabelaNotas;
+    private _07gestaoacademica.JTablePersonalizadaLancarNota tabelaNotas;
     // End of variables declaration//GEN-END:variables
 }

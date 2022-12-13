@@ -6,12 +6,14 @@ import javax.swing.table.AbstractTableModel;
 
 public class ModeloTabelaNotaAluno extends AbstractTableModel{
     
+    private Turma turma;
     private String[] colunas = {"Período", "Nota"};
-    private List<NotaDeAluno> notas = new ArrayList<>();
+    private List<NotaPeriodo> notas = new ArrayList<>();
     
     public ModeloTabelaNotaAluno(ModeloTabelaTurmaAluno referenciaOutroModelo, int linha) {
 
-        notas = referenciaOutroModelo.getTurmaSelecionada(linha).getNotas();
+        turma = referenciaOutroModelo.getTurmaSelecionada(linha);
+        notas = BancoDeDados.retornarNotaDeAlunoEspecifico((UsuarioAluno) BancoDeDados.pegaUsuario(), turma);
         
     }
 
@@ -33,11 +35,22 @@ public class ModeloTabelaNotaAluno extends AbstractTableModel{
     @Override
     public Object getValueAt(int linha, int coluna) {
         
-        switch(coluna) {
-            case 0: return ++linha + "°";
-            case 1: return null;
-            default: return null;
-        }
+        UsuarioAluno aluno = (UsuarioAluno) BancoDeDados.pegaUsuario();
+        
+        return switch (coluna) {
+            case 0 -> ++linha + "°";
+            case 1 -> notas.get(linha).getNota();
+            default -> null;
+        };
+        
+    }
+    
+    public String getMediaDoAluno() {
+        
+        if (BancoDeDados.retornarMediaDoAlunoNaTurma((UsuarioAluno) BancoDeDados.pegaUsuario(), turma) != null)
+            return BancoDeDados.retornarMediaDoAlunoNaTurma((UsuarioAluno) BancoDeDados.pegaUsuario(), turma);
+        else
+            return null;
         
     }
     

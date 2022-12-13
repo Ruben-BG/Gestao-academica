@@ -7,10 +7,9 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
-
-public class JTablePersonalizada extends JTable {
-
-    public JTablePersonalizada() {
+public class JTablePersonalizadaLancarNota extends JTable{
+    
+    public JTablePersonalizadaLancarNota() {
         
         getTableHeader().setDefaultRenderer(new JTablePersonalizadaHeader());
         getTableHeader().setPreferredSize(new Dimension(0, 40));
@@ -39,7 +38,7 @@ public class JTablePersonalizada extends JTable {
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             Component com = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
             if(isCellSelected(row, column)) {
-                com.setBackground(new Color(19,176,110));
+                setBackground(new Color(19,176,110));
             } else {
                 com.setBackground(Color.WHITE);
             }

@@ -1,5 +1,8 @@
 package _07gestaoacademica;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -315,10 +318,11 @@ public class BancoDeDados {
 
     }
     
-    public static Double retornarMediaPeriodoTurma(List<AlunoNotas> alunoNotas, int periodoEscolhido) {
+    public static String retornarMediaPeriodoTurma(List<AlunoNotas> alunoNotas, int periodoEscolhido) {
         
         Double mediaPeriodo = 0.0;
         int quantidadeAlunos = 0;
+        BigDecimal arredondamentoDaMedia;
         
         for (AlunoNotas nota : alunoNotas) {
             
@@ -333,7 +337,113 @@ public class BancoDeDados {
             
         }
         
-        return Math.floor(mediaPeriodo/quantidadeAlunos);
+        arredondamentoDaMedia = new BigDecimal(mediaPeriodo/quantidadeAlunos).setScale(1, RoundingMode.FLOOR);
+        
+        return arredondamentoDaMedia.toString();
+        
+    }
+    
+    public static String retornarMediasDasMediasTurma(List<AlunoNotas> alunoNotas) {
+        
+        Double mediaPeriodo = 0.0;
+        int quantidadeAlunos = 0;
+        BigDecimal arredondamentoDaMedia;
+        
+        for (AlunoNotas nota : alunoNotas) {
+            
+            mediaPeriodo += nota.getMedia();
+            ++quantidadeAlunos;
+            
+        }
+        
+        arredondamentoDaMedia = new BigDecimal(mediaPeriodo/quantidadeAlunos).setScale(1, RoundingMode.FLOOR);
+        
+        return arredondamentoDaMedia.toString();
+        
+    }
+    
+    public static String retornarMediaDoAlunoNaTurma(UsuarioAluno alunoSelecionado, Turma turmaEscolhida) {
+        
+        Double valor = 0.0;
+        int mediaDaNota = 0;
+        BigDecimal formatacaoDaMedia;
+        
+        for (NotaDeAluno nota : notas) {
+            
+            Boolean validaAluno = nota.getAluno().equals(alunoSelecionado);
+            Boolean validaTurma = nota.getTurma().equals(turmaEscolhida);
+            
+            if (validaAluno && validaTurma && nota.getPeriodo() == 1) {
+                valor += nota.getNota();
+                ++mediaDaNota;
+            } else if (validaAluno && validaTurma && nota.getPeriodo() == 2) {
+                valor += nota.getNota();
+                ++mediaDaNota;
+            } else if (validaAluno && validaTurma && nota.getPeriodo() == 3) {
+                valor += nota.getNota();
+                ++mediaDaNota;
+            } else if (validaAluno && validaTurma && nota.getPeriodo() == 4) {
+                valor += nota.getNota();
+                ++mediaDaNota;
+            }
+            
+        }
+        
+        if (valor != 0.0) {
+            
+            formatacaoDaMedia = new BigDecimal(valor/mediaDaNota).setScale(1, RoundingMode.FLOOR);
+            return formatacaoDaMedia.toString();
+            
+        }
+        
+        return null;
+        
+    }
+    
+    public static List<NotaPeriodo> retornarNotaDeAlunoEspecifico(UsuarioAluno alunoSelecionado, Turma turmaSelecionada) {
+        
+        List<NotaPeriodo> notaPeriodos = new ArrayList<>();
+        NotaPeriodo notaPeriodoNova;
+        
+        for (NotaDeAluno nota : notas) {
+            
+            Boolean validaAluno = nota.getAluno().equals(alunoSelecionado);
+            Boolean validaTurma = nota.getTurma().equals(turmaSelecionada);
+            
+            if (validaAluno && validaTurma) {
+                
+                switch (nota.getPeriodo()) {
+                    case 1 -> {
+                        notaPeriodoNova = new NotaPeriodo();
+                        notaPeriodoNova.setNota(nota.getNota());
+                        notaPeriodoNova.setPeriodo(nota.getPeriodo());
+                        notaPeriodos.add(notaPeriodoNova);
+                    }
+                    case 2 -> {
+                        notaPeriodoNova = new NotaPeriodo();
+                        notaPeriodoNova.setNota(nota.getNota());
+                        notaPeriodoNova.setPeriodo(nota.getPeriodo());
+                        notaPeriodos.add(notaPeriodoNova);
+                    }
+                    case 3 -> {
+                        notaPeriodoNova = new NotaPeriodo();
+                        notaPeriodoNova.setNota(nota.getNota());
+                        notaPeriodoNova.setPeriodo(nota.getPeriodo());
+                        notaPeriodos.add(notaPeriodoNova);
+                    }
+                    case 4 -> {
+                        notaPeriodoNova = new NotaPeriodo();
+                        notaPeriodoNova.setNota(nota.getNota());
+                        notaPeriodoNova.setPeriodo(nota.getPeriodo());
+                        notaPeriodos.add(notaPeriodoNova);
+                    }
+                }
+                
+            }
+            
+        }
+        
+        return notaPeriodos;
         
     }
     

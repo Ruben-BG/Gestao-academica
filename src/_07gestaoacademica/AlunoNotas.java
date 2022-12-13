@@ -1,5 +1,7 @@
 package _07gestaoacademica;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +33,7 @@ public class AlunoNotas {
     public Double getMedia() {
         
         Double somaDeNota = 0.0;
+        BigDecimal media;
         
         for (NotaPeriodo nota : notas) {
             
@@ -38,7 +41,9 @@ public class AlunoNotas {
             
         }
         
-        return Math.floor(somaDeNota/notas.size());
+        media = new BigDecimal(somaDeNota/notas.size()).setScale(1, RoundingMode.FLOOR);
+        
+        return Double.valueOf(media.toString());
         
     }
     

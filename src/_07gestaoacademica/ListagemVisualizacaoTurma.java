@@ -24,6 +24,7 @@ public class ListagemVisualizacaoTurma extends javax.swing.JFrame {
         //tabela
         jScrollPane1.getViewport().setBackground(Color.white);
         tabelaAluno.setModel(new ModeloVisualizacaoTurmaProfessor(turmaSelecionada));
+        tabelaAluno.getColumnModel().getColumn(4).setCellRenderer(new LancarNotaCorRenderer(4));
         
     }
 
