@@ -1,6 +1,7 @@
 package _07gestaoacademica;
 
 import java.awt.Color;
+import javax.swing.JLabel;
 
 public class NotasDaTurmaAluno extends javax.swing.JFrame {
 
@@ -27,13 +28,25 @@ public class NotasDaTurmaAluno extends javax.swing.JFrame {
         jScrollPane1.getViewport().setBackground(Color.WHITE);
         tableModel = new ModeloTabelaNotaAluno(tableModelParaCampos, linhaSelecionada);
         tabelaNota.setModel(tableModel);
+        NotasDaTurmaCorRenderer colunaNotasRenderer = new NotasDaTurmaCorRenderer();
+        tabelaNota.getColumnModel().getColumn(1).setCellRenderer(colunaNotasRenderer);
         
         //Média
         String mediaString = tableModel.getMediaDoAluno();
-        Double media = mediaString == null ? 0.0 : Double.valueOf(mediaString);
+        Double media = mediaString == null ? null : Double.valueOf(mediaString);
         notaLabel.setText(mediaString);
         
-        if (media < 7) {
+        if (media == null) {
+            mediaLabel.setText("⠀⠀");
+            situacaoLabel.setText("⠀⠀");
+            aprovacaoLabel.setVisible(false);
+            
+            JLabel mensagemErro = new JLabel("Você ainda não tem notas nesta turma.");
+            mensagemErro.setFont(new java.awt.Font("Verdana", 0, 13));
+            mensagemErro.setVerticalAlignment(JLabel.TOP);
+            jScrollPane1.setViewportView(mensagemErro);
+            
+        } else if (media < 7) {
             aprovacaoLabel.setText("Reprovado(a)");
             aprovacaoLabel.setForeground(Color.red);
             notaLabel.setForeground(Color.red);
@@ -195,6 +208,8 @@ public class NotasDaTurmaAluno extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tabelaNota.setSelectionBackground(new java.awt.Color(19, 176, 110));
+        tabelaNota.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(tabelaNota);
 
         mediaLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
@@ -312,9 +327,6 @@ public class NotasDaTurmaAluno extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    //Métodos de simplificação
-    //Métodos de ação
 
     private void sairPaginaButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairPaginaButtonMouseEntered
         Color corSelecionado = new Color(89, 89, 89);

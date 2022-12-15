@@ -2,7 +2,6 @@ package _07gestaoacademica;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -34,41 +33,76 @@ public class BancoDeDados {
         notas.add(nota);
 
     }
-    
+
     public static void salvarNotasAlteradas(AlunoNotas alunoNotaEscolhido, Turma turmaEscolhida) {
-        
+
+        Boolean temNovaNota = true;
+        int periodoNaoExistente = 0;
+        Double novaNotaDePeriodoNaoExistente = 0.0;
+
         for (NotaDeAluno nota : notas) {
-            
+
             Boolean validaAluno = nota.getAluno().equals(alunoNotaEscolhido.getAluno()) && nota.getTurma().equals(turmaEscolhida);
-            
+
             for (NotaPeriodo notaPorPeriodo : alunoNotaEscolhido.getNotas()) {
-                
+
                 int periodo = notaPorPeriodo.getPeriodo();
-                
+
                 if (validaAluno && periodo == 1 && nota.getPeriodo() == 1) {
-                    
+
                     nota.setNovaNota(notaPorPeriodo.getNota());
-                    
+
                 } else if (validaAluno && periodo == 2 && nota.getPeriodo() == 2) {
-                    
+
                     nota.setNovaNota(notaPorPeriodo.getNota());
-                    
+
                 } else if (validaAluno && periodo == 3 && nota.getPeriodo() == 3) {
-                    
+
                     nota.setNovaNota(notaPorPeriodo.getNota());
-                    
+
                 } else if (validaAluno && periodo == 4 && nota.getPeriodo() == 4) {
-                    
+
                     nota.setNovaNota(notaPorPeriodo.getNota());
-                    
+
+                } else if (validaAluno && periodo == 1 && nota.getPeriodo() != periodo) {
+
+                    temNovaNota = false;
+                    periodoNaoExistente = periodo;
+                    novaNotaDePeriodoNaoExistente = notaPorPeriodo.getNota();
+
+                } else if (validaAluno && periodo == 2 && nota.getPeriodo() != periodo) {
+
+                    temNovaNota = false;
+                    periodoNaoExistente = periodo;
+                    novaNotaDePeriodoNaoExistente = notaPorPeriodo.getNota();
+
+                } else if (validaAluno && periodo == 3 && nota.getPeriodo() != periodo) {
+
+                    temNovaNota = false;
+                    periodoNaoExistente = periodo;
+                    novaNotaDePeriodoNaoExistente = notaPorPeriodo.getNota();
+
+                } else if (validaAluno && periodo == 4 && nota.getPeriodo() != periodo) {
+
+                    temNovaNota = false;
+                    periodoNaoExistente = periodo;
+                    novaNotaDePeriodoNaoExistente = notaPorPeriodo.getNota();
+
                 }
-                
+
             }
-            
+
         }
-        
+
+        if (!temNovaNota) {
+
+            NotaDeAluno novaNota = new NotaDeAluno();
+            novaNota.adicionarNota(alunoNotaEscolhido.getAluno(), turmaEscolhida, novaNotaDePeriodoNaoExistente, periodoNaoExistente);
+            notas.add(novaNota);
+
+        }
+
     }
-    
 
     public static Usuario pegaUsuario() {
 
@@ -317,62 +351,66 @@ public class BancoDeDados {
         return alunoNotas;
 
     }
-    
+
     public static String retornarMediaPeriodoTurma(List<AlunoNotas> alunoNotas, int periodoEscolhido) {
-        
+
         Double mediaPeriodo = 0.0;
         int quantidadeAlunos = 0;
         BigDecimal arredondamentoDaMedia;
-        
+
         for (AlunoNotas nota : alunoNotas) {
-            
+
             for (NotaPeriodo notaP : nota.getNotas()) {
-                
+
                 if (notaP.getPeriodo() == periodoEscolhido) {
                     mediaPeriodo += notaP.getNota();
                     ++quantidadeAlunos;
                 }
-                
+
             }
-            
+
         }
-        
-        arredondamentoDaMedia = new BigDecimal(mediaPeriodo/quantidadeAlunos).setScale(1, RoundingMode.FLOOR);
-        
-        return arredondamentoDaMedia.toString();
-        
+
+        if (mediaPeriodo > 0) {
+            arredondamentoDaMedia = new BigDecimal(mediaPeriodo / quantidadeAlunos).setScale(1, RoundingMode.FLOOR);
+
+            return arredondamentoDaMedia.toString();
+        }
+        return null;
     }
-    
+
     public static String retornarMediasDasMediasTurma(List<AlunoNotas> alunoNotas) {
-        
+
         Double mediaPeriodo = 0.0;
         int quantidadeAlunos = 0;
         BigDecimal arredondamentoDaMedia;
-        
+
         for (AlunoNotas nota : alunoNotas) {
-            
+
             mediaPeriodo += nota.getMedia();
             ++quantidadeAlunos;
-            
+
         }
-        
-        arredondamentoDaMedia = new BigDecimal(mediaPeriodo/quantidadeAlunos).setScale(1, RoundingMode.FLOOR);
-        
+
+        if (mediaPeriodo > 0) {
+            arredondamentoDaMedia = new BigDecimal(mediaPeriodo / quantidadeAlunos).setScale(1, RoundingMode.FLOOR);
+
         return arredondamentoDaMedia.toString();
-        
+        }
+        return null;
     }
-    
+
     public static String retornarMediaDoAlunoNaTurma(UsuarioAluno alunoSelecionado, Turma turmaEscolhida) {
-        
+
         Double valor = 0.0;
         int mediaDaNota = 0;
         BigDecimal formatacaoDaMedia;
-        
+
         for (NotaDeAluno nota : notas) {
-            
+
             Boolean validaAluno = nota.getAluno().equals(alunoSelecionado);
             Boolean validaTurma = nota.getTurma().equals(turmaEscolhida);
-            
+
             if (validaAluno && validaTurma && nota.getPeriodo() == 1) {
                 valor += nota.getNota();
                 ++mediaDaNota;
@@ -386,32 +424,32 @@ public class BancoDeDados {
                 valor += nota.getNota();
                 ++mediaDaNota;
             }
-            
+
         }
-        
+
         if (valor != 0.0) {
-            
-            formatacaoDaMedia = new BigDecimal(valor/mediaDaNota).setScale(1, RoundingMode.FLOOR);
+
+            formatacaoDaMedia = new BigDecimal(valor / mediaDaNota).setScale(1, RoundingMode.FLOOR);
             return formatacaoDaMedia.toString();
-            
+
         }
-        
+
         return null;
-        
+
     }
-    
+
     public static List<NotaPeriodo> retornarNotaDeAlunoEspecifico(UsuarioAluno alunoSelecionado, Turma turmaSelecionada) {
-        
+
         List<NotaPeriodo> notaPeriodos = new ArrayList<>();
         NotaPeriodo notaPeriodoNova;
-        
+
         for (NotaDeAluno nota : notas) {
-            
+
             Boolean validaAluno = nota.getAluno().equals(alunoSelecionado);
             Boolean validaTurma = nota.getTurma().equals(turmaSelecionada);
-            
+
             if (validaAluno && validaTurma) {
-                
+
                 switch (nota.getPeriodo()) {
                     case 1 -> {
                         notaPeriodoNova = new NotaPeriodo();
@@ -438,15 +476,14 @@ public class BancoDeDados {
                         notaPeriodos.add(notaPeriodoNova);
                     }
                 }
-                
+
             }
-            
+
         }
-        
+
         return notaPeriodos;
-        
+
     }
-    
 
     public static void excluirProfessorDaLista(int linhaSelecionada) {
 
@@ -741,7 +778,6 @@ public class BancoDeDados {
         return turmasAlunoNaoEsta;
 
     }
-    
 
     public static Boolean verificarSeTurmaJaFoiSolicitada(Turma turmaSelecionada) {
 
@@ -758,24 +794,25 @@ public class BancoDeDados {
         return alunoSolicitouEntrarNaTurma;
 
     }
-    
+
     public static Boolean verificarSeNotaExiste(UsuarioAluno alunoSelecionado, Turma turmaSelecionada, int periodoEscolhido) {
-        
+
         Boolean validaNota = false;
-        
+
         for (NotaDeAluno nota : notas) {
-            
+
             Boolean validaAluno = nota.getAluno().equals(alunoSelecionado);
             Boolean validaTurma = nota.getTurma().equals(turmaSelecionada);
             Boolean validaPeriodo = nota.getPeriodo() == periodoEscolhido;
-            
-            if (validaAluno && validaTurma && validaPeriodo)
+
+            if (validaAluno && validaTurma && validaPeriodo) {
                 validaNota = true;
-            
+            }
+
         }
-        
+
         return validaNota;
-        
+
     }
 
     public final static void criaUsuariosFakes() {

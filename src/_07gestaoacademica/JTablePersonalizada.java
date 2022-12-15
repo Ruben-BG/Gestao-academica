@@ -14,6 +14,8 @@ public class JTablePersonalizada extends JTable {
         
         getTableHeader().setDefaultRenderer(new JTablePersonalizadaHeader());
         getTableHeader().setPreferredSize(new Dimension(0, 40));
+        getTableHeader().setResizingAllowed(false); //impedir que usuário redimensione coluna.
+        getTableHeader().setReorderingAllowed(false); //impedir reordenamento da coluna.
         setDefaultRenderer(Object.class, new JTablePersonalizadaCell());
         setRowHeight(36);
         setShowHorizontalLines(true);

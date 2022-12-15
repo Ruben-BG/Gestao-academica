@@ -7,10 +7,10 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
-public class LancarNotaCorRenderer extends DefaultTableCellRenderer{
-    
+public class LancarNotaCorRenderer extends DefaultTableCellRenderer {
+
     private int colunaN = 0;
-    
+
     public LancarNotaCorRenderer(int coluna) {
         colunaN = coluna;
         setHorizontalAlignment(JLabel.CENTER);
@@ -18,37 +18,53 @@ public class LancarNotaCorRenderer extends DefaultTableCellRenderer{
 
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-        
+
         Component com = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         JComponent jc = (JComponent) com;
-        
+
         setBorder(noFocusBorder);
-        
+
         if (!isSelected) {
+
+            setBackground(Color.white);
             
-            if (table.getValueAt(row, colunaN) != null) {
-                
-                String valor = table.getValueAt(row, colunaN).toString();
+           String valor = table.getValueAt(row, colunaN).toString();
                 Double valorConvetido = Double.valueOf(table.getValueAt(row, colunaN).toString());
-                
+
                 if (!valor.isEmpty()) {
-                    
+
                     if (valorConvetido < 7) {
                         setForeground(Color.RED);
                     } else {
                         setForeground(new Color(19, 176, 110));
                     }
-                    
+
                 } else {
-                    setBackground(table.getBackground());
                     setForeground(table.getForeground());
                 }
-                
+
+        } else {
+            if (table.getSelectedRow() == row && table.getSelectedColumn() == colunaN) {
+
+                setForeground(Color.white);
+                setBackground(new Color(19, 176, 110));
+
+            } else {
+
+                Double valorConvetido = Double.valueOf(table.getValueAt(row, colunaN).toString());
+
+                setBackground(Color.white);
+
+                if (valorConvetido < 7) {
+                    setForeground(Color.RED);
+                } else {
+                    setForeground(new Color(19, 176, 110));
+                }
+
             }
-            
         }
-        
+
         return this;
     }
-    
+
 }

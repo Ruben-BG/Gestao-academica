@@ -11,10 +11,6 @@ public class Turma{
     private List<UsuarioAluno> alunosMatriculados = new ArrayList<>();
     private List<NotaDeAluno> notas = new ArrayList<>();
 
-    public void adicionarNotaAoAluno(NotaDeAluno notaDeAluno) {
-        notas.add(notaDeAluno);
-    }
-
     public List<NotaDeAluno> getNotas() {
         return notas;
     }

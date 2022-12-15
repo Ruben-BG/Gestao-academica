@@ -107,7 +107,7 @@ public class ModeloTabelaNotasListagemProfessor extends AbstractTableModel {
         for (NotaPeriodo notaPega : alunoN.getNotas()) {
 
             if (notaPega.getPeriodo() == coluna - 1 && coluna > 1 && coluna < 6) {
-                notaPega.setNota(novoValor.equals("") || novoValor == null ? 0.0 : Double.parseDouble(novoValor));
+                notaPega.setNota(novoValor == null || novoValor.equals("") ? 0.0 : Double.parseDouble(novoValor));
             }
 
         }
@@ -118,33 +118,39 @@ public class ModeloTabelaNotasListagemProfessor extends AbstractTableModel {
 
     public void atribuirNotaACampoVazio(int linha, int coluna, String valorDigitado) {
 
-        AlunoNotas alunoNota = notas.get(linha);
-        UsuarioAluno aluno = alunoNota.getAluno();
-        Turma turmaDoAluno = turma;
-        int periodo = coluna - 1;
-        Boolean notaExiste = BancoDeDados.verificarSeNotaExiste(aluno, turmaDoAluno, periodo);
+        if (!valorDigitado.equals("")) {
 
-        if (!notaExiste) {
+            String valor = valorDigitado;
+            AlunoNotas alunoNota = notas.get(linha);
+            UsuarioAluno aluno = alunoNota.getAluno();
+            Turma turmaDoAluno = turma;
+            int periodo = coluna - 1;
+            Boolean notaExiste = BancoDeDados.verificarSeNotaExiste(aluno, turmaDoAluno, periodo);
 
-            Double notaAdicionada = valorDigitado.equals("") || valorDigitado == null ? 0.0 : Double.valueOf(valorDigitado);
-            
-            NotaPeriodo novaNota = new NotaPeriodo();
-            novaNota.setNota(notaAdicionada);
-            novaNota.setPeriodo(periodo);
-            
-            alunoNota.adicionarNota(novaNota);
-            BancoDeDados.adicionarNota(turma, aluno, notaAdicionada, periodo);
+            if (!notaExiste) {
+
+                Double notaAdicionada = valor.equals("") ? null : Double.valueOf(valor);
+
+                if (notaAdicionada != null) {
+                    NotaPeriodo novaNota = new NotaPeriodo();
+                    novaNota.setNota(notaAdicionada);
+                    novaNota.setPeriodo(periodo);
+
+                    alunoNota.adicionarNota(novaNota);
+                }
+
+            }
 
         }
 
         fireTableDataChanged();
 
     }
-    
+
     public List<AlunoNotas> retornarAlteracoesFeitas() {
-        
+
         return notas;
-        
+
     }
 
 }

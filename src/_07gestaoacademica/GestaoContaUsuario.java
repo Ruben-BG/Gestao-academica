@@ -419,9 +419,7 @@ public class GestaoContaUsuario extends javax.swing.JFrame {
                 new GestaoContaUsuario().setVisible(true);
             }
         });
-        
         BancoDeDados.criaUsuariosFakes();
-        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

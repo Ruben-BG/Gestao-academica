@@ -1,8 +1,6 @@
 package _07gestaoacademica;
 
 import java.awt.Color;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import javax.swing.JLabel;
 import javax.swing.table.TableColumn;
 
@@ -30,10 +28,8 @@ public class LancarNotasListagemTurmaPanel extends javax.swing.JPanel {
         jScrollPane1.getViewport().setBackground(Color.white);
         tableModel = new ModeloTabelaNotasListagemProfessor(turmaSelecionada);
         tabelaNotas.setModel(tableModel);
-        tabelaNotas.getTableHeader().setResizingAllowed(false); //impedir que usuário redimensione coluna.
-        tabelaNotas.getTableHeader().setReorderingAllowed(false); //impedir reordenamento da coluna.
         
-        camposEditor = new LancarNotasCampoEditor();
+        camposEditor = new LancarNotasCampoEditor(tableModel, this, turmaSelecionada);
         pegarColuna(2).setCellRenderer(camposRenderer);
         pegarColuna(2).setCellEditor(camposEditor);
         pegarColuna(3).setCellRenderer(camposRenderer);
@@ -59,36 +55,9 @@ public class LancarNotasListagemTurmaPanel extends javax.swing.JPanel {
         alterarCorDaMedia(periodo4Label);
         alterarCorDaMedia(mediaDasMedias);
         
-        tabelaNotas.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                String notaPega = camposEditor.getValorNaCelula();
-                tableModel.modificarValorDaNota(camposEditor.getLinha(), camposEditor.getColuna(), turmaSelecionada, notaPega);
-                
-                //textos
-                periodo1Label.setText(BancoDeDados.retornarMediaPeriodoTurma(tableModel.retornarAlteracoesFeitas(), 1));
-                alterarCorDaMedia(periodo1Label);
-                periodo2Label.setText(BancoDeDados.retornarMediaPeriodoTurma(tableModel.retornarAlteracoesFeitas(), 2));
-                alterarCorDaMedia(periodo2Label);
-                periodo3Label.setText(BancoDeDados.retornarMediaPeriodoTurma(tableModel.retornarAlteracoesFeitas(), 3));
-                alterarCorDaMedia(periodo3Label);
-                periodo4Label.setText(BancoDeDados.retornarMediaPeriodoTurma(tableModel.retornarAlteracoesFeitas(), 4));
-                alterarCorDaMedia(periodo4Label);
-                mediaDasMedias.setText(BancoDeDados.retornarMediasDasMediasTurma(tableModel.retornarAlteracoesFeitas()));
-                alterarCorDaMedia(mediaDasMedias);
-                
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                String notaPega = camposEditor.getValorNaCelula();
-                tableModel.atribuirNotaACampoVazio(camposEditor.getLinha(), camposEditor.getColuna(), notaPega);
-            }
-        });
-        
     }
     
-    public TableColumn pegarColuna(int colunaEscolhida) {
+    public final TableColumn pegarColuna(int colunaEscolhida) {
         return tabelaNotas.getColumnModel().getColumn(colunaEscolhida);
     }
     
@@ -105,15 +74,13 @@ public class LancarNotasListagemTurmaPanel extends javax.swing.JPanel {
         
     }
     
-    private void alterarCorDaMedia(JLabel textoDaMedia) {
+    public void alterarCorDaMedia(JLabel textoDaMedia) {
         
-        Double valor = Double.valueOf(textoDaMedia.getText());
+        Double valor = textoDaMedia.getText() == null ? null : Double.valueOf(textoDaMedia.getText());
         
-        if (valor < 0.0) {
+        if (valor == null || valor < 0.0) {
             textoDaMedia.setText("-");
-        }
-        
-        if (valor < 7) {
+        } else if (valor < 7) {
             textoDaMedia.setForeground(Color.RED);
         } else {
             textoDaMedia.setForeground(new Color(19, 176, 110));
@@ -221,8 +188,7 @@ public class LancarNotasListagemTurmaPanel extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tabelaNotas.setSelectionBackground(new java.awt.Color(19, 176, 110));
-        tabelaNotas.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        tabelaNotas.setSelectionBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(tabelaNotas);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -313,12 +279,12 @@ public class LancarNotasListagemTurmaPanel extends javax.swing.JPanel {
     private javax.swing.JLabel disciplinaTurmaLabel;
     private javax.swing.JLabel horarioTurmaLabel;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel mediaDasMedias;
+    public javax.swing.JLabel mediaDasMedias;
     private javax.swing.JLabel mediaLabel;
-    private javax.swing.JLabel periodo1Label;
-    private javax.swing.JLabel periodo2Label;
-    private javax.swing.JLabel periodo3Label;
-    private javax.swing.JLabel periodo4Label;
+    public javax.swing.JLabel periodo1Label;
+    public javax.swing.JLabel periodo2Label;
+    public javax.swing.JLabel periodo3Label;
+    public javax.swing.JLabel periodo4Label;
     private _07gestaoacademica.JTablePersonalizadaLancarNota tabelaNotas;
     // End of variables declaration//GEN-END:variables
 }

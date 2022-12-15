@@ -13,6 +13,8 @@ public class JTablePersonalizadaLancarNota extends JTable{
         
         getTableHeader().setDefaultRenderer(new JTablePersonalizadaHeader());
         getTableHeader().setPreferredSize(new Dimension(0, 40));
+        getTableHeader().setResizingAllowed(false);
+        getTableHeader().setReorderingAllowed(false);
         setDefaultRenderer(Object.class, new JTablePersonalizadaCell());
         setRowHeight(36);
         setShowHorizontalLines(true);
@@ -37,11 +39,15 @@ public class JTablePersonalizadaLancarNota extends JTable{
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             Component com = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-            if(isCellSelected(row, column)) {
+            
+            if(getSelectedRow() == row && getSelectedColumn() == column) {
                 setBackground(new Color(19,176,110));
+                setForeground(Color.white);
             } else {
-                com.setBackground(Color.WHITE);
+                setBackground(Color.WHITE);
+                setForeground(table.getForeground());
             }
+            
             setBorder(noFocusBorder);
             setHorizontalAlignment(JLabel.CENTER);
             return com;

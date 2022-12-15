@@ -206,6 +206,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="P.1"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="periodo2Label">
       <Properties>
@@ -217,6 +220,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="P.2"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="periodo3Label">
       <Properties>
@@ -228,6 +234,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="P.3"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="periodo4Label">
       <Properties>
@@ -239,6 +248,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="P.4"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="mediaDasMedias">
       <Properties>
@@ -250,6 +262,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="M"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <Properties>
@@ -280,9 +295,6 @@
               </Table>
             </Property>
             <Property name="selectionBackground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="6e" green="b0" red="13" type="rgb"/>
-            </Property>
-            <Property name="selectionForeground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
           </Properties>
