@@ -34,59 +34,72 @@ public class BancoDeDados {
 
     }
 
-    public static void salvarNotasAlteradas(AlunoNotas alunoNotaEscolhido, Turma turmaEscolhida) {
+    public static void salvarNotasAlteradas(List<AlunoNotas> listaAlunoNotas, Turma turmaEscolhida) {
 
         Boolean temNovaNota = true;
+        UsuarioAluno alunoSelecionado = listaAlunoNotas.get(0).getAluno();
         int periodoNaoExistente = 0;
         Double novaNotaDePeriodoNaoExistente = 0.0;
 
-        for (NotaDeAluno nota : notas) {
+        Boolean validaAluno = false;
+        Boolean validaPeriodo = false;
 
-            Boolean validaAluno = nota.getAluno().equals(alunoNotaEscolhido.getAluno()) && nota.getTurma().equals(turmaEscolhida);
+        for (AlunoNotas alunoN : listaAlunoNotas) {
 
-            for (NotaPeriodo notaPorPeriodo : alunoNotaEscolhido.getNotas()) {
+            for (NotaPeriodo notaP : alunoN.getNotas()) {
 
-                int periodo = notaPorPeriodo.getPeriodo();
+                int periodo = notaP.getPeriodo();
+                Boolean periodoIs1 = periodo == 1, periodoIs2 = periodo == 2, periodoIs3 = periodo == 3, periodoIs4 = periodo == 4;
+                Boolean notaZero = notaP.getNota() == 0.0;
 
-                if (validaAluno && periodo == 1 && nota.getPeriodo() == 1) {
+                for (NotaDeAluno nota : notas) {
 
-                    nota.setNovaNota(notaPorPeriodo.getNota());
+                    validaAluno = nota.getAluno().equals(alunoN.getAluno()) && nota.getTurma().equals(turmaEscolhida);
 
-                } else if (validaAluno && periodo == 2 && nota.getPeriodo() == 2) {
+                    if (validaAluno && periodoIs1 && nota.getPeriodo() == 1) {
+                        nota.setNovaNota(notaP.getNota());
+                        break;
+                    } else if (validaAluno && periodoIs2 && nota.getPeriodo() == 2) {
+                        nota.setNovaNota(notaP.getNota());
+                        break;
+                    } else if (validaAluno && periodoIs3 && nota.getPeriodo() == 3) {
+                        nota.setNovaNota(notaP.getNota());
+                        break;
+                    } else if (validaAluno && periodoIs4 && nota.getPeriodo() == 4) {
+                        nota.setNovaNota(notaP.getNota());
+                        break;
+                    }
 
-                    nota.setNovaNota(notaPorPeriodo.getNota());
+                }
 
-                } else if (validaAluno && periodo == 3 && nota.getPeriodo() == 3) {
+                //Se houver uma nota inexistente cairá aqui.
+                if (periodoIs1 && !notaZero) {
 
-                    nota.setNovaNota(notaPorPeriodo.getNota());
-
-                } else if (validaAluno && periodo == 4 && nota.getPeriodo() == 4) {
-
-                    nota.setNovaNota(notaPorPeriodo.getNota());
-
-                } else if (validaAluno && periodo == 1 && nota.getPeriodo() != periodo) {
-
+                    alunoSelecionado = alunoN.getAluno();
                     temNovaNota = false;
                     periodoNaoExistente = periodo;
-                    novaNotaDePeriodoNaoExistente = notaPorPeriodo.getNota();
+                    novaNotaDePeriodoNaoExistente = notaP.getNota();
 
-                } else if (validaAluno && periodo == 2 && nota.getPeriodo() != periodo) {
+                } else if (periodoIs2 && !notaZero) {
 
+                    alunoSelecionado = alunoN.getAluno();
                     temNovaNota = false;
                     periodoNaoExistente = periodo;
-                    novaNotaDePeriodoNaoExistente = notaPorPeriodo.getNota();
+                    novaNotaDePeriodoNaoExistente = notaP.getNota();
 
-                } else if (validaAluno && periodo == 3 && nota.getPeriodo() != periodo) {
+                } else if (periodoIs3 && !notaZero) {
 
+                    alunoSelecionado = alunoN.getAluno();
                     temNovaNota = false;
                     periodoNaoExistente = periodo;
-                    novaNotaDePeriodoNaoExistente = notaPorPeriodo.getNota();
+                    novaNotaDePeriodoNaoExistente = notaP.getNota();
 
-                } else if (validaAluno && periodo == 4 && nota.getPeriodo() != periodo) {
+                } else if (periodoIs4 && !notaZero) {
 
+                    alunoSelecionado = alunoN.getAluno();
                     temNovaNota = false;
                     periodoNaoExistente = periodo;
-                    novaNotaDePeriodoNaoExistente = notaPorPeriodo.getNota();
+                    novaNotaDePeriodoNaoExistente = notaP.getNota();
 
                 }
 
@@ -97,7 +110,7 @@ public class BancoDeDados {
         if (!temNovaNota) {
 
             NotaDeAluno novaNota = new NotaDeAluno();
-            novaNota.adicionarNota(alunoNotaEscolhido.getAluno(), turmaEscolhida, novaNotaDePeriodoNaoExistente, periodoNaoExistente);
+            novaNota.adicionarNota(alunoSelecionado, turmaEscolhida, novaNotaDePeriodoNaoExistente, periodoNaoExistente);
             notas.add(novaNota);
 
         }
@@ -320,31 +333,50 @@ public class BancoDeDados {
     public static List<AlunoNotas> retornarNotas(Turma turmaEscolhida) {
 
         List<AlunoNotas> alunoNotas = new ArrayList<>();
+        List<UsuarioAluno> alunosComNotas = new ArrayList<>();
 
-        for (NotaDeAluno nota : notas) {
+        for (UsuarioAluno aluno : retornarAlunosDaTurma(turmaEscolhida)) {
+            
+            for (NotaDeAluno nota : notas) {
 
-            Boolean validaAluno = false;
-            AlunoNotas alunoExistente = new AlunoNotas();
+                AlunoNotas alunoExistente = new AlunoNotas();
+                Boolean validaAluno = false;
 
-            for (AlunoNotas alunoN : alunoNotas) {
+                for (AlunoNotas alunoN : alunoNotas) {
 
-                if (alunoN.getAluno().getMatricula() == nota.getAluno().getMatricula()) {
-                    validaAluno = true;
-                    alunoExistente = alunoN;
-                    break;
+                    if (alunoN.getAluno().getMatricula() == nota.getAluno().getMatricula()) {
+                        validaAluno = true;
+                        alunoExistente = alunoN;
+                        break;
+                    }
+
                 }
 
-            }
+                if (!validaAluno) {
+                    alunoExistente.setAluno(nota.getAluno());
+                    alunoNotas.add(alunoExistente);
+                }
 
-            if (!validaAluno) {
-                alunoExistente.setAluno(nota.getAluno());
-                alunoNotas.add(alunoExistente);
-            }
+                NotaPeriodo novoNotaPeriodo = new NotaPeriodo();
+                novoNotaPeriodo.setNota(nota.getNota());
+                novoNotaPeriodo.setPeriodo(nota.getPeriodo());
+                alunoExistente.adicionarNota(novoNotaPeriodo);
+                alunosComNotas.add(nota.getAluno());
 
-            NotaPeriodo novoNotaPeriodo = new NotaPeriodo();
-            novoNotaPeriodo.setNota(nota.getNota());
-            novoNotaPeriodo.setPeriodo(nota.getPeriodo());
-            alunoExistente.adicionarNota(novoNotaPeriodo);
+            }
+            
+            if (!alunosComNotas.contains(aluno)) {//medida caso o aluno não tenha nota.
+                
+                AlunoNotas adicionarAlunoNotas = new AlunoNotas();
+                NotaPeriodo novaNota = new NotaPeriodo();
+
+                adicionarAlunoNotas.setAluno(aluno);
+                novaNota.setNota(0.0);
+                novaNota.setPeriodo(1);
+                adicionarAlunoNotas.adicionarNota(novaNota);
+                alunoNotas.add(adicionarAlunoNotas);
+                
+            }
 
         }
 
@@ -395,7 +427,7 @@ public class BancoDeDados {
         if (mediaPeriodo > 0) {
             arredondamentoDaMedia = new BigDecimal(mediaPeriodo / quantidadeAlunos).setScale(1, RoundingMode.FLOOR);
 
-        return arredondamentoDaMedia.toString();
+            return arredondamentoDaMedia.toString();
         }
         return null;
     }
@@ -845,9 +877,9 @@ public class BancoDeDados {
         aluno1.setEmail("gentiliM@hotmail.com");
         aluno1.setSenha("123");
         usuarios.add(aluno1);
-        NotaDeAluno notaAluno1P1 = new NotaDeAluno();
+        /*NotaDeAluno notaAluno1P1 = new NotaDeAluno();
         NotaDeAluno notaAluno1P2 = new NotaDeAluno();
-        NotaDeAluno notaAluno1P3 = new NotaDeAluno();
+        NotaDeAluno notaAluno1P3 = new NotaDeAluno();*/
 
         aluno2 = new UsuarioAluno();
         aluno2.setMatricula(2);
@@ -866,10 +898,10 @@ public class BancoDeDados {
         aluno3.setEmail("rodr1g0_B@gmail.com");
         aluno3.setSenha("123");
         usuarios.add(aluno3);
-        NotaDeAluno notaAluno3P1 = new NotaDeAluno();
+        /*NotaDeAluno notaAluno3P1 = new NotaDeAluno();
         NotaDeAluno notaAluno3P2 = new NotaDeAluno();
         NotaDeAluno notaAluno3P3 = new NotaDeAluno();
-        NotaDeAluno notaAluno3P4 = new NotaDeAluno();
+        NotaDeAluno notaAluno3P4 = new NotaDeAluno();*/
 
         professor1 = new UsuarioProfessor();
         professor1.setMatricula(4);
@@ -895,7 +927,7 @@ public class BancoDeDados {
         turma1.adicionarAluno(aluno3);
         professor1.adicionaTurma(turma1);
         turmas.add(turma1);
-        notaAluno1P1.adicionarNota(aluno1, turma1, 5.0, 1);
+        /*notaAluno1P1.adicionarNota(aluno1, turma1, 5.0, 1);
         notaAluno1P2.adicionarNota(aluno1, turma1, 8.5, 2);
         notaAluno1P3.adicionarNota(aluno1, turma1, 7, 3);
         notas.add(notaAluno1P1);
@@ -908,7 +940,7 @@ public class BancoDeDados {
         notas.add(notaAluno3P1);
         notas.add(notaAluno3P2);
         notas.add(notaAluno3P3);
-        notas.add(notaAluno3P4);
+        notas.add(notaAluno3P4);*/
 
         turma2 = new Turma();
         turma2.setProfessor(professor2);

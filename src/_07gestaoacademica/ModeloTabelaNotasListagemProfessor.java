@@ -106,7 +106,7 @@ public class ModeloTabelaNotasListagemProfessor extends AbstractTableModel {
 
         for (NotaPeriodo notaPega : alunoN.getNotas()) {
 
-            if (notaPega.getPeriodo() == coluna - 1 && coluna > 1 && coluna < 6) {
+            if (notaPega.getPeriodo() == coluna - 1 && coluna > 1 && coluna < 6 && verificarSeNotaExiste(alunoN.getAluno(), coluna)) {
                 notaPega.setNota(novoValor == null || novoValor.equals("") ? 0.0 : Double.parseDouble(novoValor));
             }
 
@@ -123,9 +123,9 @@ public class ModeloTabelaNotasListagemProfessor extends AbstractTableModel {
             String valor = valorDigitado;
             AlunoNotas alunoNota = notas.get(linha);
             UsuarioAluno aluno = alunoNota.getAluno();
-            Turma turmaDoAluno = turma;
+            //Turma turmaDoAluno = turma;
             int periodo = coluna - 1;
-            Boolean notaExiste = BancoDeDados.verificarSeNotaExiste(aluno, turmaDoAluno, periodo);
+            Boolean notaExiste = verificarSeNotaExiste(aluno, periodo);
 
             if (!notaExiste) {
 
@@ -145,6 +145,31 @@ public class ModeloTabelaNotasListagemProfessor extends AbstractTableModel {
 
         fireTableDataChanged();
 
+    }
+    
+    private Boolean verificarSeNotaExiste(UsuarioAluno alunoSelecionado, int periodoEscolhido) {
+        
+        Boolean notaExiste = false;
+        Boolean validaAluno = false;
+        Boolean validaPeriodo = false;
+        
+        for (AlunoNotas alunoNota : notas) {
+            
+            validaAluno = alunoNota.getAluno() == alunoSelecionado;
+            
+            for (NotaPeriodo nota : alunoNota.getNotas()) {
+                
+                validaPeriodo = nota.getPeriodo() == periodoEscolhido;
+                
+            }
+            
+            if (validaAluno && validaPeriodo) 
+                notaExiste = true;
+            
+        }
+        
+        return notaExiste;
+        
     }
 
     public List<AlunoNotas> retornarAlteracoesFeitas() {

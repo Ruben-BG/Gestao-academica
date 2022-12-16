@@ -63,11 +63,7 @@ public class LancarNotasListagemTurmaPanel extends javax.swing.JPanel {
     
     public void salvarAlteracoesDeNotas() {
         
-        for (AlunoNotas alunoNota : tableModel.retornarAlteracoesFeitas()) {
-            
-            BancoDeDados.salvarNotasAlteradas(alunoNota, turma);
-            
-        }
+        BancoDeDados.salvarNotasAlteradas(tableModel.retornarAlteracoesFeitas(), turma);
         
         PopUp p = new PopUp();
         p.mensagemFinalNovoProfessor("Alterações salvas com sucesso!");
