@@ -26,9 +26,11 @@ public class LancarNotaCorRenderer extends DefaultTableCellRenderer {
 
         if (!isSelected) {
 
-            setBackground(Color.white);
-            
-           String valor = table.getValueAt(row, colunaN).toString();
+            if (table.getValueAt(row, column) != null) {
+
+                setBackground(Color.white);
+
+                String valor = table.getValueAt(row, colunaN).toString();
                 Double valorConvetido = Double.valueOf(table.getValueAt(row, colunaN).toString());
 
                 if (!valor.isEmpty()) {
@@ -43,6 +45,8 @@ public class LancarNotaCorRenderer extends DefaultTableCellRenderer {
                     setForeground(table.getForeground());
                 }
 
+            }
+
         } else {
             if (table.getSelectedRow() == row && table.getSelectedColumn() == colunaN) {
 
@@ -51,14 +55,18 @@ public class LancarNotaCorRenderer extends DefaultTableCellRenderer {
 
             } else {
 
-                Double valorConvetido = Double.valueOf(table.getValueAt(row, colunaN).toString());
+                if (table.getValueAt(row, column) != null) {
 
-                setBackground(Color.white);
+                    Double valorConvetido = Double.valueOf(table.getValueAt(row, colunaN).toString());
 
-                if (valorConvetido < 7) {
-                    setForeground(Color.RED);
-                } else {
-                    setForeground(new Color(19, 176, 110));
+                    setBackground(Color.white);
+
+                    if (valorConvetido < 7) {
+                        setForeground(Color.RED);
+                    } else {
+                        setForeground(new Color(19, 176, 110));
+                    }
+
                 }
 
             }

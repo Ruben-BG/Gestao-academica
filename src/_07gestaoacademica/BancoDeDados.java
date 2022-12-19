@@ -42,7 +42,6 @@ public class BancoDeDados {
         Double novaNotaDePeriodoNaoExistente = 0.0;
 
         Boolean validaAluno = false;
-        Boolean validaPeriodo = false;
 
         for (AlunoNotas alunoN : listaAlunoNotas) {
 
@@ -367,6 +366,7 @@ public class BancoDeDados {
             
             if (!alunosComNotas.contains(aluno)) {//medida caso o aluno não tenha nota.
                 
+                alunosComNotas.clear(); //para sempre apagar tudo para não pegar muito espaço.
                 AlunoNotas adicionarAlunoNotas = new AlunoNotas();
                 NotaPeriodo novaNota = new NotaPeriodo();
 

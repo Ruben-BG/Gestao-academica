@@ -123,11 +123,10 @@ public class ModeloTabelaNotasListagemProfessor extends AbstractTableModel {
             String valor = valorDigitado;
             AlunoNotas alunoNota = notas.get(linha);
             UsuarioAluno aluno = alunoNota.getAluno();
-            //Turma turmaDoAluno = turma;
             int periodo = coluna - 1;
             Boolean notaExiste = verificarSeNotaExiste(aluno, periodo);
 
-            if (!notaExiste) {
+            if (Double.parseDouble(valor) != 0.0 || !notaExiste) {
 
                 Double notaAdicionada = valor.equals("") ? null : Double.valueOf(valor);
 
